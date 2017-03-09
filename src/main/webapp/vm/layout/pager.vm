@@ -1,0 +1,98 @@
+#macro(pageQuery $method)
+<div class="oper-l">
+	每页<select name="pageSize" onChange="$method"><option value="5" >5</option><option value="10"selected >10</option><option value="15">15</option></select>条记录<label>|</label>
+	<a style="cursor:pointer" onclick="goToFirstPage(this)"><i class="i1"></i></a>
+	<a style="cursor:pointer" onclick="goToFrontPage(this)"><i class="i2" ></i></a>
+    <label>|</label>第<input name="pageNumber" class="pageNumber inpt" style="text-align:center" value="1" onChange="goToPage(this)">页 <span style="padding-left: 7px"></span>
+    	共<span class="pageCount"></span></input>页<label>|</label>
+    <input style="display:none"/>
+    <a style="cursor:pointer" onclick="goToNextPage(this)"><i class="i3" ></i></a>
+    <a style="cursor:pointer" onclick="goToLastPage(this)"><i class="i4" ></i></a>
+</div>
+<div class="oper-r">
+共有<span class="totalRecords"></span>条数据，
+当前第<span class="pagestart"></span>-<span class="pageend"></span>条记录
+</div>
+
+<script>
+	//设置翻页信息
+    function setPageInfo(pagerId,page){
+         $("#"+pagerId+" .totalRecords").html(page.totalRecords);
+         $("#"+pagerId+" .pageCount").html(page.pageCount);
+         if(page.pageNumber==0){
+         	$("#"+pagerId+" .pageNumber").val("1"); 
+         }
+         var start = 0;
+         if(page.pageNumber>0){
+         	start = (page.pageNumber-1)*page.pageSize+1;
+         }
+         var max = page.pageNumber*page.pageSize;
+         var end;
+         if(page.totalRecords>max){
+         	end = max;
+         }else{
+         	end = page.totalRecords;
+         }
+         
+         $("#"+pagerId+" .pagestart").html(start); 
+         $("#"+pagerId+" .pageend").html(end);   
+    }
+    
+    function goToPage(obj){
+    	var pagerId = $(obj).parent().parent().attr("id");
+    	var pageNum = $("#"+pagerId+" .pageNumber").val();
+    	var totalPage = $("#"+pagerId+" .pageCount").html();
+    	if(pageNum<1){
+    		$("#"+pagerId+" .pageNumber").val("1");
+    	}else if(pageNum > totalPage){
+    		$("#"+pagerId+" .pageNumber").val(totalPage);
+    	}else if(totalPage == 0){
+    		$("#"+pagerId+" .pageNumber").val("1");
+    	}
+    	$method;
+    }
+    
+    //上一页
+    function goToFrontPage(obj){
+    	var pagerId = $(obj).parent().parent().attr("id");
+    	var nextPage = parseInt($("#"+pagerId+" .pageNumber").val())-1;
+    	if(nextPage==0){
+    		return;
+    	}
+    	$("#"+pagerId+" .pageNumber").val(nextPage);
+    	$method;
+    }
+    
+    //下一页
+    function goToNextPage(obj){
+    	var pagerId = $(obj).parent().parent().attr("id");
+    	var nextPage = 1+parseInt($("#"+pagerId+" .pageNumber").val());
+    	var totalPage = $("#"+pagerId+" .pageCount").html();
+    	if(nextPage>totalPage){
+    		return;
+    	}
+    	$("#"+pagerId+" .pageNumber").val(nextPage);
+    	$method;
+    }
+    
+    //回到首页
+    function goToFirstPage(obj){
+    	var pagerId = $(obj).parent().parent().attr("id");
+    	$("#"+pagerId+" .pageNumber").val("1");
+    	$method;
+    }
+    
+    //前往尾页
+    function goToLastPage(obj){
+    	var pagerId = $(obj).parent().parent().attr("id");
+    	var totalPage = $("#"+pagerId+" .pageCount").html();
+    	$("#"+pagerId+" .pageNumber").val(totalPage);
+    	$method;
+    }
+	
+	(function(){
+		
+		$('#queryContent').slideToggle();
+	})();
+</script>
+#end

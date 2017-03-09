@@ -1,0 +1,176 @@
+<style>
+    .bt1{background: #2187ee;color: #fff;border: 1px solid #2187ee;cursor:pointer}
+</style>
+<div class="main" >
+    <div class="m-center">
+    <form id="queryForm" name="queryForm">
+    #foreach($code in ${roleFuncs})
+    	#if('1000001001' == $code)
+        <dl class="term">
+        <dt>
+            <div class="t-l"><i></i>查询条件</div>
+            <div class="t-r" id="slide" onclick="slide(this,'#queryContent')">+</div>
+        </dt>
+        <dd>
+		<div id="queryContent">
+            <table class="trem_tb">
+                <tr>
+                    <td>手机号：</td>
+                    <td><input width="230px" type="text" name="telephone"></input></td>
+                    <td>姓名：</td>
+                    <td><input width="230px" type="text" name="username"></input></td>
+					<td>公司：</td>
+                    <td><select id="qry_orgId" name="orgId" class="select2"></select></td>
+                </tr>
+            </table>
+            <div class="trem_tb-bt">
+                    <input type="button" value="查询" class="bt1" id="queryBtn"></input>
+                    <input type="button" value="重置" class="bt2" id="resetBtn"></input>
+            </div>
+            
+            </dd>
+			</div>
+    </dl>
+    #end
+    #end
+    <div style="display:none">
+				<input id="currUserRoleId" name="currUserRoleId" value="$roleId" placeHolder="请输入用户角色"></input>
+	</div>
+     </form>
+    <!--<div style="width:100%;min-height:429px;"> -->
+	<div style="width:100%;min-height:215px;"> 
+        <table class="result-tb" id="userInfoTable">
+        	<tbody>
+	            <tr>
+	                <th>选择</th>
+	                <th>手机号</th>
+	                <th>姓名</th>
+	                <th>公司名称</th>
+	                <th>邮箱</th>
+	                <th>角色</th>
+	                <th>创建时间</th>
+	                <th>最近修改</th>
+	                <th>状态</th>
+##	                <th>操作</th>
+	            </tr>
+            </tbody>
+        </table>
+       </div>
+        <div class="result-oper">
+        	<form id="pager">
+        		<!--引入分页-->
+	            #parse("layout/pager.vm")
+	            <!--传入分页查询数据方法-->
+	            #pageQuery("query()")
+            </form>
+        </div>
+            <div class="poered">
+            	#foreach($code in ${roleFuncs})
+    				#if('1000001002' == $code)
+                		<div class="but5" id="but1"><i></i>详情</div>
+                	#end
+                	#if('1000001003' == $code)
+                		<div class="but2" id="but2"><i></i>新增</div>
+                	#end
+                	#if('1000001004' == $code)
+                		<div class="but3" id="but3"><i></i>修改</div>
+                	#end
+                	#if('1000001005' == $code)
+                		<div class="but3" id="but5"><i></i>停用/启用操作</div>
+                	#end
+                #end
+            </div>
+    </div>
+</div>
+
+
+
+<!-- 新增和详情弹框 -->
+<div id="p2" class="popw" style="width:600px;min-height:200px;">
+<form id="userInfoForm" style="margin-left:10px;margin-right:20px">
+    <table  class="trem_tb" id="editTable" style="width:100%">
+        <tr>
+            <td class="attrname" style="text-align:center;width:18%">手机号：</td>
+            <td class="attrvalue" style="width:32%">
+				<input type="text" name="telephone" id="addTelephone"></input>
+				<div id="telephoneInfo" class="errorInfo" style="display:inline-block"></div>
+			</td>
+			<td class="attrname" style="text-align:center;width:18%">姓名：</td>
+			<td class="attrvalue" style="width:32%">
+				<input type="text" name="username"></input>
+            	<div class="errorInfo" style="display:inline-block"></div>
+        	</td>
+        </tr>
+        <tr>
+			<td class="attrname" style="text-align:center;width:18%">角色：</td>
+            <td class="attrvalue" style="width:32%">
+				<select id="roleId" name="roleId"></select>
+				<div class="errorInfo" style="display:inline-block"></div>
+			</td>
+        	<td class="attrname" style="text-align:center;width:18%">所属公司：</td>
+            <td class="attrvalue" style="width:32%">
+				<select id="orgId" name="orgId" class="select2"></select>
+				<div class="errorInfo" style="display:inline-block"></div>
+			</td>
+        </tr>
+        <tr>
+        	<td class="attrname" style="text-align:center;width:18%">邮箱：</td>
+            <td class="attrvalue" style="width:32%">
+				<input type="text" name="email"></input>
+				<div class="errorInfo" style="display:inline-block"></div>
+			</td>
+        </tr>
+    </table>
+    <table  class="trem_tb" id="detailTable" style="width:100%">
+        <tr>
+            <td class="attrname" style="text-align:center;width:18%">手机号：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="telephone"></label>
+			</td>
+            <td class="attrname" style="text-align:center;width:18%">姓名：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="username"></label>
+			</td>
+        </tr>
+        <tr>
+        	<td class="attrname" style="text-align:center;width:18%">角色：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="roleName"></label>
+			</td>
+            <td class="attrname" style="text-align:center;width:18%">所属公司：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="orgName"></label>
+			</td>
+        </tr>
+        <tr>
+        	<td class="attrname" style="text-align:center;width:18%">邮箱：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="email"></label>
+			</td>
+        	<td class="attrname" style="text-align:center;width:18%">状态：</td>
+            <td class="attrvalue" style="width:32%">
+				<label name="status"></label>
+			</td>
+        </tr>
+    </table>
+    <div style="text-align:center">
+    	<div style="display:inline" id="sureBtn"></div>
+    	<div style="display:inline"><a style="margin: 20px 0px 0px 20px" class="bt return" onclick="pw2.Close()"><i></i>返回</a></div>
+    </div>
+</form>
+</div>
+
+<script src="${rc.contextPath}/resources/js/gzapamJs/user.js"></script>
+<script type="text/javascript">
+
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "http://" + ubassUrl + "/sampler/ubass.js?sysId=igpp-web";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+	
+</script>
+
+

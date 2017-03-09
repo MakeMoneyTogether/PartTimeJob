@@ -1,0 +1,10 @@
+
+
+<div class="m_product_wrap">
+	<div class="">
+    	<div style="text-align:center;">
+        	<img src="$!{rc.contextPath}/resources/img/auth.png" width="500px"/>
+            <div class="welcomeInfo">helloword！</div>
+        </div>
+    </div>
+</div>

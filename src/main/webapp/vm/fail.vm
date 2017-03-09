@@ -1,0 +1,17 @@
+<div name="failPage" class="m_product_wrap">
+	<div class="errors">
+    	<div class="info_404">
+        	<div class="info_picc"><img src="$!{rc.contextPath}/resources/img/sorry.png" width="379" height="53"/></div>
+			#if($!msg)
+				<div class="info404_title">$!msg</div>
+			#else
+				<div class="info404_title">输入的关键字含有非法字符</div>
+			#end
+			<div class="info404_back">
+            	<a href="javascript:history.go(-1);">后退&gt;&gt;</a>
+                <a href="$!{rc.contextPath}/index">返回首页&gt;&gt;</a>
+            </div>
+
+        </div>
+    </div>
+</div>
