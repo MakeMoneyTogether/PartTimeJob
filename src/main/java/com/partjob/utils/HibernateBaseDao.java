@@ -65,7 +65,7 @@ public abstract class HibernateBaseDao<T, PK extends Serializable> {
     
     /**
      * 批量添加、修改信息
-     * @param entitys
+     * @param entity
      */
     public void saveOrUpdate(final T entity){
     	EntityUtils.initEntityAttribute(entity);
@@ -442,8 +442,6 @@ public abstract class HibernateBaseDao<T, PK extends Serializable> {
      *            原生sql语句<BR>
      * @param param
      *            参数列表<BR>
-     * @param dsName
-     *            多ds情况下，指定的ds名称<BR>
      * <BR>
      * @return 记录结果集，返回字段对应Map集合<BR>
      */
