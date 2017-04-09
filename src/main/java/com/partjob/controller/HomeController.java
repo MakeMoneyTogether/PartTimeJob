@@ -30,7 +30,7 @@ public class HomeController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "index" )
+	@RequestMapping(value = "" )
 	public String welcome() {
 	    logger.info("进入欢迎页面");
 	    return "index";

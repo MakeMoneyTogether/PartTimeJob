@@ -7,8 +7,8 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
@@ -60,7 +60,7 @@ public abstract class HibernateBaseDao<T, PK extends Serializable> {
      * @param entitys
      */
     public void saveOrUpdate(Collection<T> entitys){
-    	 hibernateTemplate.saveOrUpdateAll(entitys);
+    	 hibernateTemplate.saveOrUpdate(entitys);
     }
     
     /**
