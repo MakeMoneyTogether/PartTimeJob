@@ -9,6 +9,7 @@ public class TblMchntInfo implements java.io.Serializable{
     private int mchntCd;
     private String mchntAddress;
     private String mchntName;
+    private String phone;
     private String connName;
     private String connPhone;
     private String password;
@@ -52,7 +53,16 @@ public class TblMchntInfo implements java.io.Serializable{
     public void setConnName(String connName) {
         this.connName = connName;
     }
-    @Column(name = "conn_phone")
+    @Column(name = "phone")
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Column(name = "conn_phone")
     public String getConnPhone() {
         return connPhone;
     }

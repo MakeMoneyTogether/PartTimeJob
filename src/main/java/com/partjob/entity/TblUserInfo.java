@@ -10,7 +10,7 @@ import java.sql.Date;
  * Created by Sloriac on 2017/4/9.
  */
 @Entity
-public class User {
+public class TblUserInfo {
     private int uid;
     private String name;
     private String gender;
@@ -138,7 +138,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        TblUserInfo user = (TblUserInfo) o;
 
         if (uid != user.uid) return false;
         if (Double.compare(user.balance, balance) != 0) return false;

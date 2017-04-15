@@ -1,8 +1,14 @@
 package com.partjob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.partjob.constant.CommonCanstant;
+import com.partjob.model.MchntInfo;
 
 
 
@@ -30,4 +36,9 @@ public class BaseController {
 //        return user;
 //    }
 
+    public MchntInfo getMchntInfo(HttpServletRequest request){
+    	 HttpSession session = request.getSession();
+    	 MchntInfo mchntInfo=(MchntInfo) session.getAttribute(CommonCanstant.MCHNT_INFO);
+    	 return mchntInfo;
+    }
 }

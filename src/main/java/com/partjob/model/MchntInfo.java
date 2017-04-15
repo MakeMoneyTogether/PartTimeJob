@@ -6,6 +6,7 @@ package com.partjob.model;
 public class MchntInfo {
 
     private int mchntCd;
+    private String phone;
     private String mchntAddress;
     private String mchntName;
     private String connName;
@@ -21,7 +22,15 @@ public class MchntInfo {
         this.mchntCd = mchntCd;
     }
 
-    public String getMchntAddress() {
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getMchntAddress() {
         return mchntAddress;
     }
 
