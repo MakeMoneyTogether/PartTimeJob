@@ -90,9 +90,9 @@ public class MchntController extends BaseController{
     	try{
     		boolean flag=mchntService.checkPhone(phone,getMchntInfo(request));
     		if(flag==true){
-    			return ResponseCode.SUCCESS;
-    		}else{
     			return ResponseCode.PHONE_EXIST;
+    		}else{
+    			return ResponseCode.SUCCESS;
     		}
     	}catch(Exception e){
     		logger.error(e);
