@@ -1,17 +1,15 @@
 package com.partjob.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Sloriac on 2017/4/9.
+ * Created by Sloriac on 2017/4/16.
  */
 @Entity
+@Table(name = "tbl_user_info", schema = "parttimejob", catalog = "")
 public class TblUserInfo {
-    private int uid;
+    private int userId;
     private String name;
     private String gender;
     private String phone;
@@ -24,13 +22,13 @@ public class TblUserInfo {
     private String school;
 
     @Id
-    @Column(name = "uid", nullable = false)
-    public int getUid() {
-        return uid;
+    @Column(name = "user_id", nullable = false)
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Basic
@@ -138,19 +136,19 @@ public class TblUserInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TblUserInfo user = (TblUserInfo) o;
+        TblUserInfo that = (TblUserInfo) o;
 
-        if (uid != user.uid) return false;
-        if (Double.compare(user.balance, balance) != 0) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (gender != null ? !gender.equals(user.gender) : user.gender != null) return false;
-        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (major != null ? !major.equals(user.major) : user.major != null) return false;
-        if (grade != null ? !grade.equals(user.grade) : user.grade != null) return false;
-        if (direction != null ? !direction.equals(user.direction) : user.direction != null) return false;
-        if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
-        if (school != null ? !school.equals(user.school) : user.school != null) return false;
+        if (userId != that.userId) return false;
+        if (Double.compare(that.balance, balance) != 0) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
+        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (major != null ? !major.equals(that.major) : that.major != null) return false;
+        if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
+        if (direction != null ? !direction.equals(that.direction) : that.direction != null) return false;
+        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (school != null ? !school.equals(that.school) : that.school != null) return false;
 
         return true;
     }
@@ -159,7 +157,7 @@ public class TblUserInfo {
     public int hashCode() {
         int result;
         long temp;
-        result = uid;
+        result = userId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
