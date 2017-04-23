@@ -1,6 +1,7 @@
 package com.partjob.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.partjob.constant.TransCanstant;
+import com.partjob.utils.HttpRequestUtil;
 
 /**
  * 
@@ -19,37 +22,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "")
 public class HomeController {
 
-
 	private final Logger logger = Logger.getLogger(this.getClass());
 
 	
-	
+
 	/**
 	 * 欢迎页面
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "" )
+	@RequestMapping(value = "")
 	public String welcome() {
-	    logger.info("进入欢迎页面");
-	    return "index";
+		logger.info("进入欢迎页面");
+		return "index";
 	}
 
 	/**
-     * 登录页
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "login" )
-    public String login() {
-        logger.info("进入登录页面");
-        return "login";
-    }
-    
+	 * 登录页
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "login")
+	public String login() {
+		logger.info("进入登录页面");
+		return "login";
+	}
+
 	/**
 	 * 异常页面跳转
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "error")
@@ -57,19 +62,21 @@ public class HomeController {
 		logger.info("进入报错页面ErroR");
 		return "error";
 	}
-	
+
 	/**
 	 * 输入非法页面跳转
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "fail")
 	public String fail() {
-	    logger.info("进入输入非法页面");
-	    return "fail";
+		logger.info("进入输入非法页面");
+		return "fail";
 	}
 
 	/**
 	 * 未找到页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "404")
@@ -80,6 +87,7 @@ public class HomeController {
 
 	/**
 	 * 无权限页面跳转
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "noright")
@@ -87,10 +95,5 @@ public class HomeController {
 		logger.info("进入无权限访问页面");
 		return "noright";
 	}
-
-	
-	
-	
-	
 
 }

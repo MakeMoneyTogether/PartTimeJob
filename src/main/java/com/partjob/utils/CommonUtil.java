@@ -1,10 +1,12 @@
 package com.partjob.utils;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -16,9 +18,14 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -148,6 +155,28 @@ public class CommonUtil {
         }
         return vcode;
     }
+    
+    /**
+     * 将obj转为map
+     * @param obj
+     * @return
+     * @throws Exception
+     */
+    public static Map<String, Object> objectToMap(Object obj) throws Exception {    
+        if(obj == null){    
+            return null;    
+        }   
+  
+        Map<String, Object> map = new HashMap<String, Object>();    
+  
+        Field[] declaredFields = obj.getClass().getDeclaredFields();    
+        for (Field field : declaredFields) {    
+            field.setAccessible(true);  
+            map.put(field.getName(), field.get(obj));  
+        }    
+  
+        return map;  
+    }   
 
     /**
      * 获取当前网络ip
@@ -210,6 +239,28 @@ public class CommonUtil {
         }
     }
 
+    public static String obj2xml(Object obj,Class...classes ){
+    	JAXBContext context;
+		try {
+			context = JAXBContext.newInstance(classes);
+		  // 获取上下文对象  
+        Marshaller marshaller = context.createMarshaller(); // 根据上下文获取marshaller对象  
+          
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");  // 设置编码字符集  
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); // 格式化XML输出，有分行和缩进  
+          
+//        marshaller.marshal(obj,System.out);   // 打印到控制台  
+          
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        marshaller.marshal(obj, baos);  
+        String xmlObj = new String(baos.toByteArray());         // 生成XML字符串  
+        return xmlObj; 
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}  
+    }
     /**
      * 对字符串进行MD5加密
      * @since 
