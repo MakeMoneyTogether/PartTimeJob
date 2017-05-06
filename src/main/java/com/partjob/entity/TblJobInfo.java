@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "tbl_job_info", schema = "parttimejob", catalog = "")
 public class TblJobInfo {
     private int jobId;
+    private int mchntCd;
     private String jobTitle;
     private Integer jobType;
     private Integer paymentType;
@@ -33,8 +34,18 @@ public class TblJobInfo {
     public void setJobId(int jobId) {
         this.jobId = jobId;
     }
-
+    
     @Basic
+    @Column(name = "mchnt_cd", nullable = true, length = 10)
+    public int getMchntCd() {
+		return mchntCd;
+	}
+
+	public void setMchntCd(int mchntCd) {
+		this.mchntCd = mchntCd;
+	}
+
+	@Basic
     @Column(name = "job_title", nullable = true, length = 30)
     public String getJobTitle() {
         return jobTitle;
@@ -164,49 +175,4 @@ public class TblJobInfo {
         this.jobSt = jobSt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TblJobInfo that = (TblJobInfo) o;
-
-        if (jobId != that.jobId) return false;
-        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
-        if (jobType != null ? !jobType.equals(that.jobType) : that.jobType != null) return false;
-        if (paymentType != null ? !paymentType.equals(that.paymentType) : that.paymentType != null) return false;
-        if (paymentMoney != null ? !paymentMoney.equals(that.paymentMoney) : that.paymentMoney != null) return false;
-        if (jobStartTime != null ? !jobStartTime.equals(that.jobStartTime) : that.jobStartTime != null) return false;
-        if (jobEndTime != null ? !jobEndTime.equals(that.jobEndTime) : that.jobEndTime != null) return false;
-        if (numPeople != null ? !numPeople.equals(that.numPeople) : that.numPeople != null) return false;
-        if (jobDesc != null ? !jobDesc.equals(that.jobDesc) : that.jobDesc != null) return false;
-        if (jobAddress != null ? !jobAddress.equals(that.jobAddress) : that.jobAddress != null) return false;
-        if (jobValidateTime != null ? !jobValidateTime.equals(that.jobValidateTime) : that.jobValidateTime != null)
-            return false;
-        if (connectName != null ? !connectName.equals(that.connectName) : that.connectName != null) return false;
-        if (csonnectIphone != null ? !csonnectIphone.equals(that.csonnectIphone) : that.csonnectIphone != null)
-            return false;
-        if (jobSt != null ? !jobSt.equals(that.jobSt) : that.jobSt != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = jobId;
-        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
-        result = 31 * result + (jobType != null ? jobType.hashCode() : 0);
-        result = 31 * result + (paymentType != null ? paymentType.hashCode() : 0);
-        result = 31 * result + (paymentMoney != null ? paymentMoney.hashCode() : 0);
-        result = 31 * result + (jobStartTime != null ? jobStartTime.hashCode() : 0);
-        result = 31 * result + (jobEndTime != null ? jobEndTime.hashCode() : 0);
-        result = 31 * result + (numPeople != null ? numPeople.hashCode() : 0);
-        result = 31 * result + (jobDesc != null ? jobDesc.hashCode() : 0);
-        result = 31 * result + (jobAddress != null ? jobAddress.hashCode() : 0);
-        result = 31 * result + (jobValidateTime != null ? jobValidateTime.hashCode() : 0);
-        result = 31 * result + (connectName != null ? connectName.hashCode() : 0);
-        result = 31 * result + (csonnectIphone != null ? csonnectIphone.hashCode() : 0);
-        result = 31 * result + (jobSt != null ? jobSt.hashCode() : 0);
-        return result;
-    }
 }

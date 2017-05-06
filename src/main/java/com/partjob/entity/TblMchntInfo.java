@@ -107,38 +107,4 @@ public class TblMchntInfo {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TblMchntInfo that = (TblMchntInfo) o;
-
-        if (mchntCd != that.mchntCd) return false;
-        if (mchntAddress != null ? !mchntAddress.equals(that.mchntAddress) : that.mchntAddress != null) return false;
-        if (mchntName != null ? !mchntName.equals(that.mchntName) : that.mchntName != null) return false;
-        if (connName != null ? !connName.equals(that.connName) : that.connName != null) return false;
-        if (connPhone != null ? !connPhone.equals(that.connPhone) : that.connPhone != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (mchntSt != null ? !mchntSt.equals(that.mchntSt) : that.mchntSt != null) return false;
-        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = mchntCd;
-        result = 31 * result + (mchntAddress != null ? mchntAddress.hashCode() : 0);
-        result = 31 * result + (mchntName != null ? mchntName.hashCode() : 0);
-        result = 31 * result + (connName != null ? connName.hashCode() : 0);
-        result = 31 * result + (connPhone != null ? connPhone.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (mchntSt != null ? mchntSt.hashCode() : 0);
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        return result;
-    }
 }

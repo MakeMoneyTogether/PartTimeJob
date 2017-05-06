@@ -3,6 +3,7 @@ package com.partjob.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
+import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.service.MchntService;
+import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HttpRequestUtil;
 
 import org.apache.log4j.Logger;
@@ -36,8 +39,12 @@ public class MchntController extends BaseController {
 	@Autowired
 	private MchntService mchntService;
 
+	/**
+	 * 商户登录入口
+	 * @return
+	 */
 	@RequestMapping(value = "")
-	public void mchnt() {
+	public String  mchnt() {
 		String url = "https://open.weixin.qq.com/connect/oauth/authorize";
 		String param = "appid="
 				+ TransCanstant.APP_ID
@@ -47,11 +54,21 @@ public class MchntController extends BaseController {
 								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect");
 
 		String result = HttpRequestUtil.sendGet(url, param);
-
+		
+		//返回登录页面
+		return "login";
 	}
 	
+	/**
+	 * 获取用户oppenid的地址
+	 * @param code
+	 * @param state
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "redirectUrl")
-	public String getOpenId(@RequestParam(value = "code") String code,
+	public void getOpenId(@RequestParam(value = "code") String code,
 			@RequestParam(value = "state") String state,
 			HttpServletRequest request,HttpServletResponse response) {
 
@@ -65,15 +82,17 @@ public class MchntController extends BaseController {
 		HttpSession session = request.getSession();
 		session.setAttribute(TransCanstant.OPEN_ID, openId);
 		logger.info("openId:"+openId);
-		try {
-			response.sendRedirect("http://mapengju.com/PartTimeJob/transTest/pay?totalFee=1");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "pay";
+		
+//		try {
+//			response.sendRedirect("http://mapengju.com/PartTimeJob/transTest/pay?totalFee=1");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return "pay";
 	}
 
+	
 	/**
 	 * 注册
 	 * 
@@ -180,7 +199,7 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = { "update" })
 	@ResponseBody
-	public Object updateMchntInfo(MchntInfo mchntInfo,
+	public int updateMchntInfo(MchntInfo mchntInfo,
 			HttpServletRequest request) {
 		try {
 			// 检查是否具有更新权限
@@ -190,6 +209,81 @@ public class MchntController extends BaseController {
 			mchntService.updateMchtInfo(mchntInfo);
 			return ResponseCode.SUCCESS;
 		} catch (Exception e) {
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
+	
+	/**
+	 * 商户充值
+	 * @param totalFee 充值金额
+	 * @param mchntCd	商户号
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "pay" })
+	@ResponseBody
+	public int pay(@RequestParam(value = "totalFee") String totalFee,
+			HttpServletRequest request){
+		
+		try {
+			int mchntCd=getMchntInfo(request).getMchntCd();
+			String ip=CommonUtil.getIpAddr(request);
+			String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
+			int code=mchntService.pay(totalFee, ip, openId, mchntCd);
+			
+			return code;
+		} catch (Exception e) {
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
+	/**
+	 * 发送兼职信息
+	 * @param jobInfo
+	 * @param mchntCd
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "podtJob" })
+	@ResponseBody
+	public int postJob(JobInfo jobInfo,
+			HttpServletRequest request){
+		try{
+			int mchntCd=getMchntInfo(request).getMchntCd();
+			mchntService.postJob(jobInfo, mchntCd);
+			return ResponseCode.SUCCESS;
+		}catch(Exception e){
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+	}
+	/**
+	 * 获取兼职信息列表
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "getJobList" })
+	@ResponseBody
+	public Object getJobList(HttpServletRequest request){
+		try{
+			int mchntCd=getMchntInfo(request).getMchntCd();
+			List<JobInfo>result=mchntService.getJobInfoList(mchntCd);
+			return result;
+		}catch (Exception e){
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
+	
+	public Object getUserList(@RequestParam(value = "jobId") String jobId,
+			HttpServletRequest request){
+		try{
+			return ResponseCode.SUCCESS;
+		}catch(Exception e){
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}

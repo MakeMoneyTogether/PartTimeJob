@@ -1,9 +1,17 @@
 package com.partjob.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.fabric.Response;
+import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.ResponseCode;
+import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.MchntInfoDao;
+import com.partjob.dao.UserInfoDao;
+import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
+import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.CommonUtil;
@@ -20,7 +28,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class MchntService {
 	@Autowired
 	private MchntInfoDao mchntInfoDao;
-
+	@Autowired
+	private TransService transService;
+	@Autowired
+	private JobInfoDao jobInfoDao;
+	@Autowired
+	private UserInfoDao suerInfoDao;
 	/**
 	 * 保存商户信息
 	 * @param mchntInfo
@@ -92,7 +105,66 @@ public class MchntService {
 
 		mchntInfoDao.modify(tblMchntInfo);
 	}
+	
+	/**
+	 * 商户充值
+	 * @param totalFee	充值金额
+	 * @param ip	交易发起ip
+	 * @param openId	充值用户的openid
+	 * @param mchntCd	商户充值的商户号
+	 * @return
+	 */
+	public int pay(String totalFee, String ip,String openId,int mchntCd){
+		
+		int transResult=transService.pay(totalFee, ip, openId);
+		if(transResult==ResponseCode.SUCCESS){
+			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
+			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(totalFee));
+			mchntInfoDao.modify(tblMchntInfo);
+			return ResponseCode.SUCCESS;
+		}
+		return transResult;
+		
+	}
+	
+	/**
+	 * 发送兼职信息
+	 * @param job
+	 */
+	public void postJob(JobInfo job,int mchntCd){
+		TblJobInfo tblJob=new TblJobInfo();
+		ApplicationUtil.copyProperties(job, tblJob);
+		tblJob.setMchntCd(mchntCd);
+		jobInfoDao.save(tblJob);
+		
+		//扣除商家账户金额
+		int money=0;
+		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
+			
+			
+		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
+			
+		}
+		
+		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
+		tblMchntInfo.setBalance(tblMchntInfo.getBalance()-money);
+		mchntInfoDao.modify(tblMchntInfo);
+	}
+	
+	
+	public List<JobInfo> getJobInfoList(int mchntCd){
+		List<TblJobInfo> tblJobInfoList=jobInfoDao.findByProperty("mchntCd", mchntCd);
+		List<JobInfo>result=new ArrayList<JobInfo>();
+		for(TblJobInfo temp:tblJobInfoList){
+			JobInfo jobInfo=new JobInfo();
+			ApplicationUtil.copyProperties(temp, jobInfo);
+			result.add(jobInfo);
+		}
+		
+		return result;
+	}
 
+	
 	/**
 	 * 数据转换
 	 * @param tblMchntInfo
@@ -106,4 +178,7 @@ public class MchntService {
 		return mchntInfo;
 	}
 
+	
+	
+	
 }

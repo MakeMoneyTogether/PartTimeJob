@@ -1,13 +1,33 @@
 package com.partjob.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.KeyStore;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.partjob.constant.TransCanstant;
 
 public class HttpRequestUtil {
 
@@ -117,5 +137,65 @@ public class HttpRequestUtil {
             }
         }
         return result;
+    }
+    
+    
+    public static String sendSSLPost(String url,String param)throws Exception{
+    	KeyStore keyStore  = KeyStore.getInstance("PKCS12");
+        FileInputStream instream = new FileInputStream(new File("D:/10016225.p12"));
+        try {
+            keyStore.load(instream, TransCanstant.MCHNT_ID.toCharArray());
+        } finally {
+            instream.close();
+        }
+
+        // Trust own CA and all self-signed certs
+        SSLContext sslcontext = SSLContexts.custom()
+                .loadKeyMaterial(keyStore, TransCanstant.MCHNT_ID.toCharArray())
+                .build();
+        // Allow TLSv1 protocol only
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+                sslcontext,
+                new String[] { "TLSv1" },
+                null,
+                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+        CloseableHttpClient httpclient = HttpClients.custom()
+                .setSSLSocketFactory(sslsf)
+                .build();
+        
+        String result="";
+        
+        try {
+
+            HttpPost httpPost = new HttpPost(url);
+            List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();  
+            parameters.add(new BasicNameValuePair("xml", param));  
+            httpPost.setEntity(new UrlEncodedFormEntity(parameters,"UTF-8")); 
+
+            System.out.println("executing request" + httpPost.getRequestLine());
+
+            CloseableHttpResponse response = httpclient.execute(httpPost);
+            try {
+                HttpEntity entity = response.getEntity();
+
+                System.out.println("----------------------------------------");
+                System.out.println(response.getStatusLine());
+                if (entity != null) {
+                    System.out.println("Response content length: " + entity.getContentLength());
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    
+                    while ((result = bufferedReader.readLine()) != null) {
+                        System.out.println(result);
+                    }
+                   
+                }
+                EntityUtils.consume(entity);
+            } finally {
+                response.close();
+                return result;
+            }
+        } finally {
+            httpclient.close();
+        }
     }
 }

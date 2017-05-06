@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.net.InetAddress;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -45,6 +47,16 @@ public class CommonUtil {
         return ca.get(Calendar.MONTH) + 1;
     }
 
+    /**
+     * 获取当前时间戳
+     * 
+     * @return
+     */
+    public static String getCurrentDay() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        return sdf.format(new Date());
+    }
+    
     /**
      * 获取当前时间戳
      * 
@@ -239,28 +251,49 @@ public class CommonUtil {
         }
     }
 
-    public static String obj2xml(Object obj,Class...classes ){
+    public static String obj2xml(Object obj ){
     	JAXBContext context;
 		try {
-			context = JAXBContext.newInstance(classes);
+			context = JAXBContext.newInstance(obj.getClass());
 		  // 获取上下文对象  
         Marshaller marshaller = context.createMarshaller(); // 根据上下文获取marshaller对象  
           
         marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");  // 设置编码字符集  
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); // 格式化XML输出，有分行和缩进  
-          
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);  
 //        marshaller.marshal(obj,System.out);   // 打印到控制台  
           
         ByteArrayOutputStream baos = new ByteArrayOutputStream();  
         marshaller.marshal(obj, baos);  
         String xmlObj = new String(baos.toByteArray());         // 生成XML字符串  
-        return xmlObj; 
+//        return xmlObj.substring(56); 
+        return xmlObj;
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}  
     }
+    /**
+     * @param xmlStr 字符串
+     * @param c 对象Class类型
+     * @return 对象实例
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T xml2Object(String xmlStr,Class<T> c)
+    { 
+        try
+        { 
+            JAXBContext context = JAXBContext.newInstance(c); 
+            Unmarshaller unmarshaller = context.createUnmarshaller(); 
+             
+            T t = (T) unmarshaller.unmarshal(new StringReader(xmlStr)); 
+             
+            return t; 
+             
+        } catch (JAXBException e) {  e.printStackTrace();  return null; } 
+         
+    } 
     /**
      * 对字符串进行MD5加密
      * @since 

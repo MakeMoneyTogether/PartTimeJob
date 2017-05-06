@@ -8,4 +8,9 @@ public class CommonCanstant {
 	public static String MCHNT_INFO="mchntInfo";
 
 
+	public static String PAY_TYPE_HOUR="hour";
+	public static String PAY_TYPE_DAY="day";
+	
+	public static String IP="";
+	
 }

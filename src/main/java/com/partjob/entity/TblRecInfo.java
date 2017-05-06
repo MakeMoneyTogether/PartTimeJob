@@ -10,6 +10,9 @@ import java.sql.Timestamp;
 @Table(name = "tbl_rec_info", schema = "parttimejob", catalog = "")
 public class TblRecInfo {
     private int recId;
+    private int userId;
+    private int mchntCd;
+    private int jobId;
     private Integer recSt;
     private Integer recScore;
     private Timestamp recCrtTime;
@@ -23,8 +26,32 @@ public class TblRecInfo {
     public void setRecId(int recId) {
         this.recId = recId;
     }
+    @Column(name = "user_id", nullable = false)
+    public int getUserId() {
+		return userId;
+	}
 
-    @Basic
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	 @Column(name = "mchnt_cd", nullable = false)
+	public int getMchntCd() {
+		return mchntCd;
+	}
+
+	public void setMchntCd(int mchntCd) {
+		this.mchntCd = mchntCd;
+	}
+	 @Column(name = "job_id", nullable = false)
+	public int getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}
+
+	@Basic
     @Column(name = "rec_st", nullable = true)
     public Integer getRecSt() {
         return recSt;
@@ -54,27 +81,5 @@ public class TblRecInfo {
         this.recCrtTime = recCrtTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        TblRecInfo that = (TblRecInfo) o;
-
-        if (recId != that.recId) return false;
-        if (recSt != null ? !recSt.equals(that.recSt) : that.recSt != null) return false;
-        if (recScore != null ? !recScore.equals(that.recScore) : that.recScore != null) return false;
-        if (recCrtTime != null ? !recCrtTime.equals(that.recCrtTime) : that.recCrtTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = recId;
-        result = 31 * result + (recSt != null ? recSt.hashCode() : 0);
-        result = 31 * result + (recScore != null ? recScore.hashCode() : 0);
-        result = 31 * result + (recCrtTime != null ? recCrtTime.hashCode() : 0);
-        return result;
-    }
 }
