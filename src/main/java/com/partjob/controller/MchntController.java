@@ -45,18 +45,34 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = "")
 	public String  mchnt() {
-		String url = "https://open.weixin.qq.com/connect/oauth/authorize";
+		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
 		String param = "appid="
 				+ TransCanstant.APP_ID
 				+ "&redirect_uri="
 				+ URLEncoder
-						.encode(TransCanstant.NOTIFY_MCHNT_URL
-								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect");
+						.encode(TransCanstant.NOTIFY_MCHNT_URL)
+								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
 
 		String result = HttpRequestUtil.sendGet(url, param);
+		logger.info("url:"+url+"?"+param);
+		logger.info("result"+result);
 		
 		//返回登录页面
 		return "login";
+	}
+	
+	
+	public static void main(String[] args) {
+		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
+		String param = "appid="
+				+ TransCanstant.APP_ID
+				+ "&redirect_uri="
+				+ URLEncoder
+						.encode(TransCanstant.NOTIFY_MCHNT_URL)
+								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
+
+		System.out.println(url+"?"+param);
+//		logger.info("url:"+url+"?"+param);
 	}
 	
 	/**
@@ -68,10 +84,11 @@ public class MchntController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "redirectUrl")
-	public void getOpenId(@RequestParam(value = "code") String code,
-			@RequestParam(value = "state") String state,
+	public void getOpenId(
 			HttpServletRequest request,HttpServletResponse response) {
 
+		String code=request.getParameter("code");
+		
 		String param = "appid=" + TransCanstant.APP_ID + "&secret="
 				+ TransCanstant.SECRET + "&code=" + code
 				+ "&grant_type=authorization_code";
@@ -83,12 +100,13 @@ public class MchntController extends BaseController {
 		session.setAttribute(TransCanstant.OPEN_ID, openId);
 		logger.info("openId:"+openId);
 		
-//		try {
-//			response.sendRedirect("http://mapengju.com/PartTimeJob/transTest/pay?totalFee=1");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			String res=HttpRequestUtil.sendGet("http://mapengju.com/PartTimeJob/transTest/pay?totalFee=1", null);
+			logger.info(res);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		return "pay";
 	}
 
