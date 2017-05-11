@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WeiChatController {
 	@RequestMapping("MP_verify_pfWfJsZAFlMS4TN6.txt")
 	public ResponseEntity<byte[]> weicheck() throws IOException{
-		String path = "E:/MP_verify_pfWfJsZAFlMS4TN6.txt";
+		String path = "/root/wechat/MP_verify_pfWfJsZAFlMS4TN6.txt";
 		File file=new File(path);
 		HttpHeaders headers = new HttpHeaders();
 		String fileName="MP_verify_pfWfJsZAFlMS4TN6.txt";
