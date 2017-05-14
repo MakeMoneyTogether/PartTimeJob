@@ -150,7 +150,12 @@ public class TransService {
 			ArrayList<String> list = new ArrayList<String>();
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				if ( !StringUtils.isEmpty(entry.getValue())) {
-					list.add(entry.getKey() + "=" + entry.getValue() + "&");
+					if(entry.getKey().equalsIgnoreCase("wcPackage")){
+						list.add("package=" + entry.getValue() + "&");
+					}else{
+						list.add(entry.getKey() + "=" + entry.getValue() + "&");
+					}
+					
 				}
 			}
 			int size = list.size();
