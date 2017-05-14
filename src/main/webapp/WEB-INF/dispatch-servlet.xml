@@ -13,6 +13,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/"
 		cache-period="86400" />
 
+
 	<mvc:annotation-driven
 		ignoreDefaultModelOnRedirect="true" />
 

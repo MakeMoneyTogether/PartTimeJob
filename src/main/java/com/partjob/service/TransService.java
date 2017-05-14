@@ -31,16 +31,20 @@ public class TransService {
 	 * @param openId	用户标识
 	 */
 	public int pay(String totalFee, String ip,String openId) {
+		logger.info("支付步骤2");
 		String outTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		Transaction trans=setTrans(outTradeNo, totalFee, ip,openId);
+		logger.info("支付步骤2.1"+trans);
 		String param=CommonUtil.obj2xml(trans);
-		logger.info(param);
+		logger.info("支付步骤2.2"+param);
 		String result=HttpRequestUtil.sendPost(TransCanstant.PAY_URL, param);
-		logger.info(result);
+		logger.info("支付步骤3"+result);
 		TransResult transResult=CommonUtil.xml2Object(result, TransResult.class);
 		if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
+			logger.info("支付步骤4：success");
 			return ResponseCode.SUCCESS;
 		}
+		logger.info("支付步骤4：fail");
 		return ResponseCode.FAIL;
 	}
 	

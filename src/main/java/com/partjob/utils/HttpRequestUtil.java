@@ -142,7 +142,7 @@ public class HttpRequestUtil {
     
     public static String sendSSLPost(String url,String param)throws Exception{
     	KeyStore keyStore  = KeyStore.getInstance("PKCS12");
-        FileInputStream instream = new FileInputStream(new File("D:/10016225.p12"));
+        FileInputStream instream = new FileInputStream(new File("/Users/MPJ/Downloads/cert-2/apiclient_cert.p12"));
         try {
             keyStore.load(instream, TransCanstant.MCHNT_ID.toCharArray());
         } finally {

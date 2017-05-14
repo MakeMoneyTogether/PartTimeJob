@@ -84,7 +84,7 @@ public class MchntController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "redirectUrl")
-	public void getOpenId(
+	public String getOpenId(
 			HttpServletRequest request,HttpServletResponse response) {
 
 		String code=request.getParameter("code");
@@ -100,14 +100,14 @@ public class MchntController extends BaseController {
 		session.setAttribute(TransCanstant.OPEN_ID, openId);
 		logger.info("openId:"+openId);
 		
-		try {
-			String res=HttpRequestUtil.sendGet("http://mapengju.com/PartTimeJob/transTest/pay?totalFee=1", null);
-			logger.info(res);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		return "pay";
+//		try {
+//			String res=HttpRequestUtil.sendGet("http://www.mapengju.com/PartTimeJob/transTest/pay?totalFee=1", null);
+//			logger.info(res);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		return "pay";
 	}
 
 	
