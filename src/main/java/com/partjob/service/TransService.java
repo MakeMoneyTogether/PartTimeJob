@@ -2,6 +2,7 @@ package com.partjob.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import com.partjob.model.CashTransResult;
 import com.partjob.model.CashTransaction;
 import com.partjob.model.TransResult;
 import com.partjob.model.Transaction;
+import com.partjob.model.WcPay;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HttpRequestUtil;
 
@@ -30,8 +32,9 @@ public class TransService {
 	 * @param ip 终端ip
 	 * @param openId	用户标识
 	 */
-	public int pay(String totalFee, String ip,String openId) {
+	public WcPay pay(String totalFee, String ip,String openId) {
 		logger.info("支付步骤2");
+		WcPay wcPay=null;
 		String outTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		Transaction trans=setTrans(outTradeNo, totalFee, ip,openId);
 		logger.info("支付步骤2.1"+trans);
@@ -39,13 +42,22 @@ public class TransService {
 		logger.info("支付步骤2.2"+param);
 		String result=HttpRequestUtil.sendPost(TransCanstant.PAY_URL, param);
 		logger.info("支付步骤3"+result);
-		TransResult transResult=CommonUtil.xml2Object(result, TransResult.class);
-		if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
-			logger.info("支付步骤4：success");
-			return ResponseCode.SUCCESS;
+		try{
+			TransResult transResult=CommonUtil.xml2Object(result, TransResult.class);
+			if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
+				logger.info("支付步骤4：success");
+				wcPay=setWcPay(transResult.getPrepay_id());
+				return wcPay;
+			}else{
+				logger.info("支付步骤4：fail");
+				return wcPay;
+			}
+		}catch(Exception e){
+			logger.info("支付步骤4：fail");
+			return wcPay;
 		}
-		logger.info("支付步骤4：fail");
-		return ResponseCode.FAIL;
+		
+		
 	}
 	
 	public int cash(String amount,String openId){
@@ -71,6 +83,16 @@ public class TransService {
 		
 	}
 
+	private WcPay setWcPay(String prepayId){
+		WcPay wcPay=new WcPay();
+		wcPay.setAppId(TransCanstant.APP_ID);
+		wcPay.setNonceStr(CommonUtil.toMD5(CommonUtil.createRandomVcode()));
+		wcPay.setTimeStamp(Long.toString((new Date()).getTime()));
+		wcPay.setWcPackage("prepay_id="+prepayId);
+		wcPay.setSignType("MD5");
+		wcPay.setPaySign(sign(wcPay));
+		return wcPay;
+	}
 	/**
 	 * 包装付款参数
 	 * @param outTradeNo

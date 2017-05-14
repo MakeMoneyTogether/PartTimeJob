@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
+import com.partjob.model.WcPay;
 import com.partjob.service.TransService;
 import com.partjob.utils.CommonUtil;
 
@@ -28,16 +29,20 @@ public class TransController {
 	
 	@RequestMapping(value = "pay")
 	@ResponseBody
-	public int pay(HttpServletRequest request,@RequestParam(value = "totalFee") String totalFee){
+	public Object pay(HttpServletRequest request,@RequestParam(value = "totalFee") String totalFee){
 		logger.info("支付开始");
 		String ip=CommonUtil.getIpAddr(request);
-		String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
+//		String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
 		
-//		String openId="oaelhwCJmuYs2KRKT3eYTnH1Bmyo";
+		String openId="oaelhwCJmuYs2KRKT3eYTnH1Bmyo";
 		logger.info("支付步骤1");
-		transService.pay(totalFee, ip, openId);
-		logger.info("success");
-		return ResponseCode.SUCCESS;
+		WcPay wcPay=transService.pay(totalFee, ip, openId);
+		if(wcPay!=null){
+			logger.info("success");
+			return wcPay;
+		}
+		logger.info("faile");
+		return ResponseCode.FAIL;
 	}
 	
 	@RequestMapping(value = "cash")
@@ -53,6 +58,8 @@ public class TransController {
 		logger.info("success");
 		return ResponseCode.SUCCESS;
 	}
+	
+
 	
 	@RequestMapping(value = "notify")
 	@ResponseBody
