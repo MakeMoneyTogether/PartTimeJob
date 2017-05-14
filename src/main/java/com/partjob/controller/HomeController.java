@@ -36,7 +36,7 @@ public class HomeController {
 	@RequestMapping(value = "")
 	public String welcome() {
 		logger.info("进入欢迎页面");
-		return "index";
+		return "mchnt/index";
 	}
 
 	/**

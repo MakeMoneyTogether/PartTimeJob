@@ -1,0 +1,111 @@
+.placeholder {
+	margin: 0;
+	padding: 1px 10px;
+	background-color: #efeff4;
+	height: 2.2em;
+	line-height: 2.3em;
+	text-align: center;
+	position:relative;
+	color: #010101;
+	font-size: 1.2em;
+}
+.placeselect{
+	/*margin-top: 1%;*/
+	/*height: 2.2em;*/
+	padding: 5px;
+	text-align: center;
+	position:relative;
+	color: #010101;
+	font-size: 1.3em;
+}
+.swiper-container {
+	width: 100%;
+} 
+
+.swiper-container img {
+	display: block;
+	width: 100%;
+}
+.i-circle{
+	width: 70%;
+	height: 70%;
+	margin-top: 15%;
+	border-radius:50%;
+	background-color: #7D4F9E;
+	font-size: 1em;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 260%;
+}
+.i-jz{
+	line-height: 15px;
+	margin-left: -2%;
+}
+.i-jz-title{
+	font-size: 15px;
+}
+.i-jz-desc{
+	font-size: 12px;
+}
+.i-jz-money{
+	font-size: 13px;
+	color: #ff0000;
+}
+.i-jz-date{
+	font-size: 13px;
+	float: right;
+}
+.weui-form-preview__item > span{
+	color: black;
+	float: left;
+}
+.info-desc{
+	float: left;
+	line-height:1.5;
+	text-align:left;
+}
+.checkDiv{
+	padding-left: 5%;
+}
+.checkBtn{
+	color: #0f0f0f;
+	margin-left: 5px;
+	border:1px dashed #000;
+}
+.checkBtnActive{
+	border:1px solid #0099CC;
+}
+.commitBtn{
+	width:80% !important; 
+	background-color: #1AAd19;
+	margin-bottom: 5%;
+	margin-top: 5%;
+	margin-left: 10%;
+}
+.div_left{
+	float:left;
+}
+.div_right{
+	float:right;
+}
+.icon-only > i{	/*针对日历左右选择按钮做的调整*/
+	margin-top:30%;
+}
+.div_label_out{	/*多栏显示*/
+	text-align:center;
+	margin-top:0;
+	padding:0;
+}
+.div_label_in{	/*多栏显示*/
+	padding:2% 0;
+}
+.div_box{
+	/*background-color: #efeff4;*/
+	border-left:2px solid #efeff4;
+}
+.div_border{
+	border:1px solid #000;
+}
+.div_border_left{
+	border-left:1px solid #000;
+}

@@ -32,9 +32,9 @@ public class TransController {
 	public Object pay(HttpServletRequest request,@RequestParam(value = "totalFee") String totalFee){
 		logger.info("支付开始");
 		String ip=CommonUtil.getIpAddr(request);
-//		String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
+		String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
 		
-		String openId="oaelhwCJmuYs2KRKT3eYTnH1Bmyo";
+//		String openId="oaelhwCJmuYs2KRKT3eYTnH1Bmyo";
 		logger.info("支付步骤1");
 		WcPay wcPay=transService.pay(totalFee, ip, openId);
 		if(wcPay!=null){

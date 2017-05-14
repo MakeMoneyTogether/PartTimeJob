@@ -89,7 +89,7 @@ public class TransService {
 		wcPay.setNonceStr(CommonUtil.toMD5(CommonUtil.createRandomVcode()));
 		wcPay.setTimeStamp(Long.toString((new Date()).getTime()));
 		wcPay.setWcPackage("prepay_id="+prepayId);
-		wcPay.setSignType("MD5");
+//		wcPay.setSignType("MD5");
 		wcPay.setPaySign(sign(wcPay));
 		return wcPay;
 	}

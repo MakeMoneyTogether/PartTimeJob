@@ -24,6 +24,7 @@ import com.partjob.utils.HttpRequestUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,9 +59,13 @@ public class MchntController extends BaseController {
 		logger.info("result"+result);
 		
 		//返回登录页面
-		return "login";
+		return "views/mchnt/index";
 	}
 	
+	@RequestMapping("{page}")
+	public String merto(@PathVariable String page){
+		return "mchnt/"+page;
+	}
 	
 	public static void main(String[] args) {
 		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
@@ -107,7 +112,7 @@ public class MchntController extends BaseController {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		return "pay";
+		return "mchnt/money";
 	}
 
 	
