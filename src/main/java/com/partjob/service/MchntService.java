@@ -116,15 +116,16 @@ public class MchntService {
 	 */
 	public int pay(String totalFee, String ip,String openId,int mchntCd){
 		
-		int transResult=transService.pay(totalFee, ip, openId);
-		if(transResult==ResponseCode.SUCCESS){
-			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
-			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(totalFee));
-			mchntInfoDao.modify(tblMchntInfo);
-			return ResponseCode.SUCCESS;
-		}
-		return transResult;
+//		int transResult=transService.pay(totalFee, ip, openId);
+//		if(transResult==ResponseCode.SUCCESS){
+//			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
+//			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(totalFee));
+//			mchntInfoDao.modify(tblMchntInfo);
+//			return ResponseCode.SUCCESS;
+//		}
+//		return transResult;
 		
+		return 0;				
 	}
 	
 	/**
