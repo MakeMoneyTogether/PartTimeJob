@@ -43,7 +43,7 @@
 </div>
 <div class="weui-btn-area">
 	<a onclick="merlogin();" style="width:80%;" class="weui-btn weui-btn_primary">登录</a>
-	<a href="register.html" style="width:80%;" class="weui-btn weui-btn_default">注册</a>
+	<a href="mchntp/register" style="width:80%;" class="weui-btn weui-btn_default">注册</a>
 </div>
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>

@@ -1,12 +1,12 @@
 function getMeInfo(){
 	$.ajax({
 		type: "POST",
-		url: 'merurl/json/me',
+		url: 'mchnt/getMchntInfo',
 		dataType: "json",
 		success:function(data){
-			$('#mname').html(data.mname);
-			$('#moneyable').html(data.moneyable);
-			$('#moneyice').html(data.moneyice);
+			$('#mname').html(data.mchntName);
+			$('#moneyable').html(data.balance);
+			$('#moneyice').html(data.balance);
 		}
 	});
 }

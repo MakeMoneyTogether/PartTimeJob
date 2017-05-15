@@ -224,7 +224,6 @@ public abstract class HibernateBaseDao<T, PK extends Serializable> {
      * @param values 数量可变的参数
      */
     public Query createQuery(final String queryString, final Object... values) {
-        Assert.hasText(queryString);
         Query query = getSession().createQuery(queryString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {

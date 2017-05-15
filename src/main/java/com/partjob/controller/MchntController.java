@@ -61,11 +61,7 @@ public class MchntController extends BaseController {
 		//返回登录页面
 		return "views/mchnt/index";
 	}
-	
-	@RequestMapping("{page}")
-	public String merto(@PathVariable String page){
-		return "mchnt/"+page;
-	}
+
 	
 	public static void main(String[] args) {
 		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";

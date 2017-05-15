@@ -14,7 +14,7 @@ public class MchntInfoDao extends HibernateBaseDao<TblMchntInfo,Serializable>{
 
 
 	public TblMchntInfo getMchntInfo(String password,String phone){
-		String hql="from TblMchntInfo mchnt where mchnt.password=:password amd phone=:phone";
+		String hql="from TblMchntInfo mchnt where mchnt.password=? and phone=?";
 		return findUnique(hql,password,phone);
 		
 	}
