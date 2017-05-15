@@ -69,16 +69,13 @@ function logout(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/pages/logout',
+		url: 'mchnt/logout',
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
-			$.removeCookie('phone',{path:'/'})
-			$.removeCookie('password',{path:'/'})
-			window.location.href='mchnt/login';
 		}
 	});
 	$.removeCookie('phone',{path:'/'})
 	$.removeCookie('password',{path:'/'})
-	window.location.href='mchnt/login';
+	window.location.href='mchntp/login';
 }

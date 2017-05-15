@@ -166,6 +166,29 @@ public class MchntController extends BaseController {
 	}
 
 	/**
+	 * 登录
+	 * 
+	 * @param password
+	 * @param phone
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "logout" })
+	@ResponseBody
+	public Object logout(@RequestParam(value = "phone") String phone,
+			HttpServletRequest request) {
+		try {
+				HttpSession session = request.getSession();
+				session.removeAttribute(CommonCanstant.MCHNT_INFO);
+				return ResponseCode.SUCCESS;
+		} catch (Exception e) {
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+
+	}
+	
+	/**
 	 * 检查手机号是否存在
 	 * 
 	 * @param phone

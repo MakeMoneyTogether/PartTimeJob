@@ -1,22 +1,22 @@
+mchntCd = -1;
 function init(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'merurl/json/merme',
+		url: 'mchnt/getMchntInfo',
 		dataType:'json',
-		data:{phone:phone},
 		success: function(data){
-			mname = $('#mname').val(data.mname);
-			local = $('#local').val(data.local);
-			connectname = $('#connectname').val(data.connectname);
+			mname = $('#mname').val(data.mchntName);
+			local = $('#local').val(data.mchntAddress);
+			connectname = $('#connectname').val(data.connName);
 			phone = $('#phone').val(data.phone);
+			mchntCd = data.mchntCd;
 		}
 	});
 }
 function editLocal(){
 	$("#city-picker").attr('disabled',false);
 	$("#city-picker").cityPicker({
-		showDistrict: false
 	});
 }
 function get_code(){
@@ -61,20 +61,20 @@ function update(){
 	phone = $('#phone').val();
 	code = $('#code').val();
 	
-	data={mname:mname,local:local,connectname:connectname,phone:phone,code:code};
+	data={mchntCd:mchntCd,mchntName:mname,mchntAddress:local,connName:connectname,phone:phone,code:code};
 	if(citycode != null){
 		data.citycode = citycode;
 	}
 	$.ajax({
 		type:'POST',
-		url: 'merurl/json/update',
+		url: 'mchnt/update',
 		dataType:'json',
 		data:data,
 		success: function(data){
 			console.log(data);
 			if(data == 0){
 				$.alert('信息修改成功',function(){
-					window.location.href="mchnt/index";
+					window.location.href="mchntp/index";
 				});
 			}else{
 				$.alert('简历修改失败',function(){

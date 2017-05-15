@@ -15,7 +15,13 @@
 <link rel="stylesheet" href="static/css/jquery-weui.min.css">
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
 <link rel="stylesheet" href="static/css/jz.css">
-<link rel="stylesheet" href="static/css/col.css">
+<link rel="stylesheet" href="static/css/col.css"><script>
+	$(function() {
+		FastClick.attach(document.body);
+	});
+	mercheck();
+	getMeInfo();
+</script>
 </head>
 <body ontouchstart>		
 <div class="weui-tabbar" style="position:fixed;">
@@ -35,17 +41,17 @@
 			<img style="width:100%;" alt="统一头像" src="static/images/1.jpg">
 		</div>
 		<div class="col-50 div_left">
-			<span style="margin-left:5%;float:left;" id="mname">商户名称</span><br>
+			<span style="margin-left:5%;float:left;" id="mname"></span><br>
 		</div>
 		<div style="clear:both"></div>
 	</div>
 </div>
 <div class="weui-cells weui-flex div_label_out">
 	<div class="weui-flex__item div_box div_label_in">
-		可用资产:<br><span id="moneyable">1000.00</span>元
+		可用资产:<br><span id="moneyable"></span>元
 	</div>
 	<div class="weui-flex__item div_box div_label_in">
-		冻结资产:<br><span id="moneyice">1000.00</span>元
+		冻结资产:<br><span id="moneyice"></span>元
 	</div>
 </div>
 <div class="weui-cells" style="margin-top:0;">
