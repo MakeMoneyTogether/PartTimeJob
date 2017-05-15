@@ -85,14 +85,6 @@ function postCharge(rmb){
 		        	   $.alert('支付成功')
 		           }
 		    });
-			if(data == 0){
-				$.toast('已提交申请');
-				init();
-			}else if(data == 1){
-				$.toast('余额不足','forbidden');
-			}else if(data == 2){
-				$.toast('操作失败，请稍后重试','forbidden');
-			}
 		}
 	});
 }
