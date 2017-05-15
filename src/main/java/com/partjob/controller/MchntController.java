@@ -2,6 +2,7 @@ package com.partjob.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,7 +181,6 @@ public class MchntController extends BaseController {
 			@RequestParam(value = "phone") String phone,
 			@RequestParam(value = "repassword") String repassword) {
 		try {
-				//这里要修改密码
 			if (mchntService.updatePassword(password, phone, repassword)) {
 				return ResponseCode.SUCCESS;
 			} else {
@@ -325,9 +325,12 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = { "podtJob" })
 	@ResponseBody
-	public int postJob(JobInfo jobInfo,
+	public int postJob(JobInfo jobInfo,long jjobStartTime, long jjobEndTime, long jjobValidateTime,
 			HttpServletRequest request){
 		try{
+			jobInfo.setJobStartTime(new Timestamp(jjobStartTime));
+			jobInfo.setJobEndTime(new Timestamp(jjobEndTime));
+			jobInfo.setJobValidateTime(new Timestamp(jjobValidateTime));
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			mchntService.postJob(jobInfo, mchntCd);
 			return ResponseCode.SUCCESS;

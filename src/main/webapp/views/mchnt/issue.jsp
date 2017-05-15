@@ -105,7 +105,7 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">联系人电话</label></div>
 			<div class="weui-cell__bd">
-				<input id="csonnectIphone" class="weui-input" type="text" placeholder="请输入联系人电话">
+				<input id="connectPhone" class="weui-input" type="text" placeholder="请输入联系人电话">
 			</div>
 		</div>
 		<hr>
