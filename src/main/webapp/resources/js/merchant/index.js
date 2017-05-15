@@ -1,3 +1,23 @@
+function imercheck(){
+	phone = $.cookie('phone');
+	pwd = $.cookie('password');
+	
+	if(phone == null || pwd == null){
+		window.location.href='mchntp/login';
+	}
+	$.ajax({
+		type:'POST',
+		url: 'mchnt/login',
+		dataType:'json',
+		data:{phone:phone,password:pwd},
+		success: function(data){
+			if(data != 0){
+				window.location.href='mchntp/login';
+			}
+			getMeInfo();
+		}
+	});
+}
 function getMeInfo(){
 	$.ajax({
 		type: "POST",

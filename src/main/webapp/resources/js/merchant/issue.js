@@ -1,45 +1,33 @@
 $(function(){
 	
 });
-
-function change(value){
-	if(value == 'hour'){
-		$('#for_hour').show();
-	}else{
-		$('#for_hour').hide();
-	}
-}
 function check(){
-	jzname = $('#jzname').val();
-	if(jzname == ''){
+	jobTitle = $('#jobTitle').val();
+	if(jobTitle == ''){
 		$.alert('请输入兼职名');
 		return;
 	}
-	
-	salary = $('#salary').val();
-	if(!salary.match(/^(\d)+(\.(\d)+)?$/)){
+	jobType = $('#jobType').val();
+	paymentType = $('#paymentType').val();
+	paymentMoney = $('#paymentMoney').val();
+	if(!paymentMoney.match(/^(\d)+(\.(\d)+)?$/)){
 		$.alert('请输入正确的薪水');
 		return;
 	}
-	hourOfDay = $('#hourOfDay').val();
-	if($('#unit').val() == 'hour' && !hourOfDay.match(/^(\d|\d\d)$/) || hourOfDay > 24){
-		$.alert('请输入正确的工作强度');
-		return;
-	}
-	stdate = $('#stdate').val();
-	endate = $('#endate').val();
-	pausedate = $('#pausedate').val();
-	if(stdate == '' || endate == '' || pausedate == '' || pausedate > stdate || stdate > endate){
+	jobStartTime = new Date($('#jobStartTime').val()).getTime()/1000;
+	jobEndTime = new Date($('#jobEndTime').val()).getTime()/1000;
+	jobValidateTime = new Date($('#jobValidateTime').val()).getTime()/1000;
+	if(jobStartTime == '' || jobEndTime == '' || jobValidateTime == '' || jobStartTime > jobEndTime){
 		$.alert('请输入正确日期');
 		return;
 	}
-	jznum = $('#jznum').val();
-	if(!salary.match(/^(\d)+$/)){
+	numPeople = $('#numPeople').val();
+	if(!numPeople.match(/^(\d)+$/)){
 		$.alert('请输入正确的招聘人数');
 		return;
 	}
-	jzlocal = $('#jzlocal').val();
-	if(jzlocal == ''){
+	jobAddress = $('#jobAddress').val();
+	if(jobAddress == ''){
 		$.alert('请输入兼职地点');
 		return;
 	}
@@ -49,28 +37,25 @@ function check(){
 		$.alert('请输入联系人姓名');
 		return;
 	}
-	connectPhone = $('#connectPhone').val();
-	if(connectPhone.match(/^(1\d{10})$/)){
+	csonnectIphone = $('#csonnectIphone').val();
+	if(!csonnectIphone.match(/^(1\d{10})$/)){
 		$.alert('请输入正确的手机号码');
 		return;
 	}
-	jzdes = $('#jzdes').val();
-	if($('#unit').val() == 'hour'){//calcu by hour
-		data = {salary:salary,hourOfDay:hourOfDay,stdate:stdate,endate:endate,pausedate:pausedate,jznum:jznum,jzlocal:jzlocal,connectName:connectName,connectPhone:connectPhone,jzdes:jzdes};
-	}else{//calcu by day
-		data = {salary:salary,stdate:stdate,endate:endate,pausedate:pausedate,jznum:jznum,jzlocal:jzlocal,connectName:connectName,connectPhone:connectPhone,jzdes:jzdes};
-	}
+	jobDesc = $('#jobDesc').val();
+//	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jobStartTime:jobStartTime, jobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jobValidateTime:jobValidateTime, connectName:connectName, csonnectIphone:csonnectIphone};
+	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jobStartTime:jobStartTime, jobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jobValidateTime:jobValidateTime, connectName:connectName};
 	issue(data);
 }
 function issue(data){
 	$.ajax({
 		type:'POST',
-		url: 'merurl/json/issue',
+		url: 'mchnt/podtJob',
 		dataType:'json',
 		data:data,
 		success: function(data){
 			if(data.length > 1){
-				window.location.href='mchnt/index';
+				window.location.href='mchntp/index';
 			}else{
 				$.alert('余额不足');
 			}

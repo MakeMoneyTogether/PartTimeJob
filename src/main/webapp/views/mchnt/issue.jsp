@@ -39,13 +39,13 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职名称</label></div>
 			<div class="weui-cell__bd">
-				<input id="jzname" class="weui-input" type="text" placeholder="请输入兼职名称">
+				<input id="jobTitle" class="weui-input" type="text" placeholder="请输入兼职名称">
 			</div>
 		</div>
 		<div class="weui-cell weui-cell_select weui-cell_select-after">
 			<div class="weui-cell__hd"><label class="weui-label">兼职类型</label></div>
 			<div class="weui-cell__bd">
-				<select id="jzlabel" name="jzlabel" class="weui-select">
+				<select id="jobType" name="jobType" class="weui-select">
 					<option value="1">发单</option>
 					<option value="2">销售</option>
 					<option value="3">传销</option>
@@ -55,51 +55,44 @@
 		<div class="weui-cell weui-cell_select weui-cell_select-after">
 			<div class="weui-cell__hd"><label class="weui-label">薪资待遇</label></div>
 			<div class="col-70">
-				<input id="salary" class="weui-input" type="text" placeholder="单位时间薪水">
+				<input id="paymentMoney" class="weui-input" type="text" placeholder="单位时间薪水">
 			</div>
 			<div class="col-30">
-				<select id="unit" name="unit" class="weui-select" onchange="change(this.options[this.options.selectedIndex].value);">
-					<option value="day">/天</option>
-					<option value="hour">/小时</option>
+				<select id="paymentType" name="paymentType" class="weui-select" onchange="change(this.options[this.options.selectedIndex].value);">
+					<option value="1">/小时</option>
+					<option value="2">/天</option>
 				</select>
 			</div>
-		</div>
-		<div id="for_hour" style="display:none;" class="weui-cell">
-			<div class="weui-cell__hd"><label class="weui-label">工作强度</label></div>
-			<div class="weui-cell__bd">
-				<input id="hourOfDay" class="weui-input" type="text" placeholder="平均一天工作多少小时">
-			</div>
-			小时/天
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">开始时间</label></div>
 			<div class="weui-cell__bd">
-				<input id="stdate" class="weui-input" type="date" placeholder="请选择时间">
+				<input id="jobStartTime" class="weui-input" type="date" placeholder="请选择时间">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">结束时间</label></div>
 			<div class="weui-cell__bd">
-				<input id="endate" class="weui-input" type="date" >
+				<input id="jobEndTime" class="weui-input" type="date" >
 			</div>
 		</div>
 		<div class="weui-cell">
-			<div class="weui-cell__hd"><label class="weui-label">报名时间</label></div>
+			<div class="weui-cell__hd"><label class="weui-label">兼职有效期至</label></div>
 			<div class="weui-cell__bd">
-				<input id="pausedate" class="weui-input" type="date" >
+				<input id="jobValidateTime" class="weui-input" type="date" >
 			</div>
 				前
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">需求人数</label></div>
 			<div class="weui-cell__bd">
-				<input id="jznum" class="weui-input" type="text" placeholder="请输入需求人数">
+				<input id="numPeople" class="weui-input" type="text" placeholder="请输入需求人数">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职地点</label></div>
 			<div class="weui-cell__bd">
-				<input id="jzlocal" class="weui-input" type="text" placeholder="请输入兼职地点">
+				<input id="jobAddress" class="weui-input" type="text" placeholder="请输入兼职地点">
 			</div>
 		</div>
 		<hr>
@@ -112,14 +105,14 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">联系人电话</label></div>
 			<div class="weui-cell__bd">
-				<input id="connectPhone" class="weui-input" type="text" placeholder="请输入联系人电话">
+				<input id="csonnectIphone" class="weui-input" type="text" placeholder="请输入联系人电话">
 			</div>
 		</div>
 		<hr>
 		<div class="weui-cells__title">兼职描述</div>
 		<div class="weui-cell">
 			<div class="weui-cell__bd">
-				<textarea id="jzdes" class="weui-textarea" placeholder="请输入文本" rows="6"></textarea>
+				<textarea id="jobDesc" class="weui-textarea" placeholder="请输入文本" rows="6"></textarea>
 			</div>
 		</div>
 		<div class="weui-btn-area">

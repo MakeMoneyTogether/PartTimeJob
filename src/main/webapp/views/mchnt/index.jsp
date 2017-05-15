@@ -138,8 +138,7 @@
 	$(function() {
 		FastClick.attach(document.body);
 	});
-	mercheck();
-	getMeInfo();
+	imercheck();
 </script>
 </body>
 </html>
