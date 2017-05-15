@@ -311,6 +311,8 @@ public class MchntController extends BaseController {
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping(value = { "checkPay" })
+	@ResponseBody
 	public int checkPay(@RequestParam(value = "outTradeNo") String outTradeNo,
 			HttpServletRequest request){
 		try{
