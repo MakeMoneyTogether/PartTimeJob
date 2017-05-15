@@ -128,6 +128,7 @@ public class MchntController extends BaseController {
 		try {
 			mchntService.saveMchnt(mchntInfo, password);
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -159,6 +160,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -185,6 +187,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -208,6 +211,7 @@ public class MchntController extends BaseController {
 				session.removeAttribute(CommonCanstant.MCHNT_INFO);
 				return ResponseCode.SUCCESS;
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -234,6 +238,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.SUCCESS;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -253,6 +258,7 @@ public class MchntController extends BaseController {
 			return mchntService
 					.getMchntInfo(getMchntInfo(request).getMchntCd());
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -277,6 +283,7 @@ public class MchntController extends BaseController {
 			mchntService.updateMchtInfo(mchntInfo);
 			return ResponseCode.SUCCESS;
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -303,6 +310,7 @@ public class MchntController extends BaseController {
 			
 			return code;
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -324,6 +332,7 @@ public class MchntController extends BaseController {
 			mchntService.postJob(jobInfo, mchntCd);
 			return ResponseCode.SUCCESS;
 		}catch(Exception e){
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -341,6 +350,7 @@ public class MchntController extends BaseController {
 			List<JobInfo>result=mchntService.getJobInfoList(mchntCd);
 			return result;
 		}catch (Exception e){
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}
@@ -352,6 +362,7 @@ public class MchntController extends BaseController {
 		try{
 			return ResponseCode.SUCCESS;
 		}catch(Exception e){
+			e.printStackTrace();
 			logger.error(e);
 			return ResponseCode.FAIL;
 		}

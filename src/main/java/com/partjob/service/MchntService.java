@@ -45,7 +45,7 @@ public class MchntService {
 
 		TblMchntInfo tblMchntInfo = new TblMchntInfo();
 		ApplicationUtil.copyProperties(mchntInfo, tblMchntInfo);
-		tblMchntInfo.setBalance(Integer.parseInt(BigDecimalUtil.mult100(mchntInfo.getBalance())));
+		tblMchntInfo.setBalance(Integer.parseInt(BigDecimalUtil.mult100("0")));
 		tblMchntInfo.setPassword(CommonUtil.toMD5(password));
 		tblMchntInfo.setMchntSt(1);
 
