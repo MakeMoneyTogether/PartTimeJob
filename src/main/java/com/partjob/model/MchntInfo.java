@@ -12,7 +12,7 @@ public class MchntInfo {
     private String connName;
     private String connPhone;
     private int mchntSt;
-    private int balance;
+    private String  balance;
 
     public int getMchntCd() {
         return mchntCd;
@@ -70,11 +70,11 @@ public class MchntInfo {
         this.mchntSt = mchntSt;
     }
 
-    public int getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 }

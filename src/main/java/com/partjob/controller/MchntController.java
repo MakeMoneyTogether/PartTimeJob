@@ -179,7 +179,7 @@ public class MchntController extends BaseController {
 			@RequestParam(value = "repassword") String repassword) {
 		try {
 				//这里要修改密码
-			if (!"0".equals("0")) {
+			if (mchntService.updatePassword(password, phone, repassword)) {
 				return ResponseCode.SUCCESS;
 			} else {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
