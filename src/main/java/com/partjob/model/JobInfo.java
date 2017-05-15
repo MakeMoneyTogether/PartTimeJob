@@ -16,7 +16,7 @@ public class JobInfo {
 	    private String jobAddress;
 	    private Timestamp jobValidateTime;
 	    private String connectName;
-	    private Integer csonnectIphone;
+	    private String connectPhone;
 	    private Integer jobSt;
 		public int getJobId() {
 			return jobId;
@@ -90,11 +90,12 @@ public class JobInfo {
 		public void setConnectName(String connectName) {
 			this.connectName = connectName;
 		}
-		public Integer getCsonnectIphone() {
-			return csonnectIphone;
+		
+		public String getConnectPhone() {
+			return connectPhone;
 		}
-		public void setCsonnectIphone(Integer csonnectIphone) {
-			this.csonnectIphone = csonnectIphone;
+		public void setConnectPhone(String connectPhone) {
+			this.connectPhone = connectPhone;
 		}
 		public Integer getJobSt() {
 			return jobSt;

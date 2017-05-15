@@ -1,5 +1,6 @@
 package com.partjob.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import com.partjob.entity.TblMchntInfo;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.BigDecimalUtil;
 import com.partjob.utils.CommonUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,31 @@ public class MchntService {
 
 		TblMchntInfo tblMchntInfo = new TblMchntInfo();
 		ApplicationUtil.copyProperties(mchntInfo, tblMchntInfo);
+		tblMchntInfo.setBalance(Integer.parseInt(BigDecimalUtil.mult100("0")));
 		tblMchntInfo.setPassword(CommonUtil.toMD5(password));
 		tblMchntInfo.setMchntSt(1);
 
 		mchntInfoDao.save(tblMchntInfo);
 	}
 
+	/**
+	 * 修改密码，先验证原密码是否正确，正确再进行修改
+	 * @param password 原密码
+	 * @param phone
+	 * @param rePassword 新密码
+	 * @return
+	 */
+	public boolean updatePassword(String password,String phone,String rePassword){
+		TblMchntInfo mchntInfo=mchntInfoDao.getMchntInfo(password, phone);
+		if(mchntInfo==null){
+			return false;
+		}else{
+			mchntInfo.setPassword(CommonUtil.toMD5(rePassword));
+			
+			mchntInfoDao.modify(mchntInfo);
+			return true;
+		}
+	}
 	/**
 	 * 登录
 	 * @param password
@@ -176,10 +197,11 @@ public class MchntService {
 		if (tblMchntInfo == null)
 			return null;
 		ApplicationUtil.copyProperties(tblMchntInfo, mchntInfo);
+		String balance=Integer.toString(tblMchntInfo.getBalance());
+		mchntInfo.setBalance(BigDecimalUtil.divide100(balance));
+		
 		return mchntInfo;
 	}
 
-	
-	
 	
 }
