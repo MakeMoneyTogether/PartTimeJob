@@ -10,4 +10,6 @@ public class ResponseCode {
 //	public static int VER_PASSWORD_ERROR=2;
 	public static int PHONE_EXIST=1;
 	
+	public static int PAY_FAIL=1;
+	
 }

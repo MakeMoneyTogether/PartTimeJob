@@ -16,6 +16,8 @@ import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
 import com.partjob.model.CashTransResult;
 import com.partjob.model.CashTransaction;
+import com.partjob.model.CheckTransResult;
+import com.partjob.model.CheckTransaction;
 import com.partjob.model.TransResult;
 import com.partjob.model.Transaction;
 import com.partjob.model.WcPay;
@@ -33,33 +35,33 @@ public class TransService {
 	 * @param openId	用户标识
 	 */
 	public WcPay pay(String totalFee, String ip,String openId) {
-		logger.info("支付步骤2");
 		WcPay wcPay=null;
 		String outTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		Transaction trans=setTrans(outTradeNo, totalFee, ip,openId);
-		logger.info("支付步骤2.1"+trans);
 		String param=CommonUtil.obj2xml(trans);
-		logger.info("支付步骤2.2"+param);
 		String result=HttpRequestUtil.sendPost(TransCanstant.PAY_URL, param);
-		logger.info("支付步骤3"+result);
 		try{
 			TransResult transResult=CommonUtil.xml2Object(result, TransResult.class);
 			if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
-				logger.info("支付步骤4：success");
 				wcPay=setWcPay(transResult.getPrepay_id());
+				wcPay.setOutTradeNO(outTradeNo);
 				return wcPay;
 			}else{
-				logger.info("支付步骤4：fail");
 				return wcPay;
 			}
 		}catch(Exception e){
-			logger.info("支付步骤4：fail");
 			return wcPay;
 		}
 		
 		
 	}
 	
+	/**
+	 * 下单
+	 * @param amount
+	 * @param openId
+	 * @return
+	 */
 	public int cash(String amount,String openId){
 		String partnerTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		CashTransaction trans=setCashTrans(partnerTradeNo, amount, openId);
@@ -82,7 +84,37 @@ public class TransService {
 		
 		
 	}
-
+	/**
+	 * 检查是否成功支付
+	 * @param outTradeNo
+	 * @return
+	 */
+	public CheckTransResult checkPay(String outTradeNo){
+		CheckTransaction checkTrans=new CheckTransaction();
+		checkTrans.setAppid(TransCanstant.APP_ID);
+		checkTrans.setMch_id(TransCanstant.MCHNT_ID);
+		checkTrans.setOut_trade_no(outTradeNo);
+		checkTrans.setNonce_str(CommonUtil.toMD5(CommonUtil.createRandomVcode()));
+		checkTrans.setSign_type("MD5");
+		checkTrans.setSign(sign(checkTrans));
+		
+		String param=CommonUtil.obj2xml(checkTrans);
+		String result=HttpRequestUtil.sendPost(TransCanstant.CHECK_URL, param);;
+		try{
+			CheckTransResult checkResult=CommonUtil.xml2Object(result, CheckTransResult.class);
+			return checkResult;
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+			return null;
+		}
+	}
+	
+	/**
+	 * 设置参数
+	 * @param prepayId
+	 * @return
+	 */
 	private WcPay setWcPay(String prepayId){
 		WcPay wcPay=new WcPay();
 		wcPay.setAppId(TransCanstant.APP_ID);

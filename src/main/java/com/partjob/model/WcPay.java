@@ -8,6 +8,15 @@ public class WcPay {
 	private String wcPackage;
 	private String signType;
 	private String paySign;
+	
+	private String outTradeNO;
+	
+	public String getOutTradeNO() {
+		return outTradeNO;
+	}
+	public void setOutTradeNO(String outTradeNO) {
+		this.outTradeNO = outTradeNO;
+	}
 	public String getAppId() {
 		return appId;
 	}

@@ -18,6 +18,7 @@ import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
+import com.partjob.model.WcPay;
 import com.partjob.service.MchntService;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HttpRequestUtil;
@@ -64,18 +65,6 @@ public class MchntController extends BaseController {
 	}
 
 	
-	public static void main(String[] args) {
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
-		String param = "appid="
-				+ TransCanstant.APP_ID
-				+ "&redirect_uri="
-				+ URLEncoder
-						.encode(TransCanstant.NOTIFY_MCHNT_URL)
-								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
-
-		System.out.println(url+"?"+param);
-//		logger.info("url:"+url+"?"+param);
-	}
 	
 	/**
 	 * 获取用户oppenid的地址
@@ -291,24 +280,24 @@ public class MchntController extends BaseController {
 	
 	
 	/**
-	 * 商户充值
+	 * 商户充值下单借口，该接口进行下单
 	 * @param totalFee 充值金额
 	 * @param mchntCd	商户号
 	 * @param request
-	 * @return
+	 * @return 返回js调用参数
 	 */
 	@RequestMapping(value = { "pay" })
 	@ResponseBody
-	public int pay(@RequestParam(value = "totalFee") String totalFee,
+	public Object pay(@RequestParam(value = "totalFee") String totalFee,
 			HttpServletRequest request){
 		
 		try {
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			String ip=CommonUtil.getIpAddr(request);
 			String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
-			int code=mchntService.pay(totalFee, ip, openId, mchntCd);
+			WcPay wcPay=mchntService.pay(totalFee, ip, openId, mchntCd);
 			
-			return code;
+			return wcPay;
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
@@ -316,6 +305,23 @@ public class MchntController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 查询支付结果接口，如果支付成功，那么会在商户的账户加上一定金额，如果失败需要重新下单支付
+	 * @param outTradeNo 订单号，下单接口会返回该参数
+	 * @param request
+	 * @return
+	 */
+	public int checkPay(@RequestParam(value = "outTradeNo") String outTradeNo,
+			HttpServletRequest request){
+		try{
+			int mchntCd=getMchntInfo(request).getMchntCd();
+			return mchntService.checkPay(outTradeNo, mchntCd);
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+	}
 	/**
 	 * 发送兼职信息
 	 * @param jobInfo

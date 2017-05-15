@@ -3,6 +3,7 @@ package com.partjob.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.mysql.fabric.Response;
 import com.partjob.constant.CommonCanstant;
@@ -12,8 +13,10 @@ import com.partjob.dao.MchntInfoDao;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
+import com.partjob.model.CheckTransResult;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
+import com.partjob.model.WcPay;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.BigDecimalUtil;
 import com.partjob.utils.CommonUtil;
@@ -28,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MchntService {
+	
 	@Autowired
 	private MchntInfoDao mchntInfoDao;
 	@Autowired
@@ -135,18 +139,46 @@ public class MchntService {
 	 * @param mchntCd	商户充值的商户号
 	 * @return
 	 */
-	public int pay(String totalFee, String ip,String openId,int mchntCd){
+	public WcPay pay(String totalFee, String ip,String openId,int mchntCd){
 		
 //		int transResult=transService.pay(totalFee, ip, openId);
 //		if(transResult==ResponseCode.SUCCESS){
-//			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
-//			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(totalFee));
-//			mchntInfoDao.modify(tblMchntInfo);
-//			return ResponseCode.SUCCESS;
+//		
 //		}
 //		return transResult;
 		
-		return 0;				
+		return transService.pay(totalFee, ip, openId);				
+	}
+	
+	public int checkPay(String outTradeNo,int mchntCd){
+		CheckTransResult checkResult=transService.checkPay(outTradeNo);
+		
+		if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
+				checkResult.getResult_code().equalsIgnoreCase("SUCCESS")&&
+				checkResult.getTrade_state().equalsIgnoreCase("SUCCESS")){
+			
+			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
+			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(checkResult.getTotal_fee()));
+			mchntInfoDao.modify(tblMchntInfo);
+			return ResponseCode.SUCCESS;
+			
+		}else if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
+				checkResult.getResult_code().equalsIgnoreCase("SUCCESS")&&
+				checkResult.getTrade_state().equalsIgnoreCase("USERPAYING")){
+			//如果检查出是用户正在支付，那么睡眠1s重新进行检查
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				return ResponseCode.PAY_FAIL;
+			}
+			transService.checkPay(outTradeNo);
+		}else{
+			return ResponseCode.PAY_FAIL;
+		}
+		return ResponseCode.PAY_FAIL;
 	}
 	
 	/**
@@ -203,5 +235,9 @@ public class MchntService {
 		return mchntInfo;
 	}
 
-	
+	public static void main(String[] args) {
+		String str="<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wx2421b1c4370ec43b]]></appid><mch_id><![CDATA[10000100]]></mch_id><device_info><![CDATA[1000]]></device_info><nonce_str><![CDATA[TN55wO9Pba5yENl8]]></nonce_str><sign><![CDATA[BDF0099C15FF7BC6B1585FBB110AB635]]></sign><result_code><![CDATA[SUCCESS]]></result_code></xml> ";
+		CheckTransResult result=CommonUtil.xml2Object(str, CheckTransResult.class);
+		System.out.println(result);
+	}
 }
