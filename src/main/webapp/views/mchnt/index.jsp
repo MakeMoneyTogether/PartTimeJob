@@ -15,13 +15,7 @@
 <link rel="stylesheet" href="static/css/jquery-weui.min.css">
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
 <link rel="stylesheet" href="static/css/jz.css">
-<link rel="stylesheet" href="static/css/col.css"><script>
-	$(function() {
-		FastClick.attach(document.body);
-	});
-	mercheck();
-	getMeInfo();
-</script>
+<link rel="stylesheet" href="static/css/col.css">
 </head>
 <body ontouchstart>		
 <div class="weui-tabbar" style="position:fixed;">

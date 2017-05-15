@@ -166,9 +166,35 @@ public class MchntController extends BaseController {
 	}
 
 	/**
-	 * 登录
-	 * 
+	 * 修改密码
 	 * @param password
+	 * @param phone
+	 * @param repassword
+	 * @return
+	 */
+	@RequestMapping(value = { "repassword" })
+	@ResponseBody
+	public Object repassword(@RequestParam(value = "password") String password,
+			@RequestParam(value = "phone") String phone,
+			@RequestParam(value = "repassword") String repassword) {
+		try {
+				//这里要修改密码
+			if (!"0".equals("0")) {
+				return ResponseCode.SUCCESS;
+			} else {
+				return ResponseCode.PHONE_PASSWORD_ERROR;
+			}
+		} catch (Exception e) {
+			logger.error(e);
+			return ResponseCode.FAIL;
+		}
+
+	}
+	
+	
+	/**
+	 * 登出
+	 * 
 	 * @param phone
 	 * @param request
 	 * @return

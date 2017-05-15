@@ -24,9 +24,9 @@ function repwd(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/rpwd',
+		url: 'mchnt/repassword',
 		dataType:'json',
-		data:{phone:phone,pwd:pwd,npwd:npwd},
+		data:{phone:phone,password:pwd,repassword:npwd},
 		success: function(data){
 			console.log(data);
 			if(data == 0){
@@ -37,7 +37,7 @@ function repwd(){
 				$('#rnpwd').val('');
 				$('#pwd').val('');
 			}else{
-				$.alert("原密码不正确");
+				$.alert("原密码不正确(后台逻辑还没有，所以统一无法修改密码)");
 			}
 		}
 	});
