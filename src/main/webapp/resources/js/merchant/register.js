@@ -35,7 +35,7 @@ function commit(){
 	});
 }
 function get_code(){
-	if($('#code_btn').html() == '已发送'){
+	if($('#code_btn').text() == '已发送'){
 		return;
 	}
 	var phone = $('#phone').val();
@@ -43,7 +43,7 @@ function get_code(){
 		$.alert('手机号不正确');
 		return;
 	}
-	$('#code_btn').html('已发送');
+	$('#code_btn').text('已发送');
 	$.ajax({
 		type:'POST',
 		url: 'util/sendCode',
@@ -60,10 +60,10 @@ function get_code(){
 				});
 			}else if(data == 1){
 				$.alert('手机号已被注册');
-				$('#code_btn').html('获取');
+				$('#code_btn').text('获取');
 			}else{
 				$.alert('验证码发送失败');
-				$('#code_btn').html('获取');
+				$('#code_btn').text('获取');
 			}
 		}
 	});

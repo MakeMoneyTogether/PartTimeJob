@@ -33,7 +33,7 @@ function jump(p,e){
 			$.alert();
 			$.modal({
 				title: '邀请码',
-				text: inv_bak.html(),
+				text: inv_bak.text(),
 			});
 			break;
 		case 7:
@@ -45,7 +45,7 @@ function jump(p,e){
 	}
 }
 function loading_tag(){
-	$('#jz-infos').html('<div class="weui-loadmore"> <i class="weui-loading"></i> <span class="weui-loadmore__tips">正在加载</span> </div>');
+	$('#jz-infos').text('<div class="weui-loadmore"> <i class="weui-loading"></i> <span class="weui-loadmore__tips">正在加载</span> </div>');
 }
 function genItem(one){
 	var item = '<a href="user/info/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
@@ -56,13 +56,13 @@ function genItem(one){
 }
 
 function flushJZ(sid){
-	uid = uid_bak.html();
+	uid = uid_bak.text();
 	$.ajax({
 		type: "GET",
 		url: 'jzurl/pages/sitem/'+uid+'/'+sid,
 		dataType: "json",
 		success:function(data){
-			$('#jz-infos').html('');
+			$('#jz-infos').text('');
 			for(i=0;i<data.length;i++){
 				domhtml = genItem(data[i]);
 				$('#jz-infos').append(domhtml);
@@ -113,13 +113,13 @@ $(function(){
 			dataType:'json',
 			data:{phone:phone,password:pwd},
 			success: function(data){
-				$('#uname').html(data.name);
-				$('#ugpa').html(data.grade);
-				$('#money').html(data.balance);
-				$('#s0').html(data.s4);
-				$('#s1').html(data.s1);
-				$('#s2').html(data.s2);
-				$('#s3').html(data.s3);
+				$('#uname').text(data.name);
+				$('#ugpa').text(data.grade);
+				$('#money').text(data.balance);
+				$('#s0').text(data.s4);
+				$('#s1').text(data.s1);
+				$('#s2').text(data.s2);
+				$('#s3').text(data.s3);
 			}
 		});
 	}else{

@@ -4,13 +4,13 @@ function getItem(){
 	uri = window.location.href;
 	uris = uri.split('/');
 	jid = uris[uris.length -1];
-	jid_bak.html(jid);
+	jid_bak.text(jid);
 	$.get('jzurl/pages/netitem/'+jid,function(data){
 		item = $.parseJSON(data); 
-		$('#jz-title').html(item.jname);
-		$('#jz-name').html(item.jname);
-		$('#jz-money').html(item.money);
-		$('#jz-label').html(item.jlabel);
-		$('#jz-date').html(item.jdate);
+		$('#jz-title').text(item.jname);
+		$('#jz-name').text(item.jname);
+		$('#jz-money').text(item.money);
+		$('#jz-label').text(item.jlabel);
+		$('#jz-date').text(item.jdate);
 	});
 }

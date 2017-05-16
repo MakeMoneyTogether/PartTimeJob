@@ -50,12 +50,12 @@ function getInvitation(){
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
-			$('#inv_person').html('');
+			$('#inv_person').text('');
 			str = '';
 			for(i=0;i<data.length;i++){
 				str += genPerson(data[i]);
 			}
-			$('#inv_person').html(str);
+			$('#inv_person').text(str);
 		}
 	});
 }
@@ -86,12 +86,12 @@ function getSchedule(){
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
-			$('#schedule').html('');
+			$('#schedule').text('');
 			str = '';
 			for(i=0;i<data.length;i++){
 				str += genSchedule(data[i]);
 			}
-			$('#schedule').html(str);
+			$('#schedule').text(str);
 		}
 	});
 }

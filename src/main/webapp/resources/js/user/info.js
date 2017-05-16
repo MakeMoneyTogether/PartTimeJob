@@ -4,20 +4,20 @@ function getItem(){
 	uri = window.location.href;
 	uris = uri.split('/');
 	jid = uris[uris.length -1];
-	jid_bak.html(jid);
+	jid_bak.text(jid);
 	$.get('jzurl/pages/item/'+jid,function(data){
 		item = $.parseJSON(data); 
-		$('#jz-title').html(item.jname);
-		$('#jz-name').html(item.jname);
-		$('#jz-money').html(item.jmoney);
-		$('#jz-label').html(item.jlabel);
-		$('#jz-date').html(item.jstdate);
-		$('#jz-local').html(item.jlocal);
+		$('#jz-title').text(item.jname);
+		$('#jz-name').text(item.jname);
+		$('#jz-money').text(item.jmoney);
+		$('#jz-label').text(item.jlabel);
+		$('#jz-date').text(item.jstdate);
+		$('#jz-local').text(item.jlocal);
 	});
 }
 
 function getStatu(){
-	var jid = jid_bak.html();
+	var jid = jid_bak.text();
 	var phone = $.cookie('phone');
 	if(phone !=null && phone.length > 6){
 		$.get('jzurl/pages/u2j/'+phone+'/'+jid,function(data){
@@ -33,19 +33,19 @@ function genBtn(code){
 	switch(code){
 		case 0:
 			opBtn.attr('onclick','apply();');
-			opBtn.html('报名');
+			opBtn.text('报名');
 			break;
 		case 1:
-			opBtn.html('已报名');
+			opBtn.text('已报名');
 			break;
 		case 2:
-			opBtn.html('已录用');
+			opBtn.text('已录用');
 			break;
 		case 3:
-			opBtn.html('已到岗');
+			opBtn.text('已到岗');
 			break;
 		case 4:
-			opBtn.html('已结算');
+			opBtn.text('已结算');
 			break;
 	}
 }
@@ -56,15 +56,15 @@ function apply(){
 		title:'通知',
 		text:'<strong>报名需要支付两元押金，在您完成考勤后会返还，如果缺勤或者中途离开会被扣除押金 同时无法获取到薪水，报名请慎重考虑!!</strong>',
 		onOK:function(){
-			var jid = jid_bak.html();
+			var jid = jid_bak.text();
 			var phone = $.cookie('phone');
 			$.get('jzurl/pages/apply/'+phone+'/'+jid,function(data){
 				data = JSON.parse(data);
-				$('#jz-num').html(data.applied+'/'+data.all+'人');
+				$('#jz-num').text(data.applied+'/'+data.all+'人');
 				if(data.code == 0){
 					$.toast('报名成功');
 					opBtn.addClass('weui-btn_disabled');
-					opBtn.html('已报名');
+					opBtn.text('已报名');
 					$.alert('当你临时有事是请提前致电商家，请求商家拒绝你的申请，这一点很重要！！！。');
 				}
 				if(data.code == 1){

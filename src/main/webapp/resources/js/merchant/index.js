@@ -24,9 +24,9 @@ function getMeInfo(){
 		url: 'mchnt/getMchntInfo',
 		dataType: "json",
 		success:function(data){
-			$('#mname').html(data.mchntName);
-			$('#moneyable').html(data.balance);
-			$('#moneyice').html(data.balance);
+			$('#mname').text(data.mchntName);
+			$('#moneyable').text(data.balance);
+			$('#moneyice').text(data.balance);
 		}
 	});
 }

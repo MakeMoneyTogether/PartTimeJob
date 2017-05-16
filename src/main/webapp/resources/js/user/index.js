@@ -29,11 +29,11 @@ function loadm(){
 	if(loading) return;
 	loading = true;
 	setTimeout(function() {
-		dises = dises_bak.html();
-		labels = labels_bak.html();
-		dates = dates_bak.html();
+		dises = dises_bak.text();
+		labels = labels_bak.text();
+		dates = dates_bak.text();
 		city = ncity.attr('value');
-		index = index_bak.html();
+		index = index_bak.text();
 		data = {dises:dises,labels:labels,dates:dates,city:city};
 		$.ajax({
 			type: "POST",
@@ -47,7 +47,7 @@ function loadm(){
 					$('#jz-infos').append(domhtml);
 				}
 				index = parseInt(index) +3;
-				index_bak.html(index);
+				index_bak.text(index);
 				loading = false;
 			}
 		});
@@ -57,12 +57,12 @@ $(document.body).infinite().on("infinite",loadm);
 
 
 function onLoad(){
-	dises = dises_bak.html();
-	labels = labels_bak.html();
-	dates = dates_bak.html();
+	dises = dises_bak.text();
+	labels = labels_bak.text();
+	dates = dates_bak.text();
 	city = ncity.attr('value');
 	data = {dises:dises,labels:labels,dates:dates,city:city};
-	$('#jz-infos').html('');
+	$('#jz-infos').text('');
 	$.ajax({
 		type: "POST",
 		url: "jzurl/pages/select/0/6",
@@ -73,7 +73,7 @@ function onLoad(){
 				domhtml = genItem(data[i]);
 				$('#jz-infos').append(domhtml);
 			}
-			index_bak.html(6);
+			index_bak.text(6);
 		}
 	});
 }
@@ -101,7 +101,7 @@ function getDistrict(){
 	$.get('util/city/districts/'+ccode,function(data){
 		data = JSON.parse(data);
 		var districts = $('#districts');
-		districts.html('');
+		districts.text('');
 		districts.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="all">全部</span><br>\n')
 		for(i=0;i<data.length;i++){
 			districts.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i]['dcode']+'">'+data[i]['dname']+'</span>\n')
@@ -114,7 +114,7 @@ function getLabels(){
 	$.get('util/labels',function(data){
 		data = JSON.parse(data);
 		var labels = $('#labels');
-		labels.html('');
+		labels.text('');
 		labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="all">全部</span><br>\n')
 		for(i=0;i<data.length;i++){
 			labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i].lcode+'">'+data[i].lname+'</span>\n')
@@ -138,10 +138,10 @@ function freshList(){
 	if(disbtns.length >0 && $(disbtns[0]).attr('value') != 'all'){
 		for(i=0;i<disbtns.length;i++){
 			if(flag){
-				dises = $(disbtns[i]).html();
+				dises = $(disbtns[i]).text();
 				flag = false;
 			}else{
-				dises += ','+$(disbtns[i]).html();
+				dises += ','+$(disbtns[i]).text();
 			}
 		}
 	}
@@ -149,10 +149,10 @@ function freshList(){
 	if(labelbtns.length >0 && $(labelbtns[0]).attr('value') != 'all'){
 		for(i=0;i<labelbtns.length;i++){
 			if(flag){
-				labels = $(labelbtns[i]).html();
+				labels = $(labelbtns[i]).text();
 				flag = false;
 			}else{
-				labels += ','+$(labelbtns[i]).html();
+				labels += ','+$(labelbtns[i]).text();
 			}
 		}
 	}
@@ -162,9 +162,9 @@ function freshList(){
 			dates = time;
 		}
 	}
-	dises_bak.html(dises);
-	labels_bak.html(labels);
-	dates_bak.html(dates);
+	dises_bak.text(dises);
+	labels_bak.text(labels);
+	dates_bak.text(dates);
 	$('#slocal').hide();
 	$('#stype').hide();
 	$('#stime').hide();
@@ -174,7 +174,7 @@ function localset(){
 	var t_cityCode = $.cookie('citycode');
 	if(t_cityCode !=null&& t_cityCode.length > 5){
 		ncity.attr('value',t_cityCode);
-		ncity.html($.cookie('cityname'));
+		ncity.text($.cookie('cityname'));
 	}else{
 		$.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function(data){
 		    console.log(returnCitySN.cip);
@@ -182,7 +182,7 @@ function localset(){
 		    if(cname == ''){
 		    	alert('定位失败，请手动选择!');
 		    }else{
-			    ncity.html(cname);
+			    ncity.text(cname);
 		    }
 //		    $.getJSON('http://ip.taobao.com/service/getIpInfo.php?ip='+returnCitySN.cip+'&callback=?',function(data){
 //		    	console.log(data);
@@ -204,7 +204,7 @@ function localset(){
 function setLocal(){
 	cc = $('#city-picker');
 	city = cc.val().split(' ')[1];
-	ncity.html(city);
+	ncity.text(city);
 	ncity.attr('value',cc.attr('data-code'));
 	$.cookie('citycode',cc.attr('data-code'),{expires:30,path:'/'});
 	$.cookie('cityname',city,{expires:30,path:'/'});

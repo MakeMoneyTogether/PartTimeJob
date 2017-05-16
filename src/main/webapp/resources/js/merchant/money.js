@@ -6,8 +6,8 @@ function init(){
 		dataType: "json",
 		data:{phone:phone},
 		success:function(data){
-			$('#moneyable').html(data.moneyable);
-			$('#moneyice').html(data.moneyice);
+			$('#moneyable').text(data.moneyable);
+			$('#moneyice').text(data.moneyice);
 		}
 	});
 	$.ajax({

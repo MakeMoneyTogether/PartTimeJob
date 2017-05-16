@@ -13,7 +13,7 @@ function loadm(){
 	loading = true;
 	setTimeout(function() {
 		all = 'all';
-		index = index_bak.html();
+		index = index_bak.text();
 		data = {dises:all,labels:all,dates:all,city:all};
 		$.ajax({
 			type: "POST",
@@ -27,7 +27,7 @@ function loadm(){
 					$('#jz-infos').append(domhtml);
 				}
 				index = parseInt(index) +3;
-				index_bak.html(index);
+				index_bak.text(index);
 				loading = false;
 			}
 		});
@@ -39,7 +39,7 @@ $(document.body).infinite().on("infinite",loadm);
 function onLoad(){
 	all = 'all';
 	data = {dises:all,labels:all,dates:all,city:all};
-	$('#jz-infos').html('');
+	$('#jz-infos').text('');
 	$.ajax({
 		type: "POST",
 		url: "jzurl/pages/net/0/9",
@@ -50,7 +50,7 @@ function onLoad(){
 				domhtml = genItem(data[i]);
 				$('#jz-infos').append(domhtml);
 			}
-			index_bak.html(9);
+			index_bak.text(9);
 		}
 	});
 }
