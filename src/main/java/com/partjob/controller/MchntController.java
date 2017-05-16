@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.ObjectStatuCode;
 import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
 import com.partjob.model.JobInfo;
@@ -339,6 +340,7 @@ public class MchntController extends BaseController {
 			jobInfo.setJobStartTime(new Timestamp(jjobStartTime));
 			jobInfo.setJobEndTime(new Timestamp(jjobEndTime));
 			jobInfo.setJobValidateTime(new Timestamp(jjobValidateTime));
+			jobInfo.setJobSt(ObjectStatuCode.JOB_AUDIT);
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			mchntService.postJob(jobInfo, mchntCd);
 			return ResponseCode.SUCCESS;

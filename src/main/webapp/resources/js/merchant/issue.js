@@ -17,7 +17,7 @@ function check(){
 	jobStartTime = new Date($('#jobStartTime').val()).getTime();
 	jobEndTime = new Date($('#jobEndTime').val()).getTime();
 	jobValidateTime = new Date($('#jobValidateTime').val()).getTime();
-	if(jobStartTime == '' || jobEndTime == '' || jobValidateTime == '' || jobStartTime > jobEndTime){
+	if(isNaN(jobStartTime) || isNaN(jobEndTime) || isNaN(jobValidateTime) || jobStartTime > jobEndTime){
 		$.alert('请输入正确日期');
 		return;
 	}
@@ -54,10 +54,12 @@ function issue(data){
 		dataType:'json',
 		data:data,
 		success: function(data){
-			if(data.length > 1){
-				window.location.href='mchntp/index';
+			if(data == 1){
+				$.alert('发布失败');
 			}else if(data == 0){
-				$.alert('发布成功');
+				$.alert('发布成功',function(){
+					window.location.href='mchntp/list';
+				});
 			}
 			
 		}

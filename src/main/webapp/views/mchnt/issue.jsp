@@ -55,7 +55,7 @@
 		<div class="weui-cell weui-cell_select weui-cell_select-after">
 			<div class="weui-cell__hd"><label class="weui-label">薪资待遇</label></div>
 			<div class="col-70">
-				<input id="paymentMoney" class="weui-input" type="text" placeholder="单位时间薪水">
+				<input id="paymentMoney" class="weui-input" type="number" placeholder="单位时间薪水">
 			</div>
 			<div class="col-30">
 				<select id="paymentType" name="paymentType" class="weui-select" onchange="change(this.options[this.options.selectedIndex].value);">
@@ -86,7 +86,7 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">需求人数</label></div>
 			<div class="weui-cell__bd">
-				<input id="numPeople" class="weui-input" type="text" placeholder="请输入需求人数">
+				<input id="numPeople" class="weui-input" type="number" placeholder="请输入需求人数">
 			</div>
 		</div>
 		<div class="weui-cell">
@@ -105,7 +105,7 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">联系人电话</label></div>
 			<div class="weui-cell__bd">
-				<input id="connectPhone" class="weui-input" type="text" placeholder="请输入联系人电话">
+				<input id="connectPhone" onkeypress="return event.keyCode>=48&&event.keyCode<=57" class="weui-input" type="tel" placeholder="请输入联系人电话">
 			</div>
 		</div>
 		<hr>
