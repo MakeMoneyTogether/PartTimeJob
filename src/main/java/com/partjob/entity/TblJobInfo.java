@@ -22,7 +22,7 @@ public class TblJobInfo {
     private String jobAddress;
     private Timestamp jobValidateTime;
     private String connectName;
-    private Integer csonnectIphone;
+    private String connectPhone;
     private Integer jobSt;
 
     @Id
@@ -156,13 +156,13 @@ public class TblJobInfo {
     }
 
     @Basic
-    @Column(name = "csonnect_iphone", nullable = true)
-    public Integer getCsonnectIphone() {
-        return csonnectIphone;
+    @Column(name = "connect_phone", nullable = true)
+    public String getConnectPhone() {
+        return connectPhone;
     }
 
-    public void setCsonnectIphone(Integer csonnectIphone) {
-        this.csonnectIphone = csonnectIphone;
+    public void setConnectPhone(String connectPhone) {
+        this.connectPhone = connectPhone;
     }
 
     @Basic
