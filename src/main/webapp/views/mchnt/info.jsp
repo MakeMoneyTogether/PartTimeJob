@@ -87,7 +87,7 @@
 		<h1>&nbsp;</h1>
 	</div>
 	<div class="weui-tabbar">
-		<a href="javascript:;" class="weui-tabbar__item">
+		<a href="mchntp/peoplem" class="weui-tabbar__item">
 			<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-users"></i>
