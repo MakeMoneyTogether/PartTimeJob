@@ -3,7 +3,6 @@ package com.partjob.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.mysql.fabric.Response;
 import com.partjob.constant.CommonCanstant;
@@ -21,6 +20,7 @@ import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.BigDecimalUtil;
 import com.partjob.utils.CommonUtil;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,7 +64,7 @@ public class MchntService {
 	 * @return
 	 */
 	public boolean updatePassword(String password,String phone,String rePassword){
-		TblMchntInfo mchntInfo=mchntInfoDao.getMchntInfo(password, phone);
+		TblMchntInfo mchntInfo=mchntInfoDao.getMchntInfo(CommonUtil.toMD5(password), phone);
 		if(mchntInfo==null){
 			return false;
 		}else{

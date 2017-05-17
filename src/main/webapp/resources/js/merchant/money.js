@@ -80,9 +80,25 @@ function postCharge(rmb){
 				"signType": "MD5",
 				"paySign": data.paySign
 			  },function(res){   
-				  $.alert(res.err_msg);
 		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-		        	   $.alert('支付成功')
+		        	   $.ajax({
+		        		   type:'POST',
+		        		   url: 'mchnt/checkPay',
+		        		   dataType:'json',
+		        		   data:{outTradeNo:data.outTradeNO},
+		        		   success:function(data){
+		        			   $.hideLoading();
+		        			   if(data == 0){
+		        				   $.alert('支付成功');
+		        			   }else{
+		        				   $.alert('支付失败');
+		        			   }
+		        		   }
+		        	   });
+		        	   $.showLoading();
+		        	   $('.weui_loading_toast').children('p').html('平台确认中...');
+		           }else{
+		        	   $.alert('取消支付或者支付失败!');
 		           }
 		    });
 		}
