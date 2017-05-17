@@ -13,4 +13,9 @@ public class CommonCanstant {
 	
 	public static String IP="";
 	
+	
+	public static int AVAILAB=1;
+	public static int UNAVAILAB=0;
+	public static int UNCHECKED=2;
+	
 }

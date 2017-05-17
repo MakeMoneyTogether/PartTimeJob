@@ -24,6 +24,8 @@ public class TblJobInfo {
     private String connectName;
     private String connectPhone;
     private Integer jobSt;
+    private Integer joinNum;
+    private Integer cityCode;
 
     @Id
     @Column(name = "job_id", nullable = false)
@@ -174,5 +176,23 @@ public class TblJobInfo {
     public void setJobSt(Integer jobSt) {
         this.jobSt = jobSt;
     }
+    @Basic
+    @Column(name = "join_num", nullable = true)
+	public Integer getJoinNum() {
+		return joinNum;
+	}
+
+	public void setJoinNum(Integer joinNum) {
+		this.joinNum = joinNum;
+	}
+	 @Basic
+	    @Column(name = "city_code", nullable = true)
+	public Integer getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(Integer cityCode) {
+		this.cityCode = cityCode;
+	}
 
 }

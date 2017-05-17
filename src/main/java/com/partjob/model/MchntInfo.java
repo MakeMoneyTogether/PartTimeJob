@@ -13,6 +13,7 @@ public class MchntInfo {
     private String connPhone;
     private int mchntSt;
     private String  balance;
+    private String frozenMoney;
 
     public int getMchntCd() {
         return mchntCd;
@@ -77,4 +78,14 @@ public class MchntInfo {
     public void setBalance(String balance) {
         this.balance = balance;
     }
+
+	public String getFrozenMoney() {
+		return frozenMoney;
+	}
+
+	public void setFrozenMoney(String frozenMoney) {
+		this.frozenMoney = frozenMoney;
+	}
+    
+    
 }

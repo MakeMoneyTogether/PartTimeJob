@@ -49,9 +49,10 @@ public class MchntService {
 
 		TblMchntInfo tblMchntInfo = new TblMchntInfo();
 		ApplicationUtil.copyProperties(mchntInfo, tblMchntInfo);
-		tblMchntInfo.setBalance(Integer.parseInt(BigDecimalUtil.mult100("0")));
+		tblMchntInfo.setBalance(0);
+		tblMchntInfo.setFrozenMoney(0);
 		tblMchntInfo.setPassword(CommonUtil.toMD5(password));
-		tblMchntInfo.setMchntSt(1);
+		tblMchntInfo.setMchntSt(CommonCanstant.UNCHECKED);
 
 		mchntInfoDao.save(tblMchntInfo);
 	}
@@ -141,11 +142,6 @@ public class MchntService {
 	 */
 	public WcPay pay(String totalFee, String ip,String openId,int mchntCd){
 		
-//		int transResult=transService.pay(totalFee, ip, openId);
-//		if(transResult==ResponseCode.SUCCESS){
-//		
-//		}
-//		return transResult;
 		
 		return transService.pay(totalFee, ip, openId);				
 	}
@@ -189,6 +185,7 @@ public class MchntService {
 		TblJobInfo tblJob=new TblJobInfo();
 		ApplicationUtil.copyProperties(job, tblJob);
 		tblJob.setMchntCd(mchntCd);
+		tblJob.setJobSt(CommonCanstant.UNCHECKED);
 		jobInfoDao.save(tblJob);
 		
 		//扣除商家账户金额
@@ -202,6 +199,7 @@ public class MchntService {
 		
 		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
 		tblMchntInfo.setBalance(tblMchntInfo.getBalance()-money);
+		tblMchntInfo.setFrozenMoney(money);
 		mchntInfoDao.modify(tblMchntInfo);
 	}
 	
@@ -231,6 +229,8 @@ public class MchntService {
 		ApplicationUtil.copyProperties(tblMchntInfo, mchntInfo);
 		String balance=Integer.toString(tblMchntInfo.getBalance());
 		mchntInfo.setBalance(BigDecimalUtil.divide100(balance));
+		String frozenMonry=Integer.toString(tblMchntInfo.getFrozenMoney());
+		mchntInfo.setFrozenMoney(BigDecimalUtil.divide100(frozenMonry));
 		
 		return mchntInfo;
 	}

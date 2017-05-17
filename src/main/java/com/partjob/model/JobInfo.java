@@ -18,6 +18,8 @@ public class JobInfo {
 	    private String connectName;
 	    private String connectPhone;
 	    private Integer jobSt;
+	    private Integer joinNum;
+	    private Integer cityCode;
 		public int getJobId() {
 			return jobId;
 		}
@@ -102,6 +104,18 @@ public class JobInfo {
 		}
 		public void setJobSt(Integer jobSt) {
 			this.jobSt = jobSt;
+		}
+		public Integer getJoinNum() {
+			return joinNum;
+		}
+		public void setJoinNum(Integer joinNum) {
+			this.joinNum = joinNum;
+		}
+		public Integer getCityCode() {
+			return cityCode;
+		}
+		public void setCityCode(Integer cityCode) {
+			this.cityCode = cityCode;
 		}
 	    
 	    

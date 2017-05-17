@@ -17,6 +17,7 @@ public class TblMchntInfo {
     private Integer mchntSt;
     private Integer balance;
     private String phone;
+    private Integer frozenMoney;
 
     @Id
     @Column(name = "mchnt_cd", nullable = false)
@@ -107,4 +108,15 @@ public class TblMchntInfo {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    @Basic
+    @Column(name = "frozen_money", nullable = true)
+	public Integer getFrozenMoney() {
+		return frozenMoney;
+	}
+
+	public void setFrozenMoney(Integer frozenMoney) {
+		this.frozenMoney = frozenMoney;
+	}
+    
+    
 }

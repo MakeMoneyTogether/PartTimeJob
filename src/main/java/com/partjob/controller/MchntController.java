@@ -119,8 +119,7 @@ public class MchntController extends BaseController {
 		try {
 			mchntService.saveMchnt(mchntInfo, password);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("商户注册错误",e);
 			return ResponseCode.FAIL;
 		}
 
@@ -151,8 +150,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("商户登录错误",e);
 			return ResponseCode.FAIL;
 		}
 
@@ -177,8 +175,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("商户修改密码错误",e);
 			return ResponseCode.FAIL;
 		}
 
@@ -201,8 +198,7 @@ public class MchntController extends BaseController {
 				session.removeAttribute(CommonCanstant.MCHNT_INFO);
 				return ResponseCode.SUCCESS;
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("商户登出错误",e);
 			return ResponseCode.FAIL;
 		}
 
@@ -228,8 +224,7 @@ public class MchntController extends BaseController {
 				return ResponseCode.SUCCESS;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("检查商户手机号是否存在错误",e);
 			return ResponseCode.FAIL;
 		}
 
@@ -248,8 +243,7 @@ public class MchntController extends BaseController {
 			return mchntService
 					.getMchntInfo(getMchntInfo(request).getMchntCd());
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("获取商户信息错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -273,8 +267,7 @@ public class MchntController extends BaseController {
 			mchntService.updateMchtInfo(mchntInfo);
 			return ResponseCode.SUCCESS;
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("更新商户信息错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -300,8 +293,7 @@ public class MchntController extends BaseController {
 			
 			return wcPay;
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("商户充值下单错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -320,8 +312,7 @@ public class MchntController extends BaseController {
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			return mchntService.checkPay(outTradeNo, mchntCd);
 		}catch(Exception e){
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("检查支付结果错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -345,8 +336,7 @@ public class MchntController extends BaseController {
 			mchntService.postJob(jobInfo, mchntCd);
 			return ResponseCode.SUCCESS;
 		}catch(Exception e){
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("发送兼职信息错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -363,8 +353,7 @@ public class MchntController extends BaseController {
 			List<JobInfo>result=mchntService.getJobInfoList(mchntCd);
 			return result;
 		}catch (Exception e){
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("获取兼职信息列表错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
@@ -375,8 +364,7 @@ public class MchntController extends BaseController {
 		try{
 			return ResponseCode.SUCCESS;
 		}catch(Exception e){
-			e.printStackTrace();
-			logger.error(e);
+			logger.error("获取报名兼职信息错误",e);
 			return ResponseCode.FAIL;
 		}
 	}
