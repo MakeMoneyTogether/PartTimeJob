@@ -90,12 +90,9 @@
 <script src="static/js/jquery.cookie.js"></script>
 <script src="static/js/merchant/merchant.js"></script>
 <script src="static/js/merchant/register.js"></script>
-<script src="static/js/city-picker.min.js" charset="utf-8"></script>
 <script>
 	$(function() {
 	FastClick.attach(document.body);
-	});
-	$("#city-picker").cityPicker({
 	});
 </script>
 </body>

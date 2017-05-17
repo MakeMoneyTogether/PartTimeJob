@@ -42,9 +42,9 @@ function check(){
 		$.alert('请输入正确的手机号码');
 		return;
 	}
+	citycode = $("#city-picker").val();
 	jobDesc = $('#jobDesc').val();
-	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone};
-//	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jobStartTime:jobStartTime, jobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jobValidateTime:jobValidateTime, connectName:connectName};
+	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, citycode:citycode};
 	issue(data);
 }
 function issue(data){

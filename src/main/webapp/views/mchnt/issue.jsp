@@ -90,6 +90,12 @@
 			</div>
 		</div>
 		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">兼职区域</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="city-picker" type="text">
+			</div>
+		</div>
+		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职地点</label></div>
 			<div class="weui-cell__bd">
 				<input id="jobAddress" class="weui-input" type="text" placeholder="请输入兼职地点">
@@ -129,9 +135,12 @@
 <script src="static/js/jquery.cookie.js"></script>
 <script src="static/js/merchant/merchant.js"></script>
 <script src="static/js/merchant/issue.js"></script>
+<script src="static/js/city-picker.min.js" charset="utf-8"></script>
 <script>
 	$(function() {
 		FastClick.attach(document.body);
+	});
+	$("#city-picker").cityPicker({
 	});
 </script>
 </body>

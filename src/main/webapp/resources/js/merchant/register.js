@@ -15,7 +15,6 @@ function commit(){
 	mchntName = $('#mchntName').val();
 	connName = $('#connName').val();
 	pwd = $('#password').val()
-	citycode = $("#city-picker").val();
 	code = $('#code').val();
 	$.ajax({
 		type:'POST',
