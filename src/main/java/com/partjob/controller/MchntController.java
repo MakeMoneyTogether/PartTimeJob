@@ -62,7 +62,8 @@ public class MchntController extends BaseController {
 		logger.info("result"+result);
 		
 		//返回登录页面
-		return "views/mchnt/index";
+//		return "views/mchnt/index";
+		return "redirect:/mchnt/index";
 	}
 
 	
@@ -99,7 +100,7 @@ public class MchntController extends BaseController {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		return "mchnt/money";
+		return "redirect:/mchntp/login";
 	}
 
 	
