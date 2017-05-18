@@ -1,3 +1,4 @@
+/*
 function imercheck(){
 	phone = $.cookie('phone');
 	pwd = $.cookie('password');
@@ -18,15 +19,20 @@ function imercheck(){
 		}
 	});
 }
+*/
 function getMeInfo(){
 	$.ajax({
 		type: "POST",
 		url: 'mchnt/getMchntInfo',
 		dataType: "json",
 		success:function(data){
-			$('#mname').text(data.mchntName);
-			$('#moneyable').text(data.balance);
-			$('#moneyice').text(data.balance);
+			if(data == 500){
+				window.location.href='mchntp/login';
+			}else{
+				$('#mname').text(data.mchntName);
+				$('#moneyable').text(data.balance);
+				$('#moneyice').text(data.balance);
+			}
 		}
 	});
 }
