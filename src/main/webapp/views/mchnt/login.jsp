@@ -54,6 +54,7 @@
 	$(function() {
 		FastClick.attach(document.body);
 	});
+	logincheck();
 </script>
 </body>
 </html>

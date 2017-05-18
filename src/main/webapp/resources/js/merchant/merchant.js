@@ -13,7 +13,7 @@ function jump(k){
 			window.location.href='mchntp/edit';
 			break;
 		case 5:
-			window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb5bb3526bdc5da3&redirect_uri=http%3A%2F%2Fwww.mapengju.com%2FPartTimeJob%2Fmchnt%2FredirectUrl&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect';
+			window.location.href='mchntp/money';
 			break;
 		case 6:
 			$('#repass').popup();
@@ -61,6 +61,26 @@ function mercheck(){
 		success: function(data){
 			if(data != 0){
 				window.location.href='mchntp/login';
+			}
+		}
+	});
+}
+
+function logincheck(){
+	phone = $.cookie('phone');
+	pwd = $.cookie('password');
+	
+	if(phone == null || pwd == null){
+		return;
+	}
+	$.ajax({
+		type:'POST',
+		url: 'mchnt/login',
+		dataType:'json',
+		data:{phone:phone,password:pwd},
+		success: function(data){
+			if(data == 0){
+				window.location.href='mchntp/index';
 			}
 		}
 	});
