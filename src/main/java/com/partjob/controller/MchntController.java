@@ -63,7 +63,7 @@ public class MchntController extends BaseController {
 		
 		//返回登录页面
 //		return "views/mchnt/index";
-		return "redirect:/mchnt/index";
+		return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb5bb3526bdc5da3&redirect_uri=http%3A%2F%2Fwww.mapengju.com%2FPartTimeJob%2Fmchnt%2FredirectUrl&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
 	}
 
 	
