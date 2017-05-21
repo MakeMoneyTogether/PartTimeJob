@@ -21,8 +21,13 @@ public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
         update(tblUserInfo);
     }
 
-    public TblUserInfo getUserInfo(String passwordMD5, String phone) {
-        String hql = "from TblUserInfo user where user.password=:password amd phone=:phone";
+    public TblUserInfo getByPhone(String phone) {
+        String hql = "from TblUserInfo user where user.phone=:phone";
+        return findUnique(hql, phone);
+    }
+
+    public TblUserInfo getUserInfo(String phone, String passwordMD5) {
+        String hql = "from TblUserInfo user where user.password=:password and phone=:phone";
         return findUnique(hql, passwordMD5, phone);
     }
 }
