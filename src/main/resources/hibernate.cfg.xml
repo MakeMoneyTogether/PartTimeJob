@@ -76,10 +76,6 @@
                     所以把它设置为none即可 -->
 				javax.persistence.validation.mode=none
 			</value>
-            <props>
-                <prop key="hibernate.connection.url">jdbc:mysql://rm-bp1v01938rr9gkd55o.mysql.rds.aliyuncs.com:3306/parttimejob</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-            </props>
 
         </property>
 	</bean>
