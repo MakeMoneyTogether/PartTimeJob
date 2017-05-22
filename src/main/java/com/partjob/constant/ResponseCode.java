@@ -12,4 +12,9 @@ public class ResponseCode {
 	
 	public static int PAY_FAIL=1;
 	
+	
+	//**********************工作相关返回代码********************//
+	public static int JOB_UNAVAILABLE=2;
+	public static int JOB_USER_UNAVAILABLE=3;
+	
 }

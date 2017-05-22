@@ -1,5 +1,7 @@
 package com.partjob.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 /**
@@ -13,7 +15,9 @@ public class TblRelUserJob {
     private int jobId;
     private String jobTitle;
     private int statusId;
-
+    private Integer score;
+    private Timestamp recCrtTime;
+    
     @Id
     @Column(name = "uid", nullable = false)
     public int getUid() {
@@ -54,27 +58,48 @@ public class TblRelUserJob {
         this.statusId = statusId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TblRelUserJob that = (TblRelUserJob) o;
-
-        if (uid != that.uid) return false;
-        if (jobId != that.jobId) return false;
-        if (statusId != that.statusId) return false;
-        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
-
-        return true;
+    @Basic
+    @Column(name = "score", nullable = true)
+    public Integer getRecScore() {
+        return score;
     }
 
-    @Override
-    public int hashCode() {
-        int result = uid;
-        result = 31 * result + jobId;
-        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
-        result = 31 * result + statusId;
-        return result;
+    public void setRecScore(Integer score) {
+        this.score = score;
     }
+
+    @Basic
+    @Column(name = "rec_crt_time", nullable = true)
+    public Timestamp getRecCrtTime() {
+        return recCrtTime;
+    }
+
+    public void setRecCrtTime(Timestamp recCrtTime) {
+        this.recCrtTime = recCrtTime;
+    }
+
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        TblRelUserJob that = (TblRelUserJob) o;
+//
+//        if (uid != that.uid) return false;
+//        if (jobId != that.jobId) return false;
+//        if (statusId != that.statusId) return false;
+//        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = uid;
+//        result = 31 * result + jobId;
+//        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
+//        result = 31 * result + statusId;
+//        return result;
+//    }
 }
