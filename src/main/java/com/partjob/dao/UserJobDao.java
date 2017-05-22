@@ -15,12 +15,8 @@ import java.util.List;
 @Repository
 public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
 
-    public void save(TblRelUserJob tblRelUserJob) {
-        save(tblRelUserJob);
-    }
-
     public void update(TblRelUserJob tblRelUserJob) {
-        update(tblRelUserJob);
+        super.saveOrUpdate(tblRelUserJob);
     }
 
     public List<TblRelUserJob> getByStatus(int uid, int statusId) {

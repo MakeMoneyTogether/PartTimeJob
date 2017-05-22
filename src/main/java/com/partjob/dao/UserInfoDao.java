@@ -13,21 +13,17 @@ import java.io.Serializable;
 @Repository
 public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
 
-    public void save(TblUserInfo tblUserInfo) {
-        save(tblUserInfo);
-    }
-
     public void update(TblUserInfo tblUserInfo) {
-        update(tblUserInfo);
+        super.saveOrUpdate(tblUserInfo);
     }
 
     public TblUserInfo getByPhone(String phone) {
-        String hql = "from TblUserInfo user where user.phone=:phone";
+        String hql = "from TblUserInfo user where user.phone=?";
         return findUnique(hql, phone);
     }
 
     public TblUserInfo getUserInfo(String phone, String passwordMD5) {
-        String hql = "from TblUserInfo user where user.password=:password and phone=:phone";
+        String hql = "from TblUserInfo user where user.password=? and phone=?";
         return findUnique(hql, passwordMD5, phone);
     }
 }
