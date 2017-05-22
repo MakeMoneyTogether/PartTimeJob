@@ -22,7 +22,7 @@ function jump(p,e){
 			break;
 		case 4:
 			console.log("钱包");
-			window.location.href="user/wallet";
+			window.location.href="userp/wallet";
 			break;
 		case 5:
 			console.log("修改密码");
@@ -48,7 +48,7 @@ function loading_tag(){
 	$('#jz-infos').text('<div class="weui-loadmore"> <i class="weui-loading"></i> <span class="weui-loadmore__tips">正在加载</span> </div>');
 }
 function genItem(one){
-	var item = '<a href="user/info/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
+	var item = '<a href="userp/info/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
 				one.jlabel+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
 				one.jname+'</span><br><span class="i-jz-desc">'+one.jlocal+' '+one.jstdate+'开始</span><br><span class="i-jz-money">'+
 				one.jmoney+'元/'+one.jtime+'</span></div></a>';
@@ -84,7 +84,7 @@ function repwd(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/rpwd',
+		url: 'user/rpwd',
 		dataType:'json',
 		data:{phone:phone,pwd:pwd,npwd:npwd},
 		success: function(data){
@@ -109,7 +109,7 @@ $(function(){
 		pwd = $.cookie('password');
 		$.ajax({
 			type:'POST',
-			url: 'uurl/pages/me',
+			url: 'user/pages/me',
 			dataType:'json',
 			data:{phone:phone,password:pwd},
 			success: function(data){
@@ -123,6 +123,6 @@ $(function(){
 			}
 		});
 	}else{
-		window.location.href='user/login';
+		window.location.href='userp/login';
 	}
 });

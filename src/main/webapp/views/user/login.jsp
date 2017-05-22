@@ -22,7 +22,7 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">登录</span>
 		</div>
-		<div class="placeholder"><a href="user"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
+		<div class="placeholder"><a href="userp"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">
@@ -41,7 +41,7 @@
 		</div>
 	</div>
 		<a onclick="login();" class="weui-btn weui-btn_primary commitBtn">登录</a>
-	 	<a href="user/register" class="weui-btn weui-btn_default" style="width:80%;">注册</a>
+	 	<a href="userp/register" class="weui-btn weui-btn_default" style="width:80%;">注册</a>
 <div style="display:none;">
 </div>	
 <script src="static/js/jquery-2.1.4.js"></script>
@@ -67,7 +67,7 @@
 				if(data == 0){
 					$.cookie('phone',phone,{expires:30,path:'/'});
 					$.cookie('password',pwd,{expires:30,path:'/'});
-					window.location.href='user/me';
+					window.location.href='userp/me';
 				}
 			}
 		});

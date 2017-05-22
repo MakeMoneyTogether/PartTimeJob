@@ -22,13 +22,13 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">手机兼职</span>
 		</div>
-		<div class="placeholder"><a href="user/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
 	</div>
 	<div class="weui-panel weui-panel_access">
 		<div class="weui-panel__hd" style="padding:0;">
 			<div class="weui-flex">
 				<div class="weui-flex__item placeselect">
-					<a href="user">
+					<a href="userp">
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 					</a>
 				</div>

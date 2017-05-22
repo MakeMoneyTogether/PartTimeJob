@@ -35,7 +35,7 @@
 			</div>
 
 		</div>
-		<div class="placeholder"><a href="user/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
 	</div>
 	<div>
 		<div class="swiper-container">
@@ -55,7 +55,7 @@
 				</div>
 				<hr width="1" color="#999999">
 				<div class="weui-flex__item placeselect">
-					<a href="user/net">
+					<a href="userp/net">
 					<i style="color:#010101;" class="fa fa-mobile-phone"></i>  手机兼职
 					</a>
 				</div>
@@ -176,7 +176,7 @@
 	//$.cookie('citycode','320100',{expires:30,path:'/'});
 	function searchText(){
 		$.cookie('inputKey',$('#searchInput').val());
-		window.location.href = 'user/list';
+		window.location.href = 'userp/list';
 	}
 </script>
 </body>

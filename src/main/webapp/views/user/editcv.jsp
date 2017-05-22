@@ -22,7 +22,7 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">编辑简历</span>
 		</div>
-		<div class="placeholder"><a href="user"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
+		<div class="placeholder"><a href="userp"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">

@@ -17,7 +17,7 @@ function commit(){
 	code = $('#code').val();
 	$.ajax({
 		type:'POST',
-		url: 'uurl/register',
+		url: 'user/register',
 		dataType:'json',
 		data:{phone:phone,pwd:pwd,phone:phone,invitation:invitation,code:code},
 		success: function(data){
@@ -26,7 +26,7 @@ function commit(){
 				$.cookie('phone',phone,{expires:30,path:'/'});
 				$.cookie('password',pwd,{expires:30,path:'/'});
 					$.alert('注册成功',function(){
-						window.location.href='user/me';
+						window.location.href='userp/me';
 					});
 			}
 		}

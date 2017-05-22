@@ -22,7 +22,7 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title"></span>
 		</div>
-		<div class="placeholder"><a href="user/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__hd">

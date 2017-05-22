@@ -3,12 +3,12 @@ function update(){
 	pwd = $.cookie('password');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/editcv',
+		url: 'user/editcv',
 		dataType:'json',
 		data:{phone:phone,password:pwd},
 		success: function(data){
 			$.alert('简历更新成功',function(){
-				window.location.href="user/me";
+				window.location.href="userp/me";
 			});
 			
 		}

@@ -24,7 +24,7 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">个人中心</span>
 		</div>
-		<div class="placeholder"><a href="user"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
+		<div class="placeholder"><a href="userp"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__hd">
@@ -36,7 +36,7 @@
 				<span style="margin-left:5%;float:left;" id="ugpa">5.0</span>
 			</div>
 			<div class="col-30 div_right">
-				<a href="user/editcv">编辑简历></a>
+				<a href="userp/editcv">编辑简历></a>
 			</div>
 			<div style="clear:both"></div>
 		</div>

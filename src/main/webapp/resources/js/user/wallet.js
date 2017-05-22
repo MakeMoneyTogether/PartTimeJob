@@ -13,7 +13,7 @@ function postCash(rmb){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/cash',
+		url: 'user/cash',
 		dataType:'json',
 		data:{phone:phone,rmb:rmb},
 		success: function(data){
@@ -46,7 +46,7 @@ function getInvitation(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/invitation',
+		url: 'user/invitation',
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
@@ -82,7 +82,7 @@ function getSchedule(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'uurl/schedule',
+		url: 'user/schedule',
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){

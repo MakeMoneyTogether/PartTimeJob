@@ -2,7 +2,7 @@ var index_bak = $('#index_bak')
 var loading = false;
 
 function genItem(one){
-	var item = '<a href="user/netinfo/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
+	var item = '<a href="userp/netinfo/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
 				one.jlabel+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
 				one.jname+'</span><br><span class="i-jz-desc">截止至'+one.jdate+'</span><br><span class="i-jz-money">'+
 				one.money+'元</span></div></a>';
