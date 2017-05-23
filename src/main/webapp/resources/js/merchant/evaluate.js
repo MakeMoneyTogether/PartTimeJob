@@ -11,11 +11,11 @@ function selectStar(){
 	$(this).prevAll().addClass('star');
 }
 
-function deny(uid){
+function notfound(uid){
 	var jid = $('#jid').html();
 	$.ajax({
 		type:'POST',
-		url: 'mchnt/deny',
+		url: 'mchnt/notfound',
 		dataType:'json',
 		data:{uid:uid,jid:jid},
 		success: function(data){

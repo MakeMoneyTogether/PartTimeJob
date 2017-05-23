@@ -33,7 +33,7 @@
 	<div class="weui-cells__title">参与兼职的人员</div>
 	<div id="list" class="weui-cells">
 		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="deny(1001);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__hd" ><button onclick="notfound(1001);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
 			<div class="weui-cell__bd">
 				<p>用户名字</p>
 			</div>
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="deny(1002);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__hd" ><button onclick="notfound(1002);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
 			<div class="weui-cell__bd">
 				<p>用户名字</p>
 			</div>
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="deny(1003);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__hd" ><button onclick="notfound(1003);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
 			<div class="weui-cell__bd">
 				<p>用户名字</p>
 			</div>

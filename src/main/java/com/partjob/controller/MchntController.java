@@ -377,9 +377,21 @@ public class MchntController extends BaseController {
 	 * @param jid	兼职id
 	 * @return
 	 */
-	@RequestMapping(value = { "deny" })
+	@RequestMapping(value = { "refuse" })
 	@ResponseBody
-	public Object denyUser(int uid,int jid){
+	public Object refuseUser(int uid,int jid){
+		return ResponseCode.SUCCESS;
+	}
+	/**
+	 * 记得改啊
+	 * 声明这个用户缺勤，扣他的钱
+	 * @param uid	用户id
+	 * @param jid	兼职id
+	 * @return
+	 */
+	@RequestMapping(value = { "notfound" })
+	@ResponseBody
+	public Object noUser(int uid,int jid){
 		return ResponseCode.SUCCESS;
 	}
 	/**
