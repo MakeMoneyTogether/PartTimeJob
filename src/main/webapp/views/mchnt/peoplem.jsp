@@ -18,27 +18,31 @@
 <link rel="stylesheet" href="static/css/col.css">
 </head>
 <body ontouchstart>
-	<div class="weui-flex">
-		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
-		<div class="weui-flex__item placeholder">
-			<span id="jobTitle">人员录用管理</span>
-		</div>
+<div class="weui-flex">
+	<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
+	<div class="weui-flex__item placeholder">
+		<span id="jobTitle">人员录用管理</span>
 	</div>
-	<div class="bd">
-		<div class="weui-cells__title">报名人员<strong style="color:red;">（不拒绝即被认为录用）</strong></div>
-		<div id="list" class="weui-cells">
-			<div class="weui-cell">
-				<div class="weui-cell__hd" style="color:red;">5.0</div>
-				<div class="weui-cell__bd">
-					<p>用户名字</p>
-				</div>
-				<div class="weui-cell__ft">
-					<button class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
-				</div>
+</div>
+<div class="bd">
+	<div class="weui-cells__title">报名人员<strong style="color:red;">（不拒绝即被认为录用）</strong></div>
+	<div id="list" class="weui-cells">
+		<div class="weui-cell">
+			<div class="weui-cell__hd" style="color:red;">5.0</div>
+			<div class="weui-cell__bd">
+				<p>用户名字</p>
+			</div>
+			<div class="weui-cell__ft">
+				<button onclick="deny(this,1001);" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
 			</div>
 		</div>
-		<h1>&nbsp;</h1>
 	</div>
+	<h1>&nbsp;</h1>
+</div>
+<div style="display:none;">
+<p id="jid">001</p>
+</div>
+	
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>

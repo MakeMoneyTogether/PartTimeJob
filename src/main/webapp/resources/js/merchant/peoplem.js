@@ -16,3 +16,18 @@ function getPeople(){
 		list.append(genItem(datas[i]));
 	}
 }
+
+function refuse(e,uid){
+	var jid = $('#jid').html();
+	$.ajax({
+		type:'POST',
+		url: 'mchnt/refuse',
+		dataType:'json',
+		data:{uid:uid,jid:jid},
+		success: function(data){
+			if(data == 0){
+				$(e).parent().parent().remove();
+			}
+		}
+	});
+}
