@@ -1,6 +1,15 @@
 $(function(){
-	
+	get_label();
 });
+function get_label(){
+	$.get('job/types',function(data){
+		jobType = $('#jobType');
+		jobType.html('');
+		for(i=0;i<data.length;i++){
+			jobType.append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+		}
+	});
+}
 function check(){
 	jobTitle = $('#jobTitle').val();
 	if(jobTitle == ''){

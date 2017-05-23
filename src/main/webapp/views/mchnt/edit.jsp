@@ -32,15 +32,6 @@
 				<input id="mname" class="weui-input" type="text" placeholder="请输入商户名称">
 			</div>
 		</div>
-		<div class="weui-cell weui-cell_vcode">
-			<div class="weui-cell__hd"><label class="weui-label">商户区域</label></div>
-			<div class="weui-cell__bd">
-				<input class="weui-input" id="city-picker" type="text" disabled="true">
-			</div>
-			<div class="weui-cell__ft">
-				<button onclick="editLocal();" id="local_btn" class="weui-vcode-btn">修改商户所在区</button>
-			</div>
-		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">详细地址</label></div>
 			<div class="weui-cell__bd">
@@ -80,7 +71,6 @@
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
-<script src="static/js/city-picker.min.js" charset="utf-8"></script>
 <script src="static/js/merchant/edit.js"></script>
 <script>
 	$(function() {

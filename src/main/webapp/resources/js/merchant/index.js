@@ -31,7 +31,7 @@ function getMeInfo(){
 			}else{
 				$('#mname').text(data.mchntName);
 				$('#moneyable').text(data.balance);
-				$('#moneyice').text(data.balance);
+				$('#moneyice').text(data.frozenMoney);
 			}
 		}
 	});

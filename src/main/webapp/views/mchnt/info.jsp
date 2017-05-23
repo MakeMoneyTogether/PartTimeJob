@@ -21,49 +21,49 @@
 	<div class="weui-flex">
 		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
-			<span id="jobTitle">大马蜂兼职招工蜂</span>
+			<span id="jobTitle">${job.jobTitle }</span>
 		</div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__bd">
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">薪资：</label>
-				<span class="weui-form-preview__value" style="color:red;" id="paymentMoney"></span>
+				<span class="weui-form-preview__value" style="color:red;" id="paymentMoney">${job.paymentMoney }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">类型：</label>
-				<span class="weui-form-preview__value" id="jobType"></span>
+				<span class="weui-form-preview__value" id="jobType">${job.jobType }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>
-				<span class="weui-form-preview__value" id="numPeople"></span>
+				<span class="weui-form-preview__value" id="numPeople">${job.numPeople }</span>
 			</div>
 		</div>
 		<div class="weui-form-preview__hd" style="padding:0;"></div>
 		<div class="weui-form-preview__bd">
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">工作日期：</label>
-				<span class="weui-form-preview__value" id="jobStartTime"></span>
+				<span class="weui-form-preview__value" id="jobStartTime">${job.jobStartTime }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">结束日期：</label>
-				<span class="weui-form-preview__value" id="jobEndTime"></span>
+				<span class="weui-form-preview__value" id="jobEndTime">${job.jobEndTime }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">兼职有效期：</label>
-				<span class="weui-form-preview__value" id="jobValidateTime"></span>
+				<span class="weui-form-preview__value" id="jobValidateTime">${job.jobValidateTime }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">详细地址：</label>
-				<span class="weui-form-preview__value" id="jobAddress"></span>
+				<span class="weui-form-preview__value" id="jobAddress">${job.jobAddress }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">联系人员：</label>
-				<span class="weui-form-preview__value" id="connectName">牛老师</span>
+				<span class="weui-form-preview__value" id="connectName">${job.connectName }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">联系电话：</label>
-				<span class="weui-form-preview__value" id="connectPhone">10086</span>
+				<span class="weui-form-preview__value" id="connectPhone">${job.connectPhone }</span>
 			</div>
 		</div>
 	</div>
@@ -73,12 +73,7 @@
 				<label class="weui-form-preview__label">工作内容：</label>
 				<br>
 				<span class="info-desc" id="jobDesc">
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
-					就是让你来搬砖啊，我们有Java砖，C艹砖，HTML砖，还有CSS，JS等粘合剂。
+					${job.jobDesc }
 				</span>
 			</div>
 		</div>
@@ -87,14 +82,13 @@
 		<h1>&nbsp;</h1>
 	</div>
 	<div class="weui-tabbar">
-		<a href="mchntp/peoplem" class="weui-tabbar__item">
-			<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+		<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-users"></i>
 			</div>
 			<p class="weui-tabbar__label">人员录用</p>
 		</a>
-		<a href="javascript:;" class="weui-tabbar__item">
+		<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-comment"></i>
 			</div>
@@ -111,7 +105,7 @@
 	$(function() {
 	FastClick.attach(document.body);
 	});
-	loadJob();
+//	loadJob();
 </script>
 </body>
 </html>

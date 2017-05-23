@@ -14,11 +14,6 @@ function init(){
 		}
 	});
 }
-function editLocal(){
-	$("#city-picker").attr('disabled',false);
-	$("#city-picker").cityPicker({
-	});
-}
 function get_code(){
 	if($('#code_btn').text() == '已发送'){
 		return;
