@@ -3,9 +3,11 @@ package com.partjob.controller;
 import com.partjob.constant.ResponseCode;
 import com.partjob.model.UserInfo;
 import com.partjob.service.UserService;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -86,4 +88,6 @@ public class UserController {
         // 要不要转json
         return userInfo;
     }
+    
+
 }

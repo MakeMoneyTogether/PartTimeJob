@@ -1,11 +1,17 @@
 package com.partjob.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.UserInfoDao;
+import com.partjob.dao.UserJobDao;
+import com.partjob.entity.TblRelUserJob;
 import com.partjob.entity.TblUserInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.CommonUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     @Autowired
     private UserInfoDao userInfoDao;
+    @Autowired
+    private UserJobDao userJobDao;
 
     public int register(String pwd, String phone, String code, String invitation) {
         // 先检查手机有没有注册过
@@ -36,6 +44,11 @@ public class UserService {
         pwd = CommonUtil.toMD5(pwd);
         TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, pwd);
         return transModel(tblUserInfo);
+    }
+    
+    public UserInfo getUser(int id){
+    	TblUserInfo tblUserInfo = userInfoDao.get(id);
+    	return transModel(tblUserInfo);
     }
 
     public int rpwd(String phone, String pwd, String npwd){

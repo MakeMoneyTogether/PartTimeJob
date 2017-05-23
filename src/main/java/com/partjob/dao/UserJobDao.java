@@ -28,4 +28,9 @@ public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
         String hql = "from TblRelUserJob ujob where ujob.uid=? and jobId=?";
         return findUnique(hql, uid, jid);
     }
+    
+    public List<TblRelUserJob>getByJob(int jobId){
+    	String hql="from TblRelUserJob ujob where ujob.jobId=? order by recCrtTime desc";
+    	return find(hql, jobId);
+    }
 }

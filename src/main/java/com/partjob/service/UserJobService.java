@@ -1,5 +1,7 @@
 package com.partjob.service;
 
+import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.ResponseCode;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserJobDao;
@@ -12,6 +14,7 @@ import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.ListUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +53,16 @@ public class UserJobService {
         }
         return jobInfos;
     }
+    
+    public List<UserInfo> getUsersOfJob(int jobId){
+    	List<TblRelUserJob> list=userJobDao.getByJob(jobId);
+    	List<UserInfo>users=new ArrayList<UserInfo>();
+    	for(TblRelUserJob tblRelUserJob:list){
+    		UserInfo user=userService.getUser(tblRelUserJob.getUid());
+    		users.add(user);
+    	}
+    	return users;
+    }
 
     public int getRelOfUserJob(String phone, int jid){
         UserInfo user = userService.getByPhone(phone);
@@ -59,6 +72,51 @@ public class UserJobService {
             return 0;
         } else return relUserJob.getStatusId();
     }
+    
+    /**
+     * 审核用户拒绝参加兼职
+     * @param userId
+     * @param jobId
+     * @return
+     */
+    	public int noPassUser(int userId,int jobId){
+    		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
+    		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行拒绝操作
+    		user.setStatusId(CommonCanstant.USER_NOT_PASS);
+    		userJobDao.modify(user);
+    		return ResponseCode.SUCCESS;
+    	}
+    	
+    	public int passUser(int userId,int jobId){
+    		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
+    		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行同意操作
+    		user.setStatusId(CommonCanstant.USER_PASS);
+    		userJobDao.modify(user);
+    		return ResponseCode.SUCCESS;
+    	}
+    	
+    	public int checkUserWork(int userId,int jobId,int status){
+    		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
+    		if(user.getStatusId()==CommonCanstant.USER_PASS){
+    			user.setStatusId(status);
+    			userJobDao.modify(user);
+    			return ResponseCode.SUCCESS;
+    		}else{
+    			return ResponseCode.JOB_USER_UNAVAILABLE;
+    		}
+    	}
+    	
+    	public int scoreUserWork(int userId,int jobId,int score){
+    		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
+    		if(user.getStatusId()==CommonCanstant.USER_PASS){
+//    			user.setStatusId(status);
+    			user.setScore(score);
+    			userJobDao.modify(user);
+    			return ResponseCode.SUCCESS;
+    		}else{
+    			return ResponseCode.JOB_USER_UNAVAILABLE;
+    		}
+    	}
 
     public ApplyJobResponse applyJob(String phone, int jid){
         ApplyJobResponse response = new ApplyJobResponse();

@@ -2,11 +2,15 @@ package com.partjob.service;
 
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.NetJobDao;
+import com.partjob.dao.UserJobDao;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblNetJob;
+import com.partjob.entity.TblRelUserJob;
 import com.partjob.model.JobInfo;
 import com.partjob.model.NetJob;
+import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,7 @@ public class JobService {
     private JobInfoDao jobInfoDao;
     @Autowired
     private NetJobDao netJobDao;
+   
 
     public JobInfo getById(int jid){
         TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
@@ -47,6 +52,7 @@ public class JobService {
         return transJobList(tblJobInfos);
     }
 
+   
     private JobInfo transJob(TblJobInfo tblJobInfo) {
         JobInfo jobInfo = new JobInfo();
         if (tblJobInfo == null)
@@ -54,6 +60,8 @@ public class JobService {
         ApplicationUtil.copyProperties(tblJobInfo, jobInfo);
         return jobInfo;
     }
+    
+    
 
     private List<JobInfo> transJobList(List<TblJobInfo> tblJobInfos) {
         if (tblJobInfos == null || tblJobInfos.size() == 0)

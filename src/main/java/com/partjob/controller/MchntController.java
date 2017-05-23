@@ -49,17 +49,17 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = "")
 	public String  mchnt() {
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
-		String param = "appid="
-				+ TransCanstant.APP_ID
-				+ "&redirect_uri="
-				+ URLEncoder
-						.encode(TransCanstant.NOTIFY_MCHNT_URL)
-								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
-
-		String result = HttpRequestUtil.sendGet(url, param);
-		logger.info("url:"+url+"?"+param);
-		logger.info("result"+result);
+//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
+//		String param = "appid="
+//				+ TransCanstant.APP_ID
+//				+ "&redirect_uri="
+//				+ URLEncoder
+//						.encode(TransCanstant.NOTIFY_MCHNT_URL)
+//								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
+//
+//		String result = HttpRequestUtil.sendGet(url, param);
+//		logger.info("url:"+url+"?"+param);
+//		logger.info("result"+result);
 		
 		//返回登录页面
 //		return "views/mchnt/index";
@@ -355,17 +355,6 @@ public class MchntController extends BaseController {
 			return result;
 		}catch (Exception e){
 			logger.error("获取兼职信息列表错误",e);
-			return ResponseCode.FAIL;
-		}
-	}
-	
-	
-	public Object getUserList(@RequestParam(value = "jobId") String jobId,
-			HttpServletRequest request){
-		try{
-			return ResponseCode.SUCCESS;
-		}catch(Exception e){
-			logger.error("获取报名兼职信息错误",e);
 			return ResponseCode.FAIL;
 		}
 	}

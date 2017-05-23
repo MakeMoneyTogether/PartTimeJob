@@ -60,11 +60,11 @@ public class TblRelUserJob {
 
     @Basic
     @Column(name = "score", nullable = true)
-    public Integer getRecScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setRecScore(Integer score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

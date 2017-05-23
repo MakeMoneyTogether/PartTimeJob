@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class JobPageController {
     UserJobService userJobService;
     @Autowired
     JobService jobService;
+    @Autowired
+    UserService userService;
 
     /**
      * 获取用户参与的兼职列表
@@ -86,6 +89,7 @@ public class JobPageController {
         // 要不要返回json
         return jobService.getNetJobById(jid);
     }
+    
 
     /**
      * 获取手机兼职列表
@@ -131,5 +135,63 @@ public class JobPageController {
     public Object applyJob(@PathVariable String phone, @PathVariable int jid) {
         return null;
     }
-
+    
+    @RequestMapping(value = "userOfJob/{jid}")
+    @ResponseBody
+    public Object getUserList(@PathVariable int jobId,
+			HttpServletRequest request){
+		try{
+			
+			return userJobService.getUsersOfJob(jobId);
+		}catch(Exception e){
+			logger.error("获取报名兼职信息错误",e);
+			return ResponseCode.FAIL;
+		}
+	}
+    
+    @RequestMapping(value = "refuseUser")
+    @ResponseBody
+    public int refuseUser(@RequestParam(value = "userId") int userId,
+            @RequestParam(value = "jobId") int jobId){
+    	
+    	try{
+    		userJobService.noPassUser(userId, jobId);
+    		return ResponseCode.SUCCESS;
+    	}catch(Exception e ){
+    		logger.error("拒绝用户报名错误",e);
+			return ResponseCode.FAIL;
+    	}
+    }
+    
+    @RequestMapping(value = "checkUser")
+    @ResponseBody
+    public int checkUser(@RequestParam(value = "userId") int userId,
+            @RequestParam(value = "jobId") int jobId,
+            @RequestParam(value = "status") int status){
+    	
+    	try{
+    		userJobService.checkUserWork(userId, jobId, status);
+    		return ResponseCode.SUCCESS;
+    	}catch(Exception e ){
+    		logger.error("考勤用户工作错误",e);
+			return ResponseCode.FAIL;
+    	}
+    }
+    
+    
+    @RequestMapping(value = "scoreUser")
+    @ResponseBody
+    public int scoreUser(@RequestParam(value = "userId") int userId,
+            @RequestParam(value = "jobId") int jobId,
+            @RequestParam(value = "score") int score){
+    	
+    	try{
+    		userJobService.scoreUserWork(userId, jobId, score);
+    		return ResponseCode.SUCCESS;
+    	}catch(Exception e ){
+    		logger.error("考勤用户工作错误",e);
+			return ResponseCode.FAIL;
+    	}
+    }
+    
 }

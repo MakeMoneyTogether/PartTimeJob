@@ -93,38 +93,7 @@ public class MchntService {
 		return transModel(tblMchntInfo);
 
 	}
-/**
- * 审核用户拒绝参加兼职
- * @param userId
- * @param jobId
- * @return
- */
-	public int noPassUser(int userId,int jobId){
-		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
-		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行拒绝操作
-		user.setStatusId(CommonCanstant.USER_NOT_PASS);
-		userJobDao.modify(user);
-		return ResponseCode.SUCCESS;
-	}
-	
-	public int passUser(int userId,int jobId){
-		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
-		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行同意操作
-		user.setStatusId(CommonCanstant.USER_PASS);
-		userJobDao.modify(user);
-		return ResponseCode.SUCCESS;
-	}
-	
-	public int checkUserWork(int userId,int jobId,int status){
-		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
-		if(user.getStatusId()==CommonCanstant.USER_PASS){
-			user.setStatusId(status);
-			userJobDao.modify(user);
-			return ResponseCode.SUCCESS;
-		}else{
-			return ResponseCode.JOB_USER_UNAVAILABLE;
-		}
-	}
+
 	/**
 	 * 检查手机号是否存在
 	 * @param phone
