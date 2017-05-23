@@ -41,9 +41,20 @@ public class MchntPageController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("peoplelem/{jid}")
+	@RequestMapping("peoplem/{jid}")
 	public String peoplelem(@PathVariable int jid,Model model){
 		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名，用户评分
-		return "mchnt/peoplelem";
+		return "mchnt/peoplem";
+	}
+	/**
+	 * 兼职报名人员评分
+	 * @param jid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("evaluate/{jid}")
+	public String evaluate(@PathVariable int jid,Model model){
+		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名
+		return "mchnt/evaluate";
 	}
 }

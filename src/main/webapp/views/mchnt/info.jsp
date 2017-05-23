@@ -88,7 +88,7 @@
 			</div>
 			<p class="weui-tabbar__label">人员录用</p>
 		</a>
-		<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
+		<a href="mchntp/evaluate/${job.jobId }" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-comment"></i>
 			</div>
