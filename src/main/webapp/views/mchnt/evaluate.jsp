@@ -23,57 +23,64 @@
 </style>
 </head>
 <body ontouchstart>
-	<div class="weui-flex">
-		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
-		<div class="weui-flex__item placeholder">
-			<span id="jobTitle">人员评价</span>
-		</div>
+<div class="weui-flex">
+	<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
+	<div class="weui-flex__item placeholder">
+		<span id="jobTitle">人员评价</span>
 	</div>
-	<div class="bd">
-		<div class="weui-cells__title">参与兼职的人员</div>
-		<div id="list" class="weui-cells">
-			<div class="weui-cell">
-				<div class="weui-cell__hd" ><button class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-				<div class="weui-cell__bd">
-					<p>用户名字</p>
-				</div>
-				<div id="001" value="0" class="weui-cell__ft">
-					<i value="1" class="fa fa-star"></i>
-					<i value="2" class="fa fa-star"></i>
-					<i value="3" class="fa fa-star"></i>
-					<i value="4" class="fa fa-star"></i>
-					<i value="5" class="fa fa-star"></i>
-				</div>
+</div>
+<div class="bd">
+	<div class="weui-cells__title">参与兼职的人员</div>
+	<div id="list" class="weui-cells">
+		<div class="weui-cell">
+			<div class="weui-cell__hd" ><button onclick="deny(1001);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__bd">
+				<p>用户名字</p>
 			</div>
-			<div class="weui-cell">
-				<div class="weui-cell__hd" ><button class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-				<div class="weui-cell__bd">
-					<p>用户名字</p>
-				</div>
-				<div id="001" value="0" class="weui-cell__ft">
-					<i value="1" class="fa fa-star"></i>
-					<i value="2" class="fa fa-star"></i>
-					<i value="3" class="fa fa-star"></i>
-					<i value="4" class="fa fa-star"></i>
-					<i value="5" class="fa fa-star"></i>
-				</div>
-			</div>
-			<div class="weui-cell">
-				<div class="weui-cell__hd" ><button class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-				<div class="weui-cell__bd">
-					<p>用户名字</p>
-				</div>
-				<div id="001" value="0" class="weui-cell__ft">
-					<i value="1" class="fa fa-star"></i>
-					<i value="2" class="fa fa-star"></i>
-					<i value="3" class="fa fa-star"></i>
-					<i value="4" class="fa fa-star"></i>
-					<i value="5" class="fa fa-star"></i>
-				</div>
+			<div id="1001" value="0" class="weui-cell__ft rate">
+				<i value="1" class="fa fa-star"></i>
+				<i value="2" class="fa fa-star"></i>
+				<i value="3" class="fa fa-star"></i>
+				<i value="4" class="fa fa-star"></i>
+				<i value="5" class="fa fa-star"></i>
 			</div>
 		</div>
-		<h1>&nbsp;</h1>
+		<div class="weui-cell">
+			<div class="weui-cell__hd" ><button onclick="deny(1002);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__bd">
+				<p>用户名字</p>
+			</div>
+			<div id="1002" value="0" class="weui-cell__ft rate">
+				<i value="1" class="fa fa-star"></i>
+				<i value="2" class="fa fa-star"></i>
+				<i value="3" class="fa fa-star"></i>
+				<i value="4" class="fa fa-star"></i>
+				<i value="5" class="fa fa-star"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd" ><button onclick="deny(1003);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+			<div class="weui-cell__bd">
+				<p>用户名字</p>
+			</div>
+			<div id="1003" value="0" class="weui-cell__ft rate">
+				<i value="1" class="fa fa-star"></i>
+				<i value="2" class="fa fa-star"></i>
+				<i value="3" class="fa fa-star"></i>
+				<i value="4" class="fa fa-star"></i>
+				<i value="5" class="fa fa-star"></i>
+			</div>
+		</div>
 	</div>
+	<div class="weui-btn-area">
+		<button onclick="apply();" style="width:80%;" class="weui-btn weui-btn_primary">评价完成</button>
+	</div>
+	<h1>&nbsp;</h1>
+</div>
+<div style="display:none;">
+<p id="jid">001</p>
+</div>
+	
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>

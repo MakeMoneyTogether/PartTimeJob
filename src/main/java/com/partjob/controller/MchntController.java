@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ObjectStatuCode;
 import com.partjob.constant.ResponseCode;
@@ -368,5 +369,34 @@ public class MchntController extends BaseController {
 			logger.error("获取报名兼职信息错误",e);
 			return ResponseCode.FAIL;
 		}
+	}
+	/**
+	 * 记得改啊
+	 * 拒绝某用户兼职报名
+	 * @param uid	用户id
+	 * @param jid	兼职id
+	 * @return
+	 */
+	@RequestMapping(value = { "deny" })
+	@ResponseBody
+	public Object denyUser(int uid,int jid){
+		return ResponseCode.SUCCESS;
+	}
+	/**
+	 * 完成用户评分，评分的逻辑没写，评分完成后还要将兼职的状态置为已结束
+	 * 功能码在com.partjob.constant。ObjectStatuCode 这个包里面
+	 * @param jid	兼职id
+	 * @param users	用户的id和评分列表
+	 * @return
+	 */
+	@RequestMapping(value = { "apply" })
+	@ResponseBody
+	public Object applyJob(int jid,String users){
+		System.out.println(jid);
+		List<HashMap> useres = JSON.parseArray(users, HashMap.class);
+		for(Map<String, Integer> user : useres){
+			System.out.println(user.get("uid")+" "+user.get("grade"));
+		}
+		return ResponseCode.SUCCESS;
 	}
 }
