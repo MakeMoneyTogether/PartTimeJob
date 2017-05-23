@@ -12,7 +12,7 @@ import com.partjob.utils.HibernateBaseDao;
 public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
 
     public TblJobInfo getById(int jid){
-        String hql = "from TblJobInfo job where job.jobId=:jid";
+        String hql = "from TblJobInfo job where job.jobId=?";
         return findUnique(hql, jid);
     }
 
