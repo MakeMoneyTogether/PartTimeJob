@@ -36,9 +36,9 @@ function apply(){
 	users = JSON.stringify(users);
 	$.ajax({
 		type:'POST',
-		url: 'mchnt/apply',
+		url: 'job/scoreUser',
 		dataType:'json',
-		data:{users:users,jid:jid},
+		data:{users:users,jobId:jid},
 		success: function(data){
 			if(data == 0){
 				window.location.href='mchntp/list';

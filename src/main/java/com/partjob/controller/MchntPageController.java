@@ -43,7 +43,7 @@ public class MchntPageController {
 	 */
 	@RequestMapping("peoplem/{jid}")
 	public String peoplelem(@PathVariable int jid,Model model){
-		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名，用户评分
+		model.addAttribute("jid", jid);
 		return "mchnt/peoplem";
 	}
 	/**
@@ -54,7 +54,8 @@ public class MchntPageController {
 	 */
 	@RequestMapping("evaluate/{jid}")
 	public String evaluate(@PathVariable int jid,Model model){
-		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名
+		model.addAttribute("jid", jid);
+//		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名
 		return "mchnt/evaluate";
 	}
 }

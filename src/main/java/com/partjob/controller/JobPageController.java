@@ -1,5 +1,6 @@
 package com.partjob.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.partjob.constant.ResponseCode;
 import com.partjob.model.JobInfo;
 import com.partjob.model.RelUserJob;
@@ -29,7 +30,7 @@ import java.util.Map;
  * 用户和兼职信息的操作在这里
  */
 @Controller
-@RequestMapping(value = "pages")
+@RequestMapping(value = "job")	//这个不要改了，改了我前端又要改
 public class JobPageController {
 
     private final Logger logger = Logger.getLogger(this.getClass());
@@ -136,12 +137,18 @@ public class JobPageController {
         return null;
     }
     
-    @RequestMapping(value = "userOfJob/{jid}")
+    /**
+     * 获取兼职报名的用户列表
+     * @param jobId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "userOfJob/{jobId}")
     @ResponseBody
     public Object getUserList(@PathVariable int jobId,
 			HttpServletRequest request){
 		try{
-			
+			System.out.println("get user of job");
 			return userJobService.getUsersOfJob(jobId);
 		}catch(Exception e){
 			logger.error("获取报名兼职信息错误",e);
@@ -149,6 +156,12 @@ public class JobPageController {
 		}
 	}
     
+    /**
+     * 拒绝用户参加兼职
+     * @param userId
+     * @param jobId
+     * @return
+     */
     @RequestMapping(value = "refuseUser")
     @ResponseBody
     public int refuseUser(@RequestParam(value = "userId") int userId,
@@ -179,14 +192,25 @@ public class JobPageController {
     }
     
     
+    /**
+     * 提交用户信息，sql有点问题，记得改一下
+     * @param users
+     * @param jobId
+     * @return
+     */
     @RequestMapping(value = "scoreUser")
     @ResponseBody
-    public int scoreUser(@RequestParam(value = "userId") int userId,
-            @RequestParam(value = "jobId") int jobId,
-            @RequestParam(value = "score") int score){
+    public int scoreUser(@RequestParam(value = "users") String users,
+            @RequestParam(value = "jobId") int jobId){
     	
     	try{
-    		userJobService.scoreUserWork(userId, jobId, score);
+    		List<HashMap> useres = JSON.parseArray(users,HashMap.class);
+    		for(HashMap<String, String> user : useres){
+    			int userId = Integer.parseInt(user.get("uid").toString());
+    			int score = Integer.parseInt(user.get("grade").toString());
+    			System.out.println(userId+" "+score);
+        		userJobService.scoreUserWork(userId, jobId, score);
+    		}
     		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
     		logger.error("考勤用户工作错误",e);

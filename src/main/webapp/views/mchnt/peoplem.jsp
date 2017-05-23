@@ -33,14 +33,14 @@
 				<p>用户名字</p>
 			</div>
 			<div class="weui-cell__ft">
-				<button onclick="deny(this,1001);" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
+				<button onclick="refuse(this,1001);" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
 			</div>
 		</div>
 	</div>
 	<h1>&nbsp;</h1>
 </div>
 <div style="display:none;">
-<p id="jid">001</p>
+<p id="jid">${jid }</p>
 </div>
 	
 <script src="static/js/jquery-2.1.4.js"></script>

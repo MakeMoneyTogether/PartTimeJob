@@ -78,7 +78,7 @@
 	<h1>&nbsp;</h1>
 </div>
 <div style="display:none;">
-<p id="jid">001</p>
+<p id="jid">${jid }</p>
 </div>
 	
 <script src="static/js/jquery-2.1.4.js"></script>
