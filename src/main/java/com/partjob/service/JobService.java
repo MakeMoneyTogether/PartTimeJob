@@ -27,21 +27,27 @@ public class JobService {
 
     public JobInfo getById(int jid){
         TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
-        return transModel(tblJobInfo);
+        return transJob(tblJobInfo);
     }
 
     public NetJob getNetJobById(int jid){
         TblNetJob netJob = netJobDao.getById(jid);
-        return transModel(netJob);
+        return transNetJob(netJob);
+    }
+
+    public List<NetJob> getNetJobPage(int offset, int length){
+        List<TblNetJob> tblNetJobs = netJobDao.getJobPage(offset, length);
+        assert tblNetJobs != null;
+        return transNetJobList(tblNetJobs);
     }
 
     public List<JobInfo> getJobPage(int offset, int length){
         List<TblJobInfo> tblJobInfos = jobInfoDao.getJobPage(offset, length);
         assert tblJobInfos != null;
-        return transModelList(tblJobInfos);
+        return transJobList(tblJobInfos);
     }
 
-    private JobInfo transModel(TblJobInfo tblJobInfo) {
+    private JobInfo transJob(TblJobInfo tblJobInfo) {
         JobInfo jobInfo = new JobInfo();
         if (tblJobInfo == null)
             return null;
@@ -49,7 +55,7 @@ public class JobService {
         return jobInfo;
     }
 
-    private List<JobInfo> transModelList(List<TblJobInfo> tblJobInfos) {
+    private List<JobInfo> transJobList(List<TblJobInfo> tblJobInfos) {
         if (tblJobInfos == null || tblJobInfos.size() == 0)
             return null;
         List<JobInfo> jobInfos = new ArrayList<JobInfo>();
@@ -61,12 +67,24 @@ public class JobService {
         return jobInfos;
     }
 
-    private NetJob transModel(TblNetJob tblJobInfo) {
+    private NetJob transNetJob(TblNetJob tblNetJob) {
         NetJob jobInfo = new NetJob();
-        if (tblJobInfo == null)
+        if (tblNetJob == null)
             return null;
-        ApplicationUtil.copyProperties(tblJobInfo, jobInfo);
+        ApplicationUtil.copyProperties(tblNetJob, jobInfo);
         return jobInfo;
+    }
+
+    private List<NetJob> transNetJobList(List<TblNetJob> tblNetJobs) {
+        if (tblNetJobs == null || tblNetJobs.size() == 0)
+            return null;
+        List<NetJob> netJobs = new ArrayList<NetJob>();
+        for (TblNetJob tblNetJob : tblNetJobs) {
+            NetJob netJob = new NetJob();
+            ApplicationUtil.copyProperties(tblNetJob, netJob);
+            netJobs.add(netJob);
+        }
+        return netJobs;
     }
 
 }

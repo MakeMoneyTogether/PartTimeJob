@@ -76,8 +76,7 @@
                     所以把它设置为none即可 -->
 				javax.persistence.validation.mode=none
 			</value>
-
-        </property>
+		</property>
 	</bean>
 
 	<bean id="transactionManager"

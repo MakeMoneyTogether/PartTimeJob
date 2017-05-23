@@ -5,6 +5,7 @@ import com.partjob.dao.UserInfoDao;
 import com.partjob.entity.TblUserInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,20 +27,32 @@ public class UserService {
         //验证码检查, 先忽略
         tblUserInfo = new TblUserInfo();
         tblUserInfo.setPhone(phone);
-        tblUserInfo.setPassword(pwd);
+        tblUserInfo.setPwd(CommonUtil.toMD5(pwd));
         userInfoDao.save(tblUserInfo);
         return ResponseCode.SUCCESS;
     }
 
+    public UserInfo login(String phone, String pwd) {
+        pwd = CommonUtil.toMD5(pwd);
+        TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, pwd);
+        return transModel(tblUserInfo);
+    }
+
     public int rpwd(String phone, String pwd, String npwd){
         // 先检查登录
+        pwd = CommonUtil.toMD5(pwd);
         TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, pwd);
         if (tblUserInfo == null) return ResponseCode.FAIL;
         else {
-            tblUserInfo.setPassword(npwd);
+            tblUserInfo.setPwd(CommonUtil.toMD5(npwd));
             userInfoDao.update(tblUserInfo);
             return ResponseCode.SUCCESS;
         }
+    }
+
+    public UserInfo getByPhone(String phone){
+        TblUserInfo tblUserInfo = userInfoDao.getByPhone(phone);
+        return transModel(tblUserInfo);
     }
 
 
@@ -49,11 +62,6 @@ public class UserService {
             ApplicationUtil.copyProperties(userInfo, tblUserInfo);
             userInfoDao.save(tblUserInfo);
         }
-    }
-
-    public UserInfo login(String phone, String passwordMD5) {
-        TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, passwordMD5);
-        return transModel(tblUserInfo);
     }
 
     public boolean checkPhone(String phone, UserInfo userInfo) {

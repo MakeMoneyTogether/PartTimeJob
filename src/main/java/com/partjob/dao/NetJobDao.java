@@ -20,7 +20,7 @@ public class NetJobDao extends HibernateBaseDao<TblNetJob,Serializable> {
     }
 
     public List<TblNetJob> getJobPage(int offset, int length){
-        String hql = "from TblJobInfo job";
+        String hql = "from TblNetJob job";
         return findPage(hql, offset, length);
     }
 }

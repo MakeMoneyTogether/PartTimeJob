@@ -11,13 +11,13 @@ public class UserInfo {
     private String name;
     private String gender;
     private String phone;
-    private String password;
-    private double balance;
+    private Double balance;
     private String major;
     private String grade;
     private String direction;
     private Date birthday;
     private String school;
+    private String pwd;
 
     public UserInfo() {
     }
@@ -54,19 +54,11 @@ public class UserInfo {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -108,5 +100,13 @@ public class UserInfo {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

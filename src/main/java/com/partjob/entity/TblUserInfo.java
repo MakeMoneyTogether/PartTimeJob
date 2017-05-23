@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Sloriac on 2017/5/21.
+ * Created by Sloriac on 2017/5/23.
  */
 @Entity
 @Table(name = "tbl_user_info", schema = "parttimejob", catalog = "")
@@ -13,13 +13,13 @@ public class TblUserInfo {
     private String name;
     private String gender;
     private String phone;
-    private String password;
     private Double balance;
     private String major;
     private String grade;
     private String direction;
     private Date birthday;
     private String school;
+    private String pwd;
 
     @Id
     @Column(name = "uid", nullable = false)
@@ -59,16 +59,6 @@ public class TblUserInfo {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Basic
-    @Column(name = "password", nullable = true, length = 255)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Basic
@@ -131,6 +121,16 @@ public class TblUserInfo {
         this.school = school;
     }
 
+    @Basic
+    @Column(name = "pwd", nullable = true, length = 255)
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -142,13 +142,13 @@ public class TblUserInfo {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         if (major != null ? !major.equals(that.major) : that.major != null) return false;
         if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
         if (direction != null ? !direction.equals(that.direction) : that.direction != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
         if (school != null ? !school.equals(that.school) : that.school != null) return false;
+        if (pwd != null ? !pwd.equals(that.pwd) : that.pwd != null) return false;
 
         return true;
     }
@@ -159,13 +159,13 @@ public class TblUserInfo {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (balance != null ? balance.hashCode() : 0);
         result = 31 * result + (major != null ? major.hashCode() : 0);
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (direction != null ? direction.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
+        result = 31 * result + (pwd != null ? pwd.hashCode() : 0);
         return result;
     }
 }

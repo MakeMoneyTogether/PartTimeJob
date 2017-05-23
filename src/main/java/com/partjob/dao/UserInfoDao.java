@@ -18,12 +18,12 @@ public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
     }
 
     public TblUserInfo getByPhone(String phone) {
-        String hql = "from TblUserInfo user where user.phone=?";
+        String hql = "from TblUserInfo u where u.phone=?";
         return findUnique(hql, phone);
     }
 
     public TblUserInfo getUserInfo(String phone, String passwordMD5) {
-        String hql = "from TblUserInfo user where user.password=? and phone=?";
+        String hql = "from TblUserInfo u where u.pwd=? and u.phone=?";
         return findUnique(hql, passwordMD5, phone);
     }
 }

@@ -22,7 +22,7 @@ public class UserController {
 
     private final Logger logger = Logger.getLogger(this.getClass());
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "register")
     @ResponseBody
@@ -47,6 +47,7 @@ public class UserController {
                            @RequestParam(value = "pwd") String pwd,
                            HttpSession session) {
         UserInfo userInfo = userService.login(phone, pwd);
+        System.out.println(userInfo);
         if (userInfo == null){
             logger.info("用户" + phone + "登录失败");
             return ResponseCode.FAIL;

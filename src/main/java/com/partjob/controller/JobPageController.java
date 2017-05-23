@@ -1,6 +1,7 @@
 package com.partjob.controller;
 
 import com.partjob.constant.ResponseCode;
+import com.partjob.model.JobInfo;
 import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
@@ -27,7 +28,7 @@ import java.util.Map;
  * 用户和兼职信息的操作在这里
  */
 @Controller
-@RequestMapping(value = "job")
+@RequestMapping(value = "pages")
 public class JobPageController {
 
     private final Logger logger = Logger.getLogger(this.getClass());
@@ -36,20 +37,37 @@ public class JobPageController {
     @Autowired
     JobService jobService;
 
+    /**
+     * 获取用户参与的兼职列表
+     * @param uid
+     * @param statuId
+     * @return
+     */
     @RequestMapping(value = "sitem/{uid}/{statuId}")
     @ResponseBody
     public Object sitem(@PathVariable int uid, @PathVariable int statuId) {
         List<RelUserJob> userJobs = userJobService.getUserJobsByStatus(uid, statuId);
-        // 要不要返回json
-        return userJobs;
+        if(userJobs == null) return null;
+        return userJobService.getJobsByRels(userJobs);
     }
 
+    /**
+     * 获取用户与兼职之间的关系
+     * @param phone
+     * @param jid
+     * @return
+     */
     @RequestMapping(value = "u2j/{phone}/{jid}")
     @ResponseBody
     public Object relOfUserJob(@PathVariable String phone, @PathVariable int jid) {
         return userJobService.getRelOfUserJob(phone, jid);
     }
 
+    /**
+     * 获取兼职详情
+     * @param jid
+     * @return
+     */
     @RequestMapping(value = "item/{jid}")
     @ResponseBody
     public Object getJobInfo(@PathVariable int jid) {
@@ -57,6 +75,11 @@ public class JobPageController {
         return jobService.getById(jid);
     }
 
+    /**
+     * 获取手机兼职详情
+     * @param jid
+     * @return
+     */
     @RequestMapping(value = "netitem/{jid}")
     @ResponseBody
     public Object getNetJobInfo(@PathVariable int jid) {
@@ -64,13 +87,18 @@ public class JobPageController {
         return jobService.getNetJobById(jid);
     }
 
+    /**
+     * 获取手机兼职列表
+     * @param offset
+     * @param length
+     * @return
+     */
     @RequestMapping(value = "net/{offset}/{length}")
     @ResponseBody
     public Object getJobInfo(@PathVariable int offset, @PathVariable int length) {
         // 要不要返回json
-        return jobService.getJobPage(offset, length);
+        return jobService.getNetJobPage(offset, length);
     }
-    
     
     /**
      * 获取所有兼职类型（发单、传销、义卖等）
@@ -96,6 +124,12 @@ public class JobPageController {
     	res.add(item);
     	
     	return res;
+    }
+
+    @RequestMapping(value = "apply/{phone}/{jid}")
+    @ResponseBody
+    public Object applyJob(@PathVariable String phone, @PathVariable int jid) {
+        return null;
     }
 
 }
