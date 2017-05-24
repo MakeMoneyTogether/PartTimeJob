@@ -161,7 +161,7 @@ public class MchntService {
 		if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
 				checkResult.getResult_code().equalsIgnoreCase("SUCCESS")&&
 				checkResult.getTrade_state().equalsIgnoreCase("SUCCESS")){
-			
+			//如果支付成功，那么就将修改账户余额
 			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
 			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(checkResult.getTotal_fee()));
 			mchntInfoDao.modify(tblMchntInfo);
