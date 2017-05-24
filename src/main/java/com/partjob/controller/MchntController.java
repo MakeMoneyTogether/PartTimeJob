@@ -334,8 +334,8 @@ public class MchntController extends BaseController {
 			jobInfo.setJobValidateTime(new Timestamp(jjobValidateTime));
 			jobInfo.setJobSt(ObjectStatuCode.JOB_AUDIT);
 			int mchntCd=getMchntInfo(request).getMchntCd();
-			mchntService.postJob(jobInfo, mchntCd);
-			return ResponseCode.SUCCESS;
+			int result=mchntService.postJob(jobInfo, mchntCd);
+			return result;
 		}catch(Exception e){
 			logger.error("发送兼职信息错误",e);
 			return ResponseCode.FAIL;

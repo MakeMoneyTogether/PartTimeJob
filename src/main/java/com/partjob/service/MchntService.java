@@ -186,26 +186,41 @@ public class MchntService {
 	 * 发送兼职信息
 	 * @param job
 	 */
-	public void postJob(JobInfo job,int mchntCd){
+	public int postJob(JobInfo job,int mchntCd){
 		TblJobInfo tblJob=new TblJobInfo();
 		ApplicationUtil.copyProperties(job, tblJob);
 		tblJob.setMchntCd(mchntCd);
 		tblJob.setJobSt(CommonCanstant.UNCHECKED);
-		jobInfoDao.save(tblJob);
+		int result=checkJob(job);
+		if(result!=ResponseCode.SUCCESS){
+			return result;
+		}
 		
 		//扣除商家账户金额
 		int money=0;
+		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
+		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
+		//判断商户的计费类型
 		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
-			
+			int hour=(int) (time/1000/60);
+			money=paymentMoney*job.getNumPeople()*hour;
 			
 		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
-			
+			int day=(int)(time/1000/60/24);
+			money=paymentMoney*job.getNumPeople()*day;
 		}
 		
 		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
+		if(tblMchntInfo.getBalance()<money){
+			return ResponseCode.NOT_ENOUGH_MONEY;
+		}
 		tblMchntInfo.setBalance(tblMchntInfo.getBalance()-money);
 		tblMchntInfo.setFrozenMoney(money);
+		
+		//最后在提交
+		jobInfoDao.save(tblJob);
 		mchntInfoDao.modify(tblMchntInfo);
+		return ResponseCode.SUCCESS;
 	}
 	
 	
@@ -238,6 +253,24 @@ public class MchntService {
 		mchntInfo.setFrozenMoney(BigDecimalUtil.divide100(frozenMonry));
 		
 		return mchntInfo;
+	}
+	
+	private int checkJob(JobInfo job){
+		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
+		
+		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
+			if(paymentMoney<CommonCanstant.MONEY_LEV_HOUR){
+				return ResponseCode.JOB_PAYMONEY_TO_LOW;
+			}
+			return ResponseCode.SUCCESS;
+			
+		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
+			if(paymentMoney<CommonCanstant.MONEY_LEV_DAY){
+				return ResponseCode.JOB_PAYMONEY_TO_LOW;
+			}
+			return ResponseCode.SUCCESS;
+		}
+		return ResponseCode.SUCCESS;
 	}
 
 	public static void main(String[] args) {

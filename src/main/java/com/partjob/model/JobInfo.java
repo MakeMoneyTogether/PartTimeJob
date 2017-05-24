@@ -8,7 +8,7 @@ public class JobInfo {
 	    private String jobTitle;
 	    private Integer jobType;
 	    private Integer paymentType;
-	    private Integer paymentMoney;
+	    private String paymentMoney;
 	    private Timestamp jobStartTime;
 	    private Timestamp jobEndTime;
 	    private Integer numPeople;
@@ -44,10 +44,10 @@ public class JobInfo {
 		public void setPaymentType(Integer paymentType) {
 			this.paymentType = paymentType;
 		}
-		public Integer getPaymentMoney() {
+		public String getPaymentMoney() {
 			return paymentMoney;
 		}
-		public void setPaymentMoney(Integer paymentMoney) {
+		public void setPaymentMoney(String paymentMoney) {
 			this.paymentMoney = paymentMoney;
 		}
 		public Timestamp getJobStartTime() {
