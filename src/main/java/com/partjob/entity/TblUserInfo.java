@@ -13,7 +13,7 @@ public class TblUserInfo {
     private String name;
     private String gender;
     private String phone;
-    private Double balance;
+    private int balance;
     private String major;
     private String grade;
     private String direction;
@@ -63,11 +63,11 @@ public class TblUserInfo {
 
     @Basic
     @Column(name = "balance", nullable = true, precision = 0)
-    public Double getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -142,7 +142,7 @@ public class TblUserInfo {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
+        if (balance != that.balance) return false;
         if (major != null ? !major.equals(that.major) : that.major != null) return false;
         if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
         if (direction != null ? !direction.equals(that.direction) : that.direction != null) return false;
@@ -159,7 +159,7 @@ public class TblUserInfo {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
+        result = 31 * result + balance ;
         result = 31 * result + (major != null ? major.hashCode() : 0);
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (direction != null ? direction.hashCode() : 0);

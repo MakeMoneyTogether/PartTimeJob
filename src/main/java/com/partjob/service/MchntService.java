@@ -146,11 +146,15 @@ public class MchntService {
 	 * @return
 	 */
 	public WcPay pay(String totalFee, String ip,String openId,int mchntCd){
-		
-		
 		return transService.pay(totalFee, ip, openId);				
 	}
 	
+	/**
+	 * 检查充值结果，并作用于账户余额
+	 * @param outTradeNo
+	 * @param mchntCd
+	 * @return
+	 */
 	public int checkPay(String outTradeNo,int mchntCd){
 		CheckTransResult checkResult=transService.checkPay(outTradeNo);
 		
@@ -191,6 +195,8 @@ public class MchntService {
 		ApplicationUtil.copyProperties(job, tblJob);
 		tblJob.setMchntCd(mchntCd);
 		tblJob.setJobSt(CommonCanstant.UNCHECKED);
+		
+		//检查兼职是否满足要求
 		int result=checkJob(job);
 		if(result!=ResponseCode.SUCCESS){
 			return result;
@@ -211,6 +217,7 @@ public class MchntService {
 		}
 		
 		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
+		//如果商户的账户余额太低则不能发布兼职
 		if(tblMchntInfo.getBalance()<money){
 			return ResponseCode.NOT_ENOUGH_MONEY;
 		}
@@ -223,7 +230,56 @@ public class MchntService {
 		return ResponseCode.SUCCESS;
 	}
 	
+	/**
+	 * 清算
+	 * @param jobId
+	 * @return
+	 */
+	public int clearJob(int jobId){
+		List<TblRelUserJob>list=userJobDao.getByJob(jobId);
+		TblJobInfo job=jobInfoDao.get(jobId);
+		
+		//扣除商家账户金额
+		int money=0;
+		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
+		//判断商户的计费类型
+		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
+			int hour=(int) (time/1000/60);
+			money=job.getPaymentMoney()*hour;
+			
+		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
+			int day=(int)(time/1000/60/24);
+			money=job.getPaymentMoney()*day;
+		}		
+		
+		int numpeople=job.getNumPeople();
+		
+		//计算有效参加工作的人数，同时给用户进行结算
+		int validateNum =0;//有效参加工作的人
+		for(TblRelUserJob userJob:list){
+			TblUserInfo user=userInfoDao.get(userJob.getUid());
+			if(userJob.getStatusId()==CommonCanstant.USER_WORK_FULL){
+				validateNum++;
+				user.setBalance(user.getBalance()+money+CommonCanstant.USER_WORK_CHECK_MONRY);
+				userInfoDao.modify(user);
+			}
+		}
+		//将为参加兼职人数的资金回返到商户
+		TblMchntInfo mchnt=mchntInfoDao.get(job.getMchntCd());
+		mchnt.setBalance(mchnt.getBalance()+(numpeople-validateNum)*money);
+		mchntInfoDao.modify(mchnt);
+		
+		return ResponseCode.SUCCESS;
+	}
 	
+	
+	
+	
+	/**
+	 * 获取该商户下的所有兼职
+	 * @param mchntCd
+	 * @return
+	 */
 	public List<JobInfo> getJobInfoList(int mchntCd){
 		List<TblJobInfo> tblJobInfoList=jobInfoDao.findByProperty("mchntCd", mchntCd);
 		List<JobInfo>result=new ArrayList<JobInfo>();
@@ -255,6 +311,13 @@ public class MchntService {
 		return mchntInfo;
 	}
 	
+	
+	
+	/**
+	 * 检查兼职任务
+	 * @param job
+	 * @return
+	 */
 	private int checkJob(JobInfo job){
 		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
 		

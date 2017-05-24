@@ -173,7 +173,7 @@ public class MchntController extends BaseController {
 			if (mchntService.updatePassword(password, phone, repassword)) {
 				return ResponseCode.SUCCESS;
 			} else {
-				return ResponseCode.PHONE_PASSWORD_ERROR;
+				return ResponseCode.VER_PASSWORD_ERROR;
 			}
 		} catch (Exception e) {
 			logger.error("商户修改密码错误",e);
@@ -358,4 +358,23 @@ public class MchntController extends BaseController {
 			return ResponseCode.FAIL;
 		}
 	}
+	
+	/**
+	 * 兼职任务清算
+	 * @param jobId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "clearJob" })
+	@ResponseBody
+	public int clearJob(@RequestParam(value = "jobId") int jobId,HttpServletRequest request){
+		try{
+			int result=mchntService.clearJob(jobId);
+			return result;
+		}catch (Exception e){
+			logger.error("清算兼职任务失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
 }

@@ -24,6 +24,7 @@ public class CommonCanstant {
 	public static int USER_ABSENCE=2;//工作缺勤
 	public static int USER_LEAVE_HALFWAY=3;//工作中途离开
 	public static int USER_WORK_FULL=4;//工作满勤
+	public static int USER_WORK_CHECK_MONRY=200;//用户参加兼职保证金
 	
 	//****************************工作常量******************/
 	public static int MONEY_LEV_DAY=10000;//每日最低100元
