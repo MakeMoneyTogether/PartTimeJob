@@ -2,6 +2,7 @@ package com.partjob.controller;
 
 import com.partjob.constant.ResponseCode;
 import com.partjob.model.UserInfo;
+import com.partjob.service.UserCashService;
 import com.partjob.service.UserService;
 
 import org.apache.log4j.Logger;
@@ -25,6 +26,8 @@ public class UserController {
     private final Logger logger = Logger.getLogger(this.getClass());
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserCashService userCashService;
 
     @RequestMapping(value = "register")
     @ResponseBody
@@ -87,6 +90,19 @@ public class UserController {
         }
         // 要不要转json
         return userInfo;
+    }
+
+    @RequestMapping(value = "cash")
+    @ResponseBody
+    public Object cash(@RequestParam(value = "phone") String phone,
+                         @RequestParam(value = "rmb") double rmb) {
+        return userCashService.cash(phone, rmb);
+    }
+
+    @RequestMapping(value = "schedule")
+    @ResponseBody
+    public Object schedule(@RequestParam(value = "phone") String phone) {
+        return userCashService.getByPhone(phone);
     }
     
 

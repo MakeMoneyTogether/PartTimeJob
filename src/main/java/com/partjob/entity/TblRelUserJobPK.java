@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Created by Sloriac on 2017/5/21.
+ * Created by Sloriac on 2017/5/24.
  */
 public class TblRelUserJobPK implements Serializable {
     private int uid;

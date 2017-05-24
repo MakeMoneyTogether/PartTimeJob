@@ -1,5 +1,7 @@
 package com.partjob.model;
 
+import java.sql.Timestamp;
+
 /**
  * Created by Sloriac on 2017/5/21.
  */
@@ -9,15 +11,10 @@ public class RelUserJob {
     private int jobId;
     private String jobTitle;
     private int statusId;
+    private Integer score;
+    private Timestamp recCrtTime;
 
     public RelUserJob() {
-    }
-
-    public RelUserJob(int uid, int jobId, String jobTitle, int statusId) {
-        this.uid = uid;
-        this.jobId = jobId;
-        this.jobTitle = jobTitle;
-        this.statusId = statusId;
     }
 
     public int getUid() {
@@ -50,5 +47,21 @@ public class RelUserJob {
 
     public void setStatusId(int statusId) {
         this.statusId = statusId;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Timestamp getRecCrtTime() {
+        return recCrtTime;
+    }
+
+    public void setRecCrtTime(Timestamp recCrtTime) {
+        this.recCrtTime = recCrtTime;
     }
 }

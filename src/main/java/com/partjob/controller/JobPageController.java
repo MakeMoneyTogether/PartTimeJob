@@ -87,7 +87,6 @@ public class JobPageController {
     @RequestMapping(value = "netitem/{jid}")
     @ResponseBody
     public Object getNetJobInfo(@PathVariable int jid) {
-        // 要不要返回json
         return jobService.getNetJobById(jid);
     }
     

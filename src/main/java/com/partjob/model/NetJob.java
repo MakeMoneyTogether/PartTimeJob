@@ -11,6 +11,9 @@ public class NetJob {
     private String connectName;
     private String connectPhone;
 
+    public NetJob() {
+    }
+
     public int getJobId() {
         return jobId;
     }

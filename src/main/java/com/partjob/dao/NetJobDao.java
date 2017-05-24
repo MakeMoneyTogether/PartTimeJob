@@ -15,7 +15,7 @@ import java.util.List;
 public class NetJobDao extends HibernateBaseDao<TblNetJob,Serializable> {
 
     public TblNetJob getById(int jid){
-        String hql = "from TblNetJob netJob where netJob.jobId=:jid";
+        String hql = "from TblNetJob netJob where netJob.jobId=?";
         return findUnique(hql, jid);
     }
 

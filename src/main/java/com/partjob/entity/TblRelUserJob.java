@@ -1,11 +1,10 @@
 package com.partjob.entity;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-import javax.persistence.*;
-
 /**
- * Created by Sloriac on 2017/5/21.
+ * Created by Sloriac on 2017/5/24.
  */
 @Entity
 @Table(name = "tbl_rel_user_job", schema = "parttimejob", catalog = "")
@@ -17,7 +16,7 @@ public class TblRelUserJob {
     private int statusId;
     private Integer score;
     private Timestamp recCrtTime;
-    
+
     @Id
     @Column(name = "uid", nullable = false)
     public int getUid() {
@@ -78,28 +77,31 @@ public class TblRelUserJob {
         this.recCrtTime = recCrtTime;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        TblRelUserJob that = (TblRelUserJob) o;
-//
-//        if (uid != that.uid) return false;
-//        if (jobId != that.jobId) return false;
-//        if (statusId != that.statusId) return false;
-//        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = uid;
-//        result = 31 * result + jobId;
-//        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
-//        result = 31 * result + statusId;
-//        return result;
-//    }
+        TblRelUserJob that = (TblRelUserJob) o;
+
+        if (uid != that.uid) return false;
+        if (jobId != that.jobId) return false;
+        if (statusId != that.statusId) return false;
+        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
+        if (score != null ? !score.equals(that.score) : that.score != null) return false;
+        if (recCrtTime != null ? !recCrtTime.equals(that.recCrtTime) : that.recCrtTime != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = uid;
+        result = 31 * result + jobId;
+        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
+        result = 31 * result + statusId;
+        result = 31 * result + (score != null ? score.hashCode() : 0);
+        result = 31 * result + (recCrtTime != null ? recCrtTime.hashCode() : 0);
+        return result;
+    }
 }
