@@ -18,6 +18,29 @@ public class CommonCanstant {
 	public static int UNAVAILAB=0;
 	public static int UNCHECKED=2;
 	
+	//**********************兼职状态常量*******************//
+	/**
+	 * 兼职待审核
+	 */
+	public static int JOB_AUDIT = 0;
+	/**
+	 * 兼职准备中
+	 */
+	public static int JOB_PENDING = 1;
+	/**
+	 * 兼职待评价
+	 */
+	public static int JOB_EVALUATE = 2;
+	
+	/**
+	 * 兼职已结束
+	 */
+	public static int JOB_END = 3;
+	/**
+	 * 兼职被拒绝 
+	 */
+	public static int JOB_REJECTED = 4;
+	
 	//****************************用户兼职常量******************/
 	public static int USER_PASS=1; //报名通过
 	public static int USER_NOT_PASS=0;//报名不通过
