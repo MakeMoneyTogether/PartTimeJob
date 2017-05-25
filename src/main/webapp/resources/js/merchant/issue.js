@@ -6,7 +6,7 @@ function get_label(){
 		jobType = $('#jobType');
 		jobType.html('');
 		for(i=0;i<data.length;i++){
-			jobType.append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+			jobType.append('<option value="'+data[i].lid+'">'+data[i].name+'</option>');
 		}
 	});
 }
@@ -52,8 +52,9 @@ function check(){
 		return;
 	}
 	citycode = $("#city-picker").attr('data-code');
+	jobType = $('#jobType').val();
 	jobDesc = $('#jobDesc').val();
-	data = {jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode};
+	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode};
 	issue(data);
 }
 function issue(data){
