@@ -332,7 +332,6 @@ public class MchntController extends BaseController {
 			jobInfo.setJobStartTime(new Timestamp(jjobStartTime));
 			jobInfo.setJobEndTime(new Timestamp(jjobEndTime));
 			jobInfo.setJobValidateTime(new Timestamp(jjobValidateTime));
-			jobInfo.setJobSt(ObjectStatuCode.JOB_AUDIT);
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			int result=mchntService.postJob(jobInfo, mchntCd);
 			return result;

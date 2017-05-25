@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.mysql.fabric.Response;
 import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.ObjectStatuCode;
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.MchntInfoDao;
@@ -194,7 +195,7 @@ public class MchntService {
 		TblJobInfo tblJob=new TblJobInfo();
 		ApplicationUtil.copyProperties(job, tblJob);
 		tblJob.setMchntCd(mchntCd);
-		tblJob.setJobSt(CommonCanstant.UNCHECKED);
+		tblJob.setJobSt(ObjectStatuCode.JOB_AUDIT);
 		
 		//检查兼职是否满足要求
 		int result=checkJob(job);
