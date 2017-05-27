@@ -57,9 +57,9 @@
 		
 		$.ajax({
 			type:'POST',
-			url: 'uurl/pages/login',
+			url: 'user/login',
 			dataType:'json',
-			data:{phone:phone,password:pwd},
+			data:{phone:phone,pwd:pwd},
 			success: function(data){
 				if(data == 1){
 					$.alert('登录名或密码错误！！');

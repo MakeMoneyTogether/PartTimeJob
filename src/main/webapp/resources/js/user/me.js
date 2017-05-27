@@ -40,7 +40,7 @@ function jump(p,e){
 			console.log("退出登录");
 			$.removeCookie('phone',{path:'/'});
 			$.removeCookie('password',{path:'/'});
-			window.location.href="user";
+			window.location.href="userp";
 			break;
 	}
 }
@@ -109,10 +109,13 @@ $(function(){
 		pwd = $.cookie('password');
 		$.ajax({
 			type:'POST',
-			url: 'user/pages/me',
+			url: 'user/me',
 			dataType:'json',
-			data:{phone:phone,password:pwd},
+			data:{phone:phone,pwd:pwd},
 			success: function(data){
+				if(data == 1){
+					window.location.href='userp/login';
+				}
 				$('#uname').text(data.name);
 				$('#ugpa').text(data.grade);
 				$('#money').text(data.balance);
@@ -120,6 +123,11 @@ $(function(){
 				$('#s1').text(data.s1);
 				$('#s2').text(data.s2);
 				$('#s3').text(data.s3);
+				$.cookie('password',pwd,{expires:30,path:'/'});
+				$.cookie('phone',phone,{expires:30,path:'/'});
+			},
+			fail: function(){
+				window.location.href='userp/login';
 			}
 		});
 	}else{
