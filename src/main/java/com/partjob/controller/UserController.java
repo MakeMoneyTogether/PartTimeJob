@@ -71,6 +71,7 @@ public class UserController {
         UserInfo userInfo = userService.login(phone, pwd);
         if (userInfo == null){
             logger.info("没有该用户" + phone);
+            return ResponseCode.PHONE_PASSWORD_ERROR;
         } else {
             logger.info("成功获取用户" + phone + "的信息");
         }
