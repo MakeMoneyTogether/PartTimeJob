@@ -108,6 +108,7 @@
 <script type="text/javascript">
 </script>
 <script>
+getcv();
 </script>
 </body>
 </html>
