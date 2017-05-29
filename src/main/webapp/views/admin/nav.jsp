@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>	<header class="main-header">
 		<!-- Logo -->
-		<a href="/" class="logo">
+		<a class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini">导航</span>
+			<span class="logo-mini"><img style="margin:15%;width:70%;" alt="小蜜蜂" src="static/img/logo.png"></span>
 			<!-- logo for regular state and mobile devices -->
 			<span class="logo-lg">小蜜蜂兼职管理界面</span>
 		</a>
@@ -11,7 +11,7 @@
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
 			<!-- Sidebar toggle button-->
-			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<a class="sidebar-toggle" data-toggle="offcanvas" role="button">
 				<span class="sr-only">Toggle navigation</span>
 			</a>
 		</nav>
