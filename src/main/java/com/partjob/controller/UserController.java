@@ -104,6 +104,17 @@ public class UserController {
     public Object schedule(@RequestParam(value = "phone") String phone) {
         return userCashService.getByPhone(phone);
     }
-    
+
+    /**
+     * 获取用户邀请的人
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "invitation")
+    @ResponseBody
+    public Object invitation(@RequestParam(value = "phone") String phone) {
+        return userService.getInvitations(phone);
+    }
+
 
 }

@@ -11,13 +11,14 @@ public class UserInfo {
     private String name;
     private String gender;
     private String phone;
-    private Double balance;
+    private String pwd;
+    private Integer balance;
     private String major;
     private String grade;
     private String direction;
     private Date birthday;
     private String school;
-    private String pwd;
+    private String shareCode;
 
     public UserInfo() {
     }
@@ -54,11 +55,19 @@ public class UserInfo {
         this.phone = phone;
     }
 
-    public Double getBalance() {
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
@@ -102,11 +111,11 @@ public class UserInfo {
         this.school = school;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getShareCode() {
+        return shareCode;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
     }
 }

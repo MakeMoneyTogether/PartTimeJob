@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Sloriac on 2017/5/23.
+ * Created by Sloriac on 17/5/27.
  */
 @Entity
 @Table(name = "tbl_user_info", schema = "parttimejob", catalog = "")
@@ -13,16 +13,17 @@ public class TblUserInfo {
     private String name;
     private String gender;
     private String phone;
-    private int balance;
+    private String pwd;
+    private Integer balance;
     private String major;
     private String grade;
     private String direction;
     private Date birthday;
     private String school;
-    private String pwd;
+    private String shareCode;
 
     @Id
-    @Column(name = "uid", nullable = false)
+    @Column(name = "uid")
     public int getUid() {
         return uid;
     }
@@ -32,7 +33,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 255)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -42,7 +43,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "gender", nullable = true, length = 255)
+    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
@@ -52,7 +53,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 255)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -62,17 +63,27 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "balance", nullable = true, precision = 0)
-    public int getBalance() {
+    @Column(name = "pwd")
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    @Basic
+    @Column(name = "balance")
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
     @Basic
-    @Column(name = "major", nullable = true, length = 255)
+    @Column(name = "major")
     public String getMajor() {
         return major;
     }
@@ -82,7 +93,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "grade", nullable = true, length = 255)
+    @Column(name = "grade")
     public String getGrade() {
         return grade;
     }
@@ -92,7 +103,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "direction", nullable = true, length = 255)
+    @Column(name = "direction")
     public String getDirection() {
         return direction;
     }
@@ -102,7 +113,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "birthday", nullable = true)
+    @Column(name = "birthday")
     public Date getBirthday() {
         return birthday;
     }
@@ -112,7 +123,7 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "school", nullable = true, length = 255)
+    @Column(name = "school")
     public String getSchool() {
         return school;
     }
@@ -122,13 +133,13 @@ public class TblUserInfo {
     }
 
     @Basic
-    @Column(name = "pwd", nullable = true, length = 255)
-    public String getPwd() {
-        return pwd;
+    @Column(name = "share_code")
+    public String getShareCode() {
+        return shareCode;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
     }
 
     @Override
@@ -142,13 +153,14 @@ public class TblUserInfo {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (balance != that.balance) return false;
+        if (pwd != null ? !pwd.equals(that.pwd) : that.pwd != null) return false;
+        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         if (major != null ? !major.equals(that.major) : that.major != null) return false;
         if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
         if (direction != null ? !direction.equals(that.direction) : that.direction != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
         if (school != null ? !school.equals(that.school) : that.school != null) return false;
-        if (pwd != null ? !pwd.equals(that.pwd) : that.pwd != null) return false;
+        if (shareCode != null ? !shareCode.equals(that.shareCode) : that.shareCode != null) return false;
 
         return true;
     }
@@ -159,13 +171,14 @@ public class TblUserInfo {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + balance ;
+        result = 31 * result + (pwd != null ? pwd.hashCode() : 0);
+        result = 31 * result + (balance != null ? balance.hashCode() : 0);
         result = 31 * result + (major != null ? major.hashCode() : 0);
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (direction != null ? direction.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
-        result = 31 * result + (pwd != null ? pwd.hashCode() : 0);
+        result = 31 * result + (shareCode != null ? shareCode.hashCode() : 0);
         return result;
     }
 }
