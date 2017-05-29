@@ -25,10 +25,6 @@
 			<h1>
 				主页
 			</h1>
-			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-home"></i>主页</a></li>
-				<li class="active">主页</li>
-			</ol>
 		</section>
 
 		<!-- Main content -->

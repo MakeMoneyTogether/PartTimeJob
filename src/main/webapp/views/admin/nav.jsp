@@ -5,7 +5,7 @@
 			<!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini">导航</span>
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg">管理界面</span>
+			<span class="logo-lg">小蜜蜂兼职管理界面</span>
 		</a>
 
 		<!-- Header Navbar: style can be found in header.less -->
@@ -24,7 +24,7 @@
 			<ul class="sidebar-menu">
 				<li class="header">导航</li>
 				<li id="nav_index" class="treeview">
-					<a href="admin/index">
+					<a href="adminp/index">
 						<i class="fa fa-home"></i>
 						<span>主页</span>
 						<span class="pull-right-container">
@@ -33,7 +33,7 @@
 					</a>
 				</li>
 				<li id ="nav_merchant" class="treeview">
-					<a href="#">
+					<a href="adminp/mchnt">
 						<i class="fa fa-tripadvisor"></i>
 						<span>商户管理</span>
 						<span class="pull-right-container">
@@ -42,7 +42,7 @@
 					</a>
 				</li>
 				<li id="nav_user" class="treeview">
-					<a href="#">
+					<a href="adminp/user">
 						<i class="fa fa-users"></i>
 						<span>用户管理</span>
 						<span class="pull-right-container">
@@ -51,7 +51,7 @@
 					</a>
 				</li>
 				<li id="nav_jobcheck" class="treeview">
-					<a href="probe">
+					<a href="adminp/jobcheck">
 						<i class="fa fa-search"></i>
 						<span>兼职审核</span>
 						<span class="pull-right-container">
@@ -60,7 +60,7 @@
 					</a>
 				</li>
 				<li id="nav_netjob" class="treeview">
-					<a href="#">
+					<a href="adminp/netjob">
 						<i class="fa fa-mobile"></i>
 						<span>手机兼职</span>
 						<span class="pull-right-container">
@@ -69,7 +69,7 @@
 					</a>
 				</li>
 				<li id="nav_cash" class="treeview">
-					<a href="#">
+					<a href="adminp/cash">
 						<i class="fa fa-dollar"></i>
 						<span>提现管理</span>
 						<span class="pull-right-container">
