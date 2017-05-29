@@ -15,63 +15,54 @@
 <link rel="stylesheet" href="static/css/jquery-weui.min.css">
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
 <link rel="stylesheet" href="static/css/jz.css">
+<link rel="stylesheet" href="static/css/user/me.css">
+<link rel="stylesheet" href="static/css/col.css">
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
 		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
-			<span id="jz-title">登录</span>
+			<span id="jz-title">参与兼职</span>
 		</div>
 		<div class="placeholder"><a href="userp"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
 	</div>
-	<div class="weui-form-preview">
-		<div class="weui-cells weui-cells_form">
-			<div class="weui-cell">
-				<div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
-				<div class="weui-cell__bd">
-					<input id="phone" class="weui-input" type="text" placeholder="请输入手机号码">
-				</div>
+	<div class="weui-tab">
+		<div class="weui-navbar">
+			<a id="s20" class="weui-navbar__item" href="#s0">
+				已报名
+			</a>
+			<a id="s21" class="weui-navbar__item" href="#s1">
+				已录用
+			</a>
+			<a id="s22" class="weui-navbar__item" href="#s2">
+				已到岗
+			</a>
+			<a id="s23" class="weui-navbar__item" href="#s3">
+				已结算
+			</a>
+		</div>
+		<div class="weui-tab__bd">
+			<div id="s0" class="weui-tab__bd-item">
 			</div>
-			<div class="weui-cell">
-				<div class="weui-cell__hd"><label class="weui-label">密码</label></div>
-				<div class="weui-cell__bd">
-					<input id="password" class="weui-input" type="password" placeholder="请输入密码">
-				</div>
+			<div id="s1" class="weui-tab__bd-item">
+			</div>
+			<div id="s2" class="weui-tab__bd-item">
+			</div>
+			<div id="s3" class="weui-tab__bd-item">
 			</div>
 		</div>
 	</div>
-		<a onclick="login();" class="weui-btn weui-btn_primary commitBtn">登录</a>
-	 	<a href="userp/register" class="weui-btn weui-btn_default" style="width:80%;">注册</a>
 <div style="display:none;">
 </div>	
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/user/myjob.js"></script>
 <script type="text/javascript">
 </script>
 <script>
-	function login(){
-		phone = $('#phone').val();
-		pwd = $('#password').val();
-		
-		$.ajax({
-			type:'POST',
-			url: 'user/login',
-			dataType:'json',
-			data:{phone:phone,pwd:pwd},
-			success: function(data){
-				if(data == 1){
-					$.alert('登录名或密码错误！！');
-				}
-				if(data == 0){
-					$.cookie('phone',phone,{expires:30,path:'/'});
-					$.cookie('password',pwd,{expires:30,path:'/'});
-					window.location.href='userp/me';
-				}
-			}
-		});
-	}
+$(window.location.hash).click();
 </script>
 </body>
 </html>

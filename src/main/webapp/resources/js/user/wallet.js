@@ -6,7 +6,7 @@ function cash(){
 }
 
 function postCash(rmb){
-	if(!rmb.match(/^(\d)+\.(\d)$/)){
+	if(!rmb.match(/^(\d)+(\.(\d))?$/)){
 		$.alert('请输入数字');
 		return;
 	}

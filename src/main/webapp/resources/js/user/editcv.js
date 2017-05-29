@@ -14,3 +14,17 @@ function update(){
 		}
 	});
 }
+function getcv(){
+	phone = $.cookie('phone');
+	pwd = $.cookie('password');
+	$.ajax({
+		type:'POST',
+		url: 'user/me',
+		dataType:'json',
+		data:{phone:phone,pwd:pwd},
+		success: function(data){
+			$('#name').val(data.name);
+			$('#school').val(data.school);
+		}
+	});
+}
