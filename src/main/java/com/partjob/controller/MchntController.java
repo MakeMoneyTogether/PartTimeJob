@@ -49,20 +49,6 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = "")
 	public String  mchnt() {
-//		String url = "https://open.weixin.qq.com/connect/oauth2/authorize";
-//		String param = "appid="
-//				+ TransCanstant.APP_ID
-//				+ "&redirect_uri="
-//				+ URLEncoder
-//						.encode(TransCanstant.NOTIFY_MCHNT_URL)
-//								+ "&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
-//
-//		String result = HttpRequestUtil.sendGet(url, param);
-//		logger.info("url:"+url+"?"+param);
-//		logger.info("result"+result);
-		
-		//返回登录页面
-//		return "views/mchnt/index";
 		return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb5bb3526bdc5da3&redirect_uri=http%3A%2F%2Fwww.mapengju.com%2FPartTimeJob%2Fmchnt%2FredirectUrl&response_type=code&scope=snsapi_base&state=mchnt#wechat_redirect";
 	}
 
@@ -303,7 +289,7 @@ public class MchntController extends BaseController {
 			HttpServletRequest request){
 		try{
 			int mchntCd=getMchntInfo(request).getMchntCd();
-			return mchntService.checkPay(outTradeNo, mchntCd);
+			return mchntService.checkPay(outTradeNo, mchntCd,0);
 		}catch(Exception e){
 			logger.error("检查支付结果错误",e);
 			return ResponseCode.FAIL;

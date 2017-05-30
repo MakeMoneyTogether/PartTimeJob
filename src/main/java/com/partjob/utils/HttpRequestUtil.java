@@ -173,8 +173,9 @@ public class HttpRequestUtil {
 //            List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();  
 //            parameters.add(new BasicNameValuePair("xml", param));  
 //            httpPost.setEntity(new UrlEncodedFormEntity(parameters,"UTF-8")); 
-            StringEntity strEntity=new StringEntity(param);
+            StringEntity strEntity=new StringEntity(param,"UTF-8");
             httpPost.setEntity(strEntity);
+            
             System.out.println("executing request" + httpPost.getRequestLine());
 
             CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -191,7 +192,6 @@ public class HttpRequestUtil {
                         System.out.println(temp);
                        result.append(temp);
                     }
-                    logger.info("result:"+result);
                 }
                 EntityUtils.consume(entity);
             } finally {

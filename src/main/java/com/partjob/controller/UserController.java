@@ -144,8 +144,10 @@ public class UserController extends BaseController{
     @RequestMapping(value = "cash")
     @ResponseBody
     public Object cash(@RequestParam(value = "phone") String phone,
-                         @RequestParam(value = "rmb") double rmb) {
-        return userCashService.cash(phone, rmb);
+                         @RequestParam(value = "rmb") String  rmb,
+                         HttpServletRequest request) {
+    	
+        return userCashService.cash(phone, rmb,getOpenId(request));
     }
 
     @RequestMapping(value = "schedule")

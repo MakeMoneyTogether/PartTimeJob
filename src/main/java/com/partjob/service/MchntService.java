@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MchntService {
-	
+	private final Logger logger = Logger.getLogger(this.getClass());
 	@Autowired
 	private MchntInfoDao mchntInfoDao;
 	@Autowired
@@ -156,7 +156,7 @@ public class MchntService {
 	 * @param mchntCd
 	 * @return
 	 */
-	public int checkPay(String outTradeNo,int mchntCd){
+	public int checkPay(String outTradeNo,int mchntCd,int i){
 		CheckTransResult checkResult=transService.checkPay(outTradeNo);
 		
 		if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
@@ -172,6 +172,7 @@ public class MchntService {
 				checkResult.getResult_code().equalsIgnoreCase("SUCCESS")&&
 				checkResult.getTrade_state().equalsIgnoreCase("USERPAYING")){
 			//如果检查出是用户正在支付，那么睡眠1s重新进行检查
+			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -180,12 +181,15 @@ public class MchntService {
 				
 				return ResponseCode.PAY_FAIL;
 			}
-			transService.checkPay(outTradeNo);
+			logger.warn("可能会出现死循环！！！！！！");
+			checkPay(outTradeNo,mchntCd,i++);
 		}else{
 			return ResponseCode.PAY_FAIL;
 		}
 		return ResponseCode.PAY_FAIL;
 	}
+	
+	
 	
 	/**
 	 * 发送兼职信息

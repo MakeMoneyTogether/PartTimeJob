@@ -8,10 +8,10 @@ import javax.persistence.*;
  * Created by Sloriac on 2017/5/24.
  */
 @Entity
-@Table(name = "tbl_user_schedule", schema = "parttimejob", catalog = "")
-public class TblUserSchedule {
+@Table(name = "tbl_mchnt_schedule", schema = "parttimejob", catalog = "")
+public class TblMchntSchedule {
     private int id;
-    private int uid;
+    private int mchntCd;
     private int money;
     private int status;
     private String type;
@@ -28,17 +28,18 @@ public class TblUserSchedule {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "uid", nullable = false)
-    public int getUid() {
-        return uid;
-    }
+ 
+    @Id
+    @Column(name = "mchntCd", nullable = false)
+    public int getMchntCd() {
+		return mchntCd;
+	}
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
+	public void setMchntCd(int mchntCd) {
+		this.mchntCd = mchntCd;
+	}
 
-    @Basic
+	@Basic
     @Column(name = "money", nullable = false, precision = 0)
     public int getMoney() {
         return money;

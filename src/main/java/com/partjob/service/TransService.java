@@ -58,7 +58,7 @@ public class TransService {
 	}
 	
 	/**
-	 * 下单
+	 * 
 	 * @param amount
 	 * @param openId
 	 * @return
@@ -67,15 +67,28 @@ public class TransService {
 		String partnerTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		CashTransaction trans=setCashTrans(partnerTradeNo, amount, openId);
 		String param=CommonUtil.obj2xml(trans);
-		logger.info("提现参数"+param);
+		return cashPost(param,0);
+		
+	}
+	
+	private int cashPost(String param,int i){
 		String result;
 		try {
 			result = HttpRequestUtil.sendSSLPost(TransCanstant.CASH_URL, param);
-			logger.info("返回结果"+result);
 			CashTransResult transResult=CommonUtil.xml2Object(result, CashTransResult.class);
+			if("SUCCESS".equals(transResult.getReturn_code())&&"SYSTEMERROR".equals(transResult.getResult_code())){
+				
+				logger.warn("可能会出现死循环！！！！！！");
+				if(i>=10){
+					logger.warn("妈的都循环十次了，我还能怎么办");
+					return ResponseCode.FAIL;
+				}
+				Thread.sleep(10);
+				cashPost(param,i++);
+			}
 			if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
 				logger.info("提现成功");
-				return ResponseCode.SUCCESS;
+				return ResponseCode.SUCCESS; 
 			}
 			logger.info("提现失败");
 			return ResponseCode.FAIL;
@@ -85,8 +98,6 @@ public class TransService {
 			logger.info("提现失败");
 			return ResponseCode.FAIL;
 		}
-		
-		
 	}
 	/**
 	 * 检查是否成功支付

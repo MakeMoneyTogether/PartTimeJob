@@ -1,5 +1,6 @@
 package com.partjob.service;
 
+import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserScheduleDao;
@@ -13,6 +14,7 @@ import com.partjob.model.UserInfo;
 import com.partjob.model.UserSchedule;
 import com.partjob.model.WcPay;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.BigDecimalUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,22 +93,19 @@ public class UserCashService {
 	}
 	
 	
-    public int cash(String phone, double rmb){
+    public int cash(String phone, String rmb,String openid){
         UserInfo userInfo = userService.getByPhone(phone);
         //用户不存在
         if(userInfo == null){
             return 500;
         }
+        int money=Integer.parseInt(BigDecimalUtil.mult100(rmb));
         //余额不足
-        if (rmb > userInfo.getBalance()){
+        if (money > userInfo.getBalance()){
             return 1;
         }
         //写入用户提现请求
-        TblUserSchedule tblUserSchedule = new TblUserSchedule();
-        tblUserSchedule.setUid(userInfo.getUid());
-        tblUserSchedule.setMoney(rmb);
-        tblUserSchedule.setStatus(1); //正在处理
-        userScheduleDao.add(tblUserSchedule);
+        userScheduleDao.add(userInfo.getUid(),money,CommonCanstant.MONEY_TYPE_CASH,openid,true);
         return 0;
     }
 

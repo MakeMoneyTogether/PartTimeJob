@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.TransCanstant;
 import com.partjob.model.MchntInfo;
 import com.partjob.model.UserInfo;
 
@@ -40,5 +41,10 @@ public class BaseController {
     	 HttpSession session = request.getSession();
     	 MchntInfo mchntInfo=(MchntInfo) session.getAttribute(CommonCanstant.MCHNT_INFO);
     	 return mchntInfo;
+    }
+    
+    public String getOpenId(HttpServletRequest request){
+    	 HttpSession session = request.getSession();
+    	 return (String) session.getAttribute(TransCanstant.OPEN_ID);
     }
 }

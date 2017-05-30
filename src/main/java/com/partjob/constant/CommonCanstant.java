@@ -52,4 +52,13 @@ public class CommonCanstant {
 	//****************************工作常量******************/
 	public static int MONEY_LEV_DAY=10000;//每日最低100元
 	public static int MONEY_LEV_HOUR=1000;//没小时最低10元
+	
+	
+	public static String MONEY_TYPE_PAY="充值";
+	public static String MONEY_TYPE_CASH="提现";
+	public static String MONEY_TYPE_RED_PACKET="红包";
+	public static String MONEY_TYPE_DEPOSIT="押金";
+	public static String MONEY_TYPE_WAGES="工资";
+	public static String MONEY_TYPE_PAYMENT="付款";
+	public static String MONEY_TYPE_REFUND="退款";
 }
