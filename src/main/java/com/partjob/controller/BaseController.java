@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.partjob.constant.CommonCanstant;
 import com.partjob.model.MchntInfo;
+import com.partjob.model.UserInfo;
 
 
 
@@ -28,13 +29,12 @@ public class BaseController {
      * @param request
      * @return
      */
-//    public UserInfo getUserInfo(HttpServletRequest request) {
-//        logger.info("获取当前用户信息");
-//        HttpSession session = request.getSession();
-//
-//        UserInfo user = (UserInfo) session.getAttribute(CommonCanstant.USER_INFO);
-//        return user;
-//    }
+    public UserInfo getUserInfo(HttpServletRequest request) {
+        logger.info("获取当前用户信息");
+        HttpSession session = request.getSession();
+        UserInfo user = (UserInfo) session.getAttribute(CommonCanstant.USER_INFO);
+        return user;
+    }
 
     public MchntInfo getMchntInfo(HttpServletRequest request){
     	 HttpSession session = request.getSession();
