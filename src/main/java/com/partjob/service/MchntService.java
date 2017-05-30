@@ -194,6 +194,8 @@ public class MchntService {
 	public int postJob(JobInfo job,int mchntCd){
 		TblJobInfo tblJob=new TblJobInfo();
 		ApplicationUtil.copyProperties(job, tblJob);
+		String _money=BigDecimalUtil.mult100(job.getPaymentMoney());
+		tblJob.setPaymentMoney(Integer.parseInt(_money));
 		tblJob.setMchntCd(mchntCd);
 		tblJob.setJobSt(ObjectStatuCode.JOB_AUDIT);
 		//检查兼职是否满足要求
