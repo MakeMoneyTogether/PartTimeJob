@@ -28,10 +28,10 @@
 
 <div class="weui-cells weui-flex div_label_out">
 	<div class="weui-flex__item div_box div_label_in">
-		可用资产:<br><span id="moneyable">1000.00</span>元
+		可用资产:<br><span id="moneyable"></span>元
 	</div>
 	<div class="weui-flex__item div_box div_label_in">
-		冻结资产:<br><span id="moneyice">1000.00</span>元
+		冻结资产:<br><span id="moneyice"></span>元
 	</div>
 </div>
 <div class="weui-cells weui-flex div_label_out">
@@ -62,7 +62,7 @@
 	$(function() {
 		FastClick.attach(document.body);
 	});
-	//init();
+	init();
 </script>
 </body>
 </html>
