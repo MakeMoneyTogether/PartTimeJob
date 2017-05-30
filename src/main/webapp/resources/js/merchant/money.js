@@ -2,12 +2,11 @@ function init(){
 	phone = $.cookie('phone');
 	$.ajax({
 		type: "POST",
-		url: 'merurl/json/me',
+		url: 'mchnt/getMchntInfo',
 		dataType: "json",
-		data:{phone:phone},
 		success:function(data){
-			$('#moneyable').text(data.moneyable);
-			$('#moneyice').text(data.moneyice);
+			$('#moneyable').text(data.balance);
+			$('#moneyice').text(data.frozenMoney);
 		}
 	});
 	$.ajax({
