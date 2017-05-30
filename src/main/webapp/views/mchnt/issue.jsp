@@ -58,9 +58,9 @@
 				<input id="paymentMoney" class="weui-input" type="number" placeholder="单位时间薪水">
 			</div>
 			<div class="col-30">
-				<select id="paymentType" name="paymentType" class="weui-select" onchange="change(this.options[this.options.selectedIndex].value);">
-					<option value="1">/小时</option>
-					<option value="2">/天</option>
+				<select id="paymentType" name="paymentType" class="weui-select">
+					<option value="0">/小时</option>
+					<option value="1">/天</option>
 				</select>
 			</div>
 		</div>
