@@ -11,7 +11,7 @@ public class CommonCanstant {
 	public static String PAY_TYPE_HOUR="hour";
 	public static String PAY_TYPE_DAY="day";
 	
-	public static String IP="";
+	public static String IP="116.62.155.216";
 	
 	//**********************记录状态常量*******************//
 	public static int AVAILAB=1;

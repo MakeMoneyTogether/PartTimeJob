@@ -20,7 +20,7 @@ public class TransCanstant {
 	public static String NOTIFY_MCHNT_URL="http://www.mapengju.com/PartTimeJob/mchnt/redirectUrl";
 	
 	
-	public static String SSL_LOCATION="";
-	
+	public static String SSL_LOCATION="/root/wechat/cert-2/apiclient_cert.p12";
+//	public static String SSL_LOCATION="/Users/MPJ/Downloads/cert-2/apiclient_cert.p12";
 	
 }

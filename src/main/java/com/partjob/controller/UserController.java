@@ -74,7 +74,7 @@ public class UserController extends BaseController{
 		HttpSession session = request.getSession();
 		session.setAttribute(TransCanstant.OPEN_ID, openId);
 		logger.info("openId:"+openId);
-		return "redirect:/mchntp/login";
+		return "redirect:/userp/login";
 	}
 	
     @RequestMapping(value = "register")

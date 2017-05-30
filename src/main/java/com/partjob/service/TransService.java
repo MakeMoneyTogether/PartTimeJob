@@ -66,19 +66,22 @@ public class TransService {
 		String partnerTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		CashTransaction trans=setCashTrans(partnerTradeNo, amount, openId);
 		String param=CommonUtil.obj2xml(trans);
-		logger.info(param);
+		logger.info("提现参数"+param);
 		String result;
 		try {
-			result = HttpRequestUtil.sendSSLPost(TransCanstant.PAY_URL, param);
-			logger.info(result);
+			result = HttpRequestUtil.sendSSLPost(TransCanstant.CASH_URL, param);
+			logger.info("返回结果"+result);
 			CashTransResult transResult=CommonUtil.xml2Object(result, CashTransResult.class);
 			if("SUCCESS".equals(transResult.getReturn_code())&&"SUCCESS".equals(transResult.getResult_code())){
+				logger.info("提现成功");
 				return ResponseCode.SUCCESS;
 			}
+			logger.info("提现失败");
 			return ResponseCode.FAIL;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.info("提现失败");
 			return ResponseCode.FAIL;
 		}
 		
@@ -187,7 +190,6 @@ public class TransService {
 					}else{
 						list.add(entry.getKey() + "=" + entry.getValue() + "&");
 					}
-					
 				}
 			}
 			int size = list.size();
@@ -200,7 +202,7 @@ public class TransService {
 			String result = sb.toString();
 			result += "key=" + TransCanstant.KEY;
 			// Util.log("Sign Before MD5:" + result);
-//			System.out.println(result);
+			System.out.println(result);
 			result = CommonUtil.toMD5(result).toUpperCase();
 			return result;
 		} catch (Exception e) {

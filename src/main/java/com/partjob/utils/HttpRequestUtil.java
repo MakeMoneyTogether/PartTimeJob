@@ -22,15 +22,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 import com.partjob.constant.TransCanstant;
 
 public class HttpRequestUtil {
-
+	private final static Logger logger = Logger.getLogger(HttpRequestUtil.class);
     /**
      * 向指定URL发送GET方法的请求
      * 
@@ -142,7 +144,7 @@ public class HttpRequestUtil {
     
     public static String sendSSLPost(String url,String param)throws Exception{
     	KeyStore keyStore  = KeyStore.getInstance("PKCS12");
-        FileInputStream instream = new FileInputStream(new File("/Users/MPJ/Downloads/cert-2/apiclient_cert.p12"));
+        FileInputStream instream = new FileInputStream(new File(TransCanstant.SSL_LOCATION));
         try {
             keyStore.load(instream, TransCanstant.MCHNT_ID.toCharArray());
         } finally {
@@ -163,15 +165,16 @@ public class HttpRequestUtil {
                 .setSSLSocketFactory(sslsf)
                 .build();
         
-        String result="";
+        StringBuffer result=new StringBuffer();
         
         try {
 
             HttpPost httpPost = new HttpPost(url);
-            List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();  
-            parameters.add(new BasicNameValuePair("xml", param));  
-            httpPost.setEntity(new UrlEncodedFormEntity(parameters,"UTF-8")); 
-
+//            List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();  
+//            parameters.add(new BasicNameValuePair("xml", param));  
+//            httpPost.setEntity(new UrlEncodedFormEntity(parameters,"UTF-8")); 
+            StringEntity strEntity=new StringEntity(param);
+            httpPost.setEntity(strEntity);
             System.out.println("executing request" + httpPost.getRequestLine());
 
             CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -183,16 +186,17 @@ public class HttpRequestUtil {
                 if (entity != null) {
                     System.out.println("Response content length: " + entity.getContentLength());
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    
-                    while ((result = bufferedReader.readLine()) != null) {
-                        System.out.println(result);
+                    String temp="";
+                    while (( temp = bufferedReader.readLine()) != null) {
+                        System.out.println(temp);
+                       result.append(temp);
                     }
-                   
+                    logger.info("result:"+result);
                 }
                 EntityUtils.consume(entity);
             } finally {
                 response.close();
-                return result;
+                return result.toString();
             }
         } finally {
             httpclient.close();

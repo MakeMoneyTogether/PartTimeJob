@@ -92,7 +92,7 @@ public class MchntController extends BaseController {
 		HttpSession session = request.getSession();
 		session.setAttribute(TransCanstant.OPEN_ID, openId);
 		logger.info("openId:"+openId);
-		return "redirect:/userp/login";
+		return "redirect:/mchntp/login";
 	}
 
 	
