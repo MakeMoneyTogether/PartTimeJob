@@ -196,27 +196,24 @@ public class MchntService {
 		ApplicationUtil.copyProperties(job, tblJob);
 		tblJob.setMchntCd(mchntCd);
 		tblJob.setJobSt(ObjectStatuCode.JOB_AUDIT);
-		
 		//检查兼职是否满足要求
 		int result=checkJob(job);
 		if(result!=ResponseCode.SUCCESS){
 			return result;
 		}
-		
 		//扣除商家账户金额
 		int money=0;
 		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
 		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
 		//判断商户的计费类型
-		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
+		if(job.getPaymentType() == CommonCanstant.PAY_TYPE_HOUR){
 			int hour=(int) (time/1000/60);
 			money=paymentMoney*job.getNumPeople()*hour;
 			
-		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
+		}else if(job.getPaymentType() == CommonCanstant.PAY_TYPE_DAY){
 			int day=(int)(time/1000/60/24);
 			money=paymentMoney*job.getNumPeople()*day;
 		}
-		
 		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
 		//如果商户的账户余额太低则不能发布兼职
 		if(tblMchntInfo.getBalance()<money){
@@ -322,13 +319,13 @@ public class MchntService {
 	private int checkJob(JobInfo job){
 		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
 		
-		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
+		if(job.getPaymentType() == CommonCanstant.PAY_TYPE_HOUR){
 			if(paymentMoney<CommonCanstant.MONEY_LEV_HOUR){
 				return ResponseCode.JOB_PAYMONEY_TO_LOW;
 			}
 			return ResponseCode.SUCCESS;
 			
-		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
+		}else if(job.getPaymentType() == CommonCanstant.PAY_TYPE_DAY){
 			if(paymentMoney<CommonCanstant.MONEY_LEV_DAY){
 				return ResponseCode.JOB_PAYMONEY_TO_LOW;
 			}
