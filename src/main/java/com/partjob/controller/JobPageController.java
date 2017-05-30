@@ -66,6 +66,22 @@ public class JobPageController {
     public Object relOfUserJob(@PathVariable String phone, @PathVariable int jid) {
         return userJobService.getRelOfUserJob(phone, jid);
     }
+    /**
+     * 分页获取兼职列表
+     * @param offset	下标
+     * @param length	长度
+     * @param dises		区县代码（逗号隔开）
+     * @param labels	兼职类型（逗号隔开）
+     * @param dates		开始时间（时间戳）
+     * @param city		城市代码
+     * @return
+     */
+    @RequestMapping(value = "select/{offset}/{length}")
+    @ResponseBody
+    public Object selectJob(@PathVariable int offset, @PathVariable int length,
+    		String dises,String labels, long dates,int city){
+    	return null;
+    }
 
     /**
      * 获取兼职详情
@@ -130,6 +146,12 @@ public class JobPageController {
     	return res;
     }
 
+    /**
+     * 用户报名兼职
+     * @param phone
+     * @param jid
+     * @return
+     */
     @RequestMapping(value = "apply/{phone}/{jid}")
     @ResponseBody
     public Object applyJob(@PathVariable String phone, @PathVariable int jid) {

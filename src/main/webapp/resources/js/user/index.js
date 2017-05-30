@@ -37,7 +37,7 @@ function loadm(){
 		data = {dises:dises,labels:labels,dates:dates,city:city};
 		$.ajax({
 			type: "POST",
-			url: 'jzurl/pages/select/'+index+'/3',
+			url: 'job/select/'+index+'/3',
 			dataType: "json",
 			data: data,
 			success:function(data){
@@ -65,7 +65,7 @@ function onLoad(){
 	$('#jz-infos').text('');
 	$.ajax({
 		type: "POST",
-		url: "jzurl/pages/select/0/6",
+		url: "job/select/0/6",
 		dataType: "json",
 		data: data,
 		success:function(data){
@@ -111,13 +111,13 @@ function getDistrict(){
 	});
 }
 function getLabels(){
-	$.get('util/labels',function(data){
+	$.get('job/types',function(data){
 		data = JSON.parse(data);
 		var labels = $('#labels');
 		labels.text('');
 		labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="all">全部</span><br>\n')
 		for(i=0;i<data.length;i++){
-			labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i].lcode+'">'+data[i].lname+'</span>\n')
+			labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i].lid+'">'+data[i].lname+'</span>\n')
 		}
 		labels.append('<br> <button class="weui-btn weui-btn_mini commitBtn">筛选</button> <br> <div class="weui-panel__hd" style="padding:0;"></div>');
 		onCheckBtn();
