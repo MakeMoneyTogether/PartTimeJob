@@ -39,6 +39,7 @@ public class TransService {
 		String outTradeNo=CommonUtil.getCurrentDay()+CommonUtil.createRandomVcode();
 		Transaction trans=setTrans(outTradeNo, totalFee, ip,openId);
 		String param=CommonUtil.obj2xml(trans);
+		logger.info(param);
 		String result=HttpRequestUtil.sendPost(TransCanstant.PAY_URL, param);
 		try{
 			TransResult transResult=CommonUtil.xml2Object(result, TransResult.class);

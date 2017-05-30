@@ -20,5 +20,6 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
         String hql = "from TblJobInfo job";
         return findPage(hql, offset, length);
     }
+    
 
 }
