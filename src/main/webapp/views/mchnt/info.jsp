@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -37,6 +39,28 @@
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>
 				<span class="weui-form-preview__value" id="numPeople">${job.numPeople }</span>
+			</div>
+			<div class="weui-form-preview__item">
+				<label class="weui-form-preview__label">状态：</label>
+				<span class="weui-form-preview__value" id="jobSt">
+					<c:choose>
+						<c:when test="${job.jobSt == 0 }">
+							待审核
+						</c:when>
+						<c:when test="${job.jobSt == 1 }">
+							准备中
+						</c:when>
+						<c:when test="${job.jobSt == 2 }">
+							待评价
+						</c:when>
+						<c:when test="${job.jobSt == 3 }">
+							已结束
+						</c:when>
+						<c:when test="${job.jobSt == 4 }">
+							被拒绝
+						</c:when>
+					</c:choose>
+				</span>
 			</div>
 		</div>
 		<div class="weui-form-preview__hd" style="padding:0;"></div>
@@ -81,20 +105,28 @@
 	<div>
 		<h1>&nbsp;</h1>
 	</div>
-	<div class="weui-tabbar">
+	<c:choose >
+		<c:when test="${job.jobSt==1 }">
+		<div class="weui-tabbar">
 		<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-users"></i>
 			</div>
 			<p class="weui-tabbar__label">人员录用</p>
 		</a>
+		</div>
+		</c:when>
+		<c:when test="${job.jobSt==2 }">
+		<div class="weui-tabbar">
 		<a href="mchntp/evaluate/${job.jobId }" class="weui-tabbar__item">
 			<div class="weui-tabbar__icon">
 				<i class="fa fa-comment"></i>
 			</div>
 			<p class="weui-tabbar__label">人员评价</p>
 		</a>
-	</div>
+		</div>
+		</c:when>
+	</c:choose>
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
