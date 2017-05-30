@@ -185,7 +185,7 @@ public class UserController extends BaseController{
 			
 			return wcPay;
 		} catch (Exception e) {
-			logger.error("商户充值下单错误",e);
+			logger.error("用户充值下单错误",e);
 			return ResponseCode.FAIL;
 		}
 	}

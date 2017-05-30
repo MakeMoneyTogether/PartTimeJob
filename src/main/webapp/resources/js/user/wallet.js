@@ -4,6 +4,61 @@ function cash(){
 		}
 	});
 }
+function pay(){
+	$.prompt({title:'输入充值金额', empty:false,onOK:function(text) {
+		postPay(text);
+	}
+});
+}
+
+function postPay(rmb){
+	if(!rmb.match(/^(\d)+(\.(\d))?$/)){
+		$.alert('请输入数字');
+		return;
+	}
+	phone = $.cookie('phone');
+	$.ajax({
+		type:'POST',
+		url: 'user/pay',
+		dataType:'json',
+		data:{totalFee:rmb},
+		success: function(data){
+			if(data == 500){
+				$.toast('操作失败，请稍后重试','forbidden');
+			}else {
+				WeixinJSBridge.invoke('getBrandWCPayRequest', {
+					"appId": data.appId,
+					"timeStamp": data.timeStamp,
+					"nonceStr": data.nonceStr,
+					"package": data.wcPackage,
+					"signType": "MD5",
+					"paySign": data.paySign
+				  },function(res){   
+			           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+			        	   $.ajax({
+			        		   type:'POST',
+			        		   url: 'user/checkPay',
+			        		   dataType:'json',
+			        		   data:{outTradeNo:data.outTradeNO},
+			        		   success:function(data){
+			        			   $.hideLoading();
+			        			   if(data == 0){
+			        				   $.alert('支付成功');
+			        			   }else{
+			        				   $.alert('支付失败');
+			        			   }
+			        		   }
+			        	   });
+			        	   $.showLoading();
+			        	   $('.weui_loading_toast').children('p').html('平台确认中...');
+			           }else{
+			        	   $.alert('取消支付或者支付失败!');
+			           }
+			    });
+			}
+		}
+	});
+}
 
 function postCash(rmb){
 	if(!rmb.match(/^(\d)+(\.(\d))?$/)){
