@@ -81,6 +81,27 @@ public class MchntController extends BaseController {
 		return "redirect:/mchntp/login";
 	}
 
+	/**
+     * 获取所有商户信息（管理员界面需求）
+     * @return
+     */
+    @RequestMapping(value = "all")
+    @ResponseBody
+    public Object all(){
+    	return null;
+    }
+    
+    /**
+     * 获取某个商户信息
+     * @param uid
+     * @return
+     */
+    @RequestMapping(value = "info/{mid}")
+    @ResponseBody
+    public Object one(@PathVariable int uid){
+    	return null;
+    }
+    
 	
 	/**
 	 * 注册

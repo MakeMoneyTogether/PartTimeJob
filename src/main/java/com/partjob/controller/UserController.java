@@ -112,6 +112,27 @@ public class UserController extends BaseController{
         }
     }
 
+    /**
+     * 获取所有用户信息（管理员界面需求）
+     * @return
+     */
+    @RequestMapping(value = "all")
+    @ResponseBody
+    public Object all(){
+    	return null;
+    }
+    
+    /**
+     * 获取某个用户信息
+     * @param uid
+     * @return
+     */
+    @RequestMapping(value = "info/{uid}")
+    @ResponseBody
+    public Object one(@PathVariable int uid){
+    	return null;
+    }
+    
     @RequestMapping(value = "me")
     @ResponseBody
     public Object me(@RequestParam(value = "phone") String phone,
