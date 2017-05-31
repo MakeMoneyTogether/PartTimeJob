@@ -88,7 +88,12 @@ public class MchntController extends BaseController {
     @RequestMapping(value = "all")
     @ResponseBody
     public Object all(){
-    	return null;
+    	try{
+    		return mchntService.getAllMchnt();
+    	}catch(Exception e){
+    		logger.error("获取所有商户信息错误",e);
+			return null;
+    	}
     }
     
     /**
@@ -98,8 +103,13 @@ public class MchntController extends BaseController {
      */
     @RequestMapping(value = "info/{mid}")
     @ResponseBody
-    public Object one(@PathVariable int uid){
-    	return null;
+    public Object one(@PathVariable int mid){
+    	try{
+    		return mchntService.getMchntInfo(mid);
+    	}catch(Exception e){
+    		logger.error("获取单个商户信息错误",e);
+			return null;
+    	}
     }
     
 	

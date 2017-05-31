@@ -123,6 +123,15 @@ public class MchntService {
 		TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
 		return transModel(tblMchntInfo);
 	}
+	
+	public List<MchntInfo> getAllMchnt(){
+		List<TblMchntInfo>tblMchntInfos=mchntInfoDao.getAllMchntInf();
+		List <MchntInfo>list=new ArrayList<MchntInfo>();
+		for(TblMchntInfo tblMchntInfo:tblMchntInfos){
+			list.add(transModel(tblMchntInfo));
+		}
+		return list;
+	}
 
 	/**
 	 * 更新商户信息
