@@ -10,13 +10,14 @@ import com.partjob.model.InvitationInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.CommonUtil;
-
 import com.partjob.utils.InvitationCodeUtil;
 import com.partjob.utils.ListUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +81,16 @@ public class UserService {
             userInfoDao.update(tblUserInfo);
             return ResponseCode.SUCCESS;
         }
+    }
+    
+    public int updatecv(UserInfo userInfo,String phone,String pwd){
+    	TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, pwd);
+    	tblUserInfo.setName(userInfo.getName());
+    	tblUserInfo.setBirthday(userInfo.getBirthday());
+    	tblUserInfo.setSchool(userInfo.getSchool());
+    	tblUserInfo.setGender(userInfo.getGender());
+    	userInfoDao.update(tblUserInfo);
+    	return ResponseCode.SUCCESS;
     }
 
     public UserInfo getByPhone(String phone){
