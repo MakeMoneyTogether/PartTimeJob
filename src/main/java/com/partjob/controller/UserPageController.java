@@ -1,5 +1,7 @@
 package com.partjob.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.partjob.model.NetJob;
+import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
 
 /**
@@ -15,7 +18,7 @@ import com.partjob.service.JobService;
  */
 @Controller
 @RequestMapping(value = "userp")
-public class UserPageController {
+public class UserPageController extends BaseController{
 	@Autowired
 	JobService jobService;
 	@RequestMapping("{page}")
@@ -33,5 +36,12 @@ public class UserPageController {
 		NetJob netJob = jobService.getNetJobById(nid);
 		model.addAttribute("net", netJob);
 		return "user/netinfo";
+	}
+	
+	@RequestMapping("wallet")
+	public String wallet(HttpServletRequest request,Model model){
+		UserInfo userInfo =getUserInfo(request);
+		model.addAttribute("me", userInfo);
+		return "user/wallet";
 	}
 }

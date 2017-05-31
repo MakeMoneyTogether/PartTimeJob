@@ -43,6 +43,7 @@ public class UserService {
         tblUserInfo = new TblUserInfo();
         tblUserInfo.setPhone(phone);
         tblUserInfo.setPwd(CommonUtil.toMD5(pwd));
+        tblUserInfo.setBalance(0);
         userInfoDao.save(tblUserInfo);
         tblUserInfo = userInfoDao.getByPhone(phone);
         // 生成邀请码

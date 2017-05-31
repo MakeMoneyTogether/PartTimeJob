@@ -28,11 +28,11 @@
 		<div class="weui-form-preview__hd">
 			<div class="col-40 div_left">
 				<span style="margin-left:5%;float:left;">当前余额</span><br>
-				<span style="margin-left:5%;float:left;" id="moneyable">105.0</span>
+				<span style="margin-left:5%;float:left;" id="moneyable">${me.balance }</span>
 			</div>
 			<div class="col-40 div_left">
 				<span style="margin-left:5%;float:left;">冻结资产</span><br>
-				<span style="margin-left:5%;float:left;" id="money_freeze">2.0</span>
+				<span style="margin-left:5%;float:left;" id="money_freeze"></span>
 			</div>
 			<div class="col-20 div_right" style="padding-top:5%;">
 				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="cash();">充值</button>
