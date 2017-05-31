@@ -90,6 +90,12 @@
 					<input id="school" class="weui-input" type="text" placeholder="请输入学校名称">
 				</div>
 			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">专业</label></div>
+				<div class="weui-cell__bd">
+					<input id="major" class="weui-input" type="text" placeholder="请输入专业">
+				</div>
+			</div>
 			<!-- 
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
@@ -108,6 +114,7 @@
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/dateutil.js"></script>
 <script src="static/js/user/editcv.js"></script>
 <script type="text/javascript">
 </script>
