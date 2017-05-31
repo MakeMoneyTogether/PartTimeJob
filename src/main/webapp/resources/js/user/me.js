@@ -91,6 +91,7 @@ $(function(){
 				$('#uname').text(data.name);
 				$('#ugpa').text(data.grade);
 				$('#money').text(data.balance);
+				$('#invitation_bak').text(data.shareCode);
 				$.cookie('password',pwd,{expires:30,path:'/'});
 				$.cookie('phone',phone,{expires:30,path:'/'});
 			},

@@ -40,7 +40,7 @@
 						<p>男</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input type="radio" class="weui-check" name="sex" id="man">
+						<input type="radio" class="weui-check" name="sex" value="男" id="man">
 						<span class="weui-icon-checked"></span>
 					</div>
 				</label>
@@ -49,7 +49,7 @@
 						<p>女</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input type="radio" name="sex" class="weui-check" id="women" checked="checked">
+						<input type="radio" name="sex" class="weui-check" id="women" value="女" checked="checked">
 						<span class="weui-icon-checked"></span>
 					</div>
 				</label>
@@ -60,6 +60,7 @@
 					<input id="birthday" class="weui-input" style="background:#bdbdbd;" type="date" value="">
 				</div>
 			</div>
+			<!-- 
 			<hr>
 			<div class="weui-cells__title">教育</div>
 			<div class="weui-cells weui-cells_radio">
@@ -82,18 +83,21 @@
 					</div>
 				</label>
 			</div>
+			 -->
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">学校</label></div>
 				<div class="weui-cell__bd">
 					<input id="school" class="weui-input" type="text" placeholder="请输入学校名称">
 				</div>
 			</div>
+			<!-- 
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
 				<div class="weui-cell__bd">
 					<input id="wechat" class="weui-input" type="text" placeholder="请输入微信号">
 				</div>
 			</div>
+			 -->
 		</div>
 	</div>
 		<a onclick="update();" class="weui-btn weui-btn_primary commitBtn">更新</a>

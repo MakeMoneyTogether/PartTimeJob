@@ -34,6 +34,9 @@ function loadm(){
 		dates = dates_bak.text();
 		city = ncity.attr('value');
 		index = index_bak.text();
+		if(dates != 'all'){
+			dates = new Date(dates).getTime();
+		}
 		data = {dises:dises,labels:labels,dates:dates,city:city};
 		$.ajax({
 			type: "POST",
@@ -61,6 +64,9 @@ function onLoad(){
 	labels = labels_bak.text();
 	dates = dates_bak.text();
 	city = ncity.attr('value');
+	if(dates != 'all'){
+		dates = new Date(dates).getTime();
+	}
 	data = {dises:dises,labels:labels,dates:dates,city:city};
 	$('#jz-infos').text('');
 	$.ajax({
@@ -98,7 +104,7 @@ $("#ptime").click(function(){
 
 function getDistrict(){
 	var ccode = ncity.attr('value');
-	$.get('util/city/districts/'+ccode,function(data){
+	$.get('city/districts/'+ccode,function(data){
 		data = JSON.parse(data);
 		var districts = $('#districts');
 		districts.text('');
@@ -175,6 +181,8 @@ function localset(){
 	if(t_cityCode !=null&& t_cityCode.length > 5){
 		ncity.attr('value',t_cityCode);
 		ncity.text($.cookie('cityname'));
+		getDistrict();
+		onLoad();
 	}else{
 		$.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function(data){
 		    console.log(returnCitySN.cip);
@@ -183,21 +191,24 @@ function localset(){
 		    	alert('定位失败，请手动选择!');
 		    }else{
 			    ncity.text(cname);
+			    ncity.attr('value',returnCitySN.cip);
+				getDistrict();
+				onLoad();
 		    }
 //		    $.getJSON('http://ip.taobao.com/service/getIpInfo.php?ip='+returnCitySN.cip+'&callback=?',function(data){
 //		    	console.log(data);
 //		    });
-		    console.log(returnCitySN.cip);
-		    $.ajax({
-		    	dataType:'jsonp',
-		    	url:'http://ip.taobao.com/service/getIpInfo.php',
-		    	jsonpCallback: 'json',
-		    	jsonp:'callback',
-		    	data:{ip:returnCitySN.cip},
-		    	success: function(data){
-		    		console.log(data[data]);
-		    	}
-		    });
+//		    console.log(returnCitySN.cip);
+//		    $.ajax({
+//		    	dataType:'jsonp',
+//		    	url:'http://ip.taobao.com/service/getIpInfo.php',
+//		    	jsonpCallback: 'json',
+//		    	jsonp:'callback',
+//		    	data:{ip:returnCitySN.cip},
+//		    	success: function(data){
+//		    		console.log(data[data]);
+//		    	}
+//		    });
 		});
 	}
 }
@@ -208,4 +219,6 @@ function setLocal(){
 	ncity.attr('value',cc.attr('data-code'));
 	$.cookie('citycode',cc.attr('data-code'),{expires:30,path:'/'});
 	$.cookie('cityname',city,{expires:30,path:'/'});
+	getDistrict();
+	onLoad();
 }

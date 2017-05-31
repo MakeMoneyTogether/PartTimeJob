@@ -32,8 +32,8 @@
 				<img style="width:100%;" alt="统一头像" src="static/images/1.jpg">
 			</div>
 			<div class="col-50 div_left">
-				<span style="margin-left:5%;float:left;" id="uname">姓名啊</span><br>
-				<span style="margin-left:5%;float:left;" id="ugpa">5.0</span>
+				<span style="margin-left:5%;float:left;" id="uname"></span><br>
+				<span style="margin-left:5%;float:left;" id="ugpa"></span>
 			</div>
 			<div class="col-30 div_right">
 				<a href="userp/editcv">编辑简历></a>

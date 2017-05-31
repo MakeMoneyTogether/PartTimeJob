@@ -61,13 +61,12 @@
 			dataType:'json',
 			data:{phone:phone,pwd:pwd},
 			success: function(data){
-				if(data == 1){
-					$.alert('登录名或密码错误！！');
-				}
 				if(data == 0){
 					$.cookie('phone',phone,{expires:30,path:'/'});
 					$.cookie('password',pwd,{expires:30,path:'/'});
 					window.location.href='userp/me';
+				}else{
+					$.alert('登录名或密码错误！！');
 				}
 			}
 		});
