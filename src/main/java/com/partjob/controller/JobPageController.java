@@ -238,7 +238,7 @@ public class JobPageController {
     		}
     		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
-    		logger.error("考勤用户工作错误",e);
+    		logger.error("用户评分错误",e);
 			return ResponseCode.FAIL;
     	}
     }

@@ -5,6 +5,7 @@ import com.partjob.constant.ResponseCode;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserScheduleDao;
 import com.partjob.entity.TblMchntInfo;
+import com.partjob.entity.TblMchntSchedule;
 import com.partjob.entity.TblNetJob;
 import com.partjob.entity.TblUserInfo;
 import com.partjob.entity.TblUserSchedule;
@@ -93,21 +94,48 @@ public class UserCashService {
 	}
 	
 	
-    public int cash(String phone, String rmb,String openid){
-        UserInfo userInfo = userService.getByPhone(phone);
-        //用户不存在
-        if(userInfo == null){
-            return 500;
-        }
-        int money=Integer.parseInt(BigDecimalUtil.mult100(rmb));
-        //余额不足
-        if (money > userInfo.getBalance()){
-            return 1;
-        }
-        //写入用户提现请求
-        userScheduleDao.add(userInfo.getUid(),money,CommonCanstant.MONEY_TYPE_CASH,openid,true);
-        return 0;
-    }
+	/**
+	 * 商户提现，插入资金流转表，等待管理员进行审核
+	 * @param totalFee 金额
+	 * @param openId 提现的openid
+	 * @param mchntCd 商户号
+	 * @return
+	 */
+	public int cash(String totalFee,String openId,int uId){
+		int money=Integer.parseInt(BigDecimalUtil.mult100(totalFee));
+		TblUserInfo tblUserInfo=userInfoDao.get(uId);
+		
+		if(tblUserInfo.getBalance()<money){
+			return ResponseCode.NOT_ENOUGH_MONEY;
+		}
+		
+		tblUserInfo.setBalance(tblUserInfo.getBalance()-money);
+		userInfoDao.modify(tblUserInfo);
+		
+		userScheduleDao.add(uId, money, CommonCanstant.MONEY_TYPE_CASH, openId, true);
+		return ResponseCode.SUCCESS;
+	}
+	
+	/**
+	 * 管理员审核通过商户提现请求，商户提现，修改记录状态
+	 * @param id
+	 * @return
+	 */
+	public int checkCash(int id){
+		TblUserSchedule tblUserSchedule=userScheduleDao.get(id);
+		int result=transService.cash(Integer.toString(tblUserSchedule.getMoney()), tblUserSchedule.getOpenid());
+		if(result==ResponseCode.SUCCESS){
+			tblUserSchedule.setStatus(CommonCanstant.AVAILAB);
+			userScheduleDao.modify(tblUserSchedule);
+			return ResponseCode.SUCCESS;
+		}else{
+			tblUserSchedule.setStatus(CommonCanstant.UNAVAILAB);
+			userScheduleDao.modify(tblUserSchedule);
+			return ResponseCode.CASH_FAIL;
+		}
+		
+		
+	}
 
     public List<UserSchedule> getByPhone(String phone) {
         UserInfo userInfo = userService.getByPhone(phone);
