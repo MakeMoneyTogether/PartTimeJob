@@ -1,5 +1,6 @@
 package com.partjob.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "tbl_mchnt_schedule", schema = "parttimejob", catalog = "")
-public class TblMchntSchedule {
+public class TblMchntSchedule implements Serializable{
     private int id;
     private int mchntCd;
     private int money;
