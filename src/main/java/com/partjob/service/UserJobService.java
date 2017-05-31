@@ -95,6 +95,13 @@ public class UserJobService {
     		return ResponseCode.SUCCESS;
     	}
     	
+    	/**
+    	 * 商户给用户考评
+    	 * @param userId
+    	 * @param jobId
+    	 * @param status
+    	 * @return
+    	 */
     	public int checkUserWork(int userId,int jobId,int status){
     		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
     		if(user.getStatusId()==CommonCanstant.USER_PASS){
@@ -106,8 +113,18 @@ public class UserJobService {
     		}
     	}
     	
+    	/**
+    	 * 给用户的工作评分
+    	 * @param userId
+    	 * @param jobId
+    	 * @param score
+    	 * @return
+    	 */
     	public int scoreUserWork(int userId,int jobId,int score){
     		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
+    		if(user==null){
+    			return ResponseCode.JOB_USER_UNAVAILABLE;
+    		}
     		if(user.getStatusId()==CommonCanstant.USER_PASS){
 //    			user.setStatusId(status);
     			user.setScore(score);

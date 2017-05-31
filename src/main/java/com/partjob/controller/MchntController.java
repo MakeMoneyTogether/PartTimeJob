@@ -385,4 +385,41 @@ public class MchntController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 商户发起提现请求
+	 * @param 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "cash" })
+	@ResponseBody
+	public int cash(@RequestParam(value = "totalFee") String totalFee,HttpServletRequest request){
+		try{
+			int mchntCd=getMchntInfo(request).getMchntCd();
+			String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
+			int result=mchntService.cash(totalFee, openId, mchntCd);
+			return result;
+		}catch (Exception e){
+			logger.error("商户发起提现请求失败失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
+	/**
+	 * 管理员审核提现请求
+	 * @param 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "checkcash" })
+	@ResponseBody
+	public int checkCash(@RequestParam(value = "id") int id,HttpServletRequest request){
+		try{
+			int result=mchntService.checkCash(id);
+			return result;
+		}catch (Exception e){
+			logger.error("商户发起提现请求失败失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
 }

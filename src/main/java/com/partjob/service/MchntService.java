@@ -10,10 +10,12 @@ import com.partjob.constant.ObjectStatuCode;
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.MchntInfoDao;
+import com.partjob.dao.MchntScheduleDao;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserJobDao;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
+import com.partjob.entity.TblMchntSchedule;
 import com.partjob.entity.TblRelUserJob;
 import com.partjob.entity.TblUserInfo;
 import com.partjob.model.CheckTransResult;
@@ -46,6 +48,8 @@ public class MchntService {
 	private UserInfoDao userInfoDao;
 	@Autowired
 	private UserJobDao userJobDao;
+	@Autowired
+	private MchntScheduleDao mchntScheduleDao;
 	/**
 	 * 保存商户信息
 	 * @param mchntInfo
@@ -124,6 +128,10 @@ public class MchntService {
 		return transModel(tblMchntInfo);
 	}
 	
+	/**
+	 * 获取所有商户信息
+	 * @return
+	 */
 	public List<MchntInfo> getAllMchnt(){
 		List<TblMchntInfo>tblMchntInfos=mchntInfoDao.getAllMchntInf();
 		List <MchntInfo>list=new ArrayList<MchntInfo>();
@@ -132,6 +140,8 @@ public class MchntService {
 		}
 		return list;
 	}
+	
+	
 
 	/**
 	 * 更新商户信息
@@ -157,6 +167,28 @@ public class MchntService {
 	 */
 	public WcPay pay(String totalFee, String ip,String openId,int mchntCd){
 		return transService.pay(totalFee, ip, openId);				
+	}
+	
+	/**
+	 * 商户提现，插入资金流转表，等待管理员进行审核
+	 * @param totalFee 金额
+	 * @param openId 提现的openid
+	 * @param mchntCd 商户号
+	 * @return
+	 */
+	public int cash(String totalFee,String openId,int mchntCd){
+		int money=Integer.parseInt(BigDecimalUtil.mult100(totalFee));
+		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
+		
+		if(tblMchntInfo.getBalance()<money){
+			return ResponseCode.NOT_ENOUGH_MONEY;
+		}
+		
+		tblMchntInfo.setBalance(tblMchntInfo.getBalance()-money);
+		mchntInfoDao.modify(tblMchntInfo);
+		
+		mchntScheduleDao.add(mchntCd, money, CommonCanstant.MONEY_TYPE_CASH, openId, true);
+		return ResponseCode.SUCCESS;
 	}
 	
 	/**
@@ -198,7 +230,26 @@ public class MchntService {
 		return ResponseCode.PAY_FAIL;
 	}
 	
-	
+	/**
+	 * 管理员审核通过商户提现请求，商户提现，修改记录状态
+	 * @param id
+	 * @return
+	 */
+	public int checkCash(int id){
+		TblMchntSchedule tblMchntSchedule=mchntScheduleDao.get(id);
+		int result=transService.cash(Integer.toString(tblMchntSchedule.getMoney()), tblMchntSchedule.getOpenid());
+		if(result==ResponseCode.SUCCESS){
+			tblMchntSchedule.setStatus(CommonCanstant.AVAILAB);
+			mchntScheduleDao.modify(tblMchntSchedule);
+			return ResponseCode.SUCCESS;
+		}else{
+			tblMchntSchedule.setStatus(CommonCanstant.UNAVAILAB);
+			mchntScheduleDao.modify(tblMchntSchedule);
+			return ResponseCode.CASH_FAIL;
+		}
+		
+		
+	}
 	
 	/**
 	 * 发送兼职信息

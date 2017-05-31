@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "tbl_mchnt_schedule", schema = "parttimejob", catalog = "")
-public class TblMchntSchedule implements Serializable{
+public class TblMchntSchedule {
     private int id;
     private int mchntCd;
     private int money;
