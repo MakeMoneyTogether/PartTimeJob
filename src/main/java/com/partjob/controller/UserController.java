@@ -1,5 +1,7 @@
 package com.partjob.controller;
 
+import java.sql.Date;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.partjob.constant.CommonCanstant;
@@ -103,7 +105,7 @@ public class UserController extends BaseController{
         System.out.println(userInfo);
         if (userInfo == null){
             logger.info("用户" + phone + "登录失败");
-            return ResponseCode.FAIL;
+            return ResponseCode.PHONE_PASSWORD_ERROR;
         } else {
             logger.info("用户" + phone + "登录成功");
             //要不要存session
@@ -136,12 +138,14 @@ public class UserController extends BaseController{
     @RequestMapping(value = "me")
     @ResponseBody
     public Object me(@RequestParam(value = "phone") String phone,
-                           @RequestParam(value = "pwd") String pwd) {
+                           @RequestParam(value = "pwd") String pwd,HttpServletRequest request) {
         UserInfo userInfo = userService.login(phone, pwd);
         if (userInfo == null){
             logger.info("没有该用户" + phone);
             return ResponseCode.PHONE_PASSWORD_ERROR;
         } else {
+        	HttpSession session = request.getSession();
+        	session.setAttribute(CommonCanstant.USER_INFO, userInfo);
             logger.info("成功获取用户" + phone + "的信息");
         }
         // 要不要转json
@@ -150,16 +154,20 @@ public class UserController extends BaseController{
 
     @RequestMapping(value = "editcv")
     @ResponseBody
-    public Object editcv(@RequestParam(value = "phone") String phone,
-                         @RequestParam(value = "pwd") String pwd) {
-        UserInfo userInfo = userService.login(phone, pwd);
-        if (userInfo == null){
-            logger.info("没有该用户" + phone);
-        } else {
-            logger.info("成功获取用户" + phone + "的信息");
-        }
-        // 要不要转json
-        return userInfo;
+    public Object editcv(UserInfo newUserInfo,long lbirthday,HttpServletRequest request) {
+    	try {
+    		UserInfo userInfo =getUserInfo(request);
+            if (userInfo == null){
+                logger.info("用户未登录就来修改简历了");
+                return ResponseCode.PHONE_PASSWORD_ERROR;
+            } else {
+            	newUserInfo.setBirthday(new Date(lbirthday));
+                return userService.updatecv(newUserInfo, userInfo.getPhone(), userInfo.getPwd());
+            }
+		} catch (Exception e) {
+			logger.error("更新用户简历错误",e);
+			return ResponseCode.FAIL;
+		}
     }
 
     @RequestMapping(value = "cash")

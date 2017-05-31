@@ -67,19 +67,23 @@ public class JobPageController {
         return userJobService.getRelOfUserJob(phone, jid);
     }
     /**
-     * 分页获取兼职列表
+     * 分页获取兼职列表（兼职的状态应为准备中，CommonCanstant.JOB_PENDING）
      * @param offset	下标
      * @param length	长度
-     * @param dises		区县代码（逗号隔开）
-     * @param labels	兼职类型（逗号隔开）
-     * @param dates		开始时间（时间戳）
-     * @param city		城市代码
+     * @param dises		区县代码（逗号隔开）如果为all则表示所有区县
+     * @param labels	兼职类型（逗号隔开）如果为all则表示所有类型
+     * @param dates		开始时间（时间戳）	可能为空
+     * @param city		城市代码	兼职里面只包含区县代码，没有城市代码，所以需要联表查询，用IN操作
      * @return
      */
     @RequestMapping(value = "select/{offset}/{length}")
     @ResponseBody
     public Object selectJob(@PathVariable int offset, @PathVariable int length,
-    		String dises,String labels, long dates,int city){
+    		String dises,String labels, String dates,int city){
+    	System.out.println(dises+" "+labels+" "+dates+" "+city);
+    	if(!"all".equals(dates)){
+    		long time = Long.parseLong(dates);
+    	}
     	return null;
     }
 
