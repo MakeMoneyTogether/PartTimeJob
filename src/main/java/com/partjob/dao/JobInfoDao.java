@@ -61,7 +61,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     		hql.append(")");
     	}
     	
-    	if(!StringUtils.isEmpty(dates)){
+    	if(!"all".equalsIgnoreCase(dates)){
     		hql.append(" and jobStartTime>? ");
     		values.add(dates);
     	}
