@@ -35,7 +35,7 @@
 				<span style="margin-left:5%;float:left;" id="money_freeze"></span>
 			</div>
 			<div class="col-20 div_right" style="padding-top:5%;">
-				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="cash();">充值</button>
+				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="pay();">充值</button>
 				<button class="weui-btn weui-btn_mini weui-btn_primary" onclick="cash();">提现</button>
 			</div>
 			<div style="clear:both"></div>

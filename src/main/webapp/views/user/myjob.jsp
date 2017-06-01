@@ -58,6 +58,7 @@
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/dateutil.js"></script>
 <script src="static/js/user/myjob.js"></script>
 <script type="text/javascript">
 </script>

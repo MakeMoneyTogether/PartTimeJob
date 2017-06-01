@@ -70,7 +70,7 @@ function postCash(rmb){
 		type:'POST',
 		url: 'user/cash',
 		dataType:'json',
-		data:{phone:phone,rmb:rmb},
+		data:{totalFee:rmb},
 		success: function(data){
 			if(data == 0){
 				$.toast('以提交申请');

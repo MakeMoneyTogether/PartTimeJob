@@ -105,12 +105,13 @@ $("#ptime").click(function(){
 function getDistrict(){
 	var ccode = ncity.attr('value');
 	$.get('city/districts/'+ccode,function(data){
-		data = JSON.parse(data);
+//		data = JSON.parse(data);
 		var districts = $('#districts');
 		districts.text('');
 		districts.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="all">全部</span><br>\n')
+		
 		for(i=0;i<data.length;i++){
-			districts.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i]['dcode']+'">'+data[i]['dname']+'</span>\n')
+			districts.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i]['cityCode']+'">'+data[i]['cityName']+'</span>\n')
 		}
 		districts.append('<br> <button class="weui-btn weui-btn_mini commitBtn">筛选</button> <br> <div class="weui-panel__hd" style="padding:0;"></div>');
 		onCheckBtn();
@@ -118,12 +119,12 @@ function getDistrict(){
 }
 function getLabels(){
 	$.get('job/types',function(data){
-		data = JSON.parse(data);
+//		data = JSON.parse(data);
 		var labels = $('#labels');
 		labels.text('');
 		labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="all">全部</span><br>\n')
 		for(i=0;i<data.length;i++){
-			labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i].lid+'">'+data[i].lname+'</span>\n')
+			labels.append('<span class="weui-btn weui-btn_mini weui-btn_defualt checkBtn" value="'+data[i].lid+'">'+data[i].name+'</span>\n')
 		}
 		labels.append('<br> <button class="weui-btn weui-btn_mini commitBtn">筛选</button> <br> <div class="weui-panel__hd" style="padding:0;"></div>');
 		onCheckBtn();
@@ -144,10 +145,10 @@ function freshList(){
 	if(disbtns.length >0 && $(disbtns[0]).attr('value') != 'all'){
 		for(i=0;i<disbtns.length;i++){
 			if(flag){
-				dises = $(disbtns[i]).text();
+				dises = $(disbtns[i]).attr('value');
 				flag = false;
 			}else{
-				dises += ','+$(disbtns[i]).text();
+				dises += ','+$(disbtns[i]).attr('value');
 			}
 		}
 	}
@@ -155,10 +156,10 @@ function freshList(){
 	if(labelbtns.length >0 && $(labelbtns[0]).attr('value') != 'all'){
 		for(i=0;i<labelbtns.length;i++){
 			if(flag){
-				labels = $(labelbtns[i]).text();
+				labels = $(labelbtns[i]).attr('value');
 				flag = false;
 			}else{
-				labels += ','+$(labelbtns[i]).text();
+				labels += ','+$(labelbtns[i]).attr('value');
 			}
 		}
 	}
