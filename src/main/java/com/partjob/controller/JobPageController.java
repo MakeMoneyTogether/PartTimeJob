@@ -94,11 +94,11 @@ public class JobPageController extends BaseController{
     @ResponseBody
     public Object selectJob(@PathVariable int offset, @PathVariable int length,
     		String dises,String labels, String dates,int city){
-    	System.out.println(dises+" "+labels+" "+dates+" "+city);
-    	if(!"all".equals(dates)){
-    		long time = Long.parseLong(dates);
-    	}
-    	return null;
+//    	System.out.println(dises+" "+labels+" "+dates+" "+city);
+//    	if(!"all".equals(dates)){
+//    		long time = Long.parseLong(dates);
+//    	}
+    	return jobService.getJobPage(offset, length, dises, labels, dates, city);
     }
 
     /**

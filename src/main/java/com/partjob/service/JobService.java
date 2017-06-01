@@ -51,6 +51,18 @@ public class JobService {
         assert tblJobInfos != null;
         return transJobList(tblJobInfos);
     }
+    
+    public List<JobInfo> getJobPage(int offset,int length,
+    		String dises,String labels, String dates,int city){
+    	
+    	List<TblJobInfo> tblJobInfos=jobInfoDao.getJobPage(offset, length, dises, labels, dates, city);
+    	if(tblJobInfos==null||tblJobInfos.size()==0){
+    		return null;
+    	}
+    	else{
+    		return transJobList(tblJobInfos);
+    	}
+    }
 
    
     private JobInfo transJob(TblJobInfo tblJobInfo) {
