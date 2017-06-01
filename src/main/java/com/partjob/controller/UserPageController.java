@@ -1,6 +1,7 @@
 package com.partjob.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.MidiDevice.Info;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.partjob.model.JobInfo;
 import com.partjob.model.NetJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
@@ -36,6 +38,13 @@ public class UserPageController extends BaseController{
 		NetJob netJob = jobService.getNetJobById(nid);
 		model.addAttribute("net", netJob);
 		return "user/netinfo";
+	}
+	
+	@RequestMapping("info/{jid}")
+	public String jobinfo(@PathVariable int jid,Model model){
+		JobInfo jobInfo = jobService.getById(jid);
+		model.addAttribute("job", jobInfo);
+		return "user/info";
 	}
 	
 	@RequestMapping("wallet")
