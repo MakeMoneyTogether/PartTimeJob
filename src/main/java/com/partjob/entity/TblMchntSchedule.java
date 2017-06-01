@@ -30,7 +30,7 @@ public class TblMchntSchedule {
     }
 
  
-    @Id
+    @Basic
     @Column(name = "mchntCd", nullable = false)
     public int getMchntCd() {
 		return mchntCd;
