@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "job")	//这个不要改了，改了我前端又要改
-public class JobPageController {
+public class JobPageController extends BaseController{
 
     private final Logger logger = Logger.getLogger(this.getClass());
     @Autowired
@@ -51,6 +51,20 @@ public class JobPageController {
     @ResponseBody
     public Object sitem(@PathVariable int uid, @PathVariable int statuId) {
         List<RelUserJob> userJobs = userJobService.getUserJobsByStatus(uid, statuId);
+        if(userJobs == null) return null;
+        return userJobService.getJobsByRels(userJobs);
+    }
+    
+    /**
+     * 获取用户参与的兼职列表
+     * @param uid
+     * @return
+     */
+    @RequestMapping(value = "sitem")
+    @ResponseBody
+    public Object sitme(HttpServletRequest request){
+    	UserInfo userInfo = getUserInfo(request);
+    	List<RelUserJob> userJobs = userJobService.getUserJobsByStatus(userInfo.getUid());
         if(userJobs == null) return null;
         return userJobService.getJobsByRels(userJobs);
     }

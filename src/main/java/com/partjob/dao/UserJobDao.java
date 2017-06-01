@@ -19,6 +19,10 @@ public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
         super.saveOrUpdate(tblRelUserJob);
     }
 
+    public List<TblRelUserJob> getByStatus(int uid) {
+        String hql = "from TblRelUserJob ujob where ujob.uid=?";
+        return find(hql, uid);
+    }
     public List<TblRelUserJob> getByStatus(int uid, int statusId) {
         String hql = "from TblRelUserJob ujob where ujob.uid=? and statusId=?";
         return find(hql, uid, statusId);

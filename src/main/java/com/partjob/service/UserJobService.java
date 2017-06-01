@@ -40,6 +40,11 @@ public class UserJobService {
         List<TblRelUserJob> tblRelUserJobs = userJobDao.getByStatus(uid, statusId);
         return transModelList(tblRelUserJobs);
     }
+    
+    public List<RelUserJob> getUserJobsByStatus(int uid){
+        List<TblRelUserJob> tblRelUserJobs = userJobDao.getByStatus(uid);
+        return transModelList(tblRelUserJobs);
+    }
 
     public List<JobInfo> getJobsByRels(List<RelUserJob> relUserJobs){
         if (ListUtil.isEmpty(relUserJobs)){
