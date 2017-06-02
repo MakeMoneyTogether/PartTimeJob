@@ -192,7 +192,7 @@ public class JobPageController extends BaseController{
     @RequestMapping(value = "apply/{phone}/{jid}")
     @ResponseBody
     public Object applyJob(@PathVariable String phone, @PathVariable int jid) {
-        return null;
+    	return userJobService.applyJob(phone, jid);
     }
     
     /**

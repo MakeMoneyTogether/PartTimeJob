@@ -13,12 +13,14 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.CommonUtil;
 import com.partjob.utils.ListUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +76,7 @@ public class UserJobService {
         if (user == null) return 500;
         TblRelUserJob relUserJob = userJobDao.getByUidJid(user.getUid(), jid);
         if (relUserJob == null){
-            return 0;
+            return CommonCanstant.USER_NOT_JOIN;
         } else return relUserJob.getStatusId();
     }
     
@@ -87,7 +89,7 @@ public class UserJobService {
     	public int noPassUser(int userId,int jobId){
     		TblRelUserJob user=userJobDao.getByUidJid(userId,jobId);
     		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行拒绝操作
-    		user.setStatusId(CommonCanstant.USER_NOT_PASS);
+    		user.setStatusId(CommonCanstant.USER_REFUSE);
     		userJobDao.modify(user);
     		return ResponseCode.SUCCESS;
     	}
@@ -140,12 +142,39 @@ public class UserJobService {
     		}
     	}
 
-    public ApplyJobResponse applyJob(String phone, int jid){
+	public ApplyJobResponse applyJob(String phone, int jid){
         ApplyJobResponse response = new ApplyJobResponse();
+        UserInfo userInfo= userService.getByPhone(phone);
+        JobInfo jobInfo = jobService.getById(jid);
+        //!!!!没有判断兼职时间与当前时间的冲突
+        //!!!!没有判断兼职时间与用户时间的冲突
         //检查用户
         // 检查兼职
-        // 检查用户是不是已经满了
-        return response;
+        if(jobInfo.getJobSt() != CommonCanstant.JOB_PENDING){//如果兼职不是准备中
+        	return null;
+        }
+        if(jobInfo.getJoinNum() == jobInfo.getNumPeople()){//兼职人满了
+        	return null;
+        }
+        TblRelUserJob tblRelUserJob = new TblRelUserJob();
+        tblRelUserJob.setUid(userInfo.getUid());
+        tblRelUserJob.setJobId(jobInfo.getJobId());
+        tblRelUserJob.setJobTitle(jobInfo.getJobTitle());
+        tblRelUserJob.setRecCrtTime(CommonUtil.getTimestamp());
+        tblRelUserJob.setStatusId(CommonCanstant.USER_PASS);
+        try {
+        	jobInfo = jobService.addOnePeople(jid);	//参与人数加一
+        	if(jobInfo == null){
+        		return null;
+        	}
+        	userJobDao.save(tblRelUserJob);
+        	response.setCode(ResponseCode.SUCCESS);
+        	response.setAll(jobInfo.getNumPeople());
+        	response.setApplied(jobInfo.getJoinNum());
+        	return response;
+		} catch (Exception e) {
+			return null;
+		}
     }
 
     private RelUserJob transModel(TblRelUserJob tblRelUserJob) {

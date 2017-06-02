@@ -36,6 +36,17 @@ public class JobService {
         return transJob(tblJobInfo);
     }
 
+    public JobInfo addOnePeople(int jid){
+    	TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
+    	tblJobInfo.setJoinNum(tblJobInfo.getJoinNum() +1);
+    	if(tblJobInfo.getJoinNum() > tblJobInfo.getNumPeople()){
+    		return null;
+    	}else {
+			jobInfoDao.saveOrUpdate(tblJobInfo);
+			return transJob(tblJobInfo);
+		}
+    }
+    
     public NetJob getNetJobById(int jid){
         TblNetJob netJob = netJobDao.getById(jid);
         return transNetJob(netJob);
