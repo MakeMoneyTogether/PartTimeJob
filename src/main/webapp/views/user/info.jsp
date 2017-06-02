@@ -81,7 +81,9 @@
 			</div>
 		</div>
 	</div>
-</div>
+	<div>
+		<h1>&nbsp;</h1>
+	</div>
 <div style="display:none;">
 <div id="jid_bak">${job.jobId }</div>
 </div>	

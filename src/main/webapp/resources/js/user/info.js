@@ -20,7 +20,7 @@ function getStatu(){
 	var jid = jid_bak.text();
 	var phone = $.cookie('phone');
 	if(phone !=null && phone.length > 6){
-		$.get('jzurl/pages/u2j/'+phone+'/'+jid,function(data){
+		$.get('job/u2j/'+phone+'/'+jid,function(data){
 			genBtn(parseInt(data));
 		});
 	}
@@ -39,10 +39,10 @@ function genBtn(code){
 			opBtn.text('已报名');
 			break;
 		case 2:
-			opBtn.text('已录用');
+			opBtn.text('被拒绝');
 			break;
 		case 3:
-			opBtn.text('已到岗');
+			opBtn.text('缺勤');
 			break;
 		case 4:
 			opBtn.text('已结算');
@@ -58,8 +58,7 @@ function apply(){
 		onOK:function(){
 			var jid = jid_bak.text();
 			var phone = $.cookie('phone');
-			$.get('jzurl/pages/apply/'+phone+'/'+jid,function(data){
-				data = JSON.parse(data);
+			$.get('job/apply/'+phone+'/'+jid,function(data){
 				$('#jz-num').text(data.applied+'/'+data.all+'人');
 				if(data.code == 0){
 					$.toast('报名成功');
