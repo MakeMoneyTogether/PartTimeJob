@@ -5,10 +5,10 @@ var keys_bak = $('#keys_bak')
 var loading = false;
 
 function genItem(one){
-	var item = '<a href="userp/info/'+one.jid+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
-				one.jlabel+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
-				one.jname+'</span><br><span class="i-jz-desc">'+one.jlocal+' '+one.jstdate+'开始</span><br><span class="i-jz-money">'+
-				one.jmoney+'元/'+one.jtime+'</span></div></a>';
+	var item = '<a href="userp/info/'+one.jobId+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">'+
+				one.jobType+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
+				one.jobTitle+'</span><br><span class="i-jz-desc">'+one.jobAddress+'<br>'+stamp2YMD(one.jobStartTime)+'-'+stamp2YMD(one.jobEndTime)+'</span><br><span class="i-jz-money">'+
+				one.paymentMoney+'元/'+(data.paymentType==1?'时':'天')+'</span></div></a>';
 	return item;
 }
 
@@ -16,13 +16,13 @@ function loadm(){
 	if(loading) return;
 	loading = true;
 	setTimeout(function() {
-		city = city_bak.text();
+		city = $.cookie('citycode');
 		var index = index_bak.text();
 		keys = keys_bak.text();
-		data = {keys:keys,city:city};
+		data = {keys:keys,cityCode:city};
 		$.ajax({
 			type: "POST",
-			url: 'jzurl/pages/search/'+index+'/3',
+			url: 'job/search/'+index+'/3',
 			dataType: "json",
 			data: data,
 			success:function(data){
@@ -40,13 +40,13 @@ function loadm(){
 $(document.body).infinite().on("infinite",loadm);
 
 function onLoad(){
-	city = city_bak.text();
+	city = $.cookie('citycode');
 	keys = keys_bak.text();
 	data = {keys:keys,city:city};
 	$('#jz-infos').text('');
 	$.ajax({
 		type: "POST",
-		url: "jzurl/pages/search/0/9",
+		url: "job/search/0/9",
 		dataType: "json",
 		data: data,
 		success:function(data){

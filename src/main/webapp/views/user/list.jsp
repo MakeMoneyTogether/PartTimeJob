@@ -128,16 +128,19 @@
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/dateutil.js"></script>
 <script src="static/js/user/list.js"></script>
 <script type="text/javascript">
 $('#searchInput').val($.cookie('inputKey'));
 $('#keys_bak').html($.cookie('inputKey'));
+$('#city_bak').html($.cookie('citycode'));
 
 function searchText(){
 	searchKey = $('#searchInput').val();
 	cityCode = $.cookie('citycode');
 	$('#searchInput').val(searchKey);
 	$('#keys_bak').html(searchKey);
+	$('#city_bak').html(cityCode);
 	onLoad();
 }
 onLoad();
