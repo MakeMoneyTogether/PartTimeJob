@@ -9,6 +9,7 @@ import com.partjob.entity.TblUserInfo;
 import com.partjob.model.InvitationInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.BigDecimalUtil;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.InvitationCodeUtil;
 import com.partjob.utils.ListUtil;
@@ -137,6 +138,8 @@ public class UserService {
         if (tblUserInfo == null)
             return null;
         ApplicationUtil.copyProperties(tblUserInfo, userInfo);
+        String balance=Integer.toString(tblUserInfo.getBalance());
+        userInfo.setBalance(BigDecimalUtil.divide100(balance));
         return userInfo;
     }
 

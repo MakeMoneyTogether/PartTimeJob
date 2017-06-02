@@ -12,7 +12,7 @@ public class UserInfo {
     private String gender;
     private String phone;
     private String pwd;
-    private Integer balance;
+    private String balance;
     private String major;
     private String grade;
     private String direction;
@@ -63,11 +63,11 @@ public class UserInfo {
         this.pwd = pwd;
     }
 
-    public Integer getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
