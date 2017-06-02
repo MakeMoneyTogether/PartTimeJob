@@ -1,6 +1,7 @@
 package com.partjob.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.partjob.model.JobInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
+import com.partjob.service.UserJobService;
 
 /**
  * Created by InnerAc on 17/5/15.
@@ -22,6 +24,8 @@ public class MchntPageController {
 	
 	@Autowired
 	JobService jobService;
+	@Autowired
+    UserJobService userJobService;
 	
 	@RequestMapping("{page}")
 	public String merto(@PathVariable String page){
@@ -43,6 +47,8 @@ public class MchntPageController {
 	 */
 	@RequestMapping("peoplem/{jid}")
 	public String peoplelem(@PathVariable int jid,Model model){
+		List<UserInfo> users = userJobService.getUsersOfJob(jid);
+		model.addAttribute("users", users);
 		model.addAttribute("jid", jid);
 		return "mchnt/peoplem";
 	}

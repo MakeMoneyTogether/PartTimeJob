@@ -68,7 +68,7 @@ function issue(data){
 				$.alert('余额不足');
 			}else if(data == 0){
 				$.alert('发布成功',function(){
-					//window.location.href='mchntp/list';
+					window.location.href='mchntp/list';
 				});
 			}else if(data == 4){
 				$.alert('薪资过低！！');

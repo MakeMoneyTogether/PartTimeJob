@@ -262,6 +262,7 @@ public class MchntService {
 		tblJob.setPaymentMoney(Integer.parseInt(_money));
 		tblJob.setMchntCd(mchntCd);
 		tblJob.setJobSt(ObjectStatuCode.JOB_AUDIT);
+		tblJob.setJoinNum(0);
 		//检查兼职是否满足要求
 		int result=checkJob(job);
 		if(result!=ResponseCode.SUCCESS){
@@ -350,6 +351,7 @@ public class MchntService {
 		for(TblJobInfo temp:tblJobInfoList){
 			JobInfo jobInfo=new JobInfo();
 			ApplicationUtil.copyProperties(temp, jobInfo);
+			jobInfo.setPaymentMoney(BigDecimalUtil.divide100(temp.getPaymentMoney()+""));
 			result.add(jobInfo);
 		}
 		

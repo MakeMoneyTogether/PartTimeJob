@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,15 +29,17 @@
 <div class="bd">
 	<div class="weui-cells__title">报名人员<strong style="color:red;">（不拒绝即被认为录用）</strong></div>
 	<div id="list" class="weui-cells">
-		<div class="weui-cell">
-			<div class="weui-cell__hd" style="color:red;">5.0</div>
-			<div class="weui-cell__bd">
-				<p>用户名字</p>
+		<c:forEach items="${users }" var="user">
+			<div class="weui-cell">
+				<div class="weui-cell__hd" style="color:red;">${user.grade }</div>
+				<div class="weui-cell__bd">
+					<p>${user.name }</p>
+				</div>
+				<div class="weui-cell__ft">
+					<button onclick="refuse(this,${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
+				</div>
 			</div>
-			<div class="weui-cell__ft">
-				<button onclick="refuse(this,1001);" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
 	<h1>&nbsp;</h1>
 </div>
@@ -53,7 +57,7 @@
 	$(function() {
 	FastClick.attach(document.body);
 	});
-	getPeople();
+	//getPeople();
 </script>
 </body>
 </html>

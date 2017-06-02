@@ -59,12 +59,14 @@ function apply(){
 			var jid = jid_bak.text();
 			var phone = $.cookie('phone');
 			$.get('job/apply/'+phone+'/'+jid,function(data){
-				$('#jz-num').text(data.applied+'/'+data.all+'人');
 				if(data.code == 0){
+					$('#jz-num').text(data.applied+'/'+data.all+'人');
 					$.toast('报名成功');
 					opBtn.addClass('weui-btn_disabled');
 					opBtn.text('已报名');
 					$.alert('当你临时有事是请提前致电商家，请求商家拒绝你的申请，这一点很重要！！！。');
+				}else{
+					$.toast('报名失败','forbidden');
 				}
 				if(data.code == 1){
 					$.toast('报名失败，人数已满','cancel');

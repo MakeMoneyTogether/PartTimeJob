@@ -1,8 +1,10 @@
 package com.partjob.dao;
 
+import com.partjob.constant.CommonCanstant;
 import com.partjob.entity.TblRelUserJob;
 import com.partjob.entity.TblUserInfo;
 import com.partjob.utils.HibernateBaseDao;
+
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -34,7 +36,7 @@ public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
     }
     
     public List<TblRelUserJob>getByJob(int jobId){
-    	String hql="from TblRelUserJob ujob where ujob.jobId=? order by recCrtTime desc";
-    	return find(hql, jobId);
+    	String hql="from TblRelUserJob ujob where ujob.jobId=? and ujob.statusId=? order by recCrtTime desc";
+    	return find(hql, jobId,CommonCanstant.USER_PASS);
     }
 }

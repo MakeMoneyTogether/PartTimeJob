@@ -48,38 +48,8 @@
 		<div id="tab0" class="weui-tab__bd-item weui-tab__bd-item--active">
 		</div>
 		<div id="tab1" class="weui-tab__bd-item">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-				<div class="weui-media-box__hd"><div class="i-circle">
-					类型
-				</div></div>
-				<div class="weui-media-box__bd i-jz">
-				<span class="weui-media-box__title i-jz-title">标题一</span><br>
-				<span class="i-jz-desc">江宁 5月1日开始（共10天）</span><br>
-				<span class="i-jz-money">100元/天</span>
-				</div>
-			</a>
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-				<div class="weui-media-box__hd"><div class="i-circle">
-					类型
-				</div></div>
-				<div class="weui-media-box__bd i-jz">
-				<span class="weui-media-box__title i-jz-title">标题一</span><br>
-				<span class="i-jz-desc">江宁 5月1日开始（共10天）</span><br>
-				<span class="i-jz-money">100元/天</span>
-				</div>
-			</a>
 		</div>
 		<div id="tab2" class="weui-tab__bd-item">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-				<div class="weui-media-box__hd"><div class="i-circle">
-					类型
-				</div></div>
-				<div class="weui-media-box__bd i-jz">
-				<span class="weui-media-box__title i-jz-title">标题一</span><br>
-				<span class="i-jz-desc">江宁 5月1日开始（共10天）</span><br>
-				<span class="i-jz-money">100元/天</span>
-				</div>
-			</a>
 		</div>
 		<div id="tab3" class="weui-tab__bd-item">
 
