@@ -49,6 +49,14 @@ public class CommonUtil {
 
     /**
      * 获取当前时间戳
+     * @return
+     */
+    public static Timestamp getTimestamp(){
+    	return new Timestamp(new Date().getTime());
+    }
+    
+    /**
+     * 获取当前时间戳
      * 
      * @return
      */
