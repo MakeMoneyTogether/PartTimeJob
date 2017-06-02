@@ -100,6 +100,25 @@ public class JobPageController extends BaseController{
 //    	}
     	return jobService.getJobPage(offset, length, dises, labels, dates, city);
     }
+    
+    /**
+     * 分页获取关键字检索
+     * @param offset
+     * @param length
+     * @param keys
+     * @param city
+     * @return
+     */
+    @RequestMapping(value = "search/{offset}/{length}")
+    @ResponseBody
+    public Object searchJob(@PathVariable int offset, @PathVariable int length,
+    		String keys,int city){
+//    	System.out.println(dises+" "+labels+" "+dates+" "+city);
+//    	if(!"all".equals(dates)){
+//    		long time = Long.parseLong(dates);
+//    	}
+    	return jobService.searchJobPage(offset, length, keys, city);
+    }
 
     /**
      * 获取兼职详情

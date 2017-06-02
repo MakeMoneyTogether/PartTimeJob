@@ -39,7 +39,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     		String []_dises=dises.split(",");
     		for(int i=0;i<_dises.length;i++){
     			hql.append("?,");
-    			values.add(_dises[i]);
+    			values.add(Integer.parseInt(_dises[i]));
     		}
     		
     		hql.deleteCharAt(hql.length()-1);
@@ -48,11 +48,11 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	
     	if(!"all".equalsIgnoreCase(labels)){
     		
-    		hql.append(" and job.cityCode in (");
+    		hql.append(" and job.jobType in (");
     		String []_labels=labels.split(",");
     		for(int i=0;i<_labels.length;i++){
     			hql.append("?,");
-    			values.add(_labels[i]);
+    			values.add(Integer.parseInt(_labels[i]));
     		}
     		
     		
@@ -67,9 +67,31 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	}
     	
     	if(city!=0){
-			hql.append("and city_code in "
-					+ "(select city_code from tbl_city_info where super_code =?)");
+			hql.append("and cityCode in "
+					+ "(select cityCode from TblCityInfo where superCode =?)");
 			values.add(city);
+    	}
+    	
+    	return findPage(hql.toString(), offset, length, values.toArray());
+    }
+    
+    public List<TblJobInfo> searchJobPage(int offset,int length ,
+    		String keys,int city){
+StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
+    	
+    	List<Object> values=new ArrayList<Object>();
+    	
+    	if(city!=0){
+			hql.append("cityCode in "
+					+ "(select cityCode from TblCityInfo where superCode =?)");
+			values.add(city);
+    	}
+    	
+
+    	if(keys != null){
+    		hql.append(" and job.jobTitle like ?");
+    		values.add("%"+keys+"%");
+//    		hql.append(" or ? in (select )")
     	}
     	
     	return findPage(hql.toString(), offset, length, values.toArray());

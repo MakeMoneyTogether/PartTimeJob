@@ -10,6 +10,7 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.NetJob;
 import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
+import com.partjob.utils.BigDecimalUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,18 @@ public class JobService {
     		return transJobList(tblJobInfos);
     	}
     }
+    
+    public List<JobInfo> searchJobPage(int offset,int length,
+    		String keys,int city){
+    	
+    	List<TblJobInfo> tblJobInfos=jobInfoDao.searchJobPage(offset, length, keys, city);
+    	if(tblJobInfos==null||tblJobInfos.size()==0){
+    		return null;
+    	}
+    	else{
+    		return transJobList(tblJobInfos);
+    	}
+    }
 
    
     private JobInfo transJob(TblJobInfo tblJobInfo) {
@@ -70,6 +83,10 @@ public class JobService {
         if (tblJobInfo == null)
             return null;
         ApplicationUtil.copyProperties(tblJobInfo, jobInfo);
+        int smoney = tblJobInfo.getPaymentMoney();
+        String tmoney = ""+smoney;
+        tmoney = BigDecimalUtil.divide100(tmoney);
+        jobInfo.setPaymentMoney(tmoney);
         return jobInfo;
     }
     
@@ -80,8 +97,7 @@ public class JobService {
             return null;
         List<JobInfo> jobInfos = new ArrayList<JobInfo>();
         for (TblJobInfo tblJobInfo : tblJobInfos) {
-            JobInfo jobInfo = new JobInfo();
-            ApplicationUtil.copyProperties(tblJobInfo, jobInfo);
+            JobInfo jobInfo = transJob(tblJobInfo);
             jobInfos.add(jobInfo);
         }
         return jobInfos;
