@@ -20,6 +20,7 @@ public class JobInfo {
 	    private Integer jobSt;
 	    private Integer joinNum;
 	    private Integer cityCode;
+	    private Integer userJobStatu;
 		public int getJobId() {
 			return jobId;
 		}
@@ -116,6 +117,12 @@ public class JobInfo {
 		}
 		public void setCityCode(Integer cityCode) {
 			this.cityCode = cityCode;
+		}
+		public Integer getUserJobStatu() {
+			return userJobStatu;
+		}
+		public void setUserJobStatu(Integer userJobStatu) {
+			this.userJobStatu = userJobStatu;
 		}
 	    
 	    

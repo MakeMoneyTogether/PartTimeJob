@@ -24,7 +24,7 @@ $.ajax({
 	success: function(data){
 		for(i=0;i<data.length;i++){
 			item = genItem(data[i]);
-			switch(data[i].jobSt){
+			switch(data[i].userJobStatu){
 				case 1:
 					$('#s1').append(item);break;
 				case 2:
