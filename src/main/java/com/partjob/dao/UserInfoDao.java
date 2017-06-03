@@ -2,9 +2,11 @@ package com.partjob.dao;
 
 import com.partjob.entity.TblUserInfo;
 import com.partjob.utils.HibernateBaseDao;
+
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Sloriac on 2017/4/16.
@@ -25,5 +27,10 @@ public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
     public TblUserInfo getUserInfo(String phone, String passwordMD5) {
         String hql = "from TblUserInfo u where u.pwd=? and u.phone=?";
         return findUnique(hql, passwordMD5, phone);
+    }
+    
+    public List<TblUserInfo> getAllUser(){
+    	String hql="from TblUserInfo u  order by u.uid desc";
+    	return find(hql, null);
     }
 }

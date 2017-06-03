@@ -41,6 +41,7 @@ public class UserCashService {
     @Autowired
     private UserInfoDao userInfoDao;
     
+    
     /**
 	 * 用户充值
 	 * @param totalFee	充值金额
@@ -59,19 +60,17 @@ public class UserCashService {
 	 * @param uid
 	 * @return
 	 */
-	public int checkPay(String outTradeNo,int uid){
+	public int checkPay(String outTradeNo,int uid,String openId){
 		CheckTransResult checkResult=transService.checkPay(outTradeNo);
 		
 		if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
 				checkResult.getResult_code().equalsIgnoreCase("SUCCESS")&&
 				checkResult.getTrade_state().equalsIgnoreCase("SUCCESS")){
 			//如果支付成功，那么就将修改账户余额
-//			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
-//			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(checkResult.getTotal_fee()));
-//			mchntInfoDao.modify(tblMchntInfo);
 			TblUserInfo tblUser=userInfoDao.get(uid);
 			tblUser.setBalance(tblUser.getBalance()+Integer.parseInt(checkResult.getTotal_fee()));
 			userInfoDao.modify(tblUser);
+			userScheduleDao.add(uid, Integer.parseInt(checkResult.getTotal_fee()), CommonCanstant.MONEY_TYPE_PAY, openId, false);
 			return ResponseCode.SUCCESS;
 			
 		}else if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&

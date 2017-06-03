@@ -61,4 +61,10 @@ public class CommonCanstant {
 	public static String MONEY_TYPE_WAGES="工资";
 	public static String MONEY_TYPE_PAYMENT="付款";
 	public static String MONEY_TYPE_REFUND="退款";
+	
+	
+	public static int INVITATION_UNREALIZE=0;
+	public static int INVITATION_REALIZE=1;
+	
+	public static int INVITATION_MONEY=500;
 }

@@ -8,11 +8,15 @@ import com.mysql.fabric.Response;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ObjectStatuCode;
 import com.partjob.constant.ResponseCode;
+import com.partjob.constant.TransCanstant;
+import com.partjob.dao.InvitationRecordDao;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.MchntInfoDao;
 import com.partjob.dao.MchntScheduleDao;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserJobDao;
+import com.partjob.dao.UserScheduleDao;
+import com.partjob.entity.TblInvitationRecord;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
 import com.partjob.entity.TblMchntSchedule;
@@ -50,6 +54,10 @@ public class MchntService {
 	private UserJobDao userJobDao;
 	@Autowired
 	private MchntScheduleDao mchntScheduleDao;
+	@Autowired
+	private UserScheduleDao userScheduleDao;
+	
+	private InvitationRecordDao invitationRecordDao;
 	/**
 	 * 保存商户信息
 	 * @param mchntInfo
@@ -197,7 +205,7 @@ public class MchntService {
 	 * @param mchntCd
 	 * @return
 	 */
-	public int checkPay(String outTradeNo,int mchntCd,int i){
+	public int checkPay(String outTradeNo,int mchntCd,int i,String openId){
 		CheckTransResult checkResult=transService.checkPay(outTradeNo);
 		
 		if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
@@ -207,6 +215,7 @@ public class MchntService {
 			TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
 			tblMchntInfo.setBalance(tblMchntInfo.getBalance()+Integer.parseInt(checkResult.getTotal_fee()));
 			mchntInfoDao.modify(tblMchntInfo);
+			mchntScheduleDao.add(mchntCd, Integer.parseInt(checkResult.getTotal_fee()),CommonCanstant.MONEY_TYPE_PAY, openId, false);
 			return ResponseCode.SUCCESS;
 			
 		}else if(checkResult.getReturn_code().equalsIgnoreCase("SUCCESS")&&
@@ -223,7 +232,7 @@ public class MchntService {
 				return ResponseCode.PAY_FAIL;
 			}
 			logger.warn("可能会出现死循环！！！！！！");
-			checkPay(outTradeNo,mchntCd,i++);
+			checkPay(outTradeNo,mchntCd,i++,openId);
 		}else{
 			return ResponseCode.PAY_FAIL;
 		}
@@ -292,6 +301,7 @@ public class MchntService {
 		//最后在提交
 		jobInfoDao.save(tblJob);
 		mchntInfoDao.modify(tblMchntInfo);
+		mchntScheduleDao.add(mchntCd, money, CommonCanstant.MONEY_TYPE_DEPOSIT, null, false);
 		return ResponseCode.SUCCESS;
 	}
 	
@@ -323,17 +333,33 @@ public class MchntService {
 		int validateNum =0;//有效参加工作的人
 		for(TblRelUserJob userJob:list){
 			TblUserInfo user=userInfoDao.get(userJob.getUid());
+			//如果是满勤
 			if(userJob.getStatusId()==CommonCanstant.USER_WORK_FULL){
 				validateNum++;
 				user.setBalance(user.getBalance()+money+CommonCanstant.USER_WORK_CHECK_MONRY);
 				userInfoDao.modify(user);
+				userScheduleDao.add(user.getUid(), money+CommonCanstant.USER_WORK_CHECK_MONRY, CommonCanstant.MONEY_TYPE_WAGES, "", false);
+				
+				//查看邀请码使用情况，如果未被兑现，则进行兑现
+				TblInvitationRecord record=invitationRecordDao.getByUid(user.getUid());
+				if(record.getStatus()==CommonCanstant.INVITATION_UNREALIZE){
+					//查找邀请人，给邀请人账户发红包
+					TblUserInfo tblInvidUser=userInfoDao.get(record.getInvitorId());
+					tblInvidUser.setBalance(tblInvidUser.getBalance()+CommonCanstant.INVITATION_MONEY);
+					userInfoDao.modify(tblInvidUser);
+					//记录红包流水
+					userScheduleDao.add(tblInvidUser.getUid(), CommonCanstant.INVITATION_MONEY, CommonCanstant.MONEY_TYPE_RED_PACKET, "", false);
+					record.setStatus(CommonCanstant.INVITATION_REALIZE);
+				}
+				
+				
 			}
 		}
 		//将为参加兼职人数的资金回返到商户
 		TblMchntInfo mchnt=mchntInfoDao.get(job.getMchntCd());
 		mchnt.setBalance(mchnt.getBalance()+(numpeople-validateNum)*money);
 		mchntInfoDao.modify(mchnt);
-		
+		mchntScheduleDao.add(mchnt.getMchntCd(), (numpeople-validateNum)*money, CommonCanstant.MONEY_TYPE_REFUND, "", false);
 		return ResponseCode.SUCCESS;
 	}
 	

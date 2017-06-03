@@ -2,9 +2,11 @@ package com.partjob.service;
 
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
+import com.partjob.constant.TransCanstant;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.UserInfoDao;
 import com.partjob.dao.UserJobDao;
+import com.partjob.dao.UserScheduleDao;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblRelUserJob;
 import com.partjob.entity.TblUserInfo;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +40,12 @@ public class UserJobService {
     private JobService jobService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private JobInfoDao jobInfoDao;
+    @Autowired
+    private UserInfoDao userInfoDao;
+    @Autowired
+    private UserScheduleDao userScheduleDao;
 
     public List<RelUserJob> getUserJobsByStatus(int uid, int statusId){
         List<TblRelUserJob> tblRelUserJobs = userJobDao.getByStatus(uid, statusId);
@@ -146,8 +155,13 @@ public class UserJobService {
         ApplyJobResponse response = new ApplyJobResponse();
         UserInfo userInfo= userService.getByPhone(phone);
         JobInfo jobInfo = jobService.getById(jid);
-        //!!!!没有判断兼职时间与当前时间的冲突
-        //!!!!没有判断兼职时间与用户时间的冲突
+        //如果兼职开始时间小于当前时间,就不允许报名
+        if(jobInfo.getJobStartTime().getTime()<new Date().getTime()){
+        	return null;
+        }
+        if(!checkUserJob(userInfo.getUid(), jobInfo)){
+        	return null;
+        }
         //检查用户
         // 检查兼职
         if(jobInfo.getJobSt() != CommonCanstant.JOB_PENDING){//如果兼职不是准备中
@@ -167,7 +181,14 @@ public class UserJobService {
         	if(jobInfo == null){
         		return null;
         	}
+        	
         	userJobDao.save(tblRelUserJob);
+        	
+        	//报名成功，用户的余额要扣除两元，并且记录交易流水
+        	TblUserInfo tblUser=userInfoDao.get(userInfo.getUid());
+        	tblUser.setBalance(tblUser.getBalance()-CommonCanstant.USER_WORK_CHECK_MONRY);
+        	userScheduleDao.add(userInfo.getUid(), CommonCanstant.USER_WORK_CHECK_MONRY, CommonCanstant.MONEY_TYPE_DEPOSIT, "", false);
+        	
         	response.setCode(ResponseCode.SUCCESS);
         	response.setAll(jobInfo.getNumPeople());
         	response.setApplied(jobInfo.getJoinNum());
@@ -195,5 +216,30 @@ public class UserJobService {
             userJobs.add(relUserJob);
         }
         return userJobs;
+    }
+    
+    /**
+     * 检查用户要报名的兼职和已报名的兼职是否发生冲突
+     * @param uid
+     * @param job
+     * @return
+     */
+    private boolean checkUserJob(int uid,JobInfo job){
+    	List<TblRelUserJob>list=userJobDao.getAvailByUid(uid);
+    	for(TblRelUserJob userJob:list){
+    		TblJobInfo tblJobInfo=jobInfoDao.get(userJob.getJobId());
+    		
+    		
+    		//判断要报名的兼职开始时间或者结束时间在已报名兼职的工作时间之内，认为出现时间交叉
+    		if((job.getJobStartTime().getTime()>tblJobInfo.getJobStartTime().getTime()
+    				&&job.getJobStartTime().getTime()<tblJobInfo.getJobEndTime().getTime())
+    				||(job.getJobEndTime().getTime()>tblJobInfo.getJobStartTime().getTime()
+    	    				&&job.getJobEndTime().getTime()<tblJobInfo.getJobEndTime().getTime()))
+    		
+    			return false;
+    	}
+    	
+    	return true;
+    	
     }
 }

@@ -73,6 +73,15 @@ public class UserService {
     	return transModel(tblUserInfo);
     }
 
+    public List<UserInfo> getAllUser(){
+    	List<TblUserInfo>list= userInfoDao.getAllUser();
+    	List<UserInfo>users=new ArrayList<UserInfo>();
+    	for(TblUserInfo tblUser:list){
+    		UserInfo user=transModel(tblUser);
+    		users.add(user);
+    	}
+    	return users;
+    }
     public int rpwd(String phone, String pwd, String npwd){
         // 先检查登录
         pwd = CommonUtil.toMD5(pwd);

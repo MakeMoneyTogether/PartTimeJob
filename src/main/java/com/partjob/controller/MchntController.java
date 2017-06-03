@@ -63,7 +63,7 @@ public class MchntController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "redirectUrl")
-	public String getOpenId(
+	public String getOpenIdByRedirec(
 			HttpServletRequest request,HttpServletResponse response) {
 
 		String code=request.getParameter("code");
@@ -206,6 +206,7 @@ public class MchntController extends BaseController {
 		try {
 				HttpSession session = request.getSession();
 				session.removeAttribute(CommonCanstant.MCHNT_INFO);
+				session.removeAttribute(TransCanstant.OPEN_ID);
 				return ResponseCode.SUCCESS;
 		} catch (Exception e) {
 			logger.error("商户登出错误",e);
@@ -320,7 +321,7 @@ public class MchntController extends BaseController {
 			HttpServletRequest request){
 		try{
 			int mchntCd=getMchntInfo(request).getMchntCd();
-			return mchntService.checkPay(outTradeNo, mchntCd,0);
+			return mchntService.checkPay(outTradeNo, mchntCd,0,getOpenId(request));
 		}catch(Exception e){
 			logger.error("检查支付结果错误",e);
 			return ResponseCode.FAIL;

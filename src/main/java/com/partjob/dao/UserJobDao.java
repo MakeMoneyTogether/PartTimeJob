@@ -39,4 +39,9 @@ public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
     	String hql="from TblRelUserJob ujob where ujob.jobId=? and ujob.statusId=? order by recCrtTime desc";
     	return find(hql, jobId,CommonCanstant.USER_PASS);
     }
+    
+    public List<TblRelUserJob>getAvailByUid(int uid){
+    	String hql = "from TblRelUserJob ujob where ujob.uid=? and statusId!=?";
+        return find(hql, uid,CommonCanstant.USER_REFUSE);
+    }
 }

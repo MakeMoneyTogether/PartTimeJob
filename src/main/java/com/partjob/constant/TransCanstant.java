@@ -23,4 +23,5 @@ public class TransCanstant {
 	public static String SSL_LOCATION="/root/wechat/cert-2/apiclient_cert.p12";
 //	public static String SSL_LOCATION="/Users/MPJ/Downloads/cert-2/apiclient_cert.p12";
 	
+	
 }

@@ -121,7 +121,7 @@ public class UserController extends BaseController{
     @RequestMapping(value = "all")
     @ResponseBody
     public Object all(){
-    	return null;
+    	return userService.getAllUser();
     }
     
     /**
@@ -132,7 +132,8 @@ public class UserController extends BaseController{
     @RequestMapping(value = "info/{uid}")
     @ResponseBody
     public Object one(@PathVariable int uid){
-    	return null;
+    	return userService.getUser(uid);
+    	
     }
     
     @RequestMapping(value = "me")
@@ -187,6 +188,8 @@ public class UserController extends BaseController{
     public Object invitation(@RequestParam(value = "phone") String phone) {
         return userService.getInvitations(phone);
     }
+    
+    
 
     /**
 	 * 用户充值下单借口，该接口进行下单
@@ -225,7 +228,7 @@ public class UserController extends BaseController{
 			HttpServletRequest request){
 		try{
 			int uid=getUserInfo(request).getUid();
-			return userCashService.checkPay(outTradeNo, uid);
+			return userCashService.checkPay(outTradeNo, uid,getOpenId(request));
 		}catch(Exception e){
 			logger.error("检查支付结果错误",e);
 			return ResponseCode.FAIL;
