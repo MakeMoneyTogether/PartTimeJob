@@ -65,6 +65,7 @@ public class UserJobService {
         for (RelUserJob relUserJob : relUserJobs) {
             JobInfo jobInfo = jobService.getById(relUserJob.getJobId());
             assert jobInfo != null;
+            jobInfo.setUserJobStatu(relUserJob.getStatusId());
             jobInfos.add(jobInfo);
         }
         return jobInfos;
@@ -100,6 +101,8 @@ public class UserJobService {
     		// TODO 检查兼职任务的状态是否有效的，当兼职任务过期以后不能再对用户进行拒绝操作
     		user.setStatusId(CommonCanstant.USER_REFUSE);
     		userJobDao.modify(user);
+    		//参与人数减一
+    		jobService.mulOnePeople(jobId);
     		return ResponseCode.SUCCESS;
     	}
     	

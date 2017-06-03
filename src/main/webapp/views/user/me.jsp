@@ -42,17 +42,14 @@
 		</div>
 		<div class="weui-form-preview__hd" style="text-align:center;padding:0;padding-bottom:0;">
 			<div class="weui-flex">
-				<div onclick="jump(0,this);" class="weui-flex__item div_box">已报名
+				<div onclick="jump(0,this);" class="weui-flex__item div_box">被拒绝
 					<span id="s0"></span>
 				</div>
-				<div onclick="jump(1,this);" class="weui-flex__item div_box">已录用
+				<div onclick="jump(1,this);" class="weui-flex__item div_box">已报名
 					<span id="s1"></span>
 				</div>
-				<div onclick="jump(2,this);" class="weui-flex__item div_box">已到岗
+				<div onclick="jump(2,this);" class="weui-flex__item div_box">已结算
 					<span id="s2"></span>
-				</div>
-				<div onclick="jump(3,this);" class="weui-flex__item div_box">已结算
-					<span id="s3"></span>
 				</div>
 			</div>
 		</div>

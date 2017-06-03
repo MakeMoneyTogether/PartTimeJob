@@ -3,18 +3,14 @@ inv_bak=$('#invitation_bak');
 function jump(p,e){
 	switch (p){
 		case 0:
-			window.location.href="userp/myjob#s20";
-			console.log("已报名");
+			window.location.href="userp/myjob#s22";
+			console.log("被拒绝");
 			break;
 		case 1:
 			window.location.href="userp/myjob#s21";
-			console.log("已录用");
+			console.log("已报名");
 			break;
 		case 2:
-			window.location.href="userp/myjob#s22";
-			console.log("已到岗");
-			break;
-		case 3:
 			window.location.href="userp/myjob#s23";
 			console.log("已结算");
 			break;
