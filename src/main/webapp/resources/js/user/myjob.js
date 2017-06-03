@@ -25,13 +25,13 @@ $.ajax({
 		for(i=0;i<data.length;i++){
 			item = genItem(data[i]);
 			switch(data[i].jobSt){
-				case 0:
-					$('#s0').append(item);break;
 				case 1:
 					$('#s1').append(item);break;
 				case 2:
 					$('#s2').append(item);break;
 				case 3:
+					$('#s3').append(item);break;
+				case 4:
 					$('#s3').append(item);break;
 			}
 		}
