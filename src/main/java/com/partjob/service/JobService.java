@@ -1,5 +1,7 @@
 package com.partjob.service;
 
+import com.partjob.constant.CommonCanstant;
+import com.partjob.constant.ResponseCode;
 import com.partjob.dao.JobInfoDao;
 import com.partjob.dao.NetJobDao;
 import com.partjob.dao.UserJobDao;
@@ -12,6 +14,7 @@ import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.BigDecimalUtil;
 
+import org.apache.struts.util.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +58,18 @@ public class JobService {
     	tblJobInfo.setJoinNum(nnum);
 		jobInfoDao.saveOrUpdate(tblJobInfo);
 		return transJob(tblJobInfo);
+    }
+    
+    /**
+     * 结束兼职
+     * @param jid
+     * @return
+     */
+    public int endJob(int jid){
+    	TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
+    	tblJobInfo.setJobSt(CommonCanstant.JOB_END);
+    	jobInfoDao.modify(tblJobInfo);
+    	return ResponseCode.SUCCESS;
     }
     
     public NetJob getNetJobById(int jid){

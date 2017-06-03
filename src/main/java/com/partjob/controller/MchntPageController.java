@@ -60,6 +60,8 @@ public class MchntPageController {
 	 */
 	@RequestMapping("evaluate/{jid}")
 	public String evaluate(@PathVariable int jid,Model model){
+		List<UserInfo> users = userJobService.getUsersOfJob(jid);
+		model.addAttribute("users", users);
 		model.addAttribute("jid", jid);
 //		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名
 		return "mchnt/evaluate";

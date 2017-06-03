@@ -34,45 +34,21 @@
 <div class="bd">
 	<div class="weui-cells__title">参与兼职的人员</div>
 	<div id="list" class="weui-cells">
-		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="notfound(1001);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-			<div class="weui-cell__bd">
-				<p>用户名字</p>
+		<c:forEach items="${users }" var="user">
+			<div class="weui-cell">
+				<div class="weui-cell__hd" ><button onclick="notfound(${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
+				<div class="weui-cell__bd">
+					<p>${user.name }</p>
+				</div>
+				<div id="${user.uid}" value="0" class="weui-cell__ft rate">
+					<i value="1" class="fa fa-star"></i>
+					<i value="2" class="fa fa-star"></i>
+					<i value="3" class="fa fa-star"></i>
+					<i value="4" class="fa fa-star"></i>
+					<i value="5" class="fa fa-star"></i>
+				</div>
 			</div>
-			<div id="1001" value="0" class="weui-cell__ft rate">
-				<i value="1" class="fa fa-star"></i>
-				<i value="2" class="fa fa-star"></i>
-				<i value="3" class="fa fa-star"></i>
-				<i value="4" class="fa fa-star"></i>
-				<i value="5" class="fa fa-star"></i>
-			</div>
-		</div>
-		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="notfound(1002);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-			<div class="weui-cell__bd">
-				<p>用户名字</p>
-			</div>
-			<div id="1002" value="0" class="weui-cell__ft rate">
-				<i value="1" class="fa fa-star"></i>
-				<i value="2" class="fa fa-star"></i>
-				<i value="3" class="fa fa-star"></i>
-				<i value="4" class="fa fa-star"></i>
-				<i value="5" class="fa fa-star"></i>
-			</div>
-		</div>
-		<div class="weui-cell">
-			<div class="weui-cell__hd" ><button onclick="notfound(1003);" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
-			<div class="weui-cell__bd">
-				<p>用户名字</p>
-			</div>
-			<div id="1003" value="0" class="weui-cell__ft rate">
-				<i value="1" class="fa fa-star"></i>
-				<i value="2" class="fa fa-star"></i>
-				<i value="3" class="fa fa-star"></i>
-				<i value="4" class="fa fa-star"></i>
-				<i value="5" class="fa fa-star"></i>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
 	<div class="weui-btn-area">
 		<button onclick="apply();" style="width:80%;" class="weui-btn weui-btn_primary">评价完成</button>

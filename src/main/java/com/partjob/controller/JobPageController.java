@@ -269,6 +269,7 @@ public class JobPageController extends BaseController{
     			System.out.println(userId+" "+score);
         		userJobService.scoreUserWork(userId, jobId, score);
     		}
+    		jobService.endJob(jobId);
     		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
     		logger.error("用户评分错误",e);
