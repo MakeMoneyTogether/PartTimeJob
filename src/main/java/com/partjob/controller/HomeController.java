@@ -28,9 +28,7 @@ public class HomeController {
 
 	/**
 	 * 欢迎页面
-	 * 
-	 * @param model
-	 * @param request
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "")
@@ -42,9 +40,7 @@ public class HomeController {
 
 	/**
 	 * 登录页
-	 * 
-	 * @param model
-	 * @param request
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "login")

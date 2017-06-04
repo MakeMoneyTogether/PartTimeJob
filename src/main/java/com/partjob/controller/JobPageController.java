@@ -57,7 +57,6 @@ public class JobPageController extends BaseController{
     
     /**
      * 获取用户参与的兼职列表
-     * @param uid
      * @return
      */
     @RequestMapping(value = "sitem")
@@ -80,6 +79,8 @@ public class JobPageController extends BaseController{
     public Object relOfUserJob(@PathVariable String phone, @PathVariable int jid) {
         return userJobService.getRelOfUserJob(phone, jid);
     }
+
+
     /**
      * 分页获取兼职列表（兼职的状态应为准备中，CommonCanstant.JOB_PENDING）
      * @param offset	下标

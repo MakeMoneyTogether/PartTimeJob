@@ -54,8 +54,6 @@ public class UserController extends BaseController{
 	
 	/**
 	 * 获取用户oppenid的地址
-	 * @param code
-	 * @param state
 	 * @param request
 	 * @param response
 	 * @return
@@ -194,7 +192,6 @@ public class UserController extends BaseController{
     /**
 	 * 用户充值下单借口，该接口进行下单
 	 * @param totalFee 充值金额
-	 * @param mchntCd	用户id
 	 * @param request
 	 * @return 返回js调用参数
 	 */

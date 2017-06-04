@@ -56,8 +56,6 @@ public class MchntController extends BaseController {
 	
 	/**
 	 * 获取用户oppenid的地址
-	 * @param code
-	 * @param state
 	 * @param request
 	 * @param response
 	 * @return
@@ -98,7 +96,6 @@ public class MchntController extends BaseController {
     
     /**
      * 获取某个商户信息
-     * @param uid
      * @return
      */
     @RequestMapping(value = "info/{mid}")

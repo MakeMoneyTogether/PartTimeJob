@@ -134,7 +134,7 @@ public class UserService {
         if (tblUserInfo == null) return null;
         List<TblInvitationRecord> records = invitationRecordDao.getByInviterId(tblUserInfo.getUid());
         if (ListUtil.isEmpty(records)) return null;
-        List<InvitationInfo> invitationInfos =  new ArrayList<>();
+        List<InvitationInfo> invitationInfos =  new ArrayList<InvitationInfo>();
         for (TblInvitationRecord record : records) {
             TblUserInfo user = userInfoDao.get(record.getUid());
             invitationInfos.add(new InvitationInfo(user.getName(), record.getStatus()));
