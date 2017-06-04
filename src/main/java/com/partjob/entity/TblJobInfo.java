@@ -15,6 +15,7 @@ public class TblJobInfo {
     private Integer jobType;
     private Integer paymentType;
     private Integer paymentMoney;
+    private int hoursDay;
     private Timestamp jobStartTime;
     private Timestamp jobEndTime;
     private Integer numPeople;
@@ -186,13 +187,22 @@ public class TblJobInfo {
 		this.joinNum = joinNum;
 	}
 	 @Basic
-	    @Column(name = "city_code", nullable = true)
+	 @Column(name = "city_code", nullable = true)
 	public Integer getCityCode() {
 		return cityCode;
 	}
 
 	public void setCityCode(Integer cityCode) {
 		this.cityCode = cityCode;
+	}
+	 @Basic
+	 @Column(name = "hours_day", nullable = true)
+	public int getHoursDay() {
+		return hoursDay;
+	}
+
+	public void setHoursDay(int hoursDay) {
+		this.hoursDay = hoursDay;
 	}
 
 }

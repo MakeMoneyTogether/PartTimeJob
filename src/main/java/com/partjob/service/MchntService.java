@@ -25,6 +25,7 @@ import com.partjob.entity.TblUserInfo;
 import com.partjob.model.CheckTransResult;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
+import com.partjob.model.MchntSchedule;
 import com.partjob.model.WcPay;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.BigDecimalUtil;
@@ -385,6 +386,30 @@ public class MchntService {
 	}
 
 	
+	public List<MchntSchedule> getMchntSchedules(String phone){
+		TblMchntInfo mchntInfo=mchntInfoDao.findUniqueByProperty("phone", phone);
+		if(mchntInfo==null){
+			return null;
+		}
+		List<TblMchntSchedule> list=mchntScheduleDao.getByMid(mchntInfo.getMchntCd());
+		List<MchntSchedule>schedules=new ArrayList<MchntSchedule>();
+		for(TblMchntSchedule tblMchntSchedule:list){
+			schedules.add(transModel(tblMchntSchedule));
+		}
+		return schedules;
+	}
+	
+	
+	private MchntSchedule transModel(TblMchntSchedule tblMchntSchedule){
+		MchntSchedule mchntSchedule=new MchntSchedule();
+		if(tblMchntSchedule==null){
+			return null;
+		}
+		ApplicationUtil.copyProperties(tblMchntSchedule, mchntSchedule);
+		 String money=BigDecimalUtil.divide100(Integer.toString(tblMchntSchedule.getMoney()));
+		 mchntSchedule.setMoney(money);
+		return mchntSchedule;
+	}
 	/**
 	 * 数据转换
 	 * @param tblMchntInfo

@@ -422,4 +422,14 @@ public class MchntController extends BaseController {
 		}
 	}
 	
+	/**
+     *  查看某个用户的交易流水
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "schedule")
+    @ResponseBody
+    public Object schedule(@RequestParam(value = "phone") String phone) {
+        return mchntService.getMchntSchedules(phone);
+    }
 }

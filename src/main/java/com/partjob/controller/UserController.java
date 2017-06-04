@@ -173,7 +173,7 @@ public class UserController extends BaseController{
 
 
     /**
-     * TODO 查看某个用户的交易流水
+     *  查看某个用户的交易流水
      * @param phone
      * @return
      */

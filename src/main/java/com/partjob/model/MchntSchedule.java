@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 /**
  * Created by Sloriac on 2017/5/24.
  */
-public class UserSchedule {
+public class MchntSchedule {
     private int id;
-    private int uid;
+    private int mchntCd;
     private String money;
     private String status;
     private String type;
@@ -21,13 +21,14 @@ public class UserSchedule {
         this.id = id;
     }
 
-    public int getUid() {
-        return uid;
-    }
+  
+	public int getMchntCd() {
+		return mchntCd;
+	}
 
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
+	public void setMchntCd(int mchntCd) {
+		this.mchntCd = mchntCd;
+	}
 
 	public String getMoney() {
 		return money;

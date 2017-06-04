@@ -1,6 +1,7 @@
 package com.partjob.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.model.JobInfo;
 import com.partjob.model.RelUserJob;
@@ -253,6 +254,8 @@ public class JobPageController extends BaseController{
     	
     	try{
     		userJobService.checkUserWork(userId, jobId, status);
+    		//如果用户中途离开或者缺勤，那么分数置为0分
+    		userJobService.scoreUserWork(userId, jobId, 0);
     		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
     		logger.error("考勤用户工作错误",e);
@@ -280,6 +283,7 @@ public class JobPageController extends BaseController{
     			int score = Integer.parseInt(user.get("grade").toString());
     			System.out.println(userId+" "+score);
         		userJobService.scoreUserWork(userId, jobId, score);
+        		userJobService.checkUserWork(userId, jobId, CommonCanstant.USER_WORK_FULL);
     		}
 
     		jobService.endJob(jobId);

@@ -145,13 +145,13 @@ public class UserCashService {
         return transModelList(userScheduleDao.getByUid(userInfo.getUid()));
     }
 
-    private UserSchedule transModel(TblUserSchedule tblUserSchedule) {
-        UserSchedule userSchedule = new UserSchedule();
-        if (tblUserSchedule == null)
-            return null;
-        ApplicationUtil.copyProperties(tblUserSchedule, userSchedule);
-        return userSchedule;
-    }
+//    private UserSchedule transModel(TblUserSchedule tblUserSchedule) {
+//        UserSchedule userSchedule = new UserSchedule();
+//        if (tblUserSchedule == null)
+//            return null;
+//        ApplicationUtil.copyProperties(tblUserSchedule, userSchedule);
+//        return userSchedule;
+//    }
 
     private List<UserSchedule> transModelList(List<TblUserSchedule> tblUserSchedules) {
         if (tblUserSchedules == null || tblUserSchedules.size() == 0)
@@ -160,6 +160,8 @@ public class UserCashService {
         for (TblUserSchedule tblUserSchedule : tblUserSchedules) {
             UserSchedule userSchedule = new UserSchedule();
             ApplicationUtil.copyProperties(tblUserSchedule, userSchedule);
+            String money=BigDecimalUtil.divide100(Integer.toString(tblUserSchedule.getMoney()));
+            userSchedule.setMoney(money);
             userSchedules.add(userSchedule);
         }
         return userSchedules;

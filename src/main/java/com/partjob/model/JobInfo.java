@@ -11,6 +11,7 @@ public class JobInfo {
 	    private String paymentMoney;
 	    private Timestamp jobStartTime;
 	    private Timestamp jobEndTime;
+	    private int hoursDay;
 	    private Integer numPeople;
 	    private String jobDesc;
 	    private String jobAddress;
@@ -124,6 +125,13 @@ public class JobInfo {
 		public void setUserJobStatu(Integer userJobStatu) {
 			this.userJobStatu = userJobStatu;
 		}
+		public int getHoursDay() {
+			return hoursDay;
+		}
+		public void setHoursDay(int hoursDay) {
+			this.hoursDay = hoursDay;
+		}
+		
 	    
 	    
 	    
