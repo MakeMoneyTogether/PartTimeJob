@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,10 +32,6 @@
 				<span style="margin-left:5%;float:left;">当前余额</span><br>
 				<span style="margin-left:5%;float:left;" id="moneyable">${me.balance }</span>
 			</div>
-			<div class="col-40 div_left">
-				<span style="margin-left:5%;float:left;">冻结资产</span><br>
-				<span style="margin-left:5%;float:left;" id="money_freeze"></span>
-			</div>
 			<div class="col-20 div_right" style="padding-top:5%;">
 				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="pay();">充值</button>
 				<button class="weui-btn weui-btn_mini weui-btn_primary" onclick="cash();">提现</button>
@@ -43,17 +41,6 @@
 		<div class="weui-panel weui-panel_access">
 			<div class="weui-panel__hd">已邀请</div>
 			<div id="inv_person">
-				<div class="weui-cell weui-cell_access">
-					<div class="weui-cell__hd">
-						<i class="fa fa-twitter"></i>
-					</div>
-					<div class="weui-cell__bd">
-						<p style="margin-left:10%;">张三</p>
-					</div>
-					<div class="">
-						+5.00
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="weui-panel weui-panel_access">

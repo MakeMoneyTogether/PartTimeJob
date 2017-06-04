@@ -73,10 +73,10 @@ function postCash(rmb){
 		data:{totalFee:rmb},
 		success: function(data){
 			if(data == 0){
-				$.toast('以提交申请');
+				$.toast('已提交申请');
 			}else if(data == 1){
 				$.toast('余额不足','forbidden');
-			}else if(data == 2){
+			}else{
 				$.toast('操作失败，请稍后重试','forbidden');
 			}
 		}
@@ -85,7 +85,7 @@ function postCash(rmb){
 
 function genPerson(person){
 	str = '';
-	if(person.statu == '0' ||person.statu == 0 ){
+	if(person.status == '0' ||person.status == 0 ){
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#999" class="fa fa-twitter"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
 			+ person.name
 			+ '</p> </div> <div class="">未进行兼职</div> </div>';
@@ -110,24 +110,26 @@ function getInvitation(){
 			for(i=0;i<data.length;i++){
 				str += genPerson(data[i]);
 			}
-			$('#inv_person').text(str);
+			$('#inv_person').html(str);
 		}
 	});
 }
-
+var AVAILAB=1;
+var UNAVAILAB=0;
+var UNCHECKED=2;
 function genSchedule(sche){
 	str = '';
-	if(sche.statu == 0 ){
+	if(sche.status == AVAILAB ){
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#999" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
-			+ sche.rmb
+			+ sche.money
 			+ '</p> </div> <div class="">提现成功</div> </div>';
-	}else if(sche.statu == 1){
+	}else if(sche.status == UNCHECKED){
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#99ccff" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
-			+ sche.rmb
+			+ sche.money
 			+'</p> </div> <div class=""> 申请中...</div> </div>';
 	}else{
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#ff0000" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
-			+ sche.rmb
+			+ sche.money
 			+'</p> </div> <div class=""> 平台拒绝，已退回余额</div> </div>';
 	}
 	return str;
@@ -146,7 +148,7 @@ function getSchedule(){
 			for(i=0;i<data.length;i++){
 				str += genSchedule(data[i]);
 			}
-			$('#schedule').text(str);
+			$('#schedule').html(str);
 		}
 	});
 }
