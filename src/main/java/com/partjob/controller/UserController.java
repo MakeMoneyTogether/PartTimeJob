@@ -11,6 +11,7 @@ import com.partjob.model.UserInfo;
 import com.partjob.model.WcPay;
 import com.partjob.service.UserCashService;
 import com.partjob.service.UserService;
+import com.partjob.test.OpenIdTest;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HttpRequestUtil;
 
@@ -144,6 +145,7 @@ public class UserController extends BaseController{
             return ResponseCode.PHONE_PASSWORD_ERROR;
         } else {
         	HttpSession session = request.getSession();
+        	OpenIdTest.addOpenId(request);
         	session.setAttribute(CommonCanstant.USER_INFO, userInfo);
             logger.info("成功获取用户" + phone + "的信息");
         }
@@ -242,9 +244,9 @@ public class UserController extends BaseController{
 	@ResponseBody
 	public int cash(@RequestParam(value = "totalFee") String totalFee,HttpServletRequest request){
 		try{
-			int mchntCd=getMchntInfo(request).getMchntCd();
+			int userid = getUserInfo(request).getUid();
 			String openId=(String) request.getSession().getAttribute(TransCanstant.OPEN_ID);
-			int result=userCashService.cash(totalFee, openId, mchntCd);
+			int result=userCashService.cash(totalFee, openId, userid);
 			return result;
 		}catch (Exception e){
 			logger.error("用户发起提现请求失败",e);

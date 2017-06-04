@@ -21,6 +21,7 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.model.WcPay;
 import com.partjob.service.MchntService;
+import com.partjob.test.OpenIdTest;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HttpRequestUtil;
 
@@ -151,7 +152,7 @@ public class MchntController extends BaseController {
 			if (mchntInfo != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute(CommonCanstant.MCHNT_INFO, mchntInfo);
-
+				OpenIdTest.addOpenId(request);
 				return ResponseCode.SUCCESS;
 			} else {
 				return ResponseCode.PHONE_PASSWORD_ERROR;
