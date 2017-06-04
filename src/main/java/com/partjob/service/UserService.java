@@ -100,6 +100,8 @@ public class UserService {
     	tblUserInfo.setBirthday(userInfo.getBirthday());
     	tblUserInfo.setSchool(userInfo.getSchool());
     	tblUserInfo.setGender(userInfo.getGender());
+    	tblUserInfo.setMajor(userInfo.getMajor());
+    	tblUserInfo.setDirection(userInfo.getDirection());
     	userInfoDao.update(tblUserInfo);
     	return ResponseCode.SUCCESS;
     }

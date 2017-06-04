@@ -96,6 +96,12 @@
 					<input id="major" class="weui-input" type="text" placeholder="请输入专业">
 				</div>
 			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">意向方向</label></div>
+				<div class="weui-cell__bd">
+					<input id="direction" class="weui-input" type="text" placeholder="请输入未来想从事的方向">
+				</div>
+			</div>
 			<!-- 
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
