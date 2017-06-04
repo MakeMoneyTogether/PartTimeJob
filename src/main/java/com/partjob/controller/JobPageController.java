@@ -6,6 +6,7 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
+import com.partjob.service.MchntService;
 import com.partjob.service.UserJobService;
 import com.partjob.service.UserService;
 
@@ -40,6 +41,8 @@ public class JobPageController extends BaseController{
     JobService jobService;
     @Autowired
     UserService userService;
+    @Autowired
+    MchntService mchntService; 
 
     /**
      * 获取用户参与的兼职列表
@@ -52,6 +55,7 @@ public class JobPageController extends BaseController{
     public Object sitem(@PathVariable int uid, @PathVariable int statuId) {
         List<RelUserJob> userJobs = userJobService.getUserJobsByStatus(uid, statuId);
         if(userJobs == null) return null;
+        
         return userJobService.getJobsByRels(userJobs);
     }
     
@@ -233,7 +237,13 @@ public class JobPageController extends BaseController{
 			return ResponseCode.FAIL;
     	}
     }
-    
+    /**
+     * 针对缺勤和中途离开用户调用，添加零分评价
+     * @param userId
+     * @param jobId
+     * @param status
+     * @return
+     */
     @RequestMapping(value = "checkUser")
     @ResponseBody
     public int checkUser(@RequestParam(value = "userId") int userId,
@@ -252,6 +262,7 @@ public class JobPageController extends BaseController{
     
     /**
      * 提交用户信息，sql有点问题，记得改一下
+     * 给满勤用户加状态
      * @param users
      * @param jobId
      * @return
@@ -269,6 +280,7 @@ public class JobPageController extends BaseController{
     			System.out.println(userId+" "+score);
         		userJobService.scoreUserWork(userId, jobId, score);
     		}
+    		
     		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
     		logger.error("用户评分错误",e);

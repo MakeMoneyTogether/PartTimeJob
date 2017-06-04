@@ -159,7 +159,7 @@ public class UserJobService {
         UserInfo userInfo= userService.getByPhone(phone);
         JobInfo jobInfo = jobService.getById(jid);
         //如果兼职开始时间小于当前时间,就不允许报名
-        if(jobInfo.getJobStartTime().getTime()<new Date().getTime()){
+        if(jobInfo.getJobValidateTime().getTime()<new Date().getTime()){
         	return null;
         }
         if(!checkUserJob(userInfo.getUid(), jobInfo)){
