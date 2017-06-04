@@ -189,7 +189,7 @@ function localset(){
 		    console.log(returnCitySN.cip);
 		    cname = returnCitySN.cname.replace(/.*[省|自治区]/,'');
 		    if(cname == ''){
-		    	alert('定位失败，请手动选择!');
+		    	$.alert('定位失败，请手动选择!');
 		    }else{
 			    ncity.text(cname);
 			    ncity.attr('value',returnCitySN.cip);

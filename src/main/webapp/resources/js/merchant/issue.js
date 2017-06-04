@@ -23,6 +23,11 @@ function check(){
 		$.alert('请输入正确的薪水');
 		return;
 	}
+	hourOfDay = $('#hourOfDay').val();
+	if(!paymentMoney.match(/^(\d)+(\.(\d)+)?$/)){
+		$.alert('请输入正确的工作强度');
+		return;
+	}
 	jobStartTime = new Date($('#jobStartTime').val()).getTime();
 	jobEndTime = new Date($('#jobEndTime').val()).getTime();
 	jobValidateTime = new Date($('#jobValidateTime').val()).getTime();
@@ -54,7 +59,7 @@ function check(){
 	citycode = $("#city-picker").attr('data-code');
 	jobType = $('#jobType').val();
 	jobDesc = $('#jobDesc').val();
-	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode};
+	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, hourOfDay:hourOfDay,jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode};
 	issue(data);
 }
 function issue(data){
