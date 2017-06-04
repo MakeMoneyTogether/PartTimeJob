@@ -301,7 +301,7 @@ public class MchntService {
 		//最后在提交
 		jobInfoDao.save(tblJob);
 		mchntInfoDao.modify(tblMchntInfo);
-		mchntScheduleDao.add(mchntCd, money, CommonCanstant.MONEY_TYPE_DEPOSIT, null, false);
+		mchntScheduleDao.add(mchntCd, money, CommonCanstant.MONEY_TYPE_DEPOSIT, "", false);
 		return ResponseCode.SUCCESS;
 	}
 	
