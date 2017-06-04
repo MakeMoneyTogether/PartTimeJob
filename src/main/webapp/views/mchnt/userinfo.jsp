@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" 
-	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,68 +8,71 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>兼职</title>
+<title>兼职-商家端</title>
 <base href="<%=basePath%>">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="static/css/weui.min.css">
 <link rel="stylesheet" href="static/css/jquery-weui.min.css">
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
 <link rel="stylesheet" href="static/css/jz.css">
-<link rel="stylesheet" href="static/css/col.css">
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
 		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
-			<span id="jz-title">钱包</span>
+			<span id="jz-title">${user.name }</span>
 		</div>
 	</div>
 	<div class="weui-form-preview">
-		<div class="weui-form-preview__hd">
-			<div class="col-40 div_left">
-				<span style="margin-left:5%;float:left;">当前余额</span><br>
-				<span style="margin-left:5%;float:left;" id="moneyable">${me.balance }</span>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+				<div class="weui-cell__bd">
+					${user.name }
+				</div>
 			</div>
-			<div class="col-20 div_right" style="padding-top:5%;">
-				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="pay();">充值</button>
-				<button class="weui-btn weui-btn_mini weui-btn_primary" onclick="cash();">提现</button>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+				<div class="weui-cell__bd">
+					${user.gender }
+				</div>
 			</div>
-			<div style="clear:both"></div>
-		</div>
-		<div class="weui-panel weui-panel_access">
-			<div class="weui-panel__hd">已邀请</div>
-			<div id="inv_person">
+			<hr>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">生日</label></div>
+				<div class="weui-cell__bd">
+					${user.birthday }	
+				</div>
 			</div>
-		</div>
-		<div class="weui-panel weui-panel_access">
-			<div class="weui-panel__hd">提现进度</div>
-			<div id="schedule">
-				<div class="weui-cell weui-cell_access">
-					<div class="weui-cell__hd">
-						<i class="fa fa-twitter"></i>
-					</div>
-					<div class="weui-cell__bd">
-						<p style="margin-left:10%;">张三</p>
-					</div>
-					<div class="">
-						+5.00
-					</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">学校</label></div>
+				<div class="weui-cell__bd">
+					${user.school }
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">专业</label></div>
+				<div class="weui-cell__bd">
+					${user.major }
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">意向方向</label></div>
+				<div class="weui-cell__bd">
+					${user.direction }
 				</div>
 			</div>
 		</div>
 	</div>
 <div style="display:none;">
+<div id="code_bak"></div>
 </div>	
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
-<script src="static/js/user/wallet.js"></script>
+<script src="static/js/dateutil.js"></script>
 <script type="text/javascript">
-</script>
-<script>
-getInvitation();
-getSchedule();
 </script>
 </body>
 </html>

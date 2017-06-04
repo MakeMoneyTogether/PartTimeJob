@@ -13,6 +13,7 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
 import com.partjob.service.UserJobService;
+import com.partjob.service.UserService;
 
 /**
  * Created by InnerAc on 17/5/15.
@@ -26,6 +27,8 @@ public class MchntPageController {
 	JobService jobService;
 	@Autowired
     UserJobService userJobService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("{page}")
 	public String merto(@PathVariable String page){
@@ -60,8 +63,22 @@ public class MchntPageController {
 	 */
 	@RequestMapping("evaluate/{jid}")
 	public String evaluate(@PathVariable int jid,Model model){
+		List<UserInfo> users = userJobService.getUsersOfJob(jid);
+		model.addAttribute("users", users);
 		model.addAttribute("jid", jid);
 //		model.addAttribute("users",new ArrayList<UserInfo>());	//这里要包含用户id，用户姓名
 		return "mchnt/evaluate";
+	}
+	/**
+	 * 查看用户信息
+	 * @param uid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("userinfo/{uid}")
+	public String userinfo(@PathVariable int uid,Model model){
+		UserInfo user = userService.getUser(uid);
+		model.addAttribute("user", user);
+		return "mchnt/userinfo";
 	}
 }

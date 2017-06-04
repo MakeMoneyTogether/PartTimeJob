@@ -107,23 +107,21 @@
 	</div>
 	<c:choose >
 		<c:when test="${job.jobSt==1 }">
-		<div class="weui-tabbar">
-		<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
-			<div class="weui-tabbar__icon">
-				<i class="fa fa-users"></i>
-			</div>
+		<div class="weui-tabbar" style="position:fixed;">
+			<div class="weui-navbar__item">
+			<a href="mchntp/peoplem/${job.jobId }" class="weui-tabbar__item">
 			<p class="weui-tabbar__label">人员录用</p>
-		</a>
+			</a>
+			</div>
 		</div>
 		</c:when>
 		<c:when test="${job.jobSt==2 }">
-		<div class="weui-tabbar">
-		<a href="mchntp/evaluate/${job.jobId }" class="weui-tabbar__item">
-			<div class="weui-tabbar__icon">
-				<i class="fa fa-comment"></i>
-			</div>
+		<div class="weui-tabbar" style="position:fixed;">
+			<div class="weui-navbar__item">
+			<a href="mchntp/evaluate/${job.jobId }" class="weui-tabbar__item">
 			<p class="weui-tabbar__label">人员评价</p>
-		</a>
+			</a>
+			</div>
 		</div>
 		</c:when>
 	</c:choose>

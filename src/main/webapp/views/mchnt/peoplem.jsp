@@ -32,7 +32,7 @@
 		<c:forEach items="${users }" var="user">
 			<div class="weui-cell">
 				<div class="weui-cell__hd" style="color:red;">${user.grade }</div>
-				<div class="weui-cell__bd">
+				<div onclick="showInfo(${user.uid });" class="weui-cell__bd">
 					<p>${user.name }</p>
 				</div>
 				<div class="weui-cell__ft">
@@ -58,6 +58,9 @@
 	FastClick.attach(document.body);
 	});
 	//getPeople();
+	function showInfo(uid){
+		window.location.href="mchntp/userinfo/"+uid;
+	}
 </script>
 </body>
 </html>

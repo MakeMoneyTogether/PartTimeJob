@@ -65,6 +65,15 @@
 			</div>
 		</div>
 		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">工作强度</label></div>
+			<div class="col-70">
+				<input id="hourOfDay" class="weui-input" type="number" placeholder="一天工作几小时">
+			</div>
+			<div class="col-30">
+				小时/天
+			</div>
+		</div>
+		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">开始时间</label></div>
 			<div class="weui-cell__bd">
 				<input id="jobStartTime" class="weui-input" type="date" placeholder="请选择时间">

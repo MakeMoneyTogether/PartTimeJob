@@ -100,6 +100,8 @@ public class UserService {
     	tblUserInfo.setBirthday(userInfo.getBirthday());
     	tblUserInfo.setSchool(userInfo.getSchool());
     	tblUserInfo.setGender(userInfo.getGender());
+    	tblUserInfo.setMajor(userInfo.getMajor());
+    	tblUserInfo.setDirection(userInfo.getDirection());
     	userInfoDao.update(tblUserInfo);
     	return ResponseCode.SUCCESS;
     }
@@ -134,7 +136,7 @@ public class UserService {
         if (tblUserInfo == null) return null;
         List<TblInvitationRecord> records = invitationRecordDao.getByInviterId(tblUserInfo.getUid());
         if (ListUtil.isEmpty(records)) return null;
-        List<InvitationInfo> invitationInfos =  new ArrayList<>();
+        List<InvitationInfo> invitationInfos =  new ArrayList<InvitationInfo>();
         for (TblInvitationRecord record : records) {
             TblUserInfo user = userInfoDao.get(record.getUid());
             invitationInfos.add(new InvitationInfo(user.getName(), record.getStatus()));
