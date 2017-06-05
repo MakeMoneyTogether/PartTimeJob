@@ -50,17 +50,14 @@ td > a{
 						<th>操作</th>
 					</tr>
 					</thead>
-					<tbody id="mchnts">
+					<tbody id="users">
+						<c:forEach items="${users }" var="user">
 						<tr>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
+							<td>${user.name }</td>
+							<td>${user.phone }</td>
+							<td><a onclick="showInfo(${user.uid});">查看</a></td>
 						</tr>
-						<tr>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
-						</tr>
+						</c:forEach>
 					</tbody>	
 					</table>
 					</div>
@@ -72,14 +69,14 @@ td > a{
 		</section>
 		<!-- /.content -->
 	</div>
-	<div class="modal fade" id="mchntInfo" tabindex="-1" role="dialog" aria-labelledby="mchntName" aria-hidden="true">
+	<div class="modal fade" id="userInfo" tabindex="-1" role="dialog" aria-labelledby="userName" aria-hidden="true">
 		<div class="modal-dialog" style="margin-top:10%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
 					</button>
-					<h4 class="modal-title" id="mchntName">
+					<h4 class="modal-title" id="userName">
 						用户名称
 					</h4>
 				</div>
@@ -88,11 +85,23 @@ td > a{
 					<tbody id="users">
 						<tr>
 							<td>用户名称</td>
-							<td>蜂仙人</td>
+							<td id="name"></td>
+						</tr>
+						<tr>
+							<td>性别</td>
+							<td id="gender"></td>
 						</tr>
 						<tr>
 							<td>联系电话</td>
-							<td>10086</td>
+							<td id="phone"></td>
+						</tr>
+						<tr>
+							<td>学校</td>
+							<td id="school"></td>
+						</tr>
+						<tr>
+							<td>专业</td>
+							<td id="major"></td>
 						</tr>
 					</tbody>	
 					</table>

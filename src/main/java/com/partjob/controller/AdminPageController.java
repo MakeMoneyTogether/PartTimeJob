@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.partjob.model.JobInfo;
+import com.partjob.model.MchntInfo;
+import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
+import com.partjob.service.MchntService;
 import com.partjob.service.UserJobService;
+import com.partjob.service.UserService;
 
 @Controller
 @RequestMapping(value = "adminp")
@@ -20,6 +24,10 @@ public class AdminPageController {
     UserJobService userJobService;
 	@Autowired
 	JobService jobService;
+	@Autowired
+	MchntService mchntService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("{page}")
 	public String adminto(@PathVariable String page){
@@ -36,5 +44,20 @@ public class AdminPageController {
 		List<JobInfo> jobs = jobService.getUncheckJobs();
 		model.addAttribute("jobs", jobs);
 		return "admin/jobcheck";
+	}
+	
+	@RequestMapping("mchnt")
+	public String mchnt(Model model){
+		List<MchntInfo> mchntInfos = mchntService.getAllMchnt();
+		model.addAttribute("mchnts", mchntInfos);
+		return "admin/mchnt";
+	}
+	
+	@RequestMapping("user")
+	public String user(Model model){
+		List<UserInfo> userInfos = userService.getAllUser();
+		System.out.println(userInfos.size());
+		model.addAttribute("users", userInfos);
+		return "admin/user";
 	}
 }

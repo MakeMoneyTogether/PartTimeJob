@@ -52,18 +52,14 @@ td > a{
 					</tr>
 					</thead>
 					<tbody id="mchnts">
+						<c:forEach items="${mchnts }" var="mchnt">
 						<tr>
-							<td>大马蜂巢</td>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
+							<td>${mchnt.mchntName }</td>
+							<td>${mchnt.connName }</td>
+							<td>${mchnt.connPhone }</td>
+							<td><a onclick="showInfo(${mchnt.mchntCd });">查看</a></td>
 						</tr>
-						<tr>
-							<td>大马蜂巢</td>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
-						</tr>
+						</c:forEach>
 					</tbody>	
 					</table>
 					</div>
@@ -82,7 +78,7 @@ td > a{
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
 					</button>
-					<h4 class="modal-title" id="mchntName">
+					<h4 class="modal-title" id="mchntTitle">
 						商户名称
 					</h4>
 				</div>
@@ -91,19 +87,19 @@ td > a{
 					<tbody>
 						<tr>
 							<td>商户名称</td>
-							<td>大马蜂巢</td>
+							<td id="mchntName">大马蜂巢</td>
 						</tr>
 						<tr>
 							<td>商户地址</td>
-							<td>江苏-南京-佛成西路101号</td>
+							<td id="mchntAddress">江苏-南京-佛成西路101号</td>
 						</tr>
 						<tr>
 							<td>联系人</td>
-							<td>蜂仙人</td>
+							<td id="connName">蜂仙人</td>
 						</tr>
 						<tr>
 							<td>联系电话</td>
-							<td>10086</td>
+							<td id="connPhone">10086</td>
 						</tr>
 					</tbody>	
 					</table>

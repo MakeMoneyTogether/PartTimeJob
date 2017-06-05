@@ -147,7 +147,7 @@ td > a{
 <script src="static/js/dateutil.js"></script>
 <script src="static/js/admin/jobcheck.js"></script>
 <script type="text/javascript">
-$('#nav_merchant').addClass('active');
+$('#nav_jobcheck').addClass('active');
 </script>
 </body>
 </html>
