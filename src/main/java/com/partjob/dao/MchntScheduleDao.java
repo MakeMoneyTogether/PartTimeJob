@@ -1,6 +1,7 @@
 package com.partjob.dao;
 
 import com.partjob.constant.CommonCanstant;
+import com.partjob.entity.TblMchntInfo;
 import com.partjob.entity.TblMchntSchedule;
 import com.partjob.entity.TblUserSchedule;
 import com.partjob.utils.HibernateBaseDao;
@@ -43,4 +44,9 @@ public class MchntScheduleDao extends HibernateBaseDao<TblMchntSchedule, Seriali
         String hql="from TblMchntSchedule ms where ms.mchntCd=? order by time desc";
         return find(hql, mid);
     }
+
+	public List<TblMchntSchedule> getCashs() {
+		String hql="from TblMchntSchedule ms where ms.status=? and ms.type=? order by time desc";
+        return find(hql, CommonCanstant.UNCHECKED,CommonCanstant.MONEY_TYPE_CASH);
+	}
 }

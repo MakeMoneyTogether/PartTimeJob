@@ -12,6 +12,9 @@ public class MchntSchedule {
     private String status;
     private String type;
     private String time;
+    private String mname;
+    private String cname;
+    private String phone;
 
     public int getId() {
         return id;
@@ -62,6 +65,27 @@ public class MchntSchedule {
 		this.time = time;
 	}
 
-   
+	public String getMname() {
+		return mname;
+	}
 
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

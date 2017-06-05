@@ -44,4 +44,9 @@ public class UserScheduleDao extends HibernateBaseDao<TblUserSchedule, Serializa
         String hql="from TblUserSchedule us where us.uid=? order by time desc";
         return find(hql, uid);
     }
+
+	public List<TblUserSchedule> getCashs() {
+		String hql="from TblUserSchedule us where us.status=? and us.type=? order by time desc";
+		return find(hql, CommonCanstant.UNCHECKED,CommonCanstant.MONEY_TYPE_CASH);
+	}
 }

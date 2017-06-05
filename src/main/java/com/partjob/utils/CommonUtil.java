@@ -56,7 +56,7 @@ public class CommonUtil {
     }
     
     /**
-     * 获取当前时间戳
+     * 获取当前日期串
      * 
      * @return
      */
@@ -66,7 +66,7 @@ public class CommonUtil {
     }
     
     /**
-     * 获取当前时间戳
+     * 获取当前时间串
      * 
      * @return
      */
@@ -94,6 +94,19 @@ public class CommonUtil {
      * @return
      */
     public static String transTimeStamp(Timestamp time) {
+        String s = "";
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        s = sdf.format(time);
+        return s;
+    }
+    /**
+     * 时间戳格式化为字符串
+     * 
+     * @since
+     * @param time
+     * @return
+     */
+    public static String transDate(Date time) {
         String s = "";
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         s = sdf.format(time);

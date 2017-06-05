@@ -406,9 +406,22 @@ public class MchntService {
 			return null;
 		}
 		ApplicationUtil.copyProperties(tblMchntSchedule, mchntSchedule);
-		 String money=BigDecimalUtil.divide100(Integer.toString(tblMchntSchedule.getMoney()));
-		 mchntSchedule.setMoney(money);
+		String money=BigDecimalUtil.divide100(Integer.toString(tblMchntSchedule.getMoney()));
+		mchntSchedule.setMoney(money);
+		mchntSchedule.setTime(CommonUtil.transDate(tblMchntSchedule.getTime()));
+		TblMchntInfo mchntInfo = mchntInfoDao.get(tblMchntSchedule.getMchntCd());
+		mchntSchedule.setMname(mchntInfo.getMchntName());
+		mchntSchedule.setCname(mchntInfo.getConnName());
+		mchntSchedule.setPhone(mchntInfo.getConnPhone());
 		return mchntSchedule;
+	}
+	
+	private List<MchntSchedule> transListSchedules(List<TblMchntSchedule> tblMchntSchedules){
+		List<MchntSchedule> mchntSchedules = new ArrayList<MchntSchedule>();
+		for(TblMchntSchedule tblMchntSchedule : tblMchntSchedules){
+			mchntSchedules.add(transModel(tblMchntSchedule));
+		}
+		return mchntSchedules;
 	}
 	/**
 	 * 数据转换
@@ -457,5 +470,10 @@ public class MchntService {
 		String str="<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wx2421b1c4370ec43b]]></appid><mch_id><![CDATA[10000100]]></mch_id><device_info><![CDATA[1000]]></device_info><nonce_str><![CDATA[TN55wO9Pba5yENl8]]></nonce_str><sign><![CDATA[BDF0099C15FF7BC6B1585FBB110AB635]]></sign><result_code><![CDATA[SUCCESS]]></result_code></xml> ";
 		CheckTransResult result=CommonUtil.xml2Object(str, CheckTransResult.class);
 		System.out.println(result);
+	}
+
+	public List<MchntSchedule> getCashs() {
+		List<TblMchntSchedule> tblMchntSchedules = mchntScheduleDao.getCashs();
+		return transListSchedules(tblMchntSchedules);
 	}
 }

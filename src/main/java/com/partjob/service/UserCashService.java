@@ -16,6 +16,7 @@ import com.partjob.model.UserSchedule;
 import com.partjob.model.WcPay;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.BigDecimalUtil;
+import com.partjob.utils.CommonUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -162,8 +163,17 @@ public class UserCashService {
             ApplicationUtil.copyProperties(tblUserSchedule, userSchedule);
             String money=BigDecimalUtil.divide100(Integer.toString(tblUserSchedule.getMoney()));
             userSchedule.setMoney(money);
+            userSchedule.setTime(CommonUtil.transDate(tblUserSchedule.getTime()));
+            TblUserInfo userInfo = userInfoDao.get(tblUserSchedule.getUid());
+            userSchedule.setUname(userInfo.getName());
+            userSchedule.setPhone(userInfo.getPhone());
             userSchedules.add(userSchedule);
         }
         return userSchedules;
     }
+
+	public List<UserSchedule> getCashs() {
+		List<TblUserSchedule> tblUserSchedules = userScheduleDao.getCashs();
+		return transModelList(tblUserSchedules);
+	}
 }

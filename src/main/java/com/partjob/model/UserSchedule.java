@@ -12,6 +12,8 @@ public class UserSchedule {
     private String status;
     private String type;
     private String time;
+    private String uname;
+    private String phone;
 
     public int getId() {
         return id;
@@ -61,6 +63,20 @@ public class UserSchedule {
 		this.time = time;
 	}
 
-   
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 }
