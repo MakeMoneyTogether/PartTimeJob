@@ -95,7 +95,9 @@ public class TransService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.info("提现失败");
+			logger.info("提现失败",e);
+			logger.info("开始数据回滚");
+			
 			return ResponseCode.FAIL;
 		}
 	}

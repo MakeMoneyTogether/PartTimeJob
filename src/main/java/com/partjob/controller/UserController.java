@@ -272,8 +272,27 @@ public class UserController extends BaseController{
 			int result=userCashService.checkCash(id);
 			return result;
 		}catch (Exception e){
-			logger.error("用户发起提现请求失败失败",e);
+			logger.error("审核用户提现请求失败",e);
 			return ResponseCode.FAIL;
 		}
 	}
+	
+	/**
+	 * 提现审核不通过
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = { "noPassCash" })
+	@ResponseBody
+	public int noPassCash(@RequestParam(value = "id") int id,HttpServletRequest request){
+		try{
+			int result=userCashService.noPassCash(id);
+			return result;
+		}catch (Exception e){
+			logger.error("拒绝用户提现失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
 }

@@ -1,7 +1,10 @@
 package com.partjob.service;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.mysql.fabric.Response;
@@ -255,10 +258,32 @@ public class MchntService {
 		}else{
 			tblMchntSchedule.setStatus(CommonCanstant.UNAVAILAB);
 			mchntScheduleDao.modify(tblMchntSchedule);
+			
+			//回滚商户余额
+			TblMchntInfo mchntInfo =mchntInfoDao.get(tblMchntSchedule.getMchntCd());
+			mchntInfo.setBalance(mchntInfo.getBalance()+tblMchntSchedule.getMoney());
+			mchntInfoDao.modify(mchntInfo);
+			
 			return ResponseCode.CASH_FAIL;
 		}
 		
 		
+	}
+	
+	/**
+	 * 审核商户提现不通过
+	 * @param id
+	 * @return
+	 */
+	public int notPassCash(int id){
+		TblMchntSchedule tblMchntSchedule=mchntScheduleDao.get(id);
+		TblMchntInfo mchntInfo =mchntInfoDao.get(tblMchntSchedule.getMchntCd());
+		
+		mchntInfo.setBalance(mchntInfo.getBalance()+tblMchntSchedule.getMoney());
+		tblMchntSchedule.setStatus(CommonCanstant.UNAVAILAB);
+		mchntInfoDao.modify(mchntInfo);
+		mchntScheduleDao.modify(tblMchntSchedule);
+		return ResponseCode.SUCCESS;
 	}
 	
 	/**
@@ -281,14 +306,17 @@ public class MchntService {
 		//扣除商家账户金额
 		int money=0;
 		int paymentMoney=Integer.parseInt(BigDecimalUtil.mult100(job.getPaymentMoney()));
-		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
+//		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
 		//判断商户的计费类型
 		if(job.getPaymentType() == CommonCanstant.PAY_TYPE_HOUR){
-			int hour=(int) (time/1000/60);
+//			int hour=(int) (time/1000/60);
+			int hour=differeHour(job.getJobEndTime(), job.getJobStartTime(), job.getHoursDay()==0?8:job.getHoursDay());
 			money=paymentMoney*job.getNumPeople()*hour;
 			
 		}else if(job.getPaymentType() == CommonCanstant.PAY_TYPE_DAY){
-			int day=(int)(time/1000/60/24);
+//			int day=(int)(time/1000/60/24);
+			int day=differeDay(job.getJobEndTime(), job.getJobStartTime());
+			
 			money=paymentMoney*job.getNumPeople()*day;
 		}
 		TblMchntInfo tblMchntInfo=mchntInfoDao.get(mchntCd);
@@ -317,14 +345,16 @@ public class MchntService {
 		
 		//扣除商家账户金额
 		int money=0;
-		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
+//		long time=job.getJobEndTime().getTime()-job.getJobStartTime().getTime();
 		//判断商户的计费类型
 		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
-			int hour=(int) (time/1000/60);
+//			int hour=(int) (time/1000/60);
+			int hour=differeHour(job.getJobEndTime(), job.getJobStartTime(), job.getHoursDay()==0?8:job.getHoursDay());
 			money=job.getPaymentMoney()*hour;
 			
 		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
-			int day=(int)(time/1000/60/24);
+//			int day=(int)(time/1000/60/24);
+			int day=differeDay(job.getJobEndTime(), job.getJobStartTime());
 			money=job.getPaymentMoney()*day;
 		}		
 		
@@ -466,12 +496,50 @@ public class MchntService {
 		return ResponseCode.SUCCESS;
 	}
 
-	public static void main(String[] args) {
-		String str="<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wx2421b1c4370ec43b]]></appid><mch_id><![CDATA[10000100]]></mch_id><device_info><![CDATA[1000]]></device_info><nonce_str><![CDATA[TN55wO9Pba5yENl8]]></nonce_str><sign><![CDATA[BDF0099C15FF7BC6B1585FBB110AB635]]></sign><result_code><![CDATA[SUCCESS]]></result_code></xml> ";
-		CheckTransResult result=CommonUtil.xml2Object(str, CheckTransResult.class);
-		System.out.println(result);
+/**
+ * 计算两个时间之间相差多少天
+ * @param start
+ * @param end
+ * @return
+ */
+	private int differeDay(Timestamp start,Timestamp end){
+		Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(start);
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(end);
+        
+        int dayStart=cal1.get(Calendar.DAY_OF_YEAR);
+        int dayEnd=cal2.get(Calendar.DAY_OF_YEAR);
+        return dayEnd-dayStart;
 	}
-
+	
+	/**
+	 * 计算两个日期之间相差多少个工作小时
+	 * @param start
+	 * @param end
+	 * @param hour 每天工作的小时数
+	 * @return
+	 */
+	private int differeHour(Timestamp start,Timestamp end,int hour){
+		Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(start);
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(end);
+        
+        int dayStart=cal1.get(Calendar.DAY_OF_YEAR);
+        int dayEnd=cal2.get(Calendar.DAY_OF_YEAR);
+        
+        int hourStart=cal1.get(Calendar.HOUR_OF_DAY);
+        int hourEnd=cal2.get(Calendar.HOUR_OF_DAY);
+        
+        if(dayEnd>dayStart){
+        	return (dayEnd-dayStart)*hour+hourEnd-hourStart;
+        }else{
+        	return hourEnd-hourStart;
+        }
+	}
 	public List<MchntSchedule> getCashs() {
 		List<TblMchntSchedule> tblMchntSchedules = mchntScheduleDao.getCashs();
 		return transListSchedules(tblMchntSchedules);

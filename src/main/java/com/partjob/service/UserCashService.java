@@ -131,10 +131,29 @@ public class UserCashService {
 		}else{
 			tblUserSchedule.setStatus(CommonCanstant.UNAVAILAB);
 			userScheduleDao.modify(tblUserSchedule);
+			
+			TblUserInfo userInfo=userInfoDao.get(tblUserSchedule.getUid());
+			userInfo.setBalance(userInfo.getBalance()+tblUserSchedule.getMoney());
+			userScheduleDao.modify(tblUserSchedule);
+			userInfoDao.modify(userInfo);
 			return ResponseCode.CASH_FAIL;
 		}
 		
 		
+	}
+	/**
+	 * 提现审核不通过
+	 * @param id
+	 * @return
+	 */
+	public int noPassCash(int id){
+		TblUserSchedule tblUserSchedule=userScheduleDao.get(id);
+		TblUserInfo userInfo=userInfoDao.get(tblUserSchedule.getUid());
+		userInfo.setBalance(userInfo.getBalance()+tblUserSchedule.getMoney());
+		tblUserSchedule.setStatus(CommonCanstant.UNAVAILAB);
+		userScheduleDao.modify(tblUserSchedule);
+		userInfoDao.modify(userInfo);
+		return ResponseCode.SUCCESS;
 	}
 
     public List<UserSchedule> getByPhone(String phone) {

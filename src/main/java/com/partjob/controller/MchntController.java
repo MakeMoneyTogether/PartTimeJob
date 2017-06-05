@@ -422,6 +422,18 @@ public class MchntController extends BaseController {
 		}
 	}
 	
+	
+	@RequestMapping(value = { "notPassCash" })
+	@ResponseBody
+	public int notPassCash(@RequestParam(value = "id") int id,HttpServletRequest request){
+		try{
+			int result=mchntService.notPassCash(id);
+			return result;
+		}catch (Exception e){
+			logger.error("商户发起提现请求失败失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
 	/**
      *  查看某个用户的交易流水
      * @param phone
