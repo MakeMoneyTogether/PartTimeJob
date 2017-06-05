@@ -32,7 +32,8 @@ public class JobService {
     private JobInfoDao jobInfoDao;
     @Autowired
     private NetJobDao netJobDao;
-   
+    @Autowired
+    MchntService mchntService;
 
     public JobInfo getById(int jid){
         TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
@@ -123,6 +124,7 @@ public class JobService {
         String tmoney = ""+smoney;
         tmoney = BigDecimalUtil.divide100(tmoney);
         jobInfo.setPaymentMoney(tmoney);
+        jobInfo.setMchntName(mchntService.getMchntInfo(tblJobInfo.getMchntCd()).getMchntName());
         return jobInfo;
     }
     
@@ -158,5 +160,26 @@ public class JobService {
         }
         return netJobs;
     }
+
+	public List<JobInfo> getUncheckJobs() {
+		List<TblJobInfo> tJobInfos = jobInfoDao.getJobByStatus(CommonCanstant.JOB_AUDIT);
+		return transJobList(tJobInfos);
+	}
+
+	/**
+	 * 兼职进入准备中状态
+	 * @param jid
+	 */
+	public void passJob(int jid) {
+		TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
+		tblJobInfo.setJobSt(CommonCanstant.JOB_PENDING);
+		jobInfoDao.modify(tblJobInfo);
+	}
+
+	public void refuseJob(int jid) {
+		TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
+		tblJobInfo.setJobSt(CommonCanstant.JOB_REJECTED);
+		jobInfoDao.modify(tblJobInfo);
+	}
 
 }

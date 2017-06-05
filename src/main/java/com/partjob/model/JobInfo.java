@@ -22,6 +22,7 @@ public class JobInfo {
 	    private Integer joinNum;
 	    private Integer cityCode;
 	    private Integer userJobStatu;
+	    private String mchntName;
 		public int getJobId() {
 			return jobId;
 		}
@@ -131,9 +132,10 @@ public class JobInfo {
 		public void setHoursDay(int hoursDay) {
 			this.hoursDay = hoursDay;
 		}
-		
-	    
-	    
-	    
-
+		public String getMchntName() {
+			return mchntName;
+		}
+		public void setMchntName(String mchntName) {
+			this.mchntName = mchntName;
+		}
 }

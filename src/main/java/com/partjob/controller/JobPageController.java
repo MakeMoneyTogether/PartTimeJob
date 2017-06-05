@@ -294,4 +294,36 @@ public class JobPageController extends BaseController{
     	}
     }
     
+    /**
+     * 管理员审核通过兼职
+     * @param jid	兼职id
+     * @return
+     */
+    @RequestMapping(value = "passJob/{jid}")
+    @ResponseBody
+    public Object passJob(@PathVariable int jid){
+    	try {
+    		jobService.passJob(jid);
+			return ResponseCode.SUCCESS;
+		} catch (Exception e) {
+			return ResponseCode.FAIL;
+		}
+    }
+    
+    /**
+     * 管理员审核拒绝兼职
+     * @param jid	兼职id
+     * @return
+     */
+    @RequestMapping(value = "refuseJob/{jid}")
+    @ResponseBody
+    public Object refuseJob(@PathVariable int jid){
+    	try {
+    		jobService.refuseJob(jid);
+			return ResponseCode.SUCCESS;
+		} catch (Exception e) {
+			return ResponseCode.FAIL;
+		}
+    }
+    
 }

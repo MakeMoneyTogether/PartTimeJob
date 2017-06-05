@@ -97,4 +97,9 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
     	return findPage(hql.toString(), offset, length, values.toArray());
     }
 
+	public List<TblJobInfo> getJobByStatus(int josSt) {
+		String hql = "from TblJobInfo job where job.jobSt=?";
+        return find(hql, josSt);
+	}
+
 }
