@@ -272,7 +272,7 @@ public class UserController extends BaseController{
 			int result=userCashService.checkCash(id);
 			return result;
 		}catch (Exception e){
-			logger.error("商户发起提现请求失败失败",e);
+			logger.error("用户发起提现请求失败失败",e);
 			return ResponseCode.FAIL;
 		}
 	}
