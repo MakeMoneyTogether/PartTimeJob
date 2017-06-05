@@ -53,20 +53,15 @@ td > a{
 					</tr>
 					</thead>
 					<tbody id="jobs">
-						<tr>
-							<td>大马蜂招工蜂</td>
-							<td>大马蜂巢</td>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
+						<c:forEach items="${jobs }" var="job">
+						<tr id="${job.jobId }">
+							<td>${job.jobTitle }</td>
+							<td>${job.mchntName }</td>
+							<td>${job.connectName }</td>
+							<td>${job.connectPhone }</td>
+							<td><a onclick="showInfo(${job.jobId});">查看</a></td>
 						</tr>
-						<tr>
-							<td>大马蜂招工蜂</td>
-							<td>大马蜂巢</td>
-							<td>蜂仙人</td>
-							<td>10086</td>
-							<td><a onclick="showInfo(123);">查看</a></td>
-						</tr>
+						</c:forEach>
 					</tbody>	
 					</table>
 					</div>
@@ -94,58 +89,62 @@ td > a{
 					<tbody>
 						<tr>
 							<td>兼职名称</td>
-							<td>大马蜂招工蜂</td>
+							<td id="jobTitle"></td>
 						</tr>
 						<tr>
 							<td>商户名称</td>
-							<td>大马蜂巢</td>
+							<td id="mchntName"></td>
 						</tr>
 						<tr>
 							<td>联系人</td>
-							<td>蜂仙人</td>
+							<td id="connectName"></td>
 						</tr>
 						<tr>
 							<td>联系电话</td>
-							<td>10086</td>
+							<td id="connectPhone"></td>
 						</tr>
 						<tr>
 							<td>起始时间</td>
-							<td>5-31</td>
+							<td id="jobStartTime"></td>
 						</tr>
 						<tr>
 							<td>结束时间</td>
-							<td>6-31</td>
+							<td id="jobEndTime"></td>
 						</tr>
 						<tr>
 							<td>薪资</td>
-							<td>100</td>
+							<td id="paymentMoney"></td>
 						</tr>
 						<tr>
 							<td>招收人数</td>
-							<td>10</td>
+							<td id="numPeople"></td>
 						</tr>
 					</tbody>	
 					</table>
 					<hr>
-					<div>
+					<div id="jobDesc">
 						兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" data-dismiss="modal">通过
+					<button onclick="pass();" type="button" class="btn btn-success" data-dismiss="modal">通过
 					</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">拒绝
+					<button onclick="refuse();" type="button" class="btn btn-danger" data-dismiss="modal">拒绝
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div style="display:none;">
+<div id="jid"></div>
+</div>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/app.min.js"></script>
+<script src="static/js/dateutil.js"></script>
 <script src="static/js/admin/jobcheck.js"></script>
 <script type="text/javascript">
 $('#nav_merchant').addClass('active');
