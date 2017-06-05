@@ -107,6 +107,10 @@ public class MchntService {
 		String passwordMd5 = CommonUtil.toMD5(password);
 		TblMchntInfo tblMchntInfo = mchntInfoDao.getMchntInfo(passwordMd5,
 				phone);
+//		//如果已经别冻结就不能登录
+//		if(tblMchntInfo.getMchntSt()==CommonCanstant.UNAVAILAB){
+//			return null;
+//		}
 		return transModel(tblMchntInfo);
 
 	}
@@ -429,7 +433,18 @@ public class MchntService {
 		return schedules;
 	}
 	
-	
+	/**
+	 * 冻结商户
+	 * @param mchntCd
+	 * @return
+	 */
+	public int freezeMchnt(int mchntCd){
+		TblMchntInfo mchntInfo=mchntInfoDao.get(mchntCd);
+		mchntInfo.setMchntSt(CommonCanstant.UNAVAILAB);
+		mchntInfoDao.modify(mchntInfo);
+		return ResponseCode.SUCCESS;
+		
+	}
 	private MchntSchedule transModel(TblMchntSchedule tblMchntSchedule){
 		MchntSchedule mchntSchedule=new MchntSchedule();
 		if(tblMchntSchedule==null){

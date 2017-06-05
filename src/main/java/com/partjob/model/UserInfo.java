@@ -9,6 +9,7 @@ public class UserInfo {
 
     private int uid;
     private String name;
+    private int userSt;
     private String gender;
     private String phone;
     private String pwd;
@@ -39,7 +40,15 @@ public class UserInfo {
         this.name = name;
     }
 
-    public String getGender() {
+    public int getUserSt() {
+		return userSt;
+	}
+
+	public void setUserSt(int userSt) {
+		this.userSt = userSt;
+	}
+
+	public String getGender() {
         return gender;
     }
 

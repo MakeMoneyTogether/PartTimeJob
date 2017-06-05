@@ -106,6 +106,10 @@ public class UserController extends BaseController{
             logger.info("用户" + phone + "登录失败");
             return ResponseCode.PHONE_PASSWORD_ERROR;
         } else {
+        	//判断用户是否被冻结
+        	if(userInfo.getUserSt()==CommonCanstant.UNAVAILAB){
+        		return ResponseCode.FREEZEED;
+        	}
             logger.info("用户" + phone + "登录成功");
             //要不要存session
             session.setAttribute(CommonCanstant.USER_INFO, userInfo);
@@ -291,6 +295,18 @@ public class UserController extends BaseController{
 			return result;
 		}catch (Exception e){
 			logger.error("拒绝用户提现失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
+	@RequestMapping(value = { "freezeUser" })
+	@ResponseBody
+	public int freezeUser(@RequestParam(value = "userId") int userId,HttpServletRequest request){
+		try{
+			int result=userService.freezeUser(userId);
+			return result;
+		}catch (Exception e){
+			logger.error("冻结用户失败",e);
 			return ResponseCode.FAIL;
 		}
 	}

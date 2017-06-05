@@ -11,6 +11,7 @@ import java.sql.Date;
 public class TblUserInfo {
     private int uid;
     private String name;
+    private int userSt;
     private String gender;
     private String phone;
     private String pwd;
@@ -43,6 +44,16 @@ public class TblUserInfo {
     }
 
     @Basic
+    @Column(name = "user_st")
+    public int getUserSt() {
+		return userSt;
+	}
+
+	public void setUserSt(int userSt) {
+		this.userSt = userSt;
+	}
+
+	@Basic
     @Column(name = "gender")
     public String getGender() {
         return gender;

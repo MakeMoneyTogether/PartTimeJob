@@ -1,5 +1,6 @@
 package com.partjob.service;
 
+import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.InvitationRecordDao;
 import com.partjob.dao.UserInfoDao;
@@ -130,6 +131,17 @@ public class UserService {
         }
     }
 
+    /**
+     * 冻结用户
+     * @param userId
+     * @return
+     */
+    public int freezeUser(int userId){
+    	TblUserInfo userInfo=userInfoDao.get(userId);
+    	userInfo.setUserSt(CommonCanstant.UNAVAILAB);
+    	userInfoDao.modify(userInfo);
+    	return ResponseCode.SUCCESS;
+    }
     public List<InvitationInfo> getInvitations(String phone){
         // 先检查手机有没有注册过
         TblUserInfo tblUserInfo = userInfoDao.getByPhone(phone);

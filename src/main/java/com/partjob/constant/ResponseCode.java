@@ -13,7 +13,7 @@ public class ResponseCode {
 	public static int PHONE_EXIST=1;//手机号已被注册
 	public static int VERCODE_SEND_ERROR=2;//验证码发送失败
 	public static int VERCODE_ERROR=1;//验证码出错
-
+	public static int FREEZEED=3;
 	
 	public static int PAY_FAIL=1;
 	public static int CASH_FAIL=1;

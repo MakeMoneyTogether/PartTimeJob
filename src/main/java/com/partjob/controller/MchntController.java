@@ -150,6 +150,11 @@ public class MchntController extends BaseController {
 		try {
 			MchntInfo mchntInfo = mchntService.logoin(password, phone);
 			if (mchntInfo != null) {
+				//判断商户是否被冻结
+				if(mchntInfo.getMchntSt()==CommonCanstant.UNAVAILAB){
+					return ResponseCode.FREEZEED;
+				}
+				
 				HttpSession session = request.getSession();
 				session.setAttribute(CommonCanstant.MCHNT_INFO, mchntInfo);
 				OpenIdTest.addOpenId(request);
@@ -443,5 +448,22 @@ public class MchntController extends BaseController {
     @ResponseBody
     public Object schedule(@RequestParam(value = "phone") String phone) {
         return mchntService.getMchntSchedules(phone);
+    }
+    
+    /**
+     * 冻结商户
+     * @param mchntCd
+     * @return
+     */
+    @RequestMapping(value = "freeze")
+    @ResponseBody
+    public int freezeMchnt(@RequestParam(value = "mchntCd") int mchntCd){
+    	try{
+			int result=mchntService.freezeMchnt(mchntCd);
+			return result;
+		}catch (Exception e){
+			logger.error("冻结商户失败",e);
+			return ResponseCode.FAIL;
+		}
     }
 }
