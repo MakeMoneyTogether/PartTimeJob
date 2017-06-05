@@ -35,6 +35,14 @@
     <filter-name>mySessionFilter</filter-name>
     <url-pattern>*</url-pattern>
   </filter-mapping> 
+    <filter>
+    <filter-name>XSSCheckFilter</filter-name>
+    <filter-class>com.partjob.filter.XSSCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>XSSCheckFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping> 
   
   <servlet>
     <servlet-name>dispatch</servlet-name>
