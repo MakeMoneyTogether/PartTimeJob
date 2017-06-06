@@ -15,9 +15,9 @@ function notfound(uid){
 	var jid = $('#jid').html();
 	$.ajax({
 		type:'POST',
-		url: 'mchnt/notfound',
+		url: 'mchnt/checkUser',
 		dataType:'json',
-		data:{uid:uid,jid:jid},
+		data:{userId:uid,jobId:jid,status:3},	//工作缺勤
 		success: function(data){
 			if(data == 0){
 				$('#'+uid).parent().remove();
