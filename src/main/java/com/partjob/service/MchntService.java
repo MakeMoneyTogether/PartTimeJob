@@ -60,7 +60,7 @@ public class MchntService {
 	private MchntScheduleDao mchntScheduleDao;
 	@Autowired
 	private UserScheduleDao userScheduleDao;
-	
+	@Autowired
 	private InvitationRecordDao invitationRecordDao;
 	/**
 	 * 保存商户信息
@@ -314,12 +314,12 @@ public class MchntService {
 		//判断商户的计费类型
 		if(job.getPaymentType() == CommonCanstant.PAY_TYPE_HOUR){
 //			int hour=(int) (time/1000/60);
-			int hour=differeHour(job.getJobEndTime(), job.getJobStartTime(), job.getHoursDay()==0?8:job.getHoursDay());
+			int hour=differeHour(job.getJobStartTime(), job.getJobEndTime(), job.getHoursDay()==0?8:job.getHoursDay());
 			money=paymentMoney*job.getNumPeople()*hour;
 			
 		}else if(job.getPaymentType() == CommonCanstant.PAY_TYPE_DAY){
 //			int day=(int)(time/1000/60/24);
-			int day=differeDay(job.getJobEndTime(), job.getJobStartTime());
+			int day=differeDay(job.getJobStartTime(), job.getJobEndTime());
 			
 			money=paymentMoney*job.getNumPeople()*day;
 		}
@@ -344,7 +344,7 @@ public class MchntService {
 	 * @return
 	 */
 	public int clearJob(int jobId){
-		List<TblRelUserJob>list=userJobDao.getByJob(jobId);
+		List<TblRelUserJob>list=userJobDao.getAvailByJid(jobId);
 		TblJobInfo job=jobInfoDao.get(jobId);
 		
 		//扣除商家账户金额
@@ -353,12 +353,12 @@ public class MchntService {
 		//判断商户的计费类型
 		if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_HOUR)){
 //			int hour=(int) (time/1000/60);
-			int hour=differeHour(job.getJobEndTime(), job.getJobStartTime(), job.getHoursDay()==0?8:job.getHoursDay());
+			int hour=differeHour(job.getJobStartTime(),job.getJobEndTime() , job.getHoursDay()==0?8:job.getHoursDay());
 			money=job.getPaymentMoney()*hour;
 			
 		}else if(job.getPaymentType().equals(CommonCanstant.PAY_TYPE_DAY)){
 //			int day=(int)(time/1000/60/24);
-			int day=differeDay(job.getJobEndTime(), job.getJobStartTime());
+			int day=differeDay(job.getJobStartTime(),job.getJobEndTime());
 			money=job.getPaymentMoney()*day;
 		}		
 		
@@ -377,15 +377,21 @@ public class MchntService {
 				
 				//查看邀请码使用情况，如果未被兑现，则进行兑现
 				TblInvitationRecord record=invitationRecordDao.getByUid(user.getUid());
-				if(record.getStatus()==CommonCanstant.INVITATION_UNREALIZE){
-					//查找邀请人，给邀请人账户发红包
-					TblUserInfo tblInvidUser=userInfoDao.get(record.getInvitorId());
-					tblInvidUser.setBalance(tblInvidUser.getBalance()+CommonCanstant.INVITATION_MONEY);
-					userInfoDao.modify(tblInvidUser);
-					//记录红包流水
-					userScheduleDao.add(tblInvidUser.getUid(), CommonCanstant.INVITATION_MONEY, CommonCanstant.MONEY_TYPE_RED_PACKET, "", false);
-					record.setStatus(CommonCanstant.INVITATION_REALIZE);
+				if(record!=null){
+					if(record.getStatus()==CommonCanstant.INVITATION_UNREALIZE){
+						//查找邀请人，给邀请人账户发红包
+						TblUserInfo tblInvidUser=userInfoDao.get(record.getInvitorId());
+						if(tblInvidUser!=null){
+							tblInvidUser.setBalance(tblInvidUser.getBalance()+CommonCanstant.INVITATION_MONEY);
+							userInfoDao.modify(tblInvidUser);
+							//记录红包流水
+							userScheduleDao.add(tblInvidUser.getUid(), CommonCanstant.INVITATION_MONEY, CommonCanstant.MONEY_TYPE_RED_PACKET, "", false);
+							record.setStatus(CommonCanstant.INVITATION_REALIZE);
+						}
+						
+					}
 				}
+				
 				
 				
 			}
@@ -526,7 +532,7 @@ public class MchntService {
         
         int dayStart=cal1.get(Calendar.DAY_OF_YEAR);
         int dayEnd=cal2.get(Calendar.DAY_OF_YEAR);
-        return dayEnd-dayStart;
+        return dayEnd-dayStart+1;
 	}
 	
 	/**

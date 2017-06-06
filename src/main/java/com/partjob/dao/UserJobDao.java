@@ -41,7 +41,12 @@ public class UserJobDao extends HibernateBaseDao<TblRelUserJob, Serializable> {
     }
     
     public List<TblRelUserJob>getAvailByUid(int uid){
-    	String hql = "from TblRelUserJob ujob where ujob.uid=? and statusId!=?";
+    	String hql = "from TblRelUserJob ujob where ujob.uid=? and statusId <> ?";
         return find(hql, uid,CommonCanstant.USER_REFUSE);
     }
+    public List<TblRelUserJob>getAvailByJid(int jid){
+    	String hql = "from TblRelUserJob ujob where ujob.jobId=? and statusId <> ?";
+        return find(hql, jid,CommonCanstant.USER_REFUSE);
+    }
+    
 }

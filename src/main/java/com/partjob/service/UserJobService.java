@@ -156,13 +156,17 @@ public class UserJobService {
 
 	public ApplyJobResponse applyJob(String phone, int jid){
         ApplyJobResponse response = new ApplyJobResponse();
-        UserInfo userInfo= userService.getByPhone(phone);
+//        UserInfo userInfo= userService.getByPhone(phone);
+        TblUserInfo userInfo=userInfoDao.getByPhone(phone);
         JobInfo jobInfo = jobService.getById(jid);
         //如果兼职开始时间小于当前时间,就不允许报名
         if(jobInfo.getJobValidateTime().getTime()<new Date().getTime()){
         	return null;
         }
         if(!checkUserJob(userInfo.getUid(), jobInfo)){
+        	return null;
+        }
+        if(userInfo.getBalance()<CommonCanstant.USER_WORK_CHECK_MONRY){
         	return null;
         }
         //检查用户
