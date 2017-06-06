@@ -31,7 +31,7 @@ import com.partjob.constant.CommonCanstant;
  */
 public class SessionFilter implements Filter {
 
-	private static final String[] IGNORE_URI = { "resources/", "static","login", "index","register" };
+	private static final String[] IGNORE_URI = { "resources/", "static","login", "info", "index","register" };
 
 	public void init(FilterConfig config) throws ServletException {
 	}
@@ -65,7 +65,7 @@ public class SessionFilter implements Filter {
 				// 获取用户信息并放session中
 				
 //				resp.sendRedirect("login?curUrl=" + currentUri);
-				resp.sendRedirect("index");
+				resp.sendRedirect("login");
 				return;
 			}
 		}else if(currentUri.toLowerCase().contains("mchntp")){

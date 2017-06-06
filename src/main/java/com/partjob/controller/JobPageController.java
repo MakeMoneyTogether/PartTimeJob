@@ -287,7 +287,8 @@ public class JobPageController extends BaseController{
     		}
 
     		jobService.endJob(jobId);
-    		return ResponseCode.SUCCESS;
+    		return mchntService.clearJob(jobId);
+//    		return ResponseCode.SUCCESS;
     	}catch(Exception e ){
     		logger.error("用户评分错误",e);
 			return ResponseCode.FAIL;
