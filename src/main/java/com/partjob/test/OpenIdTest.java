@@ -12,8 +12,8 @@ public class OpenIdTest {
 	 * @param request
 	 */
 	public static void addOpenId(HttpServletRequest request){
-		String openId = "oaelhwHooC2z6piKtbBEixeStn38";
-		HttpSession session = request.getSession();
-		session.setAttribute(TransCanstant.OPEN_ID, openId);
+//		String openId = "oaelhwHooC2z6piKtbBEixeStn38";
+//		HttpSession session = request.getSession();
+//		session.setAttribute(TransCanstant.OPEN_ID, openId);
 	}
 }
