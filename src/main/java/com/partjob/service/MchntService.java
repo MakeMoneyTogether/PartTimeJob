@@ -182,7 +182,8 @@ public class MchntService {
 	 * @return
 	 */
 	public WcPay pay(String totalFee, String ip,String openId,int mchntCd){
-		return transService.pay(totalFee, ip, openId);				
+		
+		return transService.pay(BigDecimalUtil.mult100(totalFee), ip, openId);				
 	}
 	
 	/**

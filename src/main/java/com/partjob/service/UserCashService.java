@@ -52,7 +52,7 @@ public class UserCashService {
 	 * @return
 	 */
 	public WcPay pay(String totalFee, String ip,String openId,int uid){
-		return transService.pay(totalFee, ip, openId);				
+		return transService.pay(BigDecimalUtil.mult100(totalFee), ip, openId);				
 	}
 	
 	/**
