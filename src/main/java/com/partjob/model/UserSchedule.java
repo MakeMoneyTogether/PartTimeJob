@@ -9,7 +9,7 @@ public class UserSchedule {
     private int id;
     private int uid;
     private String money;
-    private String status;
+    private int status;
     private String type;
     private String time;
     private String uname;
@@ -39,11 +39,11 @@ public class UserSchedule {
 		this.money = money;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

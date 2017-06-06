@@ -9,7 +9,7 @@ public class MchntSchedule {
     private int id;
     private int mchntCd;
     private String money;
-    private String status;
+    private int status;
     private String type;
     private String time;
     private String mname;
@@ -41,11 +41,11 @@ public class MchntSchedule {
 		this.money = money;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
