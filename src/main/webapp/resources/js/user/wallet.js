@@ -119,18 +119,21 @@ var UNAVAILAB=0;
 var UNCHECKED=2;
 function genSchedule(sche){
 	str = '';
+	if(sche.type != '提现'){
+		return str;
+	}
 	if(sche.status == AVAILAB ){
-		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#999" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
-			+ sche.money
-			+ '</p> </div> <div class="">提现成功</div> </div>';
-	}else if(sche.status == UNCHECKED){
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#99ccff" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
 			+ sche.money
-			+'</p> </div> <div class=""> 申请中...</div> </div>';
+			+ '元</p> </div> <div class="">提现成功</div> </div>';
+	}else if(sche.status == UNCHECKED){
+		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#dccd00" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
+			+ sche.money
+			+'元</p> </div> <div class=""> 申请中...</div> </div>';
 	}else{
 		str = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd"> <i style="color:#ff0000" class="fa fa-money"></i> </div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
 			+ sche.money
-			+'</p> </div> <div class=""> 平台拒绝，已退回余额</div> </div>';
+			+'元</p> </div> <div class=""> 平台拒绝，已退回余额</div> </div>';
 	}
 	return str;
 }

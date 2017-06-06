@@ -36,7 +36,7 @@ td > a{
 		<section class="content">
 			<!-- Main row -->
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="box box-warning">
 					<div class="box-header with-border">
 						<h3 class="box-title">用户列表</h3>
@@ -63,7 +63,27 @@ td > a{
 					</div>
 					</div>
 				</div>		
-				<div class="col-md-12">
+				<div class="col-md-6">
+					<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">交易单</h3>
+					</div>
+					<div class="box-body">
+					<table class="table table-striped table-condensed table-hover">
+					<thead>
+					<tr>
+						<th>时间</th>
+						<th>类型</th>
+						<th>金额</th>
+						<th>状态</th>
+					</tr>
+					</thead>
+					<tbody id="schedule">
+						
+					</tbody>	
+					</table>
+					</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -103,18 +123,25 @@ td > a{
 							<td>专业</td>
 							<td id="major"></td>
 						</tr>
+						<tr>
+							<td>资产</td>
+							<td id="balance"></td>
+						</tr>
 					</tbody>	
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-info" data-dismiss="modal">冻结用户
+					<button onclick="freeze();" type="button" class="btn btn-info" data-dismiss="modal">冻结用户
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div style="display:none;">
+<div id="op_userid"></div>
 </div>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
