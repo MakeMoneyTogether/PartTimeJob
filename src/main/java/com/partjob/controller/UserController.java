@@ -48,7 +48,7 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping(value = "")
 	public String  mchnt() {
-		return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb5bb3526bdc5da3&redirect_uri=http%3A%2F%2Fwww.mapengju.com%2FPartTimeJob%2Fuser%2FredirectUrl&response_type=code&scope=snsapi_base&state=user#wechat_redirect";
+		return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb5bb3526bdc5da3&redirect_uri=http%3A%2F%2Fwww.beejob51.com%2FPartTimeJob%2Fuser%2FredirectUrl&response_type=code&scope=snsapi_base&state=user#wechat_redirect";
 	}
 
 	
