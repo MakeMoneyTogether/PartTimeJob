@@ -17,7 +17,7 @@ public class TransCanstant {
 	public static String PAY_URL="https://api.mch.weixin.qq.com/pay/unifiedorder";
 	public static String CHECK_URL="https://api.mch.weixin.qq.com/pay/orderquery";
 	public static String CASH_URL="https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
-	public static String NOTIFY_MCHNT_URL="http://www.mapengju.com/PartTimeJob/mchnt/redirectUrl";
+	public static String NOTIFY_MCHNT_URL="http://www.beejob51.com/PartTimeJob/mchnt/redirectUrl";
 	
 	
 	public static String SSL_LOCATION="/root/wechat/cert-2/apiclient_cert.p12";
