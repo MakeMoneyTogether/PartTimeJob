@@ -113,6 +113,11 @@
 			<p class="weui-tabbar__label">人员录用</p>
 			</a>
 			</div>
+			<div class="weui-navbar__item">
+			<a href="mchntp/evaluate/${job.jobId }" class="weui-tabbar__item">
+			<p class="weui-tabbar__label">人员评价</p>
+			</a>
+			</div>
 		</div>
 		</c:when>
 		<c:when test="${job.jobSt==2 }">

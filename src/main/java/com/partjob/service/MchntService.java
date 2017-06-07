@@ -365,6 +365,8 @@ public class MchntService {
 		
 		int numpeople=job.getNumPeople();
 		
+		int returnMoney = money * numpeople;
+		
 		//计算有效参加工作的人数，同时给用户进行结算
 		int validateNum =0;//有效参加工作的人
 		for(TblRelUserJob userJob:list){
@@ -400,6 +402,7 @@ public class MchntService {
 		//将为参加兼职人数的资金回返到商户
 		TblMchntInfo mchnt=mchntInfoDao.get(job.getMchntCd());
 		mchnt.setBalance(mchnt.getBalance()+(numpeople-validateNum)*money);
+		mchnt.setFrozenMoney(mchnt.getFrozenMoney() - returnMoney);
 		mchntInfoDao.modify(mchnt);
 		mchntScheduleDao.add(mchnt.getMchntCd(), (numpeople-validateNum)*money, CommonCanstant.MONEY_TYPE_REFUND, "", false);
 		return ResponseCode.SUCCESS;

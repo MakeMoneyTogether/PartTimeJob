@@ -61,7 +61,7 @@ td > a{
 							<td>${mchnt.phone }</td>
 							<td>${mchnt.money }</td>
 							<td>${mchnt.time }</td>
-							<td><a onclick="mpass(${mchnt.id},this)">批准</a> <a>拒绝</a></td>
+							<td><a onclick="mpass(${mchnt.id},this)">批准</a> <a onclick="munpass(${mchnt.id},this)">拒绝</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>	
@@ -92,7 +92,7 @@ td > a{
 							<td>${user.phone }</td>
 							<td>${user.money }</td>
 							<td>${user.time }</td>
-							<td><a onclick="upass(${user.id},this)">批准</a> <a>拒绝</a></td>
+							<td><a onclick="upass(${user.id},this)">批准</a> <a onclick="uunpass(${user.id},this)">拒绝</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>	
