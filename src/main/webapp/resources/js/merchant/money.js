@@ -70,7 +70,7 @@ function postCharge(rmb){
 	phone = $.cookie('phone');
 	$.ajax({
 		type:'POST',
-		url: 'transTest/pay',
+		url: 'mchnt/pay',
 		dataType:'json',
 		data:{phone:phone,totalFee:rmb},
 		success: function(data){
