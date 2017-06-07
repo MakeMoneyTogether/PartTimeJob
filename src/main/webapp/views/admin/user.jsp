@@ -52,7 +52,7 @@ td > a{
 					</thead>
 					<tbody id="users">
 						<c:forEach items="${users }" var="user">
-						<tr>
+						<tr <c:if test="${user.userSt ==0 }">class="info"</c:if>>
 							<td>${user.name }</td>
 							<td>${user.phone }</td>
 							<td><a onclick="showInfo(${user.uid});">查看</a></td>

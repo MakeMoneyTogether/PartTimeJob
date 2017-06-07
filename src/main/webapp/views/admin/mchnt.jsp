@@ -36,7 +36,7 @@ td > a{
 		<section class="content">
 			<!-- Main row -->
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="box box-warning">
 					<div class="box-header with-border">
 						<h3 class="box-title">商户列表</h3>
@@ -53,7 +53,7 @@ td > a{
 					</thead>
 					<tbody id="mchnts">
 						<c:forEach items="${mchnts }" var="mchnt">
-						<tr>
+						<tr <c:if test="${mchnt.mchntSt == 0 }">class="info"</c:if>>
 							<td>${mchnt.mchntName }</td>
 							<td>${mchnt.connName }</td>
 							<td>${mchnt.connPhone }</td>
@@ -65,7 +65,27 @@ td > a{
 					</div>
 					</div>
 				</div>		
-				<div class="col-md-12">
+				<div class="col-md-6">
+					<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">交易单</h3>
+					</div>
+					<div class="box-body">
+					<table class="table table-striped table-condensed table-hover">
+					<thead>
+					<tr>
+						<th>时间</th>
+						<th>类型</th>
+						<th>金额</th>
+						<th>状态</th>
+					</tr>
+					</thead>
+					<tbody id="schedule">
+						
+					</tbody>	
+					</table>
+					</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -101,16 +121,29 @@ td > a{
 							<td>联系电话</td>
 							<td id="connPhone">10086</td>
 						</tr>
+						<tr>
+							<td>可用资产</td>
+							<td id="balance">10086</td>
+						</tr>
+						<tr>
+							<td>冻结资产</td>
+							<td id="frozenMoney">10086</td>
+						</tr>
 					</tbody>	
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
+					<button onclick="freeze();" type="button" class="btn btn-info" data-dismiss="modal">冻结用户
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div style="display:none;">
+<div id="op_mchntid"></div>
 </div>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
