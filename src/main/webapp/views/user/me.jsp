@@ -24,7 +24,7 @@
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">个人中心</span>
 		</div>
-		<div class="placeholder"><a href="userp"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
+		<div class="placeholder"><a href="userp/index"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__hd">

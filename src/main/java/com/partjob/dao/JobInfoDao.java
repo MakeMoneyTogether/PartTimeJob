@@ -1,6 +1,7 @@
 package com.partjob.dao;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	
     	if(!"all".equalsIgnoreCase(dates)){
     		hql.append(" and jobStartTime>? ");
-    		values.add(dates);
+    		values.add(new Timestamp(Long.parseLong(dates)));
     	}
     	
     	if(city!=0){
