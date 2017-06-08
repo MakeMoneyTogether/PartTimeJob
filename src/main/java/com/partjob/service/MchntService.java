@@ -330,7 +330,7 @@ public class MchntService {
 			return ResponseCode.NOT_ENOUGH_MONEY;
 		}
 		tblMchntInfo.setBalance(tblMchntInfo.getBalance()-money);
-		tblMchntInfo.setFrozenMoney(money);
+		tblMchntInfo.setFrozenMoney(tblMchntInfo.getFrozenMoney()+ money);		//这里不应该直接设置，应该是相加
 		
 		//最后在提交
 		jobInfoDao.save(tblJob);
