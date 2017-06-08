@@ -223,3 +223,28 @@ function setLocal(){
 	getDistrict();
 	onLoad();
 }
+
+function checkLogin(){
+	phone = $('#phone').val();
+	pwd = $('#password').val();
+	
+	if(phone == null || pwd == null){
+		return;
+	}
+	
+	$.ajax({
+		type:'POST',
+		url: 'user/login',
+		dataType:'json',
+		data:{phone:phone,pwd:pwd},
+		success: function(data){
+			if(data == 0){
+				$.cookie('phone',phone,{expires:30,path:'/'});
+				$.cookie('password',pwd,{expires:30,path:'/'});
+			}else{
+				$.removeCookie('phone',{path:'/'});
+				$.removeCookie('password',{path:'/'});
+			}
+		}
+	});
+}
