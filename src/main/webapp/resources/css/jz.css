@@ -2,12 +2,25 @@
 	margin: 0;
 	padding: 1px 10px;
 	background-color: #efeff4;
+/*	background-color: #faf575;	*/
 	height: 2.2em;
 	line-height: 2.3em;
 	text-align: center;
 	position:relative;
-	color: #010101;
+/*	color: #010101;	*/
+	color: #ff7800;
 	font-size: 1.2em;
+}
+.search_style{
+/*	background-color: #faf575;	*/
+	color: #ff7800;
+}
+.icon_fa{
+	margin-top: 60%;
+	color: #ff7800;
+}
+.my_font_color{
+	color: #ff7800 !important;
 }
 .placeselect{
 	/*margin-top: 1%;*/
@@ -73,7 +86,7 @@
 	border:1px dashed #000;
 }
 .checkBtnActive{
-	border:1px solid #0099CC;
+	border:1px solid #ff7800;;
 }
 .commitBtn{
 	width:80% !important; 

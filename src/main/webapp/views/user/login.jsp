@@ -18,11 +18,11 @@
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
-		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
+		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left my_font_color" style="margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">登录</span>
 		</div>
-		<div class="placeholder"><a href="userp/index"><i style="color:#010101;margin-top: 60%;" class="fa fa-home"></i></a></div>
+		<div class="placeholder"><a href="userp/index"><i class="fa fa-home icon_fa"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">

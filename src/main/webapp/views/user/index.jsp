@@ -18,9 +18,9 @@
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
-		<div class="placeholder"><a id="ncity" value="320100" href="javascript:;" class="open-popup" data-target="#localSelect">南京市</a></div>
+		<div class="placeholder"><a id="ncity" value="320100"  onclick="citySelectF();">南京市</a></div>
 		<div class="weui-flex__item">
-			<div class="weui-search-bar" id="searchBar">
+			<div class="weui-search-bar search_style" id="searchBar">
 				<form class="weui-search-bar__form">
 					<div class="weui-search-bar__box">
 					<i class="weui-icon-search"></i>
@@ -35,7 +35,7 @@
 			</div>
 
 		</div>
-		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i class="fa fa-user-o icon_fa"></i></a></div>
 	</div>
 	<div>
 		<div class="swiper-container">
@@ -50,12 +50,12 @@
 	<div class="weui-panel weui-panel_access">
 		<div class="weui-panel__hd" style="padding:0;">
 			<div class="weui-flex">
-				<div class="weui-flex__item placeselect">
+				<div class="weui-flex__item my_font_color placeselect">
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 				</div>
 				<hr width="1" color="#999999">
 				<div class="weui-flex__item placeselect">
-					<a href="userp/net">
+					<a href="userp/net" class="my_font_color">
 					<i style="color:#010101;" class="fa fa-mobile-phone"></i>  手机兼职
 					</a>
 				</div>
@@ -168,6 +168,7 @@
 	localset();
 	getLabels();
 	onCheckBtn();
+	checkLogin();
 	$("#city-picker").cityPicker({
 		showDistrict: false
 	});
@@ -177,6 +178,11 @@
 	function searchText(){
 		$.cookie('inputKey',$('#searchInput').val());
 		window.location.href = 'userp/list';
+	}
+	function citySelectF(){
+		$("#localSelect").popup();
+		setTimeout($('#city-picker').click(),1000);
+		;
 	}
 </script>
 </body>

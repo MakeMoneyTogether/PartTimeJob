@@ -18,22 +18,22 @@
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
-		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
+		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left my_font_color" style="margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">手机兼职</span>
 		</div>
-		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i class="fa fa-user-o icon_fa"></i></a></div>
 	</div>
 	<div class="weui-panel weui-panel_access">
 		<div class="weui-panel__hd" style="padding:0;">
 			<div class="weui-flex">
 				<div class="weui-flex__item placeselect">
-					<a href="userp">
+					<a href="userp" class="my_font_color">
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 					</a>
 				</div>
 				<hr width="1" color="#999999">
-				<div class="weui-flex__item placeselect">
+				<div class="weui-flex__item my_font_color placeselect">
 					<i style="color:#010101;" class="fa fa-mobile-phone"></i>  手机兼职
 				</div>
 			</div>

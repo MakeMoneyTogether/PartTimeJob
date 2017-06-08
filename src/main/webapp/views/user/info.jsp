@@ -18,11 +18,11 @@
 </head>
 <body ontouchstart>
 	<div class="weui-flex">
-		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left" style="color:#010101;margin-top: 90%;"></i></a></div>
+		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left my_font_color" style="margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
 			<span id="jz-title">${job.jobTitle }</span>
 		</div>
-		<div class="placeholder"><a href="userp/me"><i style="color:#010101;margin-top: 60%;" class="fa fa-user-o"></i></a></div>
+		<div class="placeholder"><a href="userp/me"><i class="fa fa-user-o icon_fa"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__hd">
