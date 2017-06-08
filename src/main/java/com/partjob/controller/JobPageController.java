@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.model.JobInfo;
+import com.partjob.model.NetJob;
 import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
@@ -149,6 +150,21 @@ public class JobPageController extends BaseController{
         return jobService.getNetJobById(jid);
     }
     
+    /**
+     * 发布手机兼职
+     * @param netJob
+     * @return
+     */
+    @RequestMapping(value = "pushNet")
+    @ResponseBody
+    public Object addNetJob(NetJob netJob){
+    	try {
+    		jobService.addNetJob(netJob);
+        	return ResponseCode.SUCCESS;
+		} catch (Exception e) {
+			return ResponseCode.FAIL;
+		}
+    }
 
     /**
      * 获取手机兼职列表

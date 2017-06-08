@@ -31,7 +31,7 @@ import com.partjob.constant.CommonCanstant;
  */
 public class SessionFilter implements Filter {
 
-	private static final String[] IGNORE_URI = { "resources/", "static","login", "info", "index","register" };
+	private static final String[] IGNORE_URI = { "resources/", "static","login", "info", "index","register","net" };
 
 	public void init(FilterConfig config) throws ServletException {
 	}

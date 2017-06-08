@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.model.MchntSchedule;
+import com.partjob.model.NetJob;
 import com.partjob.model.UserInfo;
 import com.partjob.model.UserSchedule;
 import com.partjob.service.JobService;
@@ -73,5 +74,12 @@ public class AdminPageController {
 		model.addAttribute("users", users);
 		model.addAttribute("mchnts", mchnts);
 		return "admin/cash";
+	}
+	
+	@RequestMapping("netjob")
+	public String netjob(Model model){
+		List<NetJob> netJobs = jobService.getAllNetJob();
+		model.addAttribute("netjobs", netJobs);
+		return "admin/netjob";
 	}
 }

@@ -73,11 +73,26 @@ public class JobService {
     	return ResponseCode.SUCCESS;
     }
     
+    public void addNetJob(NetJob netJob){
+    	TblNetJob tblNetJob  = new TblNetJob();
+    	tblNetJob.setJobTitle(netJob.getJobTitle());
+    	tblNetJob.setJobDesc(netJob.getJobDesc());
+    	tblNetJob.setConnectName(netJob.getConnectName());
+    	tblNetJob.setConnectPhone(netJob.getConnectPhone());
+    	netJobDao.save(tblNetJob);
+    }
+    
     public NetJob getNetJobById(int jid){
         TblNetJob netJob = netJobDao.getById(jid);
         return transNetJob(netJob);
     }
 
+    public List<NetJob> getAllNetJob(){
+    	List<TblNetJob> tblNetJobs = netJobDao.getAll();
+    	assert tblNetJobs != null;
+    	return transNetJobList(tblNetJobs);
+    }
+    
     public List<NetJob> getNetJobPage(int offset, int length){
         List<TblNetJob> tblNetJobs = netJobDao.getJobPage(offset, length);
         assert tblNetJobs != null;

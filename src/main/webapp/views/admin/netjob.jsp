@@ -55,9 +55,23 @@ td > a{
 							</div>
 						</div>
 						<br>
+						<div class="form-group">
+							<label class="control-label col-md-2" for="jobName">联系人姓名</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="connectName" placeholder="联系人姓名">
+							</div>
+						</div>
+						<br>
+						<div class="form-group">
+							<label class="control-label col-md-2" for="jobName">联系方式</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="connectPhone" placeholder="QQ/手机/微信号">
+							</div>
+						</div>
+						<br>
 						<label class="control-label col-md-2">兼职描述</label><br>
 						<div id="netdes"></div>
-						<button class="btn btn-success">发布</button>
+						<button onclick="push();" class="btn btn-success">发布</button>
 					</div>
 					</div>
 				</div>		
@@ -75,20 +89,15 @@ td > a{
 						</tr>
 						</thead>
 						<tbody id="netjobs">
+							<c:forEach items="${netjobs }" var="netjob">
 							<tr>
-								<td>大马蜂招工蜂</td>
+								<td>${netjob.jobTitle }</td>
 								<td>
-									<a onclick="showInfo(123);">查看</a>
+									<a onclick="showInfo(${netjob.jobId });">查看</a>
 									<a onclick="showInfo(123);">删除</a>
 								</td>
 							</tr>
-							<tr>
-								<td>大马蜂招工蜂</td>
-								<td>
-									<a onclick="showInfo(123);">查看</a>
-									<a onclick="showInfo(123);">删除</a>
-								</td>
-							</tr>
+							</c:forEach>
 						</tbody>	
 						</table>
 					</div>
@@ -105,7 +114,7 @@ td > a{
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
 					</button>
-					<h4 class="modal-title" id="jobName">
+					<h4 class="modal-title" id="ijobName">
 						兼职名称
 					</h4>
 				</div>
@@ -114,49 +123,25 @@ td > a{
 					<tbody>
 						<tr>
 							<td>兼职名称</td>
-							<td>大马蜂招工蜂</td>
+							<td id="ijobTitle"></td>
 						</tr>
 						<tr>
-							<td>商户名称</td>
-							<td>大马蜂巢</td>
+							<td>联系人姓名</td>
+							<td id="iconnectName"></td>
 						</tr>
 						<tr>
-							<td>联系人</td>
-							<td>蜂仙人</td>
-						</tr>
-						<tr>
-							<td>联系电话</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>起始时间</td>
-							<td>5-31</td>
-						</tr>
-						<tr>
-							<td>结束时间</td>
-							<td>6-31</td>
-						</tr>
-						<tr>
-							<td>薪资</td>
-							<td>100</td>
-						</tr>
-						<tr>
-							<td>招收人数</td>
-							<td>10</td>
+							<td>联系方式</td>
+							<td id="iconnectPhone"></td>
 						</tr>
 					</tbody>	
 					</table>
 					<hr>
-					<div>
+					<div id="ijobDesc">
 						兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述兼职描述，描述，描述
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" class="btn btn-success" data-dismiss="modal">通过
-					</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">拒绝
 					</button>
 				</div>
 			</div>
