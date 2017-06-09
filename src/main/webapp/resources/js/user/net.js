@@ -2,7 +2,7 @@ var index_bak = $('#index_bak')
 var loading = false;
 
 function genItem(one){
-	var item = '<a href="userp/netinfo/'+one.jobId+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle">手机</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
+	var item = '<a href="userp/netinfo/'+one.jobId+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle"><img style="width:100%;" src="static/img/type.png"></div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
 				one.jobTitle+'</div></a>';
 	return item;
 }

@@ -36,25 +36,25 @@
 				<span style="margin-left:5%;float:left;" id="ugpa"></span>
 			</div>
 			<div class="col-30 div_right">
-				<a href="userp/editcv">编辑简历></a>
+				<a href="userp/editcv" class="search_style">编辑简历></a>
 			</div>
 			<div style="clear:both"></div>
 		</div>
 		<div class="weui-form-preview__hd" style="text-align:center;padding:0;padding-bottom:0;">
 			<div class="weui-flex">
-				<div onclick="jump(0,this);" class="weui-flex__item div_box">被拒绝
+				<div onclick="jump(0,this);" class="weui-flex__item">被拒绝
 					<span id="s0"></span>
 				</div>
-				<div onclick="jump(1,this);" class="weui-flex__item div_box">已报名
+				<div onclick="jump(1,this);" class="weui-flex__item hr_left">已报名
 					<span id="s1"></span>
 				</div>
-				<div onclick="jump(2,this);" class="weui-flex__item div_box">已结算
+				<div onclick="jump(2,this);" class="weui-flex__item hr_left">已结算
 					<span id="s2"></span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="weui-cells">
+	<div class="weui-cells" style="margin-top:0;">
 		<div class="weui-cell weui-cell_access" onclick="jump(4);">
 			<div class="weui-cell__hd">
 				<i class="fa fa-money"></i>
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="weui-panel weui-panel_access">
+	<div class="weui-panel weui-panel_access" style="margin-top:0;">
 		
 		<div class="weui-panel__bd" id="jz-all">
 			<div id="jz-infos">
