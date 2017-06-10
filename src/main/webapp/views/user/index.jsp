@@ -41,8 +41,6 @@
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide"><img src="static/images/swiper-1.jpg" /></div>
-				<div class="swiper-slide"><img src="static/images/swiper-2.jpg" /></div>
-				<div class="swiper-slide"><img src="static/images/swiper-3.jpg" /></div>
 			</div>
 			<div class="swiper-pagination"></div>
 		</div>
