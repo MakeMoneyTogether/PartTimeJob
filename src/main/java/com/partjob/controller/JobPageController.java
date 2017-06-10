@@ -186,23 +186,29 @@ public class JobPageController extends BaseController{
     @RequestMapping(value = "types")
     @ResponseBody
     public Object getTypes(){
-    	List<Map<String, Object>> res = new ArrayList<Map<String,Object>>();
-    	Map<String, Object> item = new HashMap<String, Object>();
-    	item.put("lid", 0);
-    	item.put("name", "发单");
-    	res.add(item);
     	
-    	item = new HashMap<String, Object>();
-    	item.put("lid", 1);
-    	item.put("name", "发单");
-    	res.add(item);
+//    	Map<String, Object> item = new HashMap<String, Object>();
+//    	item.put("lid", 0);
+//    	item.put("name", "发单");
+//    	res.add(item);
+//    	
+//    	item = new HashMap<String, Object>();
+//    	item.put("lid", 1);
+//    	item.put("name", "发单");
+//    	res.add(item);
+//    	
+//    	item = new HashMap<String, Object>();
+//    	item.put("lid", 2);
+//    	item.put("name", "义卖");
+//    	res.add(item);
+    	try{
+    		List<Map<String, Object>> res = new ArrayList<Map<String,Object>>();
+        	res=jobService.getAllJobType();
+        	return res;
+    	}catch(Exception e){
+    		return ResponseCode.FAIL;
+    	}
     	
-    	item = new HashMap<String, Object>();
-    	item.put("lid", 2);
-    	item.put("name", "义卖");
-    	res.add(item);
-    	
-    	return res;
     }
 
     /**

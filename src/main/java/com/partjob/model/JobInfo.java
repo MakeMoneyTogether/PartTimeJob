@@ -7,6 +7,7 @@ public class JobInfo {
 	 	private int jobId;
 	    private String jobTitle;
 	    private Integer jobType;
+	    private String jobTypeName;
 	    private Integer paymentType;
 	    private String paymentMoney;
 	    private Timestamp jobStartTime;
@@ -40,6 +41,14 @@ public class JobInfo {
 		}
 		public void setJobType(Integer jobType) {
 			this.jobType = jobType;
+		}
+		
+		
+		public String getJobTypeName() {
+			return jobTypeName;
+		}
+		public void setJobTypeName(String jobTypeName) {
+			this.jobTypeName = jobTypeName;
 		}
 		public Integer getPaymentType() {
 			return paymentType;

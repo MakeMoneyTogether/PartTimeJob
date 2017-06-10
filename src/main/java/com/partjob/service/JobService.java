@@ -3,9 +3,11 @@ package com.partjob.service;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
 import com.partjob.dao.JobInfoDao;
+import com.partjob.dao.JobTypeDao;
 import com.partjob.dao.NetJobDao;
 import com.partjob.dao.UserJobDao;
 import com.partjob.entity.TblJobInfo;
+import com.partjob.entity.TblJobType;
 import com.partjob.entity.TblNetJob;
 import com.partjob.entity.TblRelUserJob;
 import com.partjob.model.JobInfo;
@@ -20,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sloriac on 2017/5/21.
@@ -34,7 +38,9 @@ public class JobService {
     private NetJobDao netJobDao;
     @Autowired
     MchntService mchntService;
-
+    @Autowired
+    JobTypeDao jobTypeDao;
+    
     public JobInfo getById(int jid){
         TblJobInfo tblJobInfo = jobInfoDao.getById(jid);
         return transJob(tblJobInfo);
@@ -130,6 +136,25 @@ public class JobService {
     }
 
    
+    public String getJobTypeName(int id){
+    	TblJobType tblJobType=jobTypeDao.get(id);
+    	return tblJobType.getName();
+    }
+    
+    public List<Map<String, Object>> getAllJobType(){
+    	List<TblJobType>list=jobTypeDao.getAll();
+    	List<Map<String, Object>> res = new ArrayList<Map<String,Object>>();
+    	
+    	for(TblJobType type:list){
+    		Map<String, Object>map=new HashMap<String, Object>();
+//    		map.put(Integer.toString(type.getId()), type.getName());
+        	map.put("lid", type.getId());
+        	map.put("name", type.getName());
+    		res.add(map);
+    	}
+    	return res;
+    }
+    
     private JobInfo transJob(TblJobInfo tblJobInfo) {
         JobInfo jobInfo = new JobInfo();
         if (tblJobInfo == null)
@@ -140,6 +165,7 @@ public class JobService {
         tmoney = BigDecimalUtil.divide100(tmoney);
         jobInfo.setPaymentMoney(tmoney);
         jobInfo.setMchntName(mchntService.getMchntInfo(tblJobInfo.getMchntCd()).getMchntName());
+        jobInfo.setJobTypeName(getJobTypeName(jobInfo.getJobType()));
         return jobInfo;
     }
     
