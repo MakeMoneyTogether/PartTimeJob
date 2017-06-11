@@ -225,8 +225,8 @@ function setLocal(){
 }
 
 function checkLogin(){
-	phone = $('#phone').val();
-	pwd = $('#password').val();
+	phone = $.cookie('phone');
+	pwd = $.cookie('password');
 	
 	if(phone == null || pwd == null){
 		return;

@@ -32,8 +32,8 @@
 					<input id="name" class="weui-input" type="text" placeholder="请输入真实姓名">
 				</div>
 			</div>
-			<div class="weui-cells__title">性别</div>
-			<div class="weui-cells weui-cells_radio">
+			
+			<div class="weui-cells weui-cells_radio" style="margin-top:0;">
 				<label class="weui-cell weui-check__label" for="man">
 					<div class="weui-cell__bd">
 						<p>男</p>
