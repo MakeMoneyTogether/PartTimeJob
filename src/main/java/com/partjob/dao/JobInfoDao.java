@@ -92,7 +92,8 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
     	if(keys != null){
     		hql.append(" and job.jobTitle like ?");
     		values.add("%"+keys+"%");
-//    		hql.append(" or ? in (select )")
+    		hql.append(" or job.jobType in (select id from TblJobType where name like ?)");
+    		values.add("%"+keys+"%");
     	}
     	
     	return findPage(hql.toString(), offset, length, values.toArray());

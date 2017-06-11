@@ -14,6 +14,7 @@ import com.partjob.constant.ResponseCode;
 import com.partjob.constant.TransCanstant;
 import com.partjob.dao.InvitationRecordDao;
 import com.partjob.dao.JobInfoDao;
+import com.partjob.dao.JobTypeDao;
 import com.partjob.dao.MchntInfoDao;
 import com.partjob.dao.MchntScheduleDao;
 import com.partjob.dao.UserInfoDao;
@@ -62,6 +63,8 @@ public class MchntService {
 	private UserScheduleDao userScheduleDao;
 	@Autowired
 	private InvitationRecordDao invitationRecordDao;
+    @Autowired
+    JobTypeDao jobTypeDao;
 	/**
 	 * 保存商户信息
 	 * @param mchntInfo
@@ -423,6 +426,7 @@ public class MchntService {
 			JobInfo jobInfo=new JobInfo();
 			ApplicationUtil.copyProperties(temp, jobInfo);
 			jobInfo.setPaymentMoney(BigDecimalUtil.divide100(temp.getPaymentMoney()+""));
+			jobInfo.setJobTypeName(jobTypeDao.get(jobInfo.getJobType()).getName());
 			result.add(jobInfo);
 		}
 		

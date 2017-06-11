@@ -46,9 +46,6 @@
 			<div class="weui-cell__hd"><label class="weui-label">兼职类型</label></div>
 			<div class="weui-cell__bd">
 				<select id="jobType" name="jobType" class="weui-select">
-					<option value="1">发单</option>
-					<option value="2">销售</option>
-					<option value="3">传销</option>
 				</select>
 			</div>
 		</div>

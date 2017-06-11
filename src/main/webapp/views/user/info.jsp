@@ -39,7 +39,7 @@
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">类型：</label>
-				<span class="weui-form-preview__value" id="jz-label">${job.paymentType }</span>
+				<span class="weui-form-preview__value" id="jz-label">${job.jobTypeName }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>

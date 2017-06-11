@@ -34,7 +34,7 @@
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">类型：</label>
-				<span class="weui-form-preview__value" id="jobType">${job.jobType }</span>
+				<span class="weui-form-preview__value" id="jobType">${job.jobTypeName }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>

@@ -137,8 +137,12 @@ public class JobService {
 
    
     public String getJobTypeName(int id){
-    	TblJobType tblJobType=jobTypeDao.get(id);
-    	return tblJobType.getName();
+    	try{
+        	TblJobType tblJobType=jobTypeDao.get(id);
+        	return tblJobType.getName();
+    	}catch(Exception e){
+    		return "未知";
+    	}
     }
     
     public List<Map<String, Object>> getAllJobType(){
