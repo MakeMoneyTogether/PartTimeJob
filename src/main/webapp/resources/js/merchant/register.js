@@ -14,8 +14,20 @@ function commit(){
 	mchntAddress = $('#mchntAddress').val();
 	mchntName = $('#mchntName').val();
 	connName = $('#connName').val();
-	pwd = $('#password').val()
+	pwd = $('#password').val();
 	code = $('#code').val();
+	
+	
+
+	if(!phone.match(/^(1\d{10})$/)){
+		$.alert('手机号不正确');
+		return;
+	}
+	if(pwd.length < 6){
+		$.alert('密码过短！！');
+		return;
+	}
+	
 	$.ajax({
 		type:'POST',
 		url: 'mchnt/register',
@@ -27,7 +39,7 @@ function commit(){
 				$.cookie('phone',phone,{expires:30,path:'/'});
 				$.cookie('password',pwd,{expires:30,path:'/'});
 					$.alert('注册成功',function(){
-						window.location.href='user/me';
+						window.location.href='mchnt';
 					});
 			}
 		}
