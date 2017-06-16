@@ -27,6 +27,10 @@ function commit(){
 		$.alert('密码过短！！');
 		return;
 	}
+	if(mchntAddress == null || mchntAddress == '' ||mchntName == null || mchntName == '' ||connName == null || connName == ''){
+		$.alert('请将信息填完整！！');
+		return;
+	}
 	
 	$.ajax({
 		type:'POST',
