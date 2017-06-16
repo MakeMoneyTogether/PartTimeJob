@@ -45,6 +45,7 @@ public class UserService {
         tblUserInfo = new TblUserInfo();
         tblUserInfo.setPhone(phone);
         tblUserInfo.setPwd(CommonUtil.toMD5(pwd));
+        tblUserInfo.setUserSt(CommonCanstant.AVAILAB);
         tblUserInfo.setBalance(0);
         userInfoDao.save(tblUserInfo);
         tblUserInfo = userInfoDao.getByPhone(phone);
@@ -165,5 +166,12 @@ public class UserService {
         userInfo.setBalance(BigDecimalUtil.divide100(balance));
         return userInfo;
     }
+
+	public int passUser(int userId) {
+    	TblUserInfo userInfo=userInfoDao.get(userId);
+    	userInfo.setUserSt(CommonCanstant.AVAILAB);
+    	userInfoDao.modify(userInfo);
+    	return ResponseCode.SUCCESS;
+	}
 
 }

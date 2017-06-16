@@ -573,4 +573,16 @@ public class MchntService {
 		List<TblMchntSchedule> tblMchntSchedules = mchntScheduleDao.getCashs();
 		return transListSchedules(tblMchntSchedules);
 	}
+
+	/**
+	 * 审核商户，将商户从待检查变为已通过
+	 * @param mchntCd
+	 * @return
+	 */
+	public int passMchnt(int mchntCd) {
+		TblMchntInfo mchntInfo=mchntInfoDao.get(mchntCd);
+		mchntInfo.setMchntSt(CommonCanstant.AVAILAB);
+		mchntInfoDao.modify(mchntInfo);
+		return ResponseCode.SUCCESS;
+	}
 }
