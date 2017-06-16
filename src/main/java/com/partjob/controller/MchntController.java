@@ -466,4 +466,20 @@ public class MchntController extends BaseController {
 			return ResponseCode.FAIL;
 		}
     }
+    /**
+     * 审核商户
+     * @param mchntCd
+     * @return
+     */
+    @RequestMapping(value = "passit")
+    @ResponseBody
+    public int passkMchnt(@RequestParam(value = "mchntCd") int mchntCd){
+    	try{
+			int result=mchntService.passMchnt(mchntCd);
+			return result;
+		}catch (Exception e){
+			logger.error("审核商户失败",e);
+			return ResponseCode.FAIL;
+		}
+    }
 }

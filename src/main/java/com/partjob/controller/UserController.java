@@ -311,4 +311,16 @@ public class UserController extends BaseController{
 		}
 	}
 	
+	@RequestMapping(value = { "passUser" })
+	@ResponseBody
+	public int passUser(@RequestParam(value = "userId") int userId,HttpServletRequest request){
+		try{
+			int result=userService.passUser(userId);
+			return result;
+		}catch (Exception e){
+			logger.error("解结用户失败",e);
+			return ResponseCode.FAIL;
+		}
+	}
+	
 }

@@ -18,7 +18,7 @@ function showInfo(mid){
 			for(i=0;i<data.length;i++){
 				str = '<tr><td>'+data[i].time+'</td><td>'+data[i].type+'</td><td>'+data[i].money;
 				if(data[i].status == 0){
-					str += '</td><td>无效</td></tr>';
+					str += '</td><td>失效</td></tr>';
 				}
 				if(data[i].status == 1){
 					str += '</td><td>成功</td></tr>';
@@ -37,6 +37,17 @@ function freeze(){
 	$.post('mchnt/freeze',{mchntCd:mchntCd},function(data){
 		if(data == 0){
 			alert('冻结成功');
+			location.reload();
+		}
+	});
+}
+
+function passit(){
+	mchntCd = $('#op_mchntid').html();
+	$.post('mchnt/passit',{mchntCd:mchntCd},function(data){
+		if(data == 0){
+			alert('审核成功');
+			location.reload();
 		}
 	});
 }

@@ -135,6 +135,8 @@ td > a{
 					</button>
 					<button onclick="freeze();" type="button" class="btn btn-info" data-dismiss="modal">冻结用户
 					</button>
+					<button onclick="passit();" type="button" class="btn btn-success" data-dismiss="modal">用户解冻
+					</button>
 				</div>
 			</div>
 		</div>
@@ -148,7 +150,7 @@ td > a{
 <script src="static/js/app.min.js"></script>
 <script src="static/js/admin/user.js"></script>
 <script type="text/javascript">
-$('#nav_merchant').addClass('active');
+$('#nav_user').addClass('active');
 </script>
 </body>
 </html>

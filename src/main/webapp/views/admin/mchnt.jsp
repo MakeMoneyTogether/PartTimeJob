@@ -53,7 +53,7 @@ td > a{
 					</thead>
 					<tbody id="mchnts">
 						<c:forEach items="${mchnts }" var="mchnt">
-						<tr <c:if test="${mchnt.mchntSt == 0 }">class="info"</c:if>>
+						<tr <c:if test="${mchnt.mchntSt == 0 }">class="info"</c:if><c:if test="${mchnt.mchntSt == 2 }">class="danger"</c:if>>
 							<td>${mchnt.mchntName }</td>
 							<td>${mchnt.connName }</td>
 							<td>${mchnt.connPhone }</td>
@@ -135,7 +135,9 @@ td > a{
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button onclick="freeze();" type="button" class="btn btn-info" data-dismiss="modal">冻结用户
+					<button onclick="freeze();" type="button" class="btn btn-info" data-dismiss="modal">冻结商户
+					</button>
+					<button onclick="passit();" type="button" class="btn btn-success" data-dismiss="modal">商户审核通过
 					</button>
 				</div>
 			</div>

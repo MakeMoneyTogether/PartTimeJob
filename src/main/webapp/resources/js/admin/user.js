@@ -39,3 +39,12 @@ function freeze(){
 		}
 	});
 }
+
+function passit(){
+	userid = $('#op_userid').html();
+	$.post('user/passUser',{userId:userid},function(data){
+		if(data == 0){
+			alert('解冻成功');
+		}
+	});
+}
