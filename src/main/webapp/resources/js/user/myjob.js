@@ -1,6 +1,6 @@
 function genItem(data){
 	item = '<a href="userp/info/'+data.jobId
-		+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle i-type'+one.jobType%26+'">'
+		+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle i-type'+data.jobType%26+'">'
 		+data.jobTypeName+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'
 		+data.jobTitle+'</span><br><span class="i-jz-desc">'
 		+ stamp2YMD(data.jobStartTime)+' 至 '+stamp2YMD(data.jobEndTime)+'</span><br><span class="i-jz-money">'

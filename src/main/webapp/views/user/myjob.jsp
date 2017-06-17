@@ -28,15 +28,15 @@
 	</div>
 	<div class="weui-tab">
 		<div class="weui-navbar">
-			<a id="s22" class="weui-navbar__item" href="#s2">
+			<span id="s22" class="weui-navbar__item" href="#s2">
 				被拒绝
-			</a>
-			<a id="s21" class="weui-navbar__item" href="#s1">
+			</span>
+			<span id="s21" class="weui-navbar__item" href="#s1">
 				已报名
-			</a>
-			<a id="s23" class="weui-navbar__item" href="#s3">
+			</span>
+			<span id="s23" class="weui-navbar__item" href="#s3">
 				已结算
-			</a>
+			</span>
 		</div>
 		<div class="weui-tab__bd">
 			<div id="s2" class="weui-tab__bd-item">

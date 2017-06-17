@@ -31,18 +31,18 @@
 </div>
 <div class="weui-tab">
 	<div class="weui-navbar" style="position:fixed;">
-		<a class="weui-navbar__item weui-bar__item--on" href="#tab0">
+		<span class="weui-navbar__item weui-bar__item--on" href="#tab0">
 			待审核
-		</a>
-		<a class="weui-navbar__item" href="#tab1">
+		</span>
+		<span class="weui-navbar__item" href="#tab1">
 			准备中
-		</a>
-		<a class="weui-navbar__item" href="#tab2">
+		</span>
+		<span class="weui-navbar__item" href="#tab2">
 			待评价
-		</a>
-		<a class="weui-navbar__item" href="#tab3">
+		</span>
+		<span class="weui-navbar__item" href="#tab3">
 			已结束
-		</a>
+		</span>
 	</div>
 	<div class="weui-tab__bd">
 		<div id="tab0" class="weui-tab__bd-item weui-tab__bd-item--active">
