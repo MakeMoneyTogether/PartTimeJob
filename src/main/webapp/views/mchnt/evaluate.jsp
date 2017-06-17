@@ -36,11 +36,19 @@
 	<div id="list" class="weui-cells">
 		<c:forEach items="${users }" var="user">
 			<div class="weui-cell">
-				<div class="weui-cell__hd" ><button onclick="notfound(${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;</div>
 				<div class="weui-cell__bd">
 					<p>${user.name }</p>
 				</div>
-				<div id="${user.uid}" value="0" class="weui-cell__ft rate">
+				<div class="weui-cell__bd">
+					<p>${user.phone }</p>
+				</div>
+				<div class="weui-cell__hd" >
+					<button onclick="notfound(${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;
+					<button onclick="found(${user.uid},this);" class="weui-btn weui-btn_mini weui-btn_primary">满勤</button>
+				</div>
+				
+				
+				<div id="${user.uid}" value="0" class="weui-cell__ft rate" style="display:none;">
 					<i value="1" class="fa fa-star"></i>
 					<i value="2" class="fa fa-star"></i>
 					<i value="3" class="fa fa-star"></i>

@@ -11,6 +11,12 @@ function selectStar(){
 	$(this).prevAll().addClass('star');
 }
 
+function found(uid,e){
+	var uid = $('#'+uid);
+	uid.show();
+	$(e).parent().remove();
+}
+
 function notfound(uid){
 	var jid = $('#jid').html();
 	$.ajax({
