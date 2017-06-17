@@ -24,11 +24,7 @@ function jump(p,e){
 			break;
 		case 6:
 			console.log("邀请好友");
-			$.alert();
-			$.modal({
-				title: '邀请码',
-				text: inv_bak.text(),
-			});
+			window.location.href="userp/invite";
 			break;
 		case 7:
 			console.log("退出登录");
