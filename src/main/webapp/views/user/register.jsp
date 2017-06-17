@@ -26,6 +26,17 @@
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell weui-cell_vcode">
+				<div class="weui-cell__hd">
+					<label class="weui-label">手机号</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
+				</div>
+				<div class="weui-cell__ft">
+					<button id="code_btn" class="weui-vcode-btn" onclick="get_code();">获取</button>
+				</div>
+			</div>
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">密码</label></div>
 				<div class="weui-cell__bd">
@@ -36,17 +47,6 @@
 				<div class="weui-cell__hd"><label class="weui-label">确认密码</label></div>
 				<div class="weui-cell__bd">
 					<input id="repassword" class="weui-input" type="password" placeholder="请输入密码">
-				</div>
-			</div>
-			<div class="weui-cell weui-cell_vcode">
-				<div class="weui-cell__hd">
-					<label class="weui-label">手机号</label>
-				</div>
-				<div class="weui-cell__bd">
-					<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
-				</div>
-				<div class="weui-cell__ft">
-					<button id="code_btn" class="weui-vcode-btn" onclick="get_code();">获取</button>
 				</div>
 			</div>
 			<div class="weui-cell">
