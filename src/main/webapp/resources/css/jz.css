@@ -124,6 +124,9 @@
 .hr_left{
 	border-left:1px solid #ff7800;
 }
+.weui-btn_primary {
+	background-color: #ff5200;
+}
 .i-type0{background-color:#e57272;}
 .i-type1{background-color:#e58d72;}
 .i-type2{background-color:#e5a872;}
