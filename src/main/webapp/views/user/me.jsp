@@ -29,7 +29,7 @@
 	<div class="weui-form-preview">
 		<div class="weui-form-preview__hd">
 			<div class="col-20 div_left">
-				<img style="width:100%;" alt="统一头像" src="static/images/1.jpg">
+				<img style="width:100%;" alt="统一头像" src="static/img/type.png">
 			</div>
 			<div class="col-50 div_left">
 				<span style="margin-left:5%;float:left;" id="uname"></span><br>

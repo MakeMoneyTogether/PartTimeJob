@@ -31,7 +31,7 @@
 						<span>搜索</span>
 					</label>
 				</form>
-				<a onclick="searchText();" class="weui-search-bar__cancel-btn" id="searchBtn">搜索</a>
+				<a onclick="searchText();" class="weui-search-bar__cancel-btn search_style" id="searchBtn">搜索</a>
 			</div>
 
 		</div>
@@ -132,8 +132,8 @@
 					</div>
 				  </div>
 				<br>
-				<a href="javascript:;" onclick="setLocal();" class="weui-btn weui-btn_mini weui-btn_primary close-popup" style="width:80%;margin-left:10%;">提交</a>
-				<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary close-popup" style="width:80%;margin-left:10%;">关闭</a>
+				<a href="javascript:;" onclick="setLocal();" class="weui-btn weui-btn_primary close-popup" style="width:80%;margin-left:10%;">提交</a>
+				<a href="javascript:;" class="weui-btn weui-btn_primary close-popup" style="width:80%;margin-left:10%;">关闭</a>
 			</div>
 		</div>
 	</div>
