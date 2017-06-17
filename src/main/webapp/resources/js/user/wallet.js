@@ -138,6 +138,33 @@ function genSchedule(sche){
 	return str;
 }
 
+function genPY(sche){
+	pstr = '';
+	if(sche.status == AVAILAB ){
+		pstr = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd">'
+			+ sche.type+'</div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
+			+ sche.money
+			+ '元</p> </div><div class="weui-cell__bd">'
+			+ sche.time
+			+' </div><div class="">成功</div> </div>';
+	}else if(sche.status == UNCHECKED){
+		pstr = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd">'
+			+ sche.type+'</div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
+			+ sche.money
+			+'元</p> </div><div class="weui-cell__bd">'
+			+ sche.time
+			+' </div> <div class="">等待...</div> </div>';
+	}else{
+		pstr = '<div class="weui-cell weui-cell_access"> <div class="weui-cell__hd">'
+			+ sche.type+'</div> <div class="weui-cell__bd"> <p style="margin-left:10%;">'
+			+ sche.money
+			+'元</p><div class="weui-cell__bd">'
+			+ sche.time
+			+' </div> </div> <div class="">失效</div> </div>';
+	}
+	return pstr;
+}
+
 function getSchedule(){
 	phone = $.cookie('phone');
 	$.ajax({
@@ -148,10 +175,17 @@ function getSchedule(){
 		success: function(data){
 			$('#schedule').text('');
 			str = '';
+			pystr = '';
 			for(i=0;i<data.length;i++){
 				str += genSchedule(data[i]);
+				pystr += genPY(data[i]);
 			}
 			$('#schedule').html(str);
+			$('#pyschedule').html(pystr);
 		}
 	});
+}
+
+function showSechedule(){
+	$('#pymodal').popup();
 }

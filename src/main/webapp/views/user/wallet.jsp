@@ -32,18 +32,16 @@
 				<span style="margin-left:5%;float:left;">当前余额</span><br>
 				<span style="margin-left:5%;float:left;" id="moneyable">${me.balance }</span>
 			</div>
-			<div class="col-20 div_right" style="padding-top:5%;">
+			<div class="col-50 div_right" style="padding-top:5%;">
 				<button style="background-color:#41f3da;" class="weui-btn weui-btn_mini" onclick="pay();">充值</button>
 				<button class="weui-btn weui-btn_mini weui-btn_primary" onclick="cash();">提现</button>
 			</div>
 			<div style="clear:both"></div>
 		</div>
-		<div class="weui-panel weui-panel_access">
-			<div class="weui-panel__hd">已邀请</div>
-			<div id="inv_person">
+			<div class="weui-panel__hd">
+				<button class="weui-btn weui-btn_mini weui-btn_default" style="margin-left: 10%;width:80%;" onclick="showSechedule();">交易账单</button>
 			</div>
-		</div>
-		<div class="weui-panel weui-panel_access">
+		<div class="weui-panel weui-panel_access" style="margin-top:0;">
 			<div class="weui-panel__hd">提现进度</div>
 			<div id="schedule">
 				<div class="weui-cell weui-cell_access">
@@ -60,6 +58,25 @@
 			</div>
 		</div>
 	</div>
+<div id="pymodal" class="weui-popup__container">
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-flex">
+			<div class="placeholder"><a><i class="fa fa-chevron-left my_font_color close-popup" style="margin-top: 90%;"></i></a></div>
+			<div class="weui-flex__item placeholder">
+				<span>交易流水</span>
+			</div>
+		</div>
+		<div class="weui-panel weui-panel_access" style="margin-top:0;">
+			<div class="weui-panel__hd">交易流水</div>
+			<div id="pyschedule">
+				
+			</div>
+		</div>
+		<br>
+		<button class="weui-btn weui-btn_primary close-popup">关闭</button>
+	</div>
+</div>
 <div style="display:none;">
 </div>	
 <script src="static/js/jquery-2.1.4.js"></script>
@@ -70,7 +87,6 @@
 <script type="text/javascript">
 </script>
 <script>
-getInvitation();
 getSchedule();
 </script>
 </body>
