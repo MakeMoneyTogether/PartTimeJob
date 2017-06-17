@@ -34,7 +34,7 @@
 					<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
 				</div>
 				<div class="weui-cell__ft">
-					<button id="code_btn" class="weui-vcode-btn" onclick="get_code();">获取</button>
+					<button id="code_btn" class="weui-vcode-btn search_style" onclick="get_code();">获取</button>
 				</div>
 			</div>
 			<div class="weui-cell">

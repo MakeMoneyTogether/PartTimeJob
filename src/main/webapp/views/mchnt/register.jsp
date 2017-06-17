@@ -70,7 +70,7 @@
 				<input id="phone" class="weui-input" type="tel" onkeypress="return event.keyCode>=48&&event.keyCode<=57" placeholder="请输入手机号">
 			</div>
 			<div class="weui-cell__ft">
-				<button id="code_btn" class="weui-vcode-btn">获取</button>
+				<button id="code_btn" class="weui-vcode-btn search_style">获取</button>
 			</div>
 		</div>
 		<div class="weui-cell">

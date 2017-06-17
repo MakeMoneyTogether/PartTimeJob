@@ -53,7 +53,7 @@
 				<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
 			</div>
 			<div class="weui-cell__ft">
-				<button onclick="get_code();" id="code_btn" class="weui-vcode-btn">获取</button>
+				<button onclick="get_code();" id="code_btn" class="weui-vcode-btn search_style">获取</button>
 			</div>
 		</div>
 		<div class="weui-cell">
