@@ -17,6 +17,7 @@ import com.partjob.model.UserInfo;
 import com.partjob.utils.ApplicationUtil;
 import com.partjob.utils.CommonUtil;
 import com.partjob.utils.ListUtil;
+import com.partjob.utils.VerificationUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -199,6 +200,12 @@ public class UserJobService {
         	response.setCode(ResponseCode.SUCCESS);
         	response.setAll(jobInfo.getNumPeople());
         	response.setApplied(jobInfo.getJoinNum());
+        	
+        	try {
+				VerificationUtil.sendNotify(phone,userInfo.getName() , jobInfo.getMchntName(), jobInfo.getJobTitle());
+			} catch (Exception e) {
+			}
+        	
         	return response;
 		} catch (Exception e) {
 			return null;

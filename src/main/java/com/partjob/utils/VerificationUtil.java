@@ -48,8 +48,9 @@ public class VerificationUtil {
 	 * 勤劳的的小蜜蜂${name}您好，您已报名${mchnt}发布的${job}，请确认谢谢。如有意外请及时联系商家。
 	 * @return
 	 */
-	public static int sendNotify(){
-		return 0;
+	public static int sendNotify(String phone,String name,String mchnt,String job){
+		String text = "{name:'"+name+"',mchnt:'"+mchnt+"',job:'"+job+"'}";
+		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_NOTIFY);
 	}
 	
 	public static int sendMsg(String phone,String text,String SMSTemplateCode){
