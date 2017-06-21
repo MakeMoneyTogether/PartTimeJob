@@ -258,3 +258,17 @@ function checkLogin(){
 		}
 	});
 }
+function swipers(){
+	$.get('job/swipers',function(data){
+		sws = $('#swipers');
+		sws.html('');
+		for(i=0;i<data.length;i++){
+			sws.append('<div class="swiper-slide"><a href="'+data[i].url+'"><img src="static/images/'+data[i].file+'" /></a></div>')
+		}
+
+		$(".swiper-container").swiper({
+			loop: true,
+			autoplay: 2000,
+		});
+	});
+}

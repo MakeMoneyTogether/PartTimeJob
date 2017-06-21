@@ -3,18 +3,21 @@ package com.partjob.controller;
 import com.alibaba.fastjson.JSON;
 import com.partjob.constant.CommonCanstant;
 import com.partjob.constant.ResponseCode;
+import com.partjob.entity.TblSwiperInfo;
 import com.partjob.model.JobInfo;
 import com.partjob.model.NetJob;
 import com.partjob.model.RelUserJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
 import com.partjob.service.MchntService;
+import com.partjob.service.SwiperService;
 import com.partjob.service.UserJobService;
 import com.partjob.service.UserService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +48,8 @@ public class JobPageController extends BaseController{
     UserService userService;
     @Autowired
     MchntService mchntService; 
+	@Autowired
+	SwiperService swiperService;
 
     /**
      * 获取用户参与的兼职列表
@@ -349,4 +354,10 @@ public class JobPageController extends BaseController{
 		}
     }
     
+    @RequestMapping(value = "swipers")
+    @ResponseBody
+    public Object getSwiper(){
+    	List<TblSwiperInfo> swipers = swiperService.getAll();
+    	return swipers;
+    }
 }

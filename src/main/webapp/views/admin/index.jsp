@@ -52,17 +52,59 @@
 						</div>
 					</div>
 				</div>
+			
+				
+				<div class="col-md-8">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">主页图片上传</h3>
+						</div>
+						<div class="box-body">
+							<form id="swiper" action="adminp/swiper" enctype="multipart/form-data" method="POST" target="hidden_frame">
+								<div class="form-group">
+									<label for="file">图片上传</label>
+									<input type="file" class="form-control" name="file" id="file" placeholder="上传的图片">
+								</div>
+								<div class="form-group">
+									<label for="dex">图片编号</label>
+									<input type="text" class="form-control" id="dex" name="fileName" placeholder="编号即将替代已有的图片">
+								</div>
+								<div class="form-group">
+									<label for="url">链接地址</label>
+									<input type="text" class="form-control" id="url" name="url" placeholder="点击图片跳转的路径">
+								</div>
+								<button onclick="upImg();" class="btn btn-default">上传</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 		</section>
 		<!-- /.content -->
 	</div>
 	<div class="control-sidebar-bg"></div>
 </div>
+<iframe name="hidden_frame" id="hidden_frame" style="display:none;"></iframe>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/app.min.js"></script>
 <script type="text/javascript">
 $('#nav_index').addClass('active');
+function upImg(){
+	$('#swiper').submit();
+	setTimeout(checkSuccess,2000); 
+}
+function checkSuccess(){
+	var win = document.getElementById('hidden_frame').contentWindow;
+	code = win.document.body.innerText;
+	if(code == 'success'){
+		alert('图片上传成功');
+		win.document.body.innerText = 'fail';
+	}else{
+		alert('图片上传失败');
+	}
+}
 </script>
 </body>
 </html>

@@ -39,8 +39,8 @@
 	</div>
 	<div>
 		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide"><img src="static/images/swiper-1.jpg" /></div>
+			<div id="swipers" class="swiper-wrapper">
+				<div  class="swiper-slide"><img src="static/images/swiper-1.jpg" /></div>
 			</div>
 			<div class="swiper-pagination"></div>
 		</div>
@@ -158,10 +158,7 @@
 	$(function() {
 	FastClick.attach(document.body);
 	});
-	$(".swiper-container").swiper({
-		loop: true,
-		autoplay: 2000,
-	});
+	swipers();
 	localset();
 	getLabels();
 	onCheckBtn();
