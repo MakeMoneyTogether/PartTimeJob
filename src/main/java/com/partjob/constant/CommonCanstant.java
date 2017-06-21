@@ -6,6 +6,16 @@ public class CommonCanstant {
 	
 	public static String USER_INFO="userInfo";
 	public static String MCHNT_INFO="mchntInfo";
+	public static String VERIFIATION = "verification";
+	public static String SMS_SIGN_NAME = "小蜜蜂兼职";
+	public static String SMS_APPKEY = "24484679";
+	public static String SMS_SECRET = "f730e2907cd92b70c1bac5772ce446f5";
+	public static String SMS_URL = "http://gw.api.taobao.com/router/rest";
+	public static String SMS_TYPE = "normal";
+
+	public static String SMS_TEMP_REGISTER = "SMS_71960024";
+	public static String SMS_TEMP_EDIT = "SMS_71960021";
+	public static String SMS_TEMP_NOTIFY = "SMS_71895056";
 
 
 	public static int PAY_TYPE_HOUR=0;

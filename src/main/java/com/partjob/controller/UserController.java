@@ -83,7 +83,11 @@ public class UserController extends BaseController{
     public Object register(@RequestParam(value = "pwd") String pwd,
                            @RequestParam(value = "phone") String phone,
                            @RequestParam(value = "code") String code,
-                           @RequestParam(value = "invitation") String invitation) {
+                           @RequestParam(value = "invitation") String invitation,HttpSession session) {
+    	String preCode = (String) session.getAttribute(phone);
+    	if(!code.equals(preCode)){
+    		return ResponseCode.VERCODE_ERROR;
+    	}
         return userService.register(pwd, phone, code, invitation);
     }
 

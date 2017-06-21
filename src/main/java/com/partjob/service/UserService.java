@@ -131,6 +131,15 @@ public class UserService {
             return true;
         }
     }
+    
+    public boolean checkPhone(String phone){
+    	TblUserInfo tblUserInfo = userInfoDao.findUniqueByProperty("phone", phone);
+        if (tblUserInfo == null){
+        	return false;
+        }else {
+			return true;
+		}
+    }
 
     /**
      * 冻结用户

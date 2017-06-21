@@ -18,6 +18,7 @@ import com.partjob.utils.CommonUtil;
 @Controller
 @RequestMapping(value = "transTest")
 public class TransController {
+	/*
 	private final Logger logger = Logger.getLogger(this.getClass());
 	@Autowired
 	TransService transService;
@@ -67,4 +68,5 @@ public class TransController {
 		logger.info("支付成功");
 		return ResponseCode.SUCCESS;
 	}
+	*/
 }
