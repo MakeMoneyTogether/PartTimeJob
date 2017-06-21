@@ -136,6 +136,17 @@ public class MchntService {
 			return true;
 		}
 	}
+	
+	public boolean checkPhone(String phone) {
+		TblMchntInfo tblMchntInfo = mchntInfoDao.findUniqueByProperty("phone",
+				phone);
+
+		if (tblMchntInfo == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	/**
 	 * 获取商户信息

@@ -45,6 +45,12 @@ function commit(){
 					$.alert('注册成功',function(){
 						window.location.href='mchnt';
 					});
+			}else if(data == 1){
+				$.alert('验证码不正确');
+				$('#code_btn').text('获取');
+			}else{
+				$.alert('注册失败请稍后再试');
+				$('#code_btn').text('获取');
 			}
 		}
 	});
@@ -61,17 +67,14 @@ function get_code(){
 	$('#code_btn').text('已发送');
 	$.ajax({
 		type:'POST',
-		url: 'util/sendCode',
+		url: 'util/sendMode',
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
 			console.log(data);
 			if(data == 0){
 				$.notification({
-					text: '【兼职平台】您的兼职平台手机验证码为：320100<br>打死也不要告诉别人。',
-					onClick: function(data) {
-						$.alert('吓你呢，这只是个测试。');
-					},
+					text: '验证码发送成功',
 				});
 			}else if(data == 1){
 				$.alert('手机号已被注册');

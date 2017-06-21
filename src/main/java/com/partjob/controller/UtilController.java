@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.partjob.constant.ResponseCode;
+import com.partjob.service.MchntService;
 import com.partjob.service.UserService;
 import com.partjob.utils.VerificationUtil;
 
@@ -21,6 +22,8 @@ public class UtilController extends BaseController{
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	MchntService mchntService;
 	
 	@RequestMapping(value = "sendCode")
 	@ResponseBody
@@ -33,5 +36,18 @@ public class UtilController extends BaseController{
 		String code = VerificationUtil.genCode();
 		session.setAttribute(phone, code);
 		return VerificationUtil.sendRegistCode(phone, code);
+	}
+	
+	@RequestMapping(value = "sendMode")
+	@ResponseBody
+	public Object sendMode(String phone,HttpSession session){
+		
+		if(mchntService.checkPhone(phone)){
+			return ResponseCode.PHONE_EXIST;
+		}
+		
+		String code = VerificationUtil.genCode();
+		session.setAttribute(phone, code);
+		return VerificationUtil.sendRegistMode(phone, code);
 	}
 }

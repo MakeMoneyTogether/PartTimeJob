@@ -1,6 +1,10 @@
 function register(){
-	if($('#password').val() != $('#repassword').val()){
+	if($('#password').val() != $('#repassword').val() ){
 		$.alert('两次密码要一致');
+		return;
+	}
+	if($('#password').val().length < 6){
+		$.alert('密码过短！！');
 		return;
 	}
 	if($('#code').val().length < 6){

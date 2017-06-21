@@ -21,8 +21,25 @@ public class VerificationUtil {
 		return new String(code);
 	}
 	
+	/**
+	 * 用户注册验证码发送
+	 * @param phone
+	 * @param code
+	 * @return
+	 */
 	public static int sendRegistCode(String phone,String code){
 		String text = "{code:'"+code+"',product:'"+"小蜜蜂兼职"+"'}";
+		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_REGISTER);
+	}
+	
+	/**
+	 * 商户注册验证码发送
+	 * @param phone
+	 * @param code
+	 * @return
+	 */
+	public static int sendRegistMode(String phone,String code){
+		String text = "{code:'"+code+"',product:'"+"小蜜蜂兼职商家"+"'}";
 		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_REGISTER);
 	}
 	

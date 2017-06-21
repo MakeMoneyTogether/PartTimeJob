@@ -122,8 +122,12 @@ public class MchntController extends BaseController {
 	@RequestMapping(value = { "register" })
 	@ResponseBody
 	public Object register(MchntInfo mchntInfo,
-			@RequestParam(value = "password") String password) {
+			@RequestParam(value = "password") String password,@RequestParam(value = "code")String code,HttpSession session) {
 
+		String preCode = (String) session.getAttribute(mchntInfo.getConnPhone());
+    	if(!code.equals(preCode)){
+    		return ResponseCode.VERCODE_ERROR;
+    	}
 		try {
 			mchntService.saveMchnt(mchntInfo, password);
 		} catch (Exception e) {
