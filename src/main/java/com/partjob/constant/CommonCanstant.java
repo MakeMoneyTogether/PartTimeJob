@@ -15,7 +15,7 @@ public class CommonCanstant {
 
 	public static String SMS_TEMP_REGISTER = "SMS_71960024";
 	public static String SMS_TEMP_EDIT = "SMS_71960021";
-	public static String SMS_TEMP_NOTIFY = "SMS_71895056";
+	public static String SMS_TEMP_NOTIFY = "SMS_71830131";
 
 
 	public static int PAY_TYPE_HOUR=0;
