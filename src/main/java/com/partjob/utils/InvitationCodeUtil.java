@@ -22,7 +22,7 @@ public class InvitationCodeUtil {
      * 根据ID生成六位随机码
      * @param id ID
      * @return 随机码
-     */
+     
     public static String toSerialCode(int id) {
         char[] buf=new char[32];
         int charPos=32;
@@ -46,7 +46,60 @@ public class InvitationCodeUtil {
         }
         return str;
     }
+    */
+    /**
+     * 验证码转换规则[012345] <- [051423]
+     * [0] = [0] + 0 % 10
+     * [1] = [5] + 5 % 10
+     * [2] = [1] + 1 % 10
+     * [3] = [4] + 4 % 10
+     * [4] = [2] + 2 % 10
+     * [5] = [3] + 3 % 10
+     * @param id
+     * @return
+     */
+    public static String toSerialCode(int id){
+    	String code0 = String.valueOf(id);
+    	int deta = s-code0.length();
+    	for(int i=0;i<deta;i++){
+    		code0 = '0'+code0;
+    	}
+    	StringBuffer code = new StringBuffer();
+    	
+    	code.append((code0.charAt(0) - '0'));
+    	code.append((code0.charAt(5) - '0' + 5)%10);
+    	code.append((code0.charAt(1) - '0' + 1)%10);
+    	code.append((code0.charAt(4) - '0' + 4)%10);
+    	code.append((code0.charAt(2) - '0' + 2)%10);
+    	code.append((code0.charAt(3) - '0' + 3)%10);
+    	
+    	return String.valueOf(code);
+    }
 
+    
+    /**
+     * 验证码转换规则[012345] <- [024531]
+     * [0] = [0] + 0 % 10
+     * [1] = [2] - 1 % 10
+     * [2] = [4] - 2 % 10
+     * [3] = [5] - 3 % 10
+     * [4] = [3] - 4 % 10
+     * [5] = [1] - 5 % 10
+     * @param code
+     * @return
+     */
+    public static int codeToId(String code){
+    	int id = 0;
+    	id = code.charAt(0) - '0';
+    	id = id * 10 + (code.charAt(2)-'0' -1+10)%10;
+    	id = id * 10 + (code.charAt(4)-'0' -2+10)%10;
+    	id = id * 10 + (code.charAt(5)-'0' -3+10)%10;
+    	id = id * 10 + (code.charAt(3)-'0' -4+10)%10;
+    	id = id * 10 + (code.charAt(1)-'0' -5+10)%10;
+    	return id;
+    }
+    
+    /*
     public static int codeToId(String code) {
         char chs[]=code.toCharArray();
         int res=0;
@@ -69,10 +122,13 @@ public class InvitationCodeUtil {
         }
         return res;
     }
+    */
 
     public static void main(String[] args) {
         System.out.println(toSerialCode(1));
         System.out.println(toSerialCode(2));
+        System.out.println(codeToId("061423"));
+        System.out.println(codeToId("071423"));
 //        System.out.println(toSerialCode(1));
 //        System.out.println(codeToId("wot7iv"));
 //        System.out.println(codeToId("woqt8z"));
