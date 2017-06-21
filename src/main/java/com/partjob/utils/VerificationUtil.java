@@ -72,7 +72,8 @@ public class VerificationUtil {
 		}
 	}
 	
-//	public static void main(String args[]){
+	public static void main(String args[]){
 //		sendRegistCode("13222765139",genCode());
-//	}
+		sendNotify("13222765139", "安纪存", "小蜜蜂官方", "食堂送餐");
+	}
 }

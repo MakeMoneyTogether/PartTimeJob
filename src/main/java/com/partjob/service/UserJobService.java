@@ -160,6 +160,9 @@ public class UserJobService {
 //        UserInfo userInfo= userService.getByPhone(phone);
         TblUserInfo userInfo=userInfoDao.getByPhone(phone);
         JobInfo jobInfo = jobService.getById(jid);
+        
+        boolean oldUser = checkFirst(userInfo.getUid());
+        
         //如果兼职开始时间小于当前时间,就不允许报名
         if(jobInfo.getJobValidateTime().getTime()<new Date().getTime()){
         	return null;
@@ -167,7 +170,7 @@ public class UserJobService {
         if(!checkUserJob(userInfo.getUid(), jobInfo)){
         	return null;
         }
-        if(userInfo.getBalance()<CommonCanstant.USER_WORK_CHECK_MONRY){
+        if(userInfo.getBalance()<CommonCanstant.USER_WORK_CHECK_MONRY && oldUser){
         	return null;
         }
         //检查用户
@@ -189,14 +192,16 @@ public class UserJobService {
         	if(jobInfo == null){
         		return null;
         	}
-        	
+        	System.out.println("参与人数加一");
         	userJobDao.save(tblRelUserJob);
-        	
-        	//报名成功，用户的余额要扣除两元，并且记录交易流水
-        	TblUserInfo tblUser=userInfoDao.get(userInfo.getUid());
-        	tblUser.setBalance(tblUser.getBalance()-CommonCanstant.USER_WORK_CHECK_MONRY);
-        	userScheduleDao.add(userInfo.getUid(), CommonCanstant.USER_WORK_CHECK_MONRY, CommonCanstant.MONEY_TYPE_DEPOSIT, "", false);
-        	
+        	if(oldUser){
+            	//报名成功，如果是老用户的余额要扣除两元，并且记录交易流水，新用户就算了
+        		TblUserInfo tblUser=userInfoDao.get(userInfo.getUid());
+            	tblUser.setBalance(tblUser.getBalance()-CommonCanstant.USER_WORK_CHECK_MONRY);
+            	userScheduleDao.add(userInfo.getUid(), CommonCanstant.USER_WORK_CHECK_MONRY, CommonCanstant.MONEY_TYPE_DEPOSIT, "", false);
+            
+        	}
+        		
         	response.setCode(ResponseCode.SUCCESS);
         	response.setAll(jobInfo.getNumPeople());
         	response.setApplied(jobInfo.getJoinNum());
@@ -255,5 +260,20 @@ public class UserJobService {
     	
     	return true;
     	
+    }
+    
+    /**
+     * 用户是否第一次参与兼职
+     * 如果是第一次返回false
+     * 如果不是第一次返回true
+     * @param uid
+     * @return
+     */
+    private boolean checkFirst(int uid){
+    	if(userJobDao.getByStatus(uid).size() > 0){
+        	return true;
+    	}else {
+			return false;
+		}
     }
 }
