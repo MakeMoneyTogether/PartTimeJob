@@ -28,7 +28,7 @@
 		<div class="weui-panel__hd" style="padding:0;">
 			<div class="weui-flex">
 				<div class="weui-flex__item placeselect" style="padding: 10px;">
-					<a href="userp" class="my_font_color">
+					<a href="userp/index" class="my_font_color">
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 					</a>
 				</div>

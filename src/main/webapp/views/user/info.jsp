@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -35,7 +37,12 @@
 		<div class="weui-form-preview__bd">
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">薪资：</label>
-				<span class="weui-form-preview__value" style="color:red;" id="jz-money">${job.paymentMoney }</span>
+				<span class="weui-form-preview__value" style="color:red;" id="jz-money">${job.paymentMoney }元/
+				<c:choose>
+					<c:when test="${job.paymentType == 0}">时</c:when>
+					<c:otherwise>天</c:otherwise>
+				</c:choose>
+				</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">类型：</label>

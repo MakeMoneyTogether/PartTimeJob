@@ -6,7 +6,7 @@ function showInfo(jid){
         $('#connectPhone').html(data.connectPhone);
         $('#jobStartTime').html(stamp2YMD(data.jobStartTime));
         $('#jobEndTime').html(stamp2YMD(data.jobEndTime));
-        $('#paymentMoney').html(data.paymentMoney);
+        $('#paymentMoney').html(data.paymentMoney+'元/'+(data.paymentType==0?'时':'天'));
         $('#numPeople').html(data.numPeople);
         $('#jobDesc').html(data.jobDesc);
         

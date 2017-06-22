@@ -7,5 +7,16 @@ function stamp2YMD(ts){
 	if(ymd[2].length == 1){
 		ymd[2] = '0'+ymd[2];
 	}
-	return ymd[0]+'-'+ymd[1]+'-'+ymd[2];
+	res = ymd[0]+'-'+ymd[1]+'-'+ymd[2];
+	if(time.getHours()<10){
+		res += ' 0'+time.getHours();
+	}else{
+		res += ' '+time.getHours();
+	}
+	if(time.getMinutes()<10){
+		res += ':0'+time.getMinutes();
+	}else{
+		res += ':'+time.getMinutes();
+	}
+	return res;
 }

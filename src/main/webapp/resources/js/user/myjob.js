@@ -5,7 +5,7 @@ function genItem(data){
 		+data.jobTitle+'</span><br><span class="i-jz-desc">'
 		+ stamp2YMD(data.jobStartTime)+' 至 '+stamp2YMD(data.jobEndTime)+'</span><br><span class="i-jz-money">'
 		+data.paymentMoney+'元/'
-		+(data.paymentType==1?'时':'天')+'</span></div></a>';
+		+(data.paymentType==0?'时':'天')+'</span></div></a>';
 	return item;
 }
 $(function(){

@@ -30,7 +30,12 @@
 		<div class="weui-form-preview__bd">
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">薪资：</label>
-				<span class="weui-form-preview__value" style="color:red;" id="paymentMoney">${job.paymentMoney }</span>
+				<span class="weui-form-preview__value" style="color:red;" id="paymentMoney">${job.paymentMoney }元/
+				<c:choose>
+					<c:when test="${job.paymentType == 0}">时</c:when>
+					<c:otherwise>天</c:otherwise>
+				</c:choose>
+				</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">类型：</label>
