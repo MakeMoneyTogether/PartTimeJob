@@ -30,6 +30,9 @@ function loadm(){
 					domhtml = genItem(data[i]);
 					$('#jz-infos').append(domhtml);
 				}
+				if(data.length < 3){
+					loadEnd();
+				}
 				index = parseInt(index) +3;
 				index_bak.text(index);
 				loading = false;
@@ -38,7 +41,11 @@ function loadm(){
 	}, 100);  
 }
 $(document.body).infinite().on("infinite",loadm);
-
+function loadEnd(){
+	$(document.body).destroyInfinite();
+	$('.weui-loadmore').addClass('weui-loadmore_line');
+	$('.weui-loadmore').html('<span class="weui-loadmore__tips">加载完毕</span>');
+}
 function onLoad(){
 	city = $.cookie('citycode');
 	keys = keys_bak.text();
@@ -53,6 +60,9 @@ function onLoad(){
 			for(i=0;i<data.length;i++){
 				domhtml = genItem(data[i]);
 				$('#jz-infos').append(domhtml);
+			}
+			if(data.length < 6){
+				loadEnd();
 			}
 			index_bak.text(9);
 		}

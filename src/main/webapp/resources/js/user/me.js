@@ -44,6 +44,10 @@ function repwd(){
 		$.alert('两次密码不一致');
 		return;
 	}
+	if(npwd.length < 6){
+		$.alert('密码过短');
+		return;
+	}
 	
 	phone = $.cookie('phone');
 	$.ajax({
