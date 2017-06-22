@@ -73,19 +73,19 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">开始时间</label></div>
 			<div class="weui-cell__bd">
-				<input id="jobStartTime" class="weui-input" type="date" placeholder="请选择时间">
+				<input id="jobStartTime" class="weui-input datetime-picker" type="text" placeholder="请选择时间">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">结束时间</label></div>
 			<div class="weui-cell__bd">
-				<input id="jobEndTime" class="weui-input" type="date" >
+				<input id="jobEndTime" class="weui-input datetime-picker" type="text" >
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职有效期至</label></div>
 			<div class="weui-cell__bd">
-				<input id="jobValidateTime" class="weui-input" type="date" >
+				<input id="jobValidateTime" class="weui-input datetime-picker" type="text" >
 			</div>
 				前
 		</div>
@@ -148,6 +148,7 @@
 	});
 	$("#city-picker").cityPicker({
 	});
+	$('.datetime-picker').datetimePicker();
 </script>
 </body>
 </html>

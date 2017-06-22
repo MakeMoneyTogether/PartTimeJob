@@ -31,7 +31,7 @@ function check(){
 	jobStartTime = new Date($('#jobStartTime').val()).getTime();
 	jobEndTime = new Date($('#jobEndTime').val()).getTime();
 	jobValidateTime = new Date($('#jobValidateTime').val()).getTime();
-	if(isNaN(jobStartTime) || isNaN(jobEndTime) || isNaN(jobValidateTime) || jobStartTime > jobEndTime){
+	if(isNaN(jobStartTime) || isNaN(jobEndTime) || isNaN(jobValidateTime) || jobStartTime > jobEndTime || jobValidateTime > jobStartTime){
 		$.alert('请输入正确日期');
 		return;
 	}

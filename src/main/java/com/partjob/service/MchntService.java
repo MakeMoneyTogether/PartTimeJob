@@ -574,10 +574,16 @@ public class MchntService {
         int hourStart=cal1.get(Calendar.HOUR_OF_DAY);
         int hourEnd=cal2.get(Calendar.HOUR_OF_DAY);
         
+//        if(dayEnd>dayStart){
+//        	return (dayEnd-dayStart)*hour+hourEnd-hourStart;
+//        }else{
+//        	return hourEnd-hourStart;
+//        }
+        //这里我改了一下，就是按照输入的hour进行计算
         if(dayEnd>dayStart){
-        	return (dayEnd-dayStart)*hour+hourEnd-hourStart;
+        	return (dayEnd-dayStart + 1)*hour;
         }else{
-        	return hourEnd-hourStart;
+        	return hour;
         }
 	}
 	public List<MchntSchedule> getCashs() {
