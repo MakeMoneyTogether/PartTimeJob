@@ -110,7 +110,12 @@ public class JobPageController extends BaseController{
 //    	if(!"all".equals(dates)){
 //    		long time = Long.parseLong(dates);
 //    	}
-    	return jobService.getJobPage(offset, length, dises, labels, dates, city);
+    	List<JobInfo> jobInfos = jobService.getJobPage(offset, length, dises, labels, dates, city);
+    	if(jobInfos == null){
+    		return "[]";
+    	}else {
+			return jobInfos;
+		}
     }
     
     /**
@@ -181,7 +186,12 @@ public class JobPageController extends BaseController{
     @ResponseBody
     public Object getJobInfo(@PathVariable int offset, @PathVariable int length) {
         // 要不要返回json
-        return jobService.getNetJobPage(offset, length);
+    	List<NetJob> jobInfos = jobService.getNetJobPage(offset, length);
+    	if(jobInfos == null){
+    		return "[]";
+    	}else{
+            return jobInfos;
+    	}
     }
     
     /**

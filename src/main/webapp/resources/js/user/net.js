@@ -12,24 +12,28 @@ function loadm(){
 	setTimeout(function() {
 		all = 'all';
 		index = index_bak.text();
-		$.ajax({
-			type: "POST",
-			url: 'net/'+index+'/3',
-			dataType: "json",
-			success:function(data){
-				console.log(index)
-				for(i=0;i<data.length;i++){
-					domhtml = genItem(data[i]);
-					$('#jz-infos').append(domhtml);
+		try{
+			$.ajax({
+				type: "POST",
+				url: 'net/'+index+'/3',
+				dataType: "json",
+				success:function(data){
+					console.log(index)
+					for(i=0;i<data.length;i++){
+						domhtml = genItem(data[i]);
+						$('#jz-infos').append(domhtml);
+					}
+					if(data.length < 3){
+						loadEnd();
+					}
+					index = parseInt(index) +3;
+					index_bak.text(index);
+					loading = false;
 				}
-				if(data.length < 3){
-					loadEnd();
-				}
-				index = parseInt(index) +3;
-				index_bak.text(index);
-				loading = false;
-			}
-		});
+			});
+		}catch(err){
+			loadEnd();
+		}
 	}, 100);  
 }
 $(document.body).infinite().on("infinite",loadm);
@@ -41,19 +45,23 @@ function loadEnd(){
 }
 function onLoad(){
 	$('#jz-infos').text('');
-	$.ajax({
-		type: "POST",
-		url: "job/net/0/9",
-		dataType: "json",
-		success:function(data){
-			for(i=0;i<data.length;i++){
-				domhtml = genItem(data[i]);
-				$('#jz-infos').append(domhtml);
+	try{
+		$.ajax({
+			type: "POST",
+			url: "job/net/0/9",
+			dataType: "json",
+			success:function(data){
+				for(i=0;i<data.length;i++){
+					domhtml = genItem(data[i]);
+					$('#jz-infos').append(domhtml);
+				}
+				if(data.length < 9){
+					loadEnd();
+				}
+				index_bak.text(9);
 			}
-			if(data.length < 9){
-				loadEnd();
-			}
-			index_bak.text(9);
-		}
-	});
+		});
+	}catch(err){
+		loadEnd();
+	}
 }

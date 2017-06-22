@@ -21,8 +21,8 @@ function onCheckBtn(){
 function genItem(one){
 	var item = '<a href="userp/info/'+one.jobId+'" class="weui-media-box weui-media-box_appmsg"><div class="weui-media-box__hd"><div class="i-circle i-type'+one.jobType%26+'">'+
 				one.jobTypeName+'</div></div><div class="weui-media-box__bd i-jz"><span class="weui-media-box__title i-jz-title">'+
-				one.jobTitle+'</span><br><span class="i-jz-desc">'+one.jobAddress+'<br>'+stamp2YMD(one.jobStartTime)+'-'+stamp2YMD(one.jobEndTime)+'</span><br><span class="i-jz-money">'+
-				one.paymentMoney+'元/'+(data.paymentType==1?'时':'天')+'</span></div></a>';
+				one.jobTitle+'</span><br><span class="i-jz-desc">'+one.jobAddress+'<br>'+stamp2YMD(one.jobStartTime)+'至'+stamp2YMD(one.jobEndTime)+'</span><br><span class="i-jz-money">'+
+				one.paymentMoney+'元/'+(one.paymentType==0?'时':'天')+'</span></div></a>';
 	return item;
 }
 function loadm(){
@@ -38,25 +38,29 @@ function loadm(){
 			dates = new Date(dates).getTime();
 		}
 		data = {dises:dises,labels:labels,dates:dates,city:city};
-		$.ajax({
-			type: "POST",
-			url: 'job/select/'+index+'/3',
-			dataType: "json",
-			data: data,
-			success:function(data){
-				console.log(index)
-				for(i=0;i<data.length;i++){
-					domhtml = genItem(data[i]);
-					$('#jz-infos').append(domhtml);
+		try{
+			$.ajax({
+				type: "POST",
+				url: 'job/select/'+index+'/3',
+				dataType: "json",
+				data: data,
+				success:function(data){
+					console.log(index)
+					for(i=0;i<data.length;i++){
+						domhtml = genItem(data[i]);
+						$('#jz-infos').append(domhtml);
+					}
+					if(data.length < 3){
+						loadEnd();
+					}
+					index = parseInt(index) +3;
+					index_bak.text(index);
+					loading = false;
 				}
-				if(data.length < 3){
-					loadEnd();
-				}
-				index = parseInt(index) +3;
-				index_bak.text(index);
-				loading = false;
-			}
-		});
+			});
+		}catch(err){
+			loadEnd();
+		}
 	}, 100);  
 }
 $(document.body).infinite().on("infinite",loadm);
@@ -76,22 +80,27 @@ function onLoad(){
 	}
 	data = {dises:dises,labels:labels,dates:dates,city:city};
 	$('#jz-infos').text('');
-	$.ajax({
-		type: "POST",
-		url: "job/select/0/6",
-		dataType: "json",
-		data: data,
-		success:function(data){
-			for(i=0;i<data.length;i++){
-				domhtml = genItem(data[i]);
-				$('#jz-infos').append(domhtml);
+	try{
+		$.ajax({
+			type: "POST",
+			url: "job/select/0/6",
+			dataType: "json",
+			data: data,
+			success:function(data){
+				for(i=0;i<data.length;i++){
+					domhtml = genItem(data[i]);
+					$('#jz-infos').append(domhtml);
+				}
+				if(data.length < 6){
+					loadEnd();
+				}
+				index_bak.text(6);
 			}
-			if(data.length < 6){
-				loadEnd();
-			}
-			index_bak.text(6);
-		}
-	});
+		});
+	}catch(err){
+		loadEnd();
+	}
+	
 }
 
 $("#plocal").click(function(){
