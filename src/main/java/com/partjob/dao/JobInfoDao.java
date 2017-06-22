@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
+import com.partjob.utils.CommonUtil;
 import com.partjob.utils.HibernateBaseDao;
 @Repository
 public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
@@ -67,6 +68,10 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     		values.add(new Timestamp(Long.parseLong(dates)));
     	}
     	
+    	//兼职时间判断
+    	hql.append(" and jobValidateTime > ?");
+    	values.add(CommonUtil.getTimestamp());
+    	
     	if(city!=0){
 			hql.append("and cityCode in "
 					+ "(select cityCode from TblCityInfo where superCode =?)");
@@ -87,15 +92,17 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
 					+ "(select cityCode from TblCityInfo where superCode =?)");
 			values.add(city);
     	}
-    	
-
     	if(keys != null){
     		hql.append(" and job.jobTitle like ?");
     		values.add("%"+keys+"%");
     		hql.append(" or job.jobType in (select id from TblJobType where name like ?)");
     		values.add("%"+keys+"%");
     	}
-    	
+
+    	//兼职时间判断
+    	hql.append(" and jobValidateTime > ?");
+    	values.add(CommonUtil.getTimestamp());
+
     	return findPage(hql.toString(), offset, length, values.toArray());
     }
 
