@@ -3,6 +3,8 @@ package com.partjob.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -348,12 +350,21 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = { "podtJob" })
 	@ResponseBody
-	public int postJob(JobInfo jobInfo,long jjobStartTime, long jjobEndTime, long jjobValidateTime,
+	public int postJob(JobInfo jobInfo,String jjobStartTime, String jjobEndTime, String jjobValidateTime,
 			HttpServletRequest request){
 		try{
-			jobInfo.setJobStartTime(new Timestamp(jjobStartTime));
-			jobInfo.setJobEndTime(new Timestamp(jjobEndTime));
-			jobInfo.setJobValidateTime(new Timestamp(jjobValidateTime));
+			SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+			Date start = sdf.parse(jjobStartTime);
+			Date end = sdf.parse(jjobEndTime);
+			Date vali = sdf.parse(jjobValidateTime);
+			
+			if(start.getTime() > end.getTime() || vali.getTime() > start.getTime()){
+				return 666;
+			}
+			
+			jobInfo.setJobStartTime(new Timestamp(start.getTime()));
+			jobInfo.setJobEndTime(new Timestamp(end.getTime()));
+			jobInfo.setJobValidateTime(new Timestamp(vali.getTime()));
 			int mchntCd=getMchntInfo(request).getMchntCd();
 			int result=mchntService.postJob(jobInfo, mchntCd);
 			return result;

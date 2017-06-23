@@ -28,14 +28,16 @@ function check(){
 		$.alert('请输入正确的工作强度');
 		return;
 	}
-	jobStartTime = new Date($('#jobStartTime').val()).getTime();
-	jobEndTime = new Date($('#jobEndTime').val()).getTime();
-	jobValidateTime = new Date($('#jobValidateTime').val()).getTime();
-	if(isNaN(jobStartTime) || isNaN(jobEndTime) || isNaN(jobValidateTime) || jobStartTime > jobEndTime || jobValidateTime > jobStartTime){
+	jobStartTime = $('#jobStartTime').val();
+	jobEndTime = $('#jobEndTime').val();
+	jobValidateTime = $('#jobValidateTime').val();
+	numPeople = $('#numPeople').val();
+	
+	if(jobStartTime.length < 1 || jobEndTime.length < 1 || jobValidateTime.length < 1){
 		$.alert('请输入正确日期');
 		return;
 	}
-	numPeople = $('#numPeople').val();
+	
 	if(!numPeople.match(/^(\d)+$/)){
 		$.alert('请输入正确的招聘人数');
 		return;
@@ -77,6 +79,8 @@ function issue(data){
 				});
 			}else if(data == 4){
 				$.alert('薪资过低！！');
+			}else if(data == 666){
+				$.alert('日期不正确！！');
 			}
 			
 		}
