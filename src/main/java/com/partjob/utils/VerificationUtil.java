@@ -43,6 +43,11 @@ public class VerificationUtil {
 		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_REGISTER);
 	}
 	
+	
+	public static int sendEditCode(String phone,String code,String name){
+		String text = "{code:'"+code+"',product:'"+"小蜜蜂兼职商家 "+name+"'}";
+		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_EDIT);
+	}
 	/**
 	 * 发送活动确认通知
 	 * 勤劳的的小蜜蜂${name}您好，您已报名${mchnt}发布的${job}，请确认谢谢。如有意外请及时联系商家。

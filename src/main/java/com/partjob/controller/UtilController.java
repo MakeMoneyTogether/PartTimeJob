@@ -1,5 +1,6 @@
 package com.partjob.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,14 @@ public class UtilController extends BaseController{
 		String code = VerificationUtil.genCode();
 		session.setAttribute(phone, code);
 		return VerificationUtil.sendRegistMode(phone, code);
+	}
+	
+	@RequestMapping(value = "editCode")
+	@ResponseBody
+	public Object editCode(String phone,HttpSession session,HttpServletRequest request){	
+		String code = VerificationUtil.genCode();
+		session.setAttribute(phone, code);
+		System.out.println("code = "+code);
+		return VerificationUtil.sendEditCode(phone, code, getMchntInfo(request).getMchntName());
 	}
 }

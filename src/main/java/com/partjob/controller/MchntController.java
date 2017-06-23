@@ -275,9 +275,14 @@ public class MchntController extends BaseController {
 	 */
 	@RequestMapping(value = { "update" })
 	@ResponseBody
-	public int updateMchntInfo(MchntInfo mchntInfo,
+	public int updateMchntInfo(MchntInfo mchntInfo,@RequestParam(value = "code")String code,HttpSession session,
 			HttpServletRequest request) {
 		try {
+			String preCode = (String) session.getAttribute(mchntInfo.getConnPhone());
+	    	System.out.println(preCode+"  ==  "+code);
+			if(!code.equals(preCode)){
+	    		return ResponseCode.VERCODE_ERROR;
+	    	}
 			// 检查是否具有更新权限
 			if (mchntInfo.getMchntCd() != getMchntInfo(request).getMchntCd()) {
 				return ResponseCode.FORBIDDEN;

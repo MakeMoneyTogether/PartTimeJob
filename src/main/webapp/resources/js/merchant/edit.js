@@ -26,21 +26,15 @@ function get_code(){
 	$('#code_btn').text('已发送');
 	$.ajax({
 		type:'POST',
-		url: 'util/sendCode',
+		url: 'util/editCode',
 		dataType:'json',
 		data:{phone:phone},
 		success: function(data){
 			console.log(data);
 			if(data == 0){
 				$.notification({
-					text: '【兼职平台】您的兼职平台手机验证码为：320100<br>打死也不要告诉别人。',
-					onClick: function(data) {
-						$.alert('吓你呢，这只是个测试。');
-					},
+					text: '验证码发送成功',
 				});
-			}else if(data == 1){
-				$.alert('手机号已被注册');
-				$('#code_btn').text('获取');
 			}else{
 				$.alert('验证码发送失败');
 				$('#code_btn').text('获取');
@@ -56,7 +50,7 @@ function update(){
 	phone = $('#phone').val();
 	code = $('#code').val();
 	
-	data={mchntCd:mchntCd,mchntName:mname,mchntAddress:local,connName:connectname,phone:phone,code:code};
+	data={mchntCd:mchntCd,mchntName:mname,mchntAddress:local,connName:connectname,connPhone:phone,code:code};
 	if(citycode != null){
 		data.citycode = citycode;
 	}
@@ -66,11 +60,12 @@ function update(){
 		dataType:'json',
 		data:data,
 		success: function(data){
-			console.log(data);
 			if(data == 0){
 				$.alert('信息修改成功',function(){
 					window.location.href="mchntp/index";
 				});
+			}else if(data ==1){
+				$.alert('验证码出错');
 			}else{
 				$.alert('简历修改失败',function(){
 				});
