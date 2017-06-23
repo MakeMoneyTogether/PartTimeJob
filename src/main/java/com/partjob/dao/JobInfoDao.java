@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.partjob.constant.CommonCanstant;
 import com.partjob.entity.TblJobInfo;
 import com.partjob.entity.TblMchntInfo;
 import com.partjob.utils.CommonUtil;
@@ -72,6 +73,10 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	hql.append(" and jobValidateTime > ?");
     	values.add(CommonUtil.getTimestamp());
     	
+    	//兼职有效判断
+    	hql.append(" and jobSt = ?");
+    	values.add(CommonCanstant.JOB_PENDING);
+    	
     	if(city!=0){
 			hql.append("and cityCode in "
 					+ "(select cityCode from TblCityInfo where superCode =?)");
@@ -103,6 +108,10 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
     	hql.append(" and jobValidateTime > ?");
     	values.add(CommonUtil.getTimestamp());
 
+    	//兼职有效判断
+    	hql.append(" and jobSt = ?");
+    	values.add(CommonCanstant.JOB_PENDING);
+    	
     	return findPage(hql.toString(), offset, length, values.toArray());
     }
 
