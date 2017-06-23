@@ -43,7 +43,7 @@
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>
-				<span class="weui-form-preview__value" id="numPeople">${job.numPeople }</span>
+				<span class="weui-form-preview__value" id="numPeople">${job.joinNum }/${job.numPeople }</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">状态：</label>
