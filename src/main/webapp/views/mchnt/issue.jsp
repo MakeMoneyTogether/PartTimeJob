@@ -143,7 +143,7 @@
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
 <script src="static/js/merchant/merchant.js"></script>
-<script src="static/js/merchant/issue.js"></script>
+<script src="static/js/merchant/issue1.js"></script>
 <script src="static/js/city-picker.min.js" charset="utf-8"></script>
 <script>
 	$(function() {
