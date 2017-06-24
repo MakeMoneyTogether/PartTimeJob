@@ -24,10 +24,11 @@ function check(){
 		return;
 	}
 	hoursDay = $('#hourOfDay').val();
-	if(!paymentMoney.match(/^(\d)+(\.(\d)+)?$/)){
+	if(!hoursDay.match(/^(\d)+(\.(\d)+)?$/)){
 		$.alert('请输入正确的工作强度');
 		return;
 	}
+	hoursDay = parseInt(hoursDay * 10);
 	jobStartTime = $('#jobStartTime').val();
 	jobEndTime = $('#jobEndTime').val();
 	jobValidateTime = $('#jobValidateTime').val();

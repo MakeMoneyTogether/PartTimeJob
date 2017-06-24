@@ -329,8 +329,8 @@ public class MchntService {
 		//判断商户的计费类型
 		if(job.getPaymentType() == CommonCanstant.PAY_TYPE_HOUR){
 //			int hour=(int) (time/1000/60);
-			int hour=differeHour(job.getJobStartTime(), job.getJobEndTime(), job.getHoursDay()==0?8:job.getHoursDay());
-			money=paymentMoney*job.getNumPeople()*hour;
+			int hour=differeHour(job.getJobStartTime(), job.getJobEndTime(), job.getHoursDay()==0?80:job.getHoursDay());
+			money=paymentMoney*job.getNumPeople()*hour/10;	//这里除10是因为工作强度在前台传过来时乘了一个10
 			
 		}else if(job.getPaymentType() == CommonCanstant.PAY_TYPE_DAY){
 //			int day=(int)(time/1000/60/24);

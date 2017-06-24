@@ -31,6 +31,8 @@ public class MchntScheduleDao extends HibernateBaseDao<TblMchntSchedule, Seriali
     	tblMchntSchedule.setMoney(money);
     	tblMchntSchedule.setMchntCd(mchntCd);
     	if(check){
+    		tblMchntSchedule.setStatus(CommonCanstant.UNCHECKED);
+    	}else{
     		tblMchntSchedule.setStatus(CommonCanstant.AVAILAB);
     	}
     	tblMchntSchedule.setOpenid(openId);
