@@ -48,10 +48,10 @@
 	<div class="weui-panel weui-panel_access" style="margin-top:0;">
 		<div class="weui-panel__hd" style="padding:0;">
 			<div class="weui-flex">
-				<div class="weui-flex__item my_font_color placeselect checkBtnActive" style="padding: 10px;">
+				<div class="weui-flex__item my_font_color placeselect" style="padding: 10px;">
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 				</div>
-				<div class="weui-flex__item placeselect" style="padding: 10px;">
+				<div class="weui-flex__item placeselect hr_left" style="padding: 10px;">
 					<a href="userp/net" class="my_font_color">
 					<i style="color:#010101;" class="fa fa-mobile-phone"></i>  手机兼职
 					</a>

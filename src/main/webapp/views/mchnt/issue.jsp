@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<div class="weui-cell">
-			<div class="weui-cell__hd"><label class="weui-label">兼职有效期至</label></div>
+			<div class="weui-cell__hd"><label class="weui-label">报名截止</label></div>
 			<div class="weui-cell__bd">
 				<input id="jobValidateTime" class="weui-input datetime-picker" type="text" >
 			</div>

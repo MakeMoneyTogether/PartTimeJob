@@ -32,7 +32,7 @@
 					<i style="color:#010101;" class="fa fa-calendar"></i>  实体兼职
 					</a>
 				</div>
-				<div class="weui-flex__item my_font_color placeselect checkBtnActive" style="padding: 10px;">
+				<div class="weui-flex__item my_font_color placeselect hr_left" style="padding: 10px;">
 					<i style="color:#010101;" class="fa fa-mobile-phone"></i>  手机兼职
 				</div>
 			</div>

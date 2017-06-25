@@ -20,7 +20,7 @@ function init(){
 		success:function(data){
 			n = data.length;
 			for(i = 0;i<n;i++){
-				cellpre = '<div onclick="$.alert(\''+data[i].id+'\',\'交易单号\');" class="weui-cell"><div class="weui-cell__hd"><i class="fa fa-euro"></i></div><div class="weui-cell__bd"><p style="margin-left:10%;">提现 '+data[i].money+'</p></div><div class="weui-cell__ft">';
+				cellpre = '<div onclick="$.alert(\''+data[i].id+'\',\'交易单号\');" class="weui-cell"><div class="weui-cell__hd"><i class="fa fa-euro"></i></div><div class="weui-cell__bd"><p style="margin-left:10%;">'+data[i].type+' '+data[i].money+'</p></div><div class="weui-cell__ft">';
 				if(data[i].status == UNCHECKED){
 					$('#out_moneys').append(cellpre+'待审核<i class="weui-icon-waiting"></i></div></div>');
 				}else if(data[i].status == UNAVAILAB){
