@@ -31,29 +31,29 @@
 		<section class="content">
 			<!-- Main row -->
 			<div class="row">
-				
+				<c:if test="${islogin == 0}">
 				<div class="col-md-4">
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">登录</h3>
 						</div>
 						<div class="box-body">
-							<form>
+							<form action="adminp/login" method=POST>
 								<div class="form-group">
 									<label for="user">用户名</label>
-									<input type="text" class="form-control" id="user" placeholder="Email">
+									<input type="text" class="form-control" id="user" name="phone" placeholder="Email">
 								</div>
 								<div class="form-group">
 									<label for="pwd">密码</label>
-									<input type="password" class="form-control" id="pwd" placeholder="Password">
+									<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
 								</div>
 								<button type="submit" class="btn btn-default">登录</button>
 							</form>
 						</div>
 					</div>
 				</div>
-			
-				
+				</c:if>
+				<c:if test="${islogin == 1}">
 				<div class="col-md-8">
 					<div class="box box-primary">
 						<div class="box-header with-border">
@@ -78,6 +78,7 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
 				
 			</div>
 		</section>
