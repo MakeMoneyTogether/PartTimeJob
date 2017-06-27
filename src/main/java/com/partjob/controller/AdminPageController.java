@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.partjob.constant.CommonCanstant;
 import com.partjob.model.JobInfo;
 import com.partjob.model.MchntInfo;
 import com.partjob.model.MchntSchedule;
@@ -30,7 +32,7 @@ import com.partjob.service.UserService;
 
 @Controller
 @RequestMapping(value = "adminp")
-public class AdminPageController {
+public class AdminPageController extends BaseController{
 
 	@Autowired
     UserJobService userJobService;
@@ -46,31 +48,54 @@ public class AdminPageController {
 	SwiperService swiperService;
 	
 	@RequestMapping("{page}")
-	public String adminto(@PathVariable String page){
+	public String adminto(@PathVariable String page,HttpServletRequest request,Model model){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}else {
+			model.addAttribute("islogin", 1);
+		}
 		return "admin/"+page;
 	}
 	
 	@RequestMapping("")
-	public String index(){
+	public String index(HttpServletRequest request,Model model){
+		if(checkLogin(request)){
+			model.addAttribute("islogin", 1);
+		}else{
+			model.addAttribute("islogin", 0);
+		}
 		return "admin/index";
 	}
 	
 	@RequestMapping("jobcheck")
-	public String jobcheck(Model model){
+	public String jobcheck(Model model,HttpServletRequest request){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
 		List<JobInfo> jobs = jobService.getUncheckJobs();
 		model.addAttribute("jobs", jobs);
 		return "admin/jobcheck";
 	}
 	
 	@RequestMapping("mchnt")
-	public String mchnt(Model model){
+	public String mchnt(Model model,HttpServletRequest request){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
 		List<MchntInfo> mchntInfos = mchntService.getAllMchnt();
 		model.addAttribute("mchnts", mchntInfos);
 		return "admin/mchnt";
 	}
 	
 	@RequestMapping("user")
-	public String user(Model model){
+	public String user(Model model,HttpServletRequest request){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
 		List<UserInfo> userInfos = userService.getAllUser();
 		System.out.println(userInfos.size());
 		model.addAttribute("users", userInfos);
@@ -78,7 +103,11 @@ public class AdminPageController {
 	}
 	
 	@RequestMapping("cash")
-	public String cash(Model model){
+	public String cash(Model model,HttpServletRequest request){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
 		List<UserSchedule> users = userCashService.getCashs();
 		List<MchntSchedule> mchnts = mchntService.getCashs();
 		model.addAttribute("users", users);
@@ -87,10 +116,38 @@ public class AdminPageController {
 	}
 	
 	@RequestMapping("netjob")
-	public String netjob(Model model){
+	public String netjob(Model model,HttpServletRequest request){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
 		List<NetJob> netJobs = jobService.getAllNetJob();
 		model.addAttribute("netjobs", netJobs);
 		return "admin/netjob";
+	}
+	
+	@RequestMapping("login")
+	public String login(HttpServletRequest request,Model model,String phone,String pwd){
+		MchntInfo mchntInfo = mchntService.logoin(pwd, phone);
+		HttpSession session = request.getSession();
+		if("10000000000".equals(mchntInfo.getPhone())){
+			session.setAttribute(CommonCanstant.MCHNT_INFO, mchntInfo);
+			model.addAttribute("islogin", 1);
+			return "admin/index";
+		}else {
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
+		
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request,Model model){
+		HttpSession session = request.getSession();
+		session.removeAttribute(CommonCanstant.MCHNT_INFO);
+		model.addAttribute("islogin", 0);
+		return "admin/index";
+		
 	}
 	
 	@RequestMapping("swiper")
@@ -107,5 +164,15 @@ public class AdminPageController {
 		}catch(Exception e){
 			return "fail";
 		}
+	}
+	
+	public boolean checkLogin(HttpServletRequest request){
+		MchntInfo mchntInfo = getMchntInfo(request);
+		if(mchntInfo == null || !"10000000000".equals(mchntInfo.getPhone())){
+			return false;
+		}else if("10000000000".equals(mchntInfo.getPhone())){
+			return true;
+		}
+		return false;
 	}
 }

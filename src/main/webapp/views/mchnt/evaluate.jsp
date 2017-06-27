@@ -37,10 +37,7 @@
 		<c:forEach items="${users }" var="user">
 			<div class="weui-cell">
 				<div class="weui-cell__bd">
-					<p>${user.name }</p>
-				</div>
-				<div class="weui-cell__bd">
-					<p>${user.phone }</p>
+					<p>${user.name }</p><p>${user.phone }</p>
 				</div>
 				<div class="weui-cell__hd" >
 					<button onclick="notfound(${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">缺勤</button>&nbsp;

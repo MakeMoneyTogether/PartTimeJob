@@ -14,6 +14,13 @@
 			<a class="sidebar-toggle" data-toggle="offcanvas" role="button">
 				<span class="sr-only">Toggle navigation</span>
 			</a>
+			<div class="navbar-custom-menu">
+			  <ul class="nav navbar-nav">
+			  	<li>
+			    	<a href="adminp/logout" ><i class="fa fa-sign-out"></i></a>
+			    </li>
+				</ul>
+			</div>
 		</nav>
 	</header>
 	<!-- Left side column. contains the logo and sidebar -->
