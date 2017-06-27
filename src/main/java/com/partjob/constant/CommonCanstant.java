@@ -61,7 +61,7 @@ public class CommonCanstant {
 	
 	//****************************工作常量******************/
 	public static int MONEY_LEV_DAY=10000;//每日最低100元
-	public static int MONEY_LEV_HOUR=1000;//没小时最低10元
+	public static int MONEY_LEV_HOUR=1200;//没小时最低10元
 	
 	
 	public static String MONEY_TYPE_PAY="充值";
