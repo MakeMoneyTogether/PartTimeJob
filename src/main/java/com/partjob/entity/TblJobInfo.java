@@ -27,6 +27,8 @@ public class TblJobInfo {
     private Integer jobSt;
     private Integer joinNum;
     private Integer cityCode;
+    private String sex;
+    
 
     @Id
     @Column(name = "job_id", nullable = false)
@@ -203,6 +205,15 @@ public class TblJobInfo {
 
 	public void setHoursDay(int hoursDay) {
 		this.hoursDay = hoursDay;
+	}
+	 @Basic
+	 @Column(name = "sex", nullable = true)
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 }

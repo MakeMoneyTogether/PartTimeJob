@@ -24,11 +24,19 @@ public class JobInfo {
 	    private Integer cityCode;
 	    private Integer userJobStatu;
 	    private String mchntName;
+	    private String sex;
 		public int getJobId() {
 			return jobId;
 		}
 		public void setJobId(int jobId) {
 			this.jobId = jobId;
+		}
+		
+		public String getSex() {
+			return sex;
+		}
+		public void setSex(String sex) {
+			this.sex = sex;
 		}
 		public String getJobTitle() {
 			return jobTitle;
