@@ -37,6 +37,12 @@
 					${user.gender }
 				</div>
 			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">评分</label></div>
+				<div class="weui-cell__bd">
+					${user.grade }
+				</div>
+			</div>
 			<hr>
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">生日</label></div>
