@@ -190,7 +190,12 @@ public class UserService {
 	 */
 	public List<UserInfo> getUserByKey(String userkey) {
 		// TODO Auto-generated method stub
-		return null;
+		List<TblUserInfo> tblUserInfos=userInfoDao.getUserByName(userkey);
+		List<UserInfo> list=new ArrayList<UserInfo>();
+		for(TblUserInfo tblUserInfo:tblUserInfos){
+			list.add(transModel(tblUserInfo));
+		}
+		return list;
 	}
 
 }

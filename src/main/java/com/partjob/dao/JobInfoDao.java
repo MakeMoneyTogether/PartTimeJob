@@ -119,5 +119,11 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
 		String hql = "from TblJobInfo job where job.jobSt=?";
         return find(hql, josSt);
 	}
+	
+	public List<TblJobInfo> getJobByName(String name){
+		//根据名字模糊查询未审核的兼职
+		String hql="from TblJobInfo job where job.jobTitle like ? and job.jobSt=0 order by job.jobId desc";
+		return find(hql, "%"+name+"%");
+	}
 
 }

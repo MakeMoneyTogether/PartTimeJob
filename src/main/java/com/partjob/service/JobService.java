@@ -233,7 +233,12 @@ public class JobService {
 	 */
 	public List<JobInfo> getUncheckJobsByKey(String jobkey) {
 		// TODO Auto-generated method stub
-		return null;
+		List<TblJobInfo>tblJobInfos=jobInfoDao.getJobByName(jobkey);
+		List<JobInfo> list=new ArrayList<JobInfo>();
+		for(TblJobInfo tblJobInfo:tblJobInfos){
+			list.add(transJob(tblJobInfo));
+		}
+		return list;
 	}
 
 }

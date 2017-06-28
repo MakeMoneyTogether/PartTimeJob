@@ -610,6 +610,11 @@ public class MchntService {
 	 */
 	public List<MchntInfo> getMchntByKey(String mchntkey) {
 		// TODO Auto-generated method stub
-		return null;
+		List<TblMchntInfo> tblMchntInfos=mchntInfoDao.getMchntByName(mchntkey);
+		List<MchntInfo> list=new ArrayList<MchntInfo>();
+		for(TblMchntInfo tblMchntInfo:tblMchntInfos){
+			list.add(transModel(tblMchntInfo));
+		}
+		return list;
 	}
 }

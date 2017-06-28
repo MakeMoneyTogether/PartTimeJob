@@ -51,4 +51,5 @@ public class MchntScheduleDao extends HibernateBaseDao<TblMchntSchedule, Seriali
 		String hql="from TblMchntSchedule ms where ms.status=? and ms.type=? order by time desc";
         return find(hql, CommonCanstant.UNCHECKED,CommonCanstant.MONEY_TYPE_CASH);
 	}
+	
 }

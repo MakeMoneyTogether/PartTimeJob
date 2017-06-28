@@ -33,4 +33,9 @@ public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
     	String hql="from TblUserInfo u  order by u.uid desc";
     	return find(hql, null);
     }
+    
+    public List<TblUserInfo> getUserByName(String name){
+    	String hql="from TblUserInfo u  where u.name like ? order by u.uid desc";
+    	return find(hql, "%"+name+"%");
+    }
 }

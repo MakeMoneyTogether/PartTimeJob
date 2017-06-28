@@ -29,4 +29,9 @@ public class MchntInfoDao extends HibernateBaseDao<TblMchntInfo,Serializable>{
 		String hql="from TblMchntInfo mchnt order by mchnt.mchntCd desc";
 		return find(hql, null);
 	}
+	
+	public List<TblMchntInfo> getMchntByName(String name){
+		String hql="from TblMchntInfo mchnt where mchnt.mchntName like ? order by mchnt.mchntCd desc";
+		return find(hql, "%"+name+"%");
+	}
 }
