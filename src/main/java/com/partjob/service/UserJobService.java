@@ -149,10 +149,15 @@ public class UserJobService {
 //    			user.setStatusId(status);
     			user.setScore(score);
     			userJobDao.modify(user);
+    			//更新用户成绩
+    			userInfoDao.setScore(userId);
+    			
     			return ResponseCode.SUCCESS;
     		}else{
     			return ResponseCode.JOB_USER_UNAVAILABLE;
     		}
+    		
+    		
     	}
 
 	public ApplyJobResponse applyJob(String phone, int jid){

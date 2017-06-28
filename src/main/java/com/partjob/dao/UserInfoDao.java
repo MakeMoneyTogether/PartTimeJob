@@ -38,4 +38,10 @@ public class UserInfoDao extends HibernateBaseDao<TblUserInfo, Serializable> {
     	String hql="from TblUserInfo u  where u.name like ? order by u.uid desc";
     	return find(hql, "%"+name+"%");
     }
+    
+    public void setScore(int userId ){
+    	String sql="update tbl_user_info set grade = (select round(avg(score),2) from tbl_rel_user_job where uid= "+userId+") where uid= "+userId;
+    	sqlExec(sql);
+    	
+    }
 }

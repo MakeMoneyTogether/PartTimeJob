@@ -37,7 +37,9 @@ public class UserScheduleDao extends HibernateBaseDao<TblUserSchedule, Serializa
     	tblUserSchedule.setType(type);
     	tblUserSchedule.setTime(new Date());
     	
+//    	getSession().merge(tblUserSchedule);
         save(tblUserSchedule);
+        getSession().clear();
     }
 
     public List<TblUserSchedule> getByUid(int uid){
