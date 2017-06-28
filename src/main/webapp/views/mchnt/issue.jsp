@@ -98,6 +98,16 @@
 				<input id="numPeople" class="weui-input" type="number" placeholder="请输入需求人数">
 			</div>
 		</div>
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd"><label class="weui-label">性别需求</label></div>
+			<div class="weui-cell__bd">
+				<select id="sex" name="sex" class="weui-select">
+					<option value="不限">不限</option>
+					<option value="男">男</option>
+					<option value="女">女</option>
+				</select>
+			</div>
+		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职区域</label></div>
 			<div class="weui-cell__bd">

@@ -42,6 +42,14 @@
 				<span class="weui-form-preview__value" id="jobType">${job.jobTypeName }</span>
 			</div>
 			<div class="weui-form-preview__item">
+				<label class="weui-form-preview__label">性别：</label>
+				<span class="weui-form-preview__value" id="sex">${job.sex }</span>
+			</div>
+			<div class="weui-form-preview__item">
+				<label class="weui-form-preview__label">工作强度：</label>
+				<span class="weui-form-preview__value" id="sex">${job.hoursDay }</span>
+			</div>
+			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>
 				<span class="weui-form-preview__value" id="numPeople">${job.joinNum }/${job.numPeople }</span>
 			</div>

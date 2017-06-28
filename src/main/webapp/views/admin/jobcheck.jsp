@@ -119,6 +119,14 @@ td > a{
 							<td>招收人数</td>
 							<td id="numPeople"></td>
 						</tr>
+						<tr>
+							<td>工作强度</td>
+							<td id="hoursDay"></td>
+						</tr>
+						<tr>
+							<td>性别需求</td>
+							<td id="sex"></td>
+						</tr>
 					</tbody>	
 					</table>
 					<hr>

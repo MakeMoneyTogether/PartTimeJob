@@ -62,7 +62,8 @@ function check(){
 	citycode = $("#city-picker").attr('data-code');
 	jobType = $('#jobType').val();
 	jobDesc = $('#jobDesc').val();
-	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, hoursDay:hoursDay,jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode};
+	sex = $('#sex').val();
+	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, hoursDay:hoursDay,jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode,sex:sex};
 	issue(data);
 }
 function issue(data){

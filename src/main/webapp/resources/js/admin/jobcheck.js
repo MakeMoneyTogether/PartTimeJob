@@ -8,6 +8,8 @@ function showInfo(jid){
         $('#jobEndTime').html(stamp2YMD(data.jobEndTime));
         $('#paymentMoney').html(data.paymentMoney+'元/'+(data.paymentType==0?'时':'天'));
         $('#numPeople').html(data.numPeople);
+        $('#hoursDay').html(data.hoursDay);
+        $('#sex').html(data.sex);
         $('#jobDesc').html(data.jobDesc);
         
         
