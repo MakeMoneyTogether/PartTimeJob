@@ -227,4 +227,13 @@ public class JobService {
 		jobInfoDao.modify(tblJobInfo);
 	}
 
+	/**模糊搜索未审核额兼职
+	 * @param jobkey
+	 * @return
+	 */
+	public List<JobInfo> getUncheckJobsByKey(String jobkey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

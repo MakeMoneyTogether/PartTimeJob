@@ -602,4 +602,14 @@ public class MchntService {
 		mchntInfoDao.modify(mchntInfo);
 		return ResponseCode.SUCCESS;
 	}
+
+	/**
+	 * 模糊匹配查询商户
+	 * @param mchntkey
+	 * @return
+	 */
+	public List<MchntInfo> getMchntByKey(String mchntkey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

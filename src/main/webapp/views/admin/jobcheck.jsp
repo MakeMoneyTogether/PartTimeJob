@@ -42,6 +42,12 @@ td > a{
 						<h3 class="box-title">待审核列表</h3>
 					</div>
 					<div class="box-body">
+					<form class="form-inline" action="adminp/jobcheck" method="POST">
+						<div class="form-group">
+							<input type="text" class="form-control" name="jobkey" id="jobkey" placeholder="请输入兼职名称">
+						</div>
+						<button type="submit" class="btn btn-default">搜索</button>
+					</form>
 					<table class="table table-striped table-condensed table-hover">
 					<thead>
 					<tr>

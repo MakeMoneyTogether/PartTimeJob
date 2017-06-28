@@ -183,4 +183,14 @@ public class UserService {
     	return ResponseCode.SUCCESS;
 	}
 
+	/**
+	 * 模糊搜索用户
+	 * @param userkey
+	 * @return
+	 */
+	public List<UserInfo> getUserByKey(String userkey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

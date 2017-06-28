@@ -42,6 +42,12 @@ td > a{
 						<h3 class="box-title">用户列表</h3>
 					</div>
 					<div class="box-body">
+					<form class="form-inline" action="adminp/user" method="POST">
+						<div class="form-group">
+							<input type="text" class="form-control" name="userkey" id="userkey" placeholder="请输入用户名称">
+						</div>
+						<button type="submit" class="btn btn-default">搜索</button>
+					</form>
 					<table class="table table-striped table-condensed table-hover">
 					<thead>
 					<tr>

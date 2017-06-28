@@ -69,34 +69,51 @@ public class AdminPageController extends BaseController{
 	}
 	
 	@RequestMapping("jobcheck")
-	public String jobcheck(Model model,HttpServletRequest request){
+	public String jobcheck(Model model,HttpServletRequest request,String jobkey){
 		if(!checkLogin(request)){
 			model.addAttribute("islogin", 0);
 			return "admin/index";
 		}
-		List<JobInfo> jobs = jobService.getUncheckJobs();
+		List<JobInfo> jobs = null;
+		if(jobkey ==null || "".equals(jobkey)){
+			jobs = jobService.getUncheckJobs();
+		}else{
+			jobs = jobService.getUncheckJobsByKey(jobkey);
+		}
+		
 		model.addAttribute("jobs", jobs);
 		return "admin/jobcheck";
 	}
 	
 	@RequestMapping("mchnt")
-	public String mchnt(Model model,HttpServletRequest request){
+	public String mchnt(Model model,HttpServletRequest request,String mchntkey){
 		if(!checkLogin(request)){
 			model.addAttribute("islogin", 0);
 			return "admin/index";
 		}
-		List<MchntInfo> mchntInfos = mchntService.getAllMchnt();
+		List<MchntInfo> mchntInfos = null;
+		if(mchntkey == null || "".equals(mchntkey)){
+			mchntInfos = mchntService.getAllMchnt();
+		}else {
+			mchntInfos = mchntService.getMchntByKey(mchntkey);
+		}
 		model.addAttribute("mchnts", mchntInfos);
 		return "admin/mchnt";
 	}
 	
 	@RequestMapping("user")
-	public String user(Model model,HttpServletRequest request){
+	public String user(Model model,HttpServletRequest request, String userkey){
 		if(!checkLogin(request)){
 			model.addAttribute("islogin", 0);
 			return "admin/index";
 		}
-		List<UserInfo> userInfos = userService.getAllUser();
+		List<UserInfo> userInfos =null;
+		if(userkey == null || "".equals(userkey)){
+			userInfos = userService.getAllUser();
+		}else {
+			userInfos = userService.getUserByKey(userkey);
+		}
+		 
 		System.out.println(userInfos.size());
 		model.addAttribute("users", userInfos);
 		return "admin/user";
