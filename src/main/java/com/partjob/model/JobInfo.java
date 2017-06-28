@@ -24,6 +24,7 @@ public class JobInfo {
 	    private Integer cityCode;
 	    private Integer userJobStatu;
 	    private String mchntName;
+	    private int mchntCd;
 	    private String sex;
 		public int getJobId() {
 			return jobId;
@@ -155,4 +156,11 @@ public class JobInfo {
 		public void setMchntName(String mchntName) {
 			this.mchntName = mchntName;
 		}
+		public int getMchntCd() {
+			return mchntCd;
+		}
+		public void setMchntCd(int mchntCd) {
+			this.mchntCd = mchntCd;
+		}
+		
 }
