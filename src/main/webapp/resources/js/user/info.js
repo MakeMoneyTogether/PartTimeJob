@@ -23,9 +23,14 @@ function getStatu(){
 		$.get('job/u2j/'+phone+'/'+jid,function(data){
 			genBtn(parseInt(data));
 		});
+	}else{
+		opBtn.attr('onclick','login();');
+		opBtn.text('报名');
 	}
 }
-
+function login(){
+	window.location.href="userp/me";
+}
 function genBtn(code){
 	if(code > 0){
 		opBtn.addClass('weui-btn_disabled');
