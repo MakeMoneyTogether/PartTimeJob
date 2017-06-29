@@ -65,16 +65,16 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	}
     	
     	if(!"all".equalsIgnoreCase(dates)){
-    		hql.append(" and jobStartTime>? ");
+    		hql.append(" and job.jobStartTime>? ");
     		values.add(new Timestamp(Long.parseLong(dates)));
     	}
     	
     	//兼职时间判断
-    	hql.append(" and jobValidateTime > ?");
+    	hql.append(" and job.jobValidateTime > ?");
     	values.add(CommonUtil.getTimestamp());
     	
     	//兼职有效判断
-    	hql.append(" and jobSt = ?");
+    	hql.append(" and job.jobSt = ?");
     	values.add(CommonCanstant.JOB_PENDING);
     	
     	if(city!=0){
@@ -92,25 +92,27 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
     	
     	List<Object> values=new ArrayList<Object>();
     	
+
+    	//兼职时间判断
+    	hql.append("job.jobValidateTime > ?");
+    	values.add(CommonUtil.getTimestamp());
+
+    	//兼职有效判断
+    	hql.append(" and job.jobSt = ?");
+    	values.add(CommonCanstant.JOB_PENDING);
+    	
     	if(city!=0){
-			hql.append("cityCode in "
+			hql.append("and cityCode in "
 					+ "(select cityCode from TblCityInfo where superCode =?)");
 			values.add(city);
     	}
     	if(keys != null){
-    		hql.append(" and job.jobTitle like ?");
+    		hql.append(" and( job.jobTitle like ?");
     		values.add("%"+keys+"%");
-    		hql.append(" or job.jobType in (select id from TblJobType where name like ?)");
+    		hql.append(" or job.jobType in (select id from TblJobType where name like ?))");
     		values.add("%"+keys+"%");
     	}
 
-    	//兼职时间判断
-    	hql.append(" and jobValidateTime > ?");
-    	values.add(CommonUtil.getTimestamp());
-
-    	//兼职有效判断
-    	hql.append(" and jobSt = ?");
-    	values.add(CommonCanstant.JOB_PENDING);
     	
     	return findPage(hql.toString(), offset, length, values.toArray());
     }
@@ -129,6 +131,11 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
 	public List<TblJobInfo> getjobByUid(int uid) {
 		String hql = "from TblJobInfo job where job.jobId in (select r.jobId from TblRelUserJob r where r.uid = ?)";
 		return find(hql, uid);
+	}
+
+	public List<TblJobInfo> getCheckJob() {
+		String hql = "from TblJobInfo job ORDER BY job.jobSt , job.jobId DESC";
+        return find(hql);
 	}
 
 }

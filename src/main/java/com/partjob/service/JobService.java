@@ -116,7 +116,7 @@ public class JobService {
     	
     	List<TblJobInfo> tblJobInfos=jobInfoDao.getJobPage(offset, length, dises, labels, dates, city);
     	if(tblJobInfos==null||tblJobInfos.size()==0){
-    		return null;
+    		return  new ArrayList<JobInfo>();
     	}
     	else{
     		return transJobList(tblJobInfos);
@@ -128,7 +128,7 @@ public class JobService {
     	
     	List<TblJobInfo> tblJobInfos=jobInfoDao.searchJobPage(offset, length, keys, city);
     	if(tblJobInfos==null||tblJobInfos.size()==0){
-    		return null;
+    		return new ArrayList<JobInfo>();
     	}
     	else{
     		return transJobList(tblJobInfos);
@@ -207,7 +207,8 @@ public class JobService {
     }
 
 	public List<JobInfo> getUncheckJobs() {
-		List<TblJobInfo> tJobInfos = jobInfoDao.getJobByStatus(CommonCanstant.JOB_AUDIT);
+//		List<TblJobInfo> tJobInfos = jobInfoDao.getJobByStatus(CommonCanstant.JOB_AUDIT);
+		List<TblJobInfo> tJobInfos = jobInfoDao.getCheckJob();
 		return transJobList(tJobInfos);
 	}
 

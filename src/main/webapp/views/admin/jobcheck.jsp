@@ -60,7 +60,7 @@ td > a{
 					</thead>
 					<tbody id="jobs">
 						<c:forEach items="${jobs }" var="job">
-						<tr id="${job.jobId }">
+						<tr id="${job.jobId }" <c:if test="${job.jobSt != 0 }">class="danger"</c:if>>
 							<td>${job.jobTitle }</td>
 							<td>${job.mchntName }</td>
 							<td>${job.connectName }</td>
