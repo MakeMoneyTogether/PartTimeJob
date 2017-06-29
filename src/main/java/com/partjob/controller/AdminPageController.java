@@ -84,6 +84,22 @@ public class AdminPageController extends BaseController{
 		model.addAttribute("jobs", jobs);
 		return "admin/jobcheck";
 	}
+	@RequestMapping("jobs")
+	public String jobs(Model model,HttpServletRequest request,int uid,int flag){
+		if(!checkLogin(request)){
+			model.addAttribute("islogin", 0);
+			return "admin/index";
+		}
+		List<JobInfo> jobs = null;
+		if(flag == 0){//用户
+			jobs = jobService.getJobByUid(uid);
+		}else{//商户
+			jobs = mchntService.getJobInfoList(uid);
+		}
+		
+		model.addAttribute("jobs", jobs);
+		return "admin/jobs";
+	}
 	
 	@RequestMapping("mchnt")
 	public String mchnt(Model model,HttpServletRequest request,String mchntkey){

@@ -74,7 +74,7 @@ public class JobPageController extends BaseController{
     @ResponseBody
     public Object sitme(HttpServletRequest request){
     	UserInfo userInfo = getUserInfo(request);
-    	List<RelUserJob> userJobs = userJobService.getUserJobsByStatus(userInfo.getUid());
+    	List<RelUserJob> userJobs = userJobService.getUserJobsByUid(userInfo.getUid());
         if(userJobs == null) return null;
         return userJobService.getJobsByRels(userJobs);
     }

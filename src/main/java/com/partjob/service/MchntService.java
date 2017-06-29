@@ -433,11 +433,14 @@ public class MchntService {
 	public List<JobInfo> getJobInfoList(int mchntCd){
 		List<TblJobInfo> tblJobInfoList=jobInfoDao.findByProperty("mchntCd", mchntCd);
 		List<JobInfo>result=new ArrayList<JobInfo>();
+		TblMchntInfo tblMchntInfo = mchntInfoDao.get(mchntCd);
+		String mchntName = tblMchntInfo.getMchntName();
 		for(TblJobInfo temp:tblJobInfoList){
 			JobInfo jobInfo=new JobInfo();
 			ApplicationUtil.copyProperties(temp, jobInfo);
 			jobInfo.setPaymentMoney(BigDecimalUtil.divide100(temp.getPaymentMoney()+""));
 			jobInfo.setJobTypeName(jobTypeDao.get(jobInfo.getJobType()).getName());
+			jobInfo.setMchntName(mchntName);
 			result.add(jobInfo);
 		}
 		

@@ -9,6 +9,7 @@ function showInfo(uid){
 		$('#school').html(data.school);
 		$('#balance').html(data.balance);
 		userid = $('#op_userid').html(data.uid);
+		$('#jobUid').val(data.uid);
 		$('#userInfo').modal('show');
 
 		$.post('user/schedule',{phone:data.phone},function(data){
@@ -47,4 +48,7 @@ function passit(){
 			alert('解冻成功');
 		}
 	});
+}
+function showJobs(){
+	$('#tojobs').submit();
 }

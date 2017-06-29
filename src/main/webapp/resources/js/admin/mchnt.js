@@ -9,7 +9,7 @@ function showInfo(mid){
 		$('#balance').html(data.balance);
 		
 		$('#op_mchntid').html(data.mchntCd);
-		
+		$('#jobUid').val(data.mchntCd);
 		$('#mchntInfo').modal('show');
 		
 		$.post('mchnt/schedule',{phone:data.phone},function(data){
@@ -50,4 +50,8 @@ function passit(){
 			location.reload();
 		}
 	});
+}
+
+function showJobs(){
+	$('#tojobs').submit();
 }

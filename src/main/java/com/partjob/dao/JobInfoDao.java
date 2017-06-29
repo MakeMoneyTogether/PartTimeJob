@@ -126,4 +126,9 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
 		return find(hql, "%"+name+"%");
 	}
 
+	public List<TblJobInfo> getjobByUid(int uid) {
+		String hql = "from TblJobInfo job where job.jobId in (select r.jobId from TblRelUserJob r where r.uid = ?)";
+		return find(hql, uid);
+	}
+
 }

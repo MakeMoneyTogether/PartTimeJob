@@ -241,4 +241,9 @@ public class JobService {
 		return list;
 	}
 
+	public List<JobInfo> getJobByUid(int uid) {
+		List<TblJobInfo> tblJobInfos = jobInfoDao.getjobByUid(uid);
+		return transJobList(tblJobInfos);
+	}
+
 }

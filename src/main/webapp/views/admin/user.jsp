@@ -143,6 +143,8 @@ td > a{
 					</button>
 					<button onclick="passit();" type="button" class="btn btn-success" data-dismiss="modal">用户解冻
 					</button>
+					<button onclick="showJobs();" type="button" class="btn btn-warning" data-dismiss="modal">查询兼职
+					</button>
 				</div>
 			</div>
 		</div>
@@ -150,6 +152,10 @@ td > a{
 </div>
 <div style="display:none;">
 <div id="op_userid"></div>
+<form target="_blank" action="adminp/jobs" id="tojobs">
+	<input name="flag" value="0"/>
+	<input id="jobUid" name="uid"/>
+</form>
 </div>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>

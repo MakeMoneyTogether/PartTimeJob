@@ -53,8 +53,8 @@ public class UserJobService {
         return transModelList(tblRelUserJobs);
     }
     
-    public List<RelUserJob> getUserJobsByStatus(int uid){
-        List<TblRelUserJob> tblRelUserJobs = userJobDao.getByStatus(uid);
+    public List<RelUserJob> getUserJobsByUid(int uid){
+        List<TblRelUserJob> tblRelUserJobs = userJobDao.getByUid(uid);
         return transModelList(tblRelUserJobs);
     }
 
@@ -275,7 +275,7 @@ public class UserJobService {
      * @return
      */
     private boolean checkFirst(int uid){
-    	if(userJobDao.getByStatus(uid).size() > 0){
+    	if(userJobDao.getByUid(uid).size() > 0){
         	return true;
     	}else {
 			return false;
