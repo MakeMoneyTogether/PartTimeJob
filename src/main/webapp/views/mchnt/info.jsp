@@ -47,7 +47,7 @@
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">工作强度：</label>
-				<span class="weui-form-preview__value" id="sex">${job.hoursDay }</span>
+				<span class="weui-form-preview__value" id="sex">${job.hoursDay/10 } 小时</span>
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">人数：</label>
