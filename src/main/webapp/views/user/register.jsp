@@ -26,15 +26,12 @@
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">
-			<div class="weui-cell weui-cell_vcode">
+			<div class="weui-cell">
 				<div class="weui-cell__hd">
 					<label class="weui-label">手机号</label>
 				</div>
 				<div class="weui-cell__bd">
 					<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
-				</div>
-				<div class="weui-cell__ft">
-					<button id="code_btn" class="weui-vcode-btn search_style" onclick="get_code();">获取</button>
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -49,20 +46,47 @@
 					<input id="repassword" class="weui-input" type="password" placeholder="请输入密码">
 				</div>
 			</div>
-			<div class="weui-cell">
+			<div class="weui-cell weui-cell_vcode">
 				<div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
 				<div class="weui-cell__bd">
 					<input id="code" class="weui-input" type="text" placeholder="请输入验证码">
 				</div>
+				<div class="weui-cell__ft">
+					<button id="code_btn" class="weui-vcode-btn search_style" onclick="get_code();">获取</button>
+				</div>
 			</div>
-			<hr>
+		</div>
+		<div class="weui-cells weui-cells_form" style=" margin-top: 0;">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+				<div class="weui-cell__bd">
+					<input id="name" class="weui-input" type="text" placeholder="请输入真实姓名">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">学校</label></div>
+				<div class="weui-cell__bd">
+					<input id="school" class="weui-input" type="text" placeholder="请输入学校名称">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">专业</label></div>
+				<div class="weui-cell__bd">
+					<input id="major" class="weui-input" type="text" placeholder="请输入专业">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">意向方向</label></div>
+				<div class="weui-cell__bd">
+					<input id="direction" class="weui-input" type="text" placeholder="请输入未来想从事的方向">
+				</div>
+			</div>
 			<div class="weui-cell">
 				<div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
 				<div class="weui-cell__bd">
 					<input id="invitation" class="weui-input" type="text" placeholder="选填">
 				</div>
 			</div>
-
 		</div>
 	</div>
 		<a onclick="register();" class="weui-btn weui-btn_primary commitBtn">注册</a>

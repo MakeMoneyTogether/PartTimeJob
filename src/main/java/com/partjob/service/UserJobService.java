@@ -167,24 +167,28 @@ public class UserJobService {
         JobInfo jobInfo = jobService.getById(jid);
         
         boolean oldUser = checkFirst(userInfo.getUid());
-        
         //如果兼职开始时间小于当前时间,就不允许报名
         if(jobInfo.getJobValidateTime().getTime()<new Date().getTime()){
-        	return null;
+        	response.setCode(111);
+        	return response;
         }
         if(!checkUserJob(userInfo.getUid(), jobInfo)){
-        	return null;
+        	response.setCode(222);
+        	return response;
         }
         if(userInfo.getBalance()<CommonCanstant.USER_WORK_CHECK_MONRY && oldUser){
-        	return null;
+        	response.setCode(333);
+        	return response;
         }
         //检查用户
         // 检查兼职
         if(jobInfo.getJobSt() != CommonCanstant.JOB_PENDING){//如果兼职不是准备中
-        	return null;
+        	response.setCode(444);
+        	return response;
         }
         if(jobInfo.getJoinNum() == jobInfo.getNumPeople()){//兼职人满了
-        	return null;
+        	response.setCode(555);
+        	return response;
         }
         TblRelUserJob tblRelUserJob = new TblRelUserJob();
         tblRelUserJob.setUid(userInfo.getUid());
@@ -195,7 +199,8 @@ public class UserJobService {
         try {
         	jobInfo = jobService.addOnePeople(jid);	//参与人数加一
         	if(jobInfo == null){
-        		return null;
+        		response.setCode(666);
+        		return response;
         	}
         	System.out.println("参与人数加一");
         	userJobDao.save(tblRelUserJob);
@@ -214,11 +219,13 @@ public class UserJobService {
         	try {
 				VerificationUtil.sendNotify(phone,userInfo.getName() , jobInfo.getMchntName(), jobInfo.getJobTitle());
 			} catch (Exception e) {
+				response.setCode(888);
 			}
         	
         	return response;
 		} catch (Exception e) {
-			return null;
+			response.setCode(777);
+			return response;
 		}
     }
 

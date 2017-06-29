@@ -37,18 +37,22 @@ public class UserService {
     @Autowired
     private InvitationRecordDao invitationRecordDao;
 
-    public int register(String pwd, String phone, String code, String invitation) {
+    public int register(UserInfo userInfo,String code, String invitation) {
         // 先检查手机有没有注册过
-        TblUserInfo tblUserInfo = userInfoDao.getByPhone(phone);
+        TblUserInfo tblUserInfo = userInfoDao.getByPhone(userInfo.getPhone());
         if (tblUserInfo != null) return ResponseCode.FAIL;
         // TODO 验证码检查
         tblUserInfo = new TblUserInfo();
-        tblUserInfo.setPhone(phone);
-        tblUserInfo.setPwd(CommonUtil.toMD5(pwd));
+        tblUserInfo.setName(userInfo.getName());
+    	tblUserInfo.setSchool(userInfo.getSchool());
+    	tblUserInfo.setMajor(userInfo.getMajor());
+    	tblUserInfo.setDirection(userInfo.getDirection());
+        tblUserInfo.setPhone(userInfo.getPhone());
+        tblUserInfo.setPwd(CommonUtil.toMD5(userInfo.getPwd()));
         tblUserInfo.setUserSt(CommonCanstant.AVAILAB);
         tblUserInfo.setBalance(0);
         userInfoDao.save(tblUserInfo);
-        tblUserInfo = userInfoDao.getByPhone(phone);
+        tblUserInfo = userInfoDao.getByPhone(userInfo.getPhone());
         // 生成邀请码
         tblUserInfo.setShareCode(InvitationCodeUtil.toSerialCode(tblUserInfo.getUid()));
         userInfoDao.update(tblUserInfo);

@@ -192,4 +192,12 @@ public class TblUserInfo {
         result = 31 * result + (shareCode != null ? shareCode.hashCode() : 0);
         return result;
     }
+
+	@Override
+	public String toString() {
+		return "{\"uid\":" + uid + ", name\":" + name + ", userSt\":" + userSt + ", gender\":" + gender + ", phone\":"
+				+ phone + ", pwd\":" + pwd + ", balance\":" + balance + ", major\":" + major + ", grade\":" + grade
+				+ ", direction\":" + direction + ", birthday\":" + birthday + ", school\":" + school + ", shareCode\":"
+				+ shareCode + "}";
+	}
 }

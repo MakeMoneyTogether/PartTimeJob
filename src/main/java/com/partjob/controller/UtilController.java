@@ -35,8 +35,10 @@ public class UtilController extends BaseController{
 		}
 		
 		String code = VerificationUtil.genCode();
+//		String code = "666666";
 		session.setAttribute(phone, code);
 		return VerificationUtil.sendRegistCode(phone, code);
+//		return 0;
 	}
 	
 	@RequestMapping(value = "sendMode")

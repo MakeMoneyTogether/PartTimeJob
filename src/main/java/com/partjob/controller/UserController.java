@@ -80,15 +80,14 @@ public class UserController extends BaseController{
 	
     @RequestMapping(value = "register")
     @ResponseBody
-    public Object register(@RequestParam(value = "pwd") String pwd,
-                           @RequestParam(value = "phone") String phone,
+    public Object register(UserInfo userinfo,
                            @RequestParam(value = "code") String code,
                            @RequestParam(value = "invitation") String invitation,HttpSession session) {
-    	String preCode = (String) session.getAttribute(phone);
+    	String preCode = (String) session.getAttribute(userinfo.getPhone());
     	if(!code.equals(preCode)){
     		return ResponseCode.VERCODE_ERROR;
     	}
-        return userService.register(pwd, phone, code, invitation);
+        return userService.register(userinfo ,code, invitation);
     }
 
     @RequestMapping(value = "rpwd")

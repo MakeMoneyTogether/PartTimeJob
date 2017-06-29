@@ -19,11 +19,17 @@ function commit(){
 	phone = $('#phone').val();
 	invitation = $('#invitation').val();
 	code = $('#code').val();
+	
+	name = $('#name').val();
+	school = $('#school').val();
+	major = $('#major').val();
+	direction = $('#direction').val();
+	
 	$.ajax({
 		type:'POST',
 		url: 'user/register',
 		dataType:'json',
-		data:{phone:phone,pwd:pwd,phone:phone,invitation:invitation,code:code},
+		data:{phone:phone,pwd:pwd,phone:phone,invitation:invitation,code:code,name:name,school:school,major:major,direction:direction},
 		success: function(data){
 			console.log(data);
 			if(data == 0){
