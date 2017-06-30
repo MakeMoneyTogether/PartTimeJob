@@ -31,9 +31,8 @@
 	<div id="list" class="weui-cells">
 		<c:forEach items="${users }" var="user">
 			<div class="weui-cell">
-				<div class="weui-cell__hd" style="color:red;">${user.grade }</div>
 				<div onclick="showInfo(${user.uid });" class="weui-cell__bd">
-					<p>${user.name }</p>
+					<p>${user.name } （查看）</p>
 				</div>
 				<div class="weui-cell__ft">
 					<button onclick="refuse(this,${user.uid});" class="weui-btn weui-btn_mini weui-btn_warn">拒绝</button>
