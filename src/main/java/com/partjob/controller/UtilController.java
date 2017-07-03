@@ -41,6 +41,14 @@ public class UtilController extends BaseController{
 //		return 0;
 	}
 	
+	@RequestMapping(value = "sendForgot")
+	@ResponseBody
+	public Object sendForgot(String phone,HttpSession session){
+		String code = VerificationUtil.genCode();
+		session.setAttribute(phone, code);
+		return VerificationUtil.sendForgotCode(phone, code);
+	}
+	
 	@RequestMapping(value = "sendMode")
 	@ResponseBody
 	public Object sendMode(String phone,HttpSession session){

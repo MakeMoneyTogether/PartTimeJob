@@ -25,6 +25,11 @@ function commit(){
 	major = $('#major').val();
 	direction = $('#direction').val();
 	
+	if(phone.length < 1 ||pwd.length < 1 ||phone.length < 1 ||code.length < 1 ||name.length < 1 ||school.length < 1 ||major.length < 1 ||	direction.length < 1){
+		$.alert('请将信息填写完整再进行注册，谢谢');
+		return;
+	}
+	
 	$.ajax({
 		type:'POST',
 		url: 'user/register',

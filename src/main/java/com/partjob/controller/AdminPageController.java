@@ -163,7 +163,7 @@ public class AdminPageController extends BaseController{
 	public String login(HttpServletRequest request,Model model,String phone,String pwd){
 		MchntInfo mchntInfo = mchntService.logoin(pwd, phone);
 		HttpSession session = request.getSession();
-		if("10000000000".equals(mchntInfo.getPhone()) || "13222765139".equals(mchntInfo.getPhone())){
+		if("10000000000".equals(mchntInfo.getPhone()) || "13212345678".equals(mchntInfo.getPhone())){
 			session.setAttribute(CommonCanstant.MCHNT_INFO, mchntInfo);
 			model.addAttribute("islogin", 1);
 			return "admin/index";
@@ -201,9 +201,9 @@ public class AdminPageController extends BaseController{
 	
 	public boolean checkLogin(HttpServletRequest request){
 		MchntInfo mchntInfo = getMchntInfo(request);
-		if(mchntInfo == null || (!"10000000000".equals(mchntInfo.getPhone()) && !"13222765139".equals(mchntInfo.getPhone()))){
+		if(mchntInfo == null || (!"10000000000".equals(mchntInfo.getPhone()) && !"13212345678".equals(mchntInfo.getPhone()))){
 			return false;
-		}else if("10000000000".equals(mchntInfo.getPhone()) || "13222765139".equals(mchntInfo.getPhone())){
+		}else if("10000000000".equals(mchntInfo.getPhone()) || "13212345678".equals(mchntInfo.getPhone())){
 			return true;
 		}
 		return false;

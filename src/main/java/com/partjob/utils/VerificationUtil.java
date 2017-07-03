@@ -32,6 +32,11 @@ public class VerificationUtil {
 		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_REGISTER);
 	}
 	
+	public static int sendForgotCode(String phone,String code){
+		String text = "{code:'"+code+"',product:'"+"手机号为 "+phone+"'}";
+		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_EDIT);
+	}
+	
 	/**
 	 * 商户注册验证码发送
 	 * @param phone

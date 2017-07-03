@@ -20,63 +20,54 @@
 	<div class="weui-flex">
 		<div class="placeholder"><a onclick="history.go(-1);"><i class="fa fa-chevron-left my_font_color" style="margin-top: 90%;"></i></a></div>
 		<div class="weui-flex__item placeholder">
-			<span id="jz-title">登录</span>
+			<span id="jz-title">重置密码</span>
 		</div>
-		<div class="placeholder"><a href="userp/index"><i class="fa fa-home icon_fa"></i></a></div>
 	</div>
 	<div class="weui-form-preview">
 		<div class="weui-cells weui-cells_form">
 			<div class="weui-cell">
-				<div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+				<div class="weui-cell__hd">
+					<label class="weui-label">手机号</label>
+				</div>
 				<div class="weui-cell__bd">
-					<input id="phone" class="weui-input" type="text" placeholder="请输入手机号码">
+					<input id="phone" class="weui-input" type="tel" placeholder="请输入手机号">
 				</div>
 			</div>
 			<div class="weui-cell">
-				<div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+				<div class="weui-cell__hd"><label class="weui-label">新密码</label></div>
 				<div class="weui-cell__bd">
-					<input id="password" class="weui-input" type="password" placeholder="请输入密码">
+					<input id="password" class="weui-input" type="password" placeholder="请输入新密码">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">确认密码</label></div>
+				<div class="weui-cell__bd">
+					<input id="repassword" class="weui-input" type="password" placeholder="请输入新密码">
+				</div>
+			</div>
+			<div class="weui-cell weui-cell_vcode">
+				<div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+				<div class="weui-cell__bd">
+					<input id="code" class="weui-input" type="text" placeholder="请输入验证码">
+				</div>
+				<div class="weui-cell__ft">
+					<button id="code_btn" class="weui-vcode-btn search_style" onclick="get_code();">获取</button>
 				</div>
 			</div>
 		</div>
 	</div>
-		<a onclick="login();" class="weui-btn weui-btn_primary commitBtn">登录</a>
-	 	<a href="userp/register" class="weui-btn weui-btn_default" style="width:80%;">注册</a>
-	 	<div class="weui-loadmore weui-loadmore_line">
-			<span onclick="forgot();" class="weui-loadmore__tips">忘记密码</span>
-		</div>
+		<a onclick="reinit();" class="weui-btn weui-btn_primary commitBtn">重置</a>
 <div style="display:none;">
+<div id="code_bak"></div>
 </div>	
 <script src="static/js/jquery-2.1.4.js"></script>
 <script src="static/js/fastclick.js"></script>
 <script src="static/js/jquery-weui.min.js"></script>
 <script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/user/forgot.js"></script>
 <script type="text/javascript">
 </script>
 <script>
-	function login(){
-		phone = $('#phone').val();
-		pwd = $('#password').val();
-		
-		$.ajax({
-			type:'POST',
-			url: 'user/login',
-			dataType:'json',
-			data:{phone:phone,pwd:pwd},
-			success: function(data){
-				if(data == 0){
-					$.cookie('phone',phone,{expires:30,path:'/'});
-					$.cookie('password',pwd,{expires:30,path:'/'});
-					window.location.href='userp/me';
-				}else{
-					$.alert('登录名或密码错误！！');
-				}
-			}
-		});
-	}
-	function forgot(){
-		window.location.href="userp/forgot";
-	}
 </script>
 </body>
 </html>

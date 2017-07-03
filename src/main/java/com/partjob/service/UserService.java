@@ -57,7 +57,7 @@ public class UserService {
         tblUserInfo.setShareCode(InvitationCodeUtil.toSerialCode(tblUserInfo.getUid()));
         userInfoDao.update(tblUserInfo);
         // 更新邀请信息表
-        if (invitation != null){
+        if (invitation != null && invitation.length() == 6){
             int invitor = InvitationCodeUtil.codeToId(invitation);
             TblInvitationRecord record = new TblInvitationRecord();
             record.setUid(tblUserInfo.getUid());
@@ -95,6 +95,17 @@ public class UserService {
         if (tblUserInfo == null) return ResponseCode.FAIL;
         else {
             tblUserInfo.setPwd(CommonUtil.toMD5(npwd));
+            userInfoDao.update(tblUserInfo);
+            return ResponseCode.SUCCESS;
+        }
+    }
+    
+    public int forgot(String phone,String pwd){
+    	pwd = CommonUtil.toMD5(pwd);
+        TblUserInfo tblUserInfo = userInfoDao.getByPhone(phone);
+        if (tblUserInfo == null) return ResponseCode.FAIL;
+        else {
+            tblUserInfo.setPwd(CommonUtil.toMD5(pwd));
             userInfoDao.update(tblUserInfo);
             return ResponseCode.SUCCESS;
         }
