@@ -63,7 +63,7 @@ function charge(){
 }
 
 function postCharge(rmb){
-	if(!rmb.match(/^(\d)+$/)){
+	if(!rmb.match(/^(\d)+(\.(\d))?$/)){
 		$.alert('请输入数字');
 		return;
 	}
@@ -108,7 +108,7 @@ function postCharge(rmb){
 }
 
 function postCash(rmb){
-	if(!rmb.match(/^(\d)+\.(\d)$/)){
+	if(!rmb.match(/^(\d)+(\.(\d))?$/)){
 		$.alert('请输入数字');
 		return;
 	}
