@@ -63,7 +63,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     		hql.deleteCharAt(hql.length()-1);
     		hql.append(")");
     	}
-    	
+    	/*----学弟说过期的也要显示，所以我注释了
     	if(!"all".equalsIgnoreCase(dates)){
     		hql.append(" and job.jobStartTime>? ");
     		values.add(new Timestamp(Long.parseLong(dates)));
@@ -72,14 +72,14 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	//兼职时间判断
     	hql.append(" and job.jobValidateTime > ?");
     	values.add(CommonUtil.getTimestamp());
-    	
+    	*/
     	//兼职有效判断
-    	hql.append(" and job.jobSt = ?");
-    	values.add(CommonCanstant.JOB_PENDING);
+    	hql.append(" and job.jobSt > 0 and job.jobSt < 3 ");
+//    	values.add(CommonCanstant.JOB_PENDING);
     	
     	if(city!=0){
 			hql.append("and cityCode in "
-					+ "(select cityCode from TblCityInfo where superCode =?)");
+					+ "(select cityCode from TblCityInfo where superCode =?) order by job.jobStartTime desc");
 			values.add(city);
     	}
     	
@@ -93,13 +93,17 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
     	List<Object> values=new ArrayList<Object>();
     	
 
+    	
+    	/*----学弟说过期的也要显示，所以我注释了
     	//兼职时间判断
     	hql.append("job.jobValidateTime > ?");
     	values.add(CommonUtil.getTimestamp());
 
+		*/
+
     	//兼职有效判断
-    	hql.append(" and job.jobSt = ?");
-    	values.add(CommonCanstant.JOB_PENDING);
+    	hql.append(" and job.jobSt > 0 and job.jobSt < 3 ");
+//    	values.add(CommonCanstant.JOB_PENDING);
     	
     	if(city!=0){
 			hql.append("and cityCode in "
