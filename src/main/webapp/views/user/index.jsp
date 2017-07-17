@@ -158,6 +158,9 @@
 	$(function() {
 	FastClick.attach(document.body);
 	});
+	if($.cookie('citycode') ==null || $.cookie('citycode').length< 6){
+		$.cookie('citycode','320100');
+	}
 	swipers();
 	localset();
 	getLabels();

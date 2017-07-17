@@ -111,7 +111,7 @@
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">兼职区域</label></div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" id="city-picker" value="江苏省 南京市" type="text">
+				<input class="weui-input" id="city-picker" value="江苏省 南京市 鼓楼区" type="text">
 			</div>
 		</div>
 		<div class="weui-cell">

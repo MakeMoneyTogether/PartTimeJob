@@ -16,7 +16,23 @@ function getItem(){
 	});
 }
 
+function judgeTime(){
+	stdate = $('#jz-date').html();
+	if(new Date(stdate) > new Date()){
+		return false;
+	}else{
+		opBtn.addClass('weui-btn_disabled');
+		opBtn.text('已结束');
+		return true;
+	}
+}
+
 function getStatu(){
+	
+	if(judgeTime()){
+		return;
+	}
+	
 	var jid = jid_bak.text();
 	var phone = $.cookie('phone');
 	if(phone !=null && phone.length > 6){

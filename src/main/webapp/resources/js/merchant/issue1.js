@@ -60,8 +60,16 @@ function check(){
 		return;
 	}
 	citycode = $("#city-picker").attr('data-code');
+	if(citycode ==null || citycode.length < 6){
+		$.alert('请输入正确的行政区');
+		return;
+	}
 	jobType = $('#jobType').val();
 	jobDesc = $('#jobDesc').val();
+	if(jobDesc ==null || jobDesc.length < 1){
+		$.alert('请输入兼职描述');
+		return;
+	}	
 	sex = $('#sex').val();
 	data = {jobType:jobType,jobTitle:jobTitle, jobType:jobType, paymentType:paymentType, paymentMoney:paymentMoney, hoursDay:hoursDay,jjobStartTime:jobStartTime, jjobEndTime:jobEndTime, numPeople:numPeople, jobDesc:jobDesc, jobAddress:jobAddress, jjobValidateTime:jobValidateTime, connectName:connectName, connectPhone:connectPhone, cityCode:citycode,sex:sex};
 	issue(data);
