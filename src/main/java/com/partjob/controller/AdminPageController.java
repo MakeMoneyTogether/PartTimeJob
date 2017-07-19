@@ -198,7 +198,17 @@ public class AdminPageController extends BaseController{
 			return "fail";
 		}
 	}
-	
+	@RequestMapping("delete/{jid}")
+	@ResponseBody
+	public int delete(@PathVariable int jid){
+		try {
+			jobService.delete(jid);
+			return 0;
+		} catch (Exception e) {
+			return 1;
+		}
+		
+	}
 	public boolean checkLogin(HttpServletRequest request){
 		MchntInfo mchntInfo = getMchntInfo(request);
 		if(mchntInfo == null || (!"10000000000".equals(mchntInfo.getPhone()) && !"13212345678".equals(mchntInfo.getPhone()))){
@@ -208,4 +218,5 @@ public class AdminPageController extends BaseController{
 		}
 		return false;
 	}
+	
 }

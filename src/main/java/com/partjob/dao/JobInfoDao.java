@@ -88,7 +88,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     
     public List<TblJobInfo> searchJobPage(int offset,int length ,
     		String keys,int city){
-StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
+StringBuffer hql=new StringBuffer("from TblJobInfo job where 1=1");
     	
     	List<Object> values=new ArrayList<Object>();
     	
@@ -141,5 +141,4 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where ");
 		String hql = "from TblJobInfo job ORDER BY job.jobSt , job.jobId DESC";
         return find(hql);
 	}
-
 }

@@ -246,5 +246,9 @@ public class JobService {
 		List<TblJobInfo> tblJobInfos = jobInfoDao.getjobByUid(uid);
 		return transJobList(tblJobInfos);
 	}
+	
+	public void delete(int jid){
+		jobInfoDao.delete(jid);
+	}
 
 }

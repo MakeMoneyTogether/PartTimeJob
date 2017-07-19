@@ -30,3 +30,13 @@ function refuse(){
 		$('#'+jid).remove();
 	});
 }
+function deleteit(){
+	jid =  $('#jid').html();
+	$.get('adminp/delete/'+jid,function(data){
+		if(data == 0){
+			$('#'+jid).remove();
+		}else{
+			alert('删除失败，请只删除无用的兼职.');
+		}
+	});
+}

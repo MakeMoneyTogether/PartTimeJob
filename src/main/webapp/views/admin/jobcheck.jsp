@@ -147,6 +147,8 @@ td > a{
 					</button>
 					<button onclick="refuse();" type="button" class="btn btn-danger" data-dismiss="modal">拒绝
 					</button>
+					<button onclick="deleteit();" type="button" class="btn btn-warning" data-dismiss="modal">删除
+					</button>
 				</div>
 			</div>
 		</div>
