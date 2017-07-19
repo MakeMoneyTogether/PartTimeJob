@@ -4,7 +4,7 @@ $(function(){
 		url: 'mchnt/getJobList',
 		dataType:'json',
 		success: function(data){
-			for(i=0;i<data.length;i++){
+			for(i=data.length-1;i>=0;i--){
 				item = genItem(data[i]);
 				switch(data[i].jobSt){
 					case 0:
