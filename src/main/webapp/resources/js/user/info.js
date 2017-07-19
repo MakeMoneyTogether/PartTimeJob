@@ -18,7 +18,8 @@ function getItem(){
 
 function judgeTime(){
 	stdate = $('#jz-date').html();
-	if(new Date(stdate) > new Date()){
+	arr = stdate.split(/[- : \/]/);
+	if(new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4]) > new Date()){
 		return false;
 	}else{
 		opBtn.addClass('weui-btn_disabled');
