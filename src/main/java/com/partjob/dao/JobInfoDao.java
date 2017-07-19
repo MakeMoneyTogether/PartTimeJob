@@ -74,7 +74,7 @@ public class JobInfoDao extends HibernateBaseDao<TblJobInfo,Serializable>{
     	values.add(CommonUtil.getTimestamp());
     	*/
     	//兼职有效判断
-    	hql.append(" and job.jobSt > 0 and job.jobSt < 3 ");
+    	hql.append(" and job.jobSt > 0 and job.jobSt < 4 ");
 //    	values.add(CommonCanstant.JOB_PENDING);
     	
     	if(city!=0){
@@ -102,7 +102,7 @@ StringBuffer hql=new StringBuffer("from TblJobInfo job where 1=1");
 		*/
 
     	//兼职有效判断
-    	hql.append(" and job.jobSt > 0 and job.jobSt < 3 ");
+    	hql.append(" and job.jobSt > 0 and job.jobSt < 4 ");
 //    	values.add(CommonCanstant.JOB_PENDING);
     	
     	if(city!=0){
