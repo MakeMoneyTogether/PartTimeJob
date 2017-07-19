@@ -259,8 +259,9 @@ public class UserJobService {
     	List<TblRelUserJob>list=userJobDao.getAvailByUid(uid);
     	for(TblRelUserJob userJob:list){
     		TblJobInfo tblJobInfo=jobInfoDao.get(userJob.getJobId());
-    		
-    		
+    		if(tblJobInfo == null){
+    			continue;
+    		}
     		//判断要报名的兼职开始时间或者结束时间在已报名兼职的工作时间之内，认为出现时间交叉
     		if((job.getJobStartTime().getTime()>tblJobInfo.getJobStartTime().getTime()
     				&&job.getJobStartTime().getTime()<tblJobInfo.getJobEndTime().getTime())

@@ -71,6 +71,7 @@ public class UserService {
     public UserInfo login(String phone, String pwd) {
         pwd = CommonUtil.toMD5(pwd);
         TblUserInfo tblUserInfo = userInfoDao.getUserInfo(phone, pwd);
+        userInfoDao.setScore(tblUserInfo.getUid());
         return transModel(tblUserInfo);
     }
     
