@@ -65,6 +65,10 @@
 		<div class="weui-form-preview__hd" style="padding:0;"></div>
 		<div class="weui-form-preview__bd">
 			<div class="weui-form-preview__item">
+				<label class="weui-form-preview__label">报名截止日期：</label>
+				<span class="weui-form-preview__value" id="jz-vali">${job.jobValidateTime }</span>
+			</div>
+			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">工作日期：</label>
 				<span class="weui-form-preview__value" id="jz-date">${job.jobStartTime }</span>
 			</div>
@@ -82,7 +86,7 @@
 			</div>
 			<div class="weui-form-preview__item">
 				<label class="weui-form-preview__label">联系电话：</label>
-				<span class="weui-form-preview__value" id="jz-phone">${job.connectPhone }</span>
+				<span class="weui-form-preview__value" id="jz-phone"><a>${job.connectPhone }</a></span>
 			</div>
 		</div>
 	</div>
