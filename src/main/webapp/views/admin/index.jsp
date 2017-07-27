@@ -78,6 +78,21 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-8">
+					<div class="box box-danger">
+						<div class="box-header with-border">
+							<h3 class="box-title">关于我们编辑</h3>
+						</div>
+						<div class="box-body">
+							<form>
+								<div class="form-group">
+									<textarea class="form-control" id="content" rows="5"></textarea>
+								</div>
+								<a onclick="upAboutMe();" class="btn btn-default">更新</a>
+							</form>
+						</div>
+					</div>
+				</div>
 				</c:if>
 				
 			</div>
@@ -106,6 +121,19 @@ function checkSuccess(){
 		alert('图片上传失败');
 	}
 }
+function upAboutMe(){
+	content = $('#content').val();
+	$.post('adminp/upme',{content:content},function(data){
+		if(data == 'success'){
+			alert('更新成功');
+		}else{
+			alert('更新失败');
+		}
+	});
+}
+$.get('adminp/aboutme',function(data){
+	$('#content').val(data.content);
+});
 </script>
 </body>
 </html>

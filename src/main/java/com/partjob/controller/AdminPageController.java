@@ -23,6 +23,7 @@ import com.partjob.model.MchntSchedule;
 import com.partjob.model.NetJob;
 import com.partjob.model.UserInfo;
 import com.partjob.model.UserSchedule;
+import com.partjob.service.CityService;
 import com.partjob.service.JobService;
 import com.partjob.service.MchntService;
 import com.partjob.service.SwiperService;
@@ -217,6 +218,23 @@ public class AdminPageController extends BaseController{
 			return true;
 		}
 		return false;
+	}
+	
+	@ResponseBody
+	@RequestMapping("aboutme")
+	public Object aboutMe(){
+		return swiperService.getAboutMe();
+	}
+	
+	@ResponseBody
+	@RequestMapping("upme")
+	public Object upAboutMe(String content){
+		try {
+			swiperService.updateAboutMe(content);
+			return "success";
+		} catch (Exception e) {
+			return "fail";
+		}
 	}
 	
 }
