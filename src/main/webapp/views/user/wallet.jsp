@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>兼职</title>
+<title>小蜜蜂兼职</title>
 <base href="<%=basePath%>">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="static/css/weui.min.css">

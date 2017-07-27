@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>兼职-商家端</title>
+<title>小蜜蜂兼职-商家端</title>
 <base href="<%=basePath%>">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="static/css/weui.min.css">
@@ -29,6 +29,12 @@
 				<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
 				<div class="weui-cell__bd">
 					${user.name }
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+				<div class="weui-cell__bd">
+					<a>${user.connectPhone }</a>
 				</div>
 			</div>
 			<div class="weui-cell">

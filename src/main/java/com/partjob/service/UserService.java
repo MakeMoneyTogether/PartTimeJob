@@ -120,6 +120,7 @@ public class UserService {
     	tblUserInfo.setGender(userInfo.getGender());
     	tblUserInfo.setMajor(userInfo.getMajor());
     	tblUserInfo.setDirection(userInfo.getDirection());
+    	tblUserInfo.setConnectPhone(userInfo.getConnectPhone());
     	userInfoDao.update(tblUserInfo);
     	return ResponseCode.SUCCESS;
     }

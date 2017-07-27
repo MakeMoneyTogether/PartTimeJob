@@ -60,7 +60,8 @@ public class VerificationUtil {
 	 */
 	public static int sendNotify(String phone,String name,String mchnt,String job){
 		String text = "{name:'"+name+"',mchnt:'"+mchnt+"',job:'"+job+"'}";
-		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_NOTIFY);
+//		return sendMsg(phone, text, CommonCanstant.SMS_TEMP_NOTIFY);
+		return ResponseCode.SUCCESS;//客户爸爸说取消短信通知服务
 	}
 	
 	public static int sendMsg(String phone,String text,String SMSTemplateCode){

@@ -20,6 +20,7 @@ public class UserInfo {
     private Date birthday;
     private String school;
     private String shareCode;
+    private String connectPhone;
 
     public UserInfo() {
     }
@@ -127,4 +128,13 @@ public class UserInfo {
     public void setShareCode(String shareCode) {
         this.shareCode = shareCode;
     }
+
+	public String getConnectPhone() {
+		return connectPhone;
+	}
+
+	public void setConnectPhone(String connectPhone) {
+		this.connectPhone = connectPhone;
+	}
+    
 }

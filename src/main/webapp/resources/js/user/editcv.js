@@ -5,11 +5,12 @@ function update(){
 	school = $('#school').val();
 	major = $('#major').val();
 	direction = $('#direction').val();
+	connectPhone = $('#connectPhone').val();
 	$.ajax({
 		type:'POST',
 		url: 'user/editcv',
 		dataType:'json',
-		data:{name:name,gender:sex,lbirthday:birthday,school:school,major:major,direction:direction},
+		data:{name:name,connectPhone:connectPhone,gender:sex,lbirthday:birthday,school:school,major:major,direction:direction},
 		success: function(data){
 			$.alert('简历更新成功',function(){
 				window.location.href="userp/me";
@@ -32,6 +33,7 @@ function getcv(){
 			if(data.gender == '男'){
 				$('#man').attr('checked','true');
 			}
+			$('#connectPhone').val(data.connectPhone);
 			$('#birthday').val(data.birthday);
 			$('#major').val(data.major);
 			$('#direction').val(data.direction);

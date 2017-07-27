@@ -22,6 +22,7 @@ public class TblUserInfo {
     private Date birthday;
     private String school;
     private String shareCode;
+    private String connectPhone;
 
     @Id
     @Column(name = "uid")
@@ -152,8 +153,18 @@ public class TblUserInfo {
     public void setShareCode(String shareCode) {
         this.shareCode = shareCode;
     }
+    
+    @Basic
+    @Column(name = "connect_phone")
+    public String getConnectPhone() {
+		return connectPhone;
+	}
 
-    @Override
+	public void setConnectPhone(String connectPhone) {
+		this.connectPhone = connectPhone;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

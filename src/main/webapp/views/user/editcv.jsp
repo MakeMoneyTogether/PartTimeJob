@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>兼职</title>
+<title>小蜜蜂兼职</title>
 <base href="<%=basePath%>">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="static/css/weui.min.css">
@@ -32,7 +32,12 @@
 					<input id="name" class="weui-input" type="text" placeholder="请输入真实姓名">
 				</div>
 			</div>
-			
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+				<div class="weui-cell__bd">
+					<input id="connectPhone" class="weui-input" type="text" placeholder="请输入手机号码">
+				</div>
+			</div>
 			<div class="weui-cells weui-cells_radio" style="margin-top:0;">
 				<label class="weui-cell weui-check__label" for="man">
 					<div class="weui-cell__bd">
