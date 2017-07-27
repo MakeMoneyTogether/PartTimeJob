@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -106,11 +108,7 @@
 						<label class="weui-form-preview__label">关于我们：</label>
 						<br>
 						<span class="info-desc" id="jz-des">
-							我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。
-							我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。
-							我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。
-							我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。
-							我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。我们是特别厉害的兼职平台。
+							${aboutme }
 						</span>
 					</div>
 				</div>

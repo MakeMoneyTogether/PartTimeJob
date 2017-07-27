@@ -16,6 +16,7 @@ import com.partjob.model.JobInfo;
 import com.partjob.model.NetJob;
 import com.partjob.model.UserInfo;
 import com.partjob.service.JobService;
+import com.partjob.service.SwiperService;
 import com.partjob.service.UserService;
 
 /**
@@ -29,6 +30,8 @@ public class UserPageController extends BaseController{
 	JobService jobService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	SwiperService swiperService;
 	
 	@RequestMapping("{page}")
 	public String userto(@PathVariable String page){
@@ -38,6 +41,11 @@ public class UserPageController extends BaseController{
 	@RequestMapping("")
 	public String index(){
 		return "user/index";
+	}
+	@RequestMapping("me")
+	public String me(Model model){
+		model.addAttribute("aboutme", swiperService.getAboutMe().getContent());
+		return "user/me";
 	}
 	
 	@RequestMapping("netinfo/{nid}")
